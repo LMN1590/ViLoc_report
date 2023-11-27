@@ -1,0 +1,107 @@
+\chapter{GIỚI THIỆU}
+
+Giới thiệu đề tài: motivation, nội dung, mục tiêu, etc.
+
+\section{Động cơ nghiên cứu}
+
+\subsection*{Nhu cầu sử dụng trong thực tế}
+
+Đây là phần đặt vấn đề. Nêu ngắn gọn động cơ thực tế mà mình chọn đề tài (mục tiêu ứng dụng trong đời sống, ...).
+
+\subsection*{Ứng dụng của bài toán bản địa hóa trực quan}
+
+Giả sử Visual localization là một giải pháp để giải quyết vấn đề trên, đây là phần giới thiệu sơ bộ mục tiêu và phương hướng đề ra của giải pháp. Cần thể hiện mục tiêu và phương hướng này giải quyết những mặt gì của vấn đề đặt ra.
+
+Ở đoạn văn hai, liệt kê sơ bộ một số yếu tố đã tạo nên các vấn đề chính mà bài toán này đã và đang gặp phải.
+
+Đưa ra định nghĩa sơ lược của bản địa hóa trực quan và ứng dụng đã có
+
+\section{Mục tiêu đề tài}
+\subsection*{Định nghĩa chính thức của bản địa hóa trực quan}
+
+\subsection*{Xác định những vấn đề hiện hữu trong bài toán bản địa hóa trực quan}
+
+\begin{itemize}
+    \item \textbf{Vấn đề lưu trữ}
+    \begin{itemize}
+        \item 3D-point cloud tốn quá nhiều bộ nhớ để duy trì, đặc biệt là với những thành phố lớn
+        \item Có thể compress được nhưng mà sẽ đánh đổi bằng độ chính xác đặc trưng của phương pháp 2D-3D
+    \end{itemize}
+    
+    \item \textbf{Vẫn đề tài nguyên}
+    \begin{itemize}
+        \item Những mô hình học sâu thường có xu hướng nặng về tài nguyên tính toán: các mô hình VLAD(do nó cần nhiều descriptor ~32768). Được nhắc đến trong CosPlace
+        \item Những mô hình SfM nặng về việc lưu trữ data + do cần phải tạo bản đồ 3D để có thể bắt đầu tính toán
+    \end{itemize}
+    \item \textbf{Vấn đề về khả năng mở rộng của mô hình}
+    \begin{itemize}
+        \item Mô hình deep learning chỉ chạy tốt trên những dataset nhỏ như 7Scenes và Cambridge Landmark, không phải những tập dữ liệu rộng và thưa thớt như Aachen và Mapillary Street-level Sequences
+    \end{itemize}
+    \item \textbf{Vấn để duy trì tập dữ liệu}
+    \begin{itemize}
+        \item Ảnh vệ tinh do khó thu thập được nên đa số các ảnh vệ tinh sẽ bị lỗi thời không phản ánh đúng được tình hình hiện tại của môi trường. Ngoài ra, do ảnh vệ tinh chứa thông tin của một vùng rộng lớn nên khi có sự cập nhật của một khu vực nhỏ sẽ không được phản ánh hiệu quả trong ảnh vệ tinh.
+        \item Do những tập dữ liệu thành thị bao phủ một khu vực rộng lớn và dày đặc các địa danh(tòa nhà, công viên, trường học,...) nên đa số các tập dữ liệu sẽ không thể nào chứa hết được những góc nhìn có thể có. Dẫn đến việc ảnh lấy được từ dữ liệu sẽ không có nhiều điểm tương đồng với ảnh truy vấn.
+    \end{itemize}
+    \item \textbf{Vấn đề về khả năng khái quát hóa}
+    \begin{itemize}
+        \item Phần lớn các mô hình chỉ hoạt động trong một loại địa hình khu vực như một thành phố cố định (CosPlace, MixVPR,...). Trong khi AnyLoc tuyên bố có thể hoạt động trên đa địa hình.
+        \item Một số mô hình xây dựng cách biểu diễn của khu vực theo cách bao hàm bên trong mô hình học sâu (hồi quy vị trí tuyệt đối), hoặc trải qua quá trình tiền xử lý như xây dựng bản đồ đám mây điểm 3D cho nên khi cập nhật tập dữ liệu, sẽ cần phải xử lý lại. Vậy nên, sẽ cần trải qua quá trình huấn luyện hoặc xử lý lại khi cập nhật tập dữ liệu.
+        \item Một số mô hình học sâu cho ảnh như CNN không thể nắm bắt được những đặc trưng hình học khi được huấn luyện trên những hàm loss đơn giản(for more information, please refer to the paper to learn or not to learn, EssNet)
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Đề xuất các mô hình học sâu phục vụ quá trình giải quyết bài toán}
+
+Nhóm đề xuất một kiến trúc mô hình gồm 2 phần: truy xuất ảnh và hồi quy vị trí máy ảnh. 
+\begin{itemize}
+    \item Truy xuất ảnh
+    \item Hồi quy vị trí tương đối
+\end{itemize}
+
+\section{Phạm vi đề tài}
+\begin{itemize}
+    \item \textbf{Mục tiêu chung} 
+    \begin{itemize}
+        \item Hướng đến việc thiết kế và áp dụng một kiến trúc mô hình học sâu để giải quyết bài toán bản địa hóa trực quan.
+    \end{itemize} 
+    \item \textbf{Kết quả mong đợi}
+    \begin{itemize}
+        \item Đối với truy xuất ảnh, nhóm mong có thể giúp cải thiện độ chính xác của những mô hình truy xuất ảnh đã được đề xuất trước đây.
+        \item Đối với mô hình hồi quy vị trí máy ảnh, nhóm mong có thể giúp mô hình được sử dụng trên các tập dữ liệu lớn hơn.
+    \end{itemize}
+    \item \textbf{Thời gian}
+    \begin{itemize}
+        \item Đồ án chuyên ngành kéo dài trong 15 tuần
+        \item Đồ án tốt nghiệp kéo dài trong 15 tuần
+    \end{itemize}
+    \item \textbf{Lĩnh vực hướng đến}
+    \begin{itemize}
+        \item Đóng góp cho những nghiên cứu về bài toán bản địa hóa trực quan trong chuyên ngành thị giác máy tính.
+    \end{itemize}
+    
+\end{itemize}
+
+\section{Cấu trúc đồ án chuyên ngành}
+Đồ án chuyên ngành sẽ bao gồm năm (6) chương, bao gồm cả chương này. Nội dung ủa mỗi chương như sau:
+\begin{itemize}
+    \item \textbf{Chương 1: Giới thiệu} \\
+    Trình bày sơ lược về động cơ nghiên cứu, mục tiêu và phạm vi đề tài giải quyết.
+    \item \textbf{Chương 2: Công trình liên quan} \\
+    Chương này đề cập tới các kiến thức lý thuyết của các công trình nghiên cứu có liên quan.
+    \item \textbf{Chương 3: Kiến thức nền tảng} \\
+    Chương này đề cập tới các kiến thức lý thuyết nền tảng, các nguyên tắc cần được đảm bảo khi hiện thực và tiến hành so sánh, lựa chọn công nghệ sử dụng.
+    \item \textbf{Chương 4: Phương pháp đề xuất} \\
+    Chương này đề cập đến phương pháp giải quyết bài toán mà nhóm đề xuất bao gồm tổng quan về cơ chế cũng như lý thuyết cách hoạt động.
+    \item \textbf{Chương 5: Kết quả khảo sát} \\
+    Chương này đề cập kết quả khảo sát của nhóm bao gồm kết quả đánh giá hiệu quả của các phương pháp truy xuất ảnh và hồi quy vị trí máy ảnh.
+    \item \textbf{Chương 6: Thảo luận} \\
+    Chương này đề cập đến các câu hỏi cũng như các vấn đề nảy sinh trong quá trình nghiên cứu, thu thập kiến thức và hiện thực mô hình.
+\end{itemize}
+Cấu trúc của toàn đề tài sẽ được trình bày trong giai đoạn Đồ án tốt nghiệp.
+
+\section{Kết chương}
+Việc xác định chính xác vị trí có một phạm vi ứng dụng rộng rãi, là công nghệ chủ chốt trong rất nhiều lĩnh vực khác nhau. Tuy nhiên, việc chỉ dựa vào hệ thống không đảm bảo được sự ổn định như GPS sẽ hạn chế khả năng phát triển trong tương lai của những lĩnh vực ấy. Vậy nên bài toán định vị hóa trực quan đã được đưa ra để có một hệ thống đưa ra định vị chính xác và ổn định, dựa vào thông tin hình ảnh môi trường xung quanh.
+
+Trong những phương pháp được đưa ra, nhóm tập trung vào việc kết hợp 2 hướng xử lý là truy xuất ảnh và hồi quy tương đối vị trí. Mỗi phương án sẽ có một vấn đề riêng. Đối với việc truy xuất ảnh, kết quả cho ra được sẽ không có độ chính xác cao, do vị trí của ảnh truy xuất được sẽ được lấy làm kết quả. Đối với hướng hồi quy tương đối vị trí, đa số những phương pháp trước đây đều tập trung vào việc hồi quy trong những không gian nhỏ, có lượng dữ liệu dày đặc, không phù hợp với tập dữ liệu đô thị, mục tiêu của bài nghiên cứu của nhóm. Qua việc ứng dụng cả 2 cách giải quyết trong một mô hình, nhóm hy vọng 2 mô hình có thể bổ trợ, giải quyết điểm yếu của nhau.
+
+Để có thể lựa chọn được những giải pháp phù hợp, nhóm đã tiến hành khảo sát những kiến thức nền tảng và những công trình nghiên cứu đã được xuất bản trước đây. Những nội dung này sẽ được thể hiện trong \textbf{Chương 2: Các công trình liên quan} và \textbf{Chương 3: Kiến thức nền tảng}
