@@ -89,6 +89,13 @@ Không dùng đến cả hàm mất mát cố định hoặc những hàm mất 
 \end{figure}
 Các nghiên cứu về việc áp dụng hàm mất mát có xu hướng tiến tới việc tự động hóa, không sử dụng siêu tham số và mang nhiều thông tin hơn để giảm việc sử dụng các tham số cố định. Một hàm mất mát cố định tính tổng độ dời và hướng quay sử dụng một yếu tố cân bằng để cân bằng các mục có trọng số khác nhau, điều này đòi hỏi một khoảng thời gian dài để tối ưu hóa mất mát trên dữ liệu huấn luyện. Sau đó, một hàm mất mát có trọng số học được đã được đề xuất bằng cách thêm không đột phân biệt đồng nhất để tự động cân bằng mất mát dịch và hướng, tránh sử dụng siêu tham số và vượt qua hiệu suất của phương pháp mất mát cố định. Ngoài phương pháp hàm mất mát cố định và hàm mất mát với trọng số học được, các phương pháp khác đề xuất sử dụng mất mát lỗi tái chiếu và mất mát GPoseNet để thêm các định dạng thông tin khác như phân phối xác suất của vị trí - hướng quay đầu ra để cải thiện hàm mất mát. 
 
+Một nhóm nghiên cứu \cite{shavit2021learning, article} đề xuất áp dụng mô hình Transformer vào tác vụ hồi quy vị trí tuyệt đối. Mô hình nhận vào một ảnh đơn và sử dụng một CNN làm bộ trích xuất đặc trưng, sau đó các bản đồ đặc trưng được truyền song song qua hai nhánh: mỗi nhánh là một mô hình Transformer đảm nhiệm một tác vụ riêng lần lượt là hồi quy vị trí và hồi quy hướng quay. Mô hình sử dụng hàm mất mát tương tự với PoseNet.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{pics/Chapter2/trans.png}
+    \caption{Minh họa kiến trúc mô hình Multi-Scene Transformer}
+\end{figure}
+
 \subsubsection*{Hồi quy vị trí tuyệt đối đa ảnh - Absolute pose regression through auxiliary image sequence}
 Một phương pháp khác được áp dụng để hồi quy vị trí tuyệt đối là áp dụng học có hỗ trợ với một chuỗi ảnh. Học có hỗ trợ được định nghĩa là phương pháp cải thiện hiệu suất của một tác vụ chính thông qua việc học cùng lúc các tác vụ hỗ trợ. Phương pháp học này giúp mô hình phát triển các biểu diễn dữ liệu tốt hơn. Bằng cách tận dụng các tác vụ hỗ trợ có liên quan khác trong quá trình học, hiệu suất của tác vụ chính có thể được cải thiện. Ở đây, học có hỗ trợ ám chỉ việc kết hợp APR với các tác vụ phụ có liên quan như đo lường cảm biến trực quan. Hàm mất mát của các phương pháp học có hỗ trợ thường bao gồm hàm mất mát của APR kết hợp với hàm mất mát của các phương pháp phụ trợ, thậm chí có thể kết hợp cả hàm mất mát của APR và RPR. Khác với các phương pháp hồi quy vị trí tuyệt đối đơn ảnh, phương pháp học có hỗ trợ học từ các cặp ảnh với bản chất là học cách xác định vị trí tuyệt đối bằng cách đánh giá trước hết vị trí tương đối với các ràng buộc phụ thuộc.
 
@@ -264,6 +271,14 @@ Tập dữ liệu Aachen Day-Night \cite{Sattler2012ImageRF} bao gồm 14.607 �
 \end{figure}
 \subsubsection*{Pittsburgh 250k}
 Tập dữ liệu Pittsburgh 250k \cite{6618963} là một tập dữ liệu tương đối rộng bao phủ thành phố Pittsburgh của Mỹ. Đây là một tập dữ liệu tương đối phổ biến trong thị giác máy tính, cụ thể là ở tác vụ nhận điện địa điểm trực quan, truy xuất ảnh và bản địa hóa trực quan.
+
+\subsubsection*{GSV-Cities}
+Tập dữ liệu GSV-Cities \cite{Ali_bey_2022} bao phủ một vùng địa lý cực kỳ rộng lớn với hơn 40 thành phố xuyên lục địa trong khoảng thời gian 14 năm liên tục. GSV-Cities chứa khoảng hơn 530.000 ảnh - khoảng hơn 62.000 vị trí. Mỗi vị trí sẽ có khoảng từ 4 đến 20 ảnh. Đồng thời mỗi vị trí sẽ cách nhau một khoảng ít nhất 100m.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{pics/Chapter2/gsv.png}
+    \caption{Minh họa tập dữ liệu GSV-Cities}
+\end{figure}
 
 \subsubsection*{SF-XL}
 Tập dữ liệu San Francisco Extra Large (SF-XL) \cite{berton2022rethinking} được tạo nên từ 3.43 triệu ảnh 360 độ thu thập từ kho ảnh Google Streetview. Các ảnh này sau đó được cắt ra thành 41.2 triệu ảnh. Mỗi ảnh cắt ra đều được gắn nhãn 6DoF (bao gồm cả GPS). Dữ liệu được thu thập từ năm 2009 đến năm 2021, dẫn đến việc tập dữ liệu bao phủ nhiều điều kiện ngoại cảnh như thời tiết, ánh sáng cũng như sự thay đổi của công trình kiến trúc trong khu vực.
