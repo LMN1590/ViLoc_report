@@ -1,17 +1,16 @@
 \begin{abstract}
 
-Định vị toàn cầu chính xác (Accurate Global Positioning) luôn là ưu tiên hàng đầu trong các công nghệ phụ thuộc nhiều vào hiểu biết, tính toán sâu về môi trường như xe tự lái, robot tự động và hệ thống định vị. Tuy nhiên, hệ thống định vị toàn cầu (GPS) truyền thống hiện đang đối mặt với một số hạn chế lớn, bao gồm tính không chính xác trong môi trường trong nhà, hạn chế về nhận thức định hướng, khả năng chống chặn tín hiệu và nhiễu đa đường giảm sút.
+Khả năng định vị toàn cầu có vai trò cốt lõi trong những lĩnh vực phụ thuộc nhiều vào việc nhận biết và tương tác phù hợp với môi trường xung quanh như xe tự hành, robot và công nghệ tương tác thực tế ảo AR. Trước đây, đa số những công nghệ này đều sẽ lấy thông tin về môi trường xung quanh nhờ vào những hệ thống định vị toàn cầu như GPS. Tuy nhiên, những hệ thống này cũng sẽ có những giới hạn nhất định về độ chính xác, độ tin cậy tùy thuộc vào khu vực được sử dụng. Vì vậy nên, bài toán bản địa hóa trực quan đã được đưa ra nhằm cung cấp thông tin đáng tin cậy hơn cho nhu cầu ngày càng tăng của quá trình phát triển của công nghệ.
 
-Bản địa hóa trực quan (Visual Localization) nhằm cung cấp dịch vụ xác định vị trí chính xác hơn bằng việc phân tích thông tin hình ảnh từ môi trường xung quanh. Thay vì dựa vào các phương pháp truyền thống, bản địa hóa trực quan sử dụng hình ảnh để xác định vị trí và hướng của máy ảnh một cách chính xác, mở ra tiềm năng lớn trong việc cải thiện đáng kể khả năng định vị vị trí.
+Bản địa hóa trực quan - Visual Localization - là một bài toán hướng đến việc xây dựng một cách biểu diễn phù hợp và hiệu quả cho môi trường đang xét, từ đó có thể định vị một cách chính xác hơn trong môi trường đó. Bài toán sẽ chỉ quan tâm đến việc xử lý hình ảnh, video hoặc kết quả của những bộ cảm biến về môi trường xung quanh.
 
-Công nghệ này mang tính cốt lõi đối với các ứng dụng trong các lĩnh vực học máy như thực tế tăng cường, robot và xe tự động lái. Không như Bản địa hóa và lập bản đồ đồng thời (Simultaneous Localization and Mapping), Bản địa hóa trực quan giả định rằng của một cách biểu diễn nào đó của môi trường xung quanh đã được biết trước và không yêu cầu tái tạo môi trường 3D.
+Hai hướng tiếp cận đã có những cải tiến liên tục trong những năm gần đây chính là hướng nhận dạng địa điểm trực quan - Visual Place Recognition - và hướng ước tính vị trí của máy ảnh - Pose Estimation. Với hướng tiếp cận nhận dạng địa điểm trực quan, mô hình sẽ nhận vào một ảnh truy vấn và chọn ra một hay nhiều ảnh từ tập ảnh được cung cấp sẵn mà được cho là thể hiện chung một cảnh với ảnh đầu vào. Với hướng tiếp cận ước tính vị trí của máy ảnh, từ cặp ảnh truy vấn và ảnh tham khảo đầu vào, mô hình sẽ tính toán vị trí và hướng quay của máy ảnh trong không gian.  
 
-Nhận thấy rằng hướng tiếp cận học sâu (Deep Learning) đã và đang mang lại những kết quả đầy hứa hẹn trong cải thiện độ chính xác cũng như độ chắc chắn của Bản địa hóa trực quan, nhóm chúng tôi quyết định sẽ áp dụng các chiến thuật học sâu vào công cuộc cải thiện các phương pháp Bản địa hóa trực quan hiện có:
+Nhận thấy rằng hai hướng tiếp cận của bài toán khi đứng riêng đều đã có thể cung cấp những kết quả khả quan trong phạm vi của mình, và kết quả đầu ra cũng như dữ liệu đầu vào của hai hướng tiếp cận tương thích với nhau, nhóm quyết định sẽ kết hợp hai bài toán này thành một quy trình hoàn chỉnh, nhằm bổ trợ cho những khiếm khuyết của nhau. Cụ thể hơn:
 
 \begin{itemize}
-    \item Với hướng tiếp cận kiến trúc, chúng tôi sẽ thay thế những cơ chế thành phần hiện tại của các mô hình bằng những mô hình học sâu.
-    \item Với hướng tiếp cận end-to-end, chúng tôi cải tiến quá trình huấn luyện bằng những cách như áp dụng nhiều loại dữ liệu khác, xây dựng kiến trúc hiện đại hơn...
-
+    \item Với hướng tiếp cận nhận dạng địa điểm trực quan, nhóm sẽ sử dụng mô hình MixVPR, được xây dựng dựa trên mạng MLP-Mixer. Đây sẽ là nửa đầu của quy trình, cung cấp khả năng mở rộng lên những không gian rộng lớn như thành phố.
+    \item Với hướng tiếp cận ước tính vị trí máy ảnh, nhóm sẽ sử dụng hướng tiếp cận 2D-2D được đề xuất trong Map-free Relocalization. Đây sẽ là nửa còn lại của quy trình, cung cấp khả năng đưa ra một dự đoán cụ thể cho quy trình.
 \end{itemize}
 
 \end{abstract}
