@@ -1,25 +1,49 @@
 \chapter{GIỚI THIỆU}
 
-Giới thiệu đề tài: motivation, nội dung, mục tiêu, etc.
+\textit{Nội dung chương 1 sẽ đề cập đến nội dung của bài toán bản địa hóa trực quan - Visual Localization, những giải pháp đã được đề xuất hiện nay của bài toán, và những hạn chế của chúng. Từ đó, nhóm sẽ xác định mục tiêu cần thực hiện và phạm vi của đề tài}
 
 \section{Động cơ nghiên cứu}
 
 \subsection*{Nhu cầu sử dụng trong thực tế}
 
-Đây là phần đặt vấn đề. Nêu ngắn gọn động cơ thực tế mà mình chọn đề tài (mục tiêu ứng dụng trong đời sống, ...).
+Theo thời gian, công nghệ ngày càng được tích hợp vào đời sống hàng ngày của con người. Sự xuất hiện của chúng không còn bị giới hạn ở một không gian cụ thể nào, mà dần tiến tới việc tương tác với không gian ngoài trời. Những công nghệ này bao gồm xe tự hành \cite{chaabane2021end}, robot \cite{sunderhauf2015place}, công nghệ tương tác thực tế ảo \cite{middelberg2014scalable}, định hướng \cite{sarlin2023orienternet}, ... Việc có thể nhận biết được môi trường xung quanh để có thể tương tác là một tác vụ cốt lõi trong những công nghệ trên và là yếu tố quyết định để đạt được hiệu quả tốt. 
 
-\subsection*{Ứng dụng của bài toán bản địa hóa trực quan}
+Trước đây, những hệ thống định vị toàn cầu như GPS đã được sử dụng để xác định thông tin về môi trường. Tuy nhiên, những hệ thống này có một số khiếm khuyết như độ chính xác chỉ nằm trong khoảng vài mét, hiệu quả bị giới hạn ở không gian bên trong và thiếu thông tin về hướng quay nếu không sử dụng thêm la bàn. Với nhu cầu ngày càng tăng về độ chính xác, những hệ thống định vị toàn cầu dần trở nên không phù hợp. Từ đó, dẫn đến sự ra đời của bài toán bản địa hóa trực quan - Visual Localization - trong lĩnh vực thị giác máy tính.
 
-Giả sử Visual localization là một giải pháp để giải quyết vấn đề trên, đây là phần giới thiệu sơ bộ mục tiêu và phương hướng đề ra của giải pháp. Cần thể hiện mục tiêu và phương hướng này giải quyết những mặt gì của vấn đề đặt ra.
+Bộ não con người có thể thực hiện bài toán bản địa hóa trực quan bằng trực giác. Thông tin trực quan về môi trường nhận được bởi mắt sẽ được dùng để truy xuất thông tin từ biểu diễn bên trong bộ não con người về những nơi đã được đi qua. Tuy nhiên, để mô phỏng lại quá trình này, những giải thuật phức tạp liên quan đến việc xây dựng một cách biểu diễn phù hợp cho không gian như 3D-point cloud hay thực hiện feature matching đã được sử dụng. Những tác vụ này sẽ tiêu tốn rất nhiều tài nguyên để xây dựng và thực hiện.
 
-Ở đoạn văn hai, liệt kê sơ bộ một số yếu tố đã tạo nên các vấn đề chính mà bài toán này đã và đang gặp phải.
+Trong những năm gần đây, lĩnh vực này đã có những bước phát triển đáng kể, được thể hiện qua một lượng lớn bài báo nghiên cứu khoa học. Những bài báo này đã đưa ra những hướng đi đa dạng để giải quyết bài toán bản địa hóa trực quan, nhưng đa số đều tập trung vào hai chủ đề chính là:
+\begin{itemize}
+    \item Tìm kiếm một cách biểu diễn tuy đơn giản, nhưng vẫn đảm bảo được tính hiệu quả trong việc truy xuất thông tin nhằm tiết kiệm tài nguyên để xây dựng, duy trì, mở rộng và sử dụng.
+    \item Cải thiện độ chính xác của vị trí được truy xuất mà vẫn đảm bảo được tính hiệu quả.
+\end{itemize}
 
-Đưa ra định nghĩa sơ lược của bản địa hóa trực quan và ứng dụng đã có
+\subsection*{Những hướng đi đã được đề xuất}
 
-\section{Mục tiêu đề tài}
-\subsection*{Định nghĩa chính thức của bản địa hóa trực quan}
+Với mục tiêu là xác định được vị trí mà ảnh được chụp, nhiều phương pháp khác nhau đã được đề xuất để giải quyết bài toán bản địa hóa trực quan. Một nhóm phương pháp truyền thống mà cho đến hiện tại vẫn cho ra kết quả cạnh tranh là phương pháp dựa trên cấu trúc của cảnh - Structure-based Method. Phương pháp này sẽ dựa trên việc tái tạo lại cấu trúc của môi trường đang xét bằng một tập các điểm trong không gian 3D, tạo thành một 3D-point cloud và tiến hành xác định những cặp đặc trưng cục bộ tương ứng với nhau trong ảnh truy vấn và bản đồ 3D \cite{sattler2011fast}. Từ đó, tọa độ chính xác của vị trí chụp ảnh có thể được xác định. Để tối ưu hóa quá trình xác định tương ứng của các điểm ảnh, phương pháp truy xuất ảnh có thể được sử dụng để giới hạn lại không gian tìm kiếm. Chỉ những đặc trưng nằm trong những ảnh tương đồng truy xuất ra mới được xét \cite{sarlin2019coarse}. Ngoài ra, ở bước xác định những cặp đặc trưng tương ứng, thay vì sử dụng những phương pháp được định nghĩa sẵn bởi con người, mạng học sâu có thể được ứng dụng để trực tiếp xác định vị trí của các điểm ảnh trong không gian 3D \cite{brachmann2021visual}. 
+
+Một hướng đi khác, sử dụng những ảnh có nét tương đồng truy xuất được, vị trí cuối cùng có thể được nội suy từ vị trí của những ảnh đó. Kết quả này sẽ chỉ là một ước tính sơ bộ với độ chính xác khá thấp \cite{pion2020benchmarking}. Với phương pháp hồi quy tương đối, từ cặp ảnh gồm ảnh truy vấn và ảnh tham chiếu, mô hình sẽ xác định được khoảng cách về vị trí giữa hai ảnh \cite{zhou2020learn}. Ngoài ra, thay vì truy xuất ảnh làm điểm mốc để xác định vị trí, phương pháp hồi quy vị trí tuyệt đối sẽ xây dựng cách biểu diễn của môi trường bên trong mô hình và có thể tính trực tiếp kết quả chỉ với đầu vào là ảnh truy vấn \cite{kendall2016posenet}.
 
 \subsection*{Xác định những vấn đề hiện hữu trong bài toán bản địa hóa trực quan}
+
+\begin{itemize}
+    \item \textbf{Vấn đề với những phương pháp sử dụng biểu diễn 3D}
+    \begin{itemize}
+        \item Vấn đề về lưu trữ:
+        \item Vấn đề về khả năng mở rộng của mô hình
+        \item Vấn đề về khả năng khái quát hóa
+    \end{itemize}
+    \item \textbf{Vấn đề với những phương pháp hồi quy vị trí}
+    \begin{itemize}
+        \item Vấn đề về tài nguyên:
+        \item Vấn đề về khả năng mở rộng của mô hình
+        \item Vấn đề về khả năng khái quát hóa
+    \end{itemize}
+    \item \textbf{Những vấn đề khác}
+    \begin{itemize}
+        \item Vấn để duy trì tập dữ liệu:
+    \end{itemize}
+\end{itemize}
 
 \begin{itemize}
     \item \textbf{Vấn đề lưu trữ}
@@ -50,7 +74,7 @@ Giả sử Visual localization là một giải pháp để giải quyết vấn
     \end{itemize}
 \end{itemize}
 
-\subsection*{Đề xuất các mô hình học sâu phục vụ quá trình giải quyết bài toán}
+\section{Mục tiêu đề tài}
 
 Nhóm đề xuất một kiến trúc mô hình gồm 2 phần: truy xuất ảnh và hồi quy vị trí máy ảnh. 
 \begin{itemize}
