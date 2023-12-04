@@ -4,13 +4,13 @@
 
 \section{Động cơ nghiên cứu}
 
-\subsection*{Nhu cầu sử dụng trong thực tế}
+\subsection{Nhu cầu sử dụng trong thực tế}
 
-Theo thời gian, công nghệ ngày càng được tích hợp vào đời sống hàng ngày của con người. Sự xuất hiện của chúng không còn bị giới hạn ở một không gian cụ thể nào, mà dần tiến tới việc tương tác với không gian ngoài trời. Những công nghệ này bao gồm xe tự hành \cite{chaabane2021end}, robot \cite{sunderhauf2015place}, công nghệ tương tác thực tế ảo \cite{middelberg2014scalable}, định hướng \cite{sarlin2023orienternet}, ... Việc có thể nhận biết được môi trường xung quanh để có thể tương tác là một tác vụ cốt lõi trong những công nghệ trên và là yếu tố quyết định để đạt được hiệu quả tốt. 
+Việc có thể nhận biết được môi trường xung quanh để có thể tương tác là một tác vụ cốt lõi trong những công nghệ được tích hợp vào cuộc sống hàng ngày của con người. Những công nghệ này bao gồm xe tự hành \cite{chaabane2021end}, robot \cite{sunderhauf2015place}, công nghệ tương tác thực tế ảo \cite{middelberg2014scalable}, định hướng \cite{sarlin2023orienternet}, ... 
 
-Trước đây, những hệ thống định vị toàn cầu như GPS đã được sử dụng để xác định thông tin về môi trường. Tuy nhiên, những hệ thống này có một số khiếm khuyết như độ chính xác chỉ nằm trong khoảng vài mét, hiệu quả bị giới hạn ở không gian bên trong và thiếu thông tin về hướng quay nếu không sử dụng thêm la bàn. Với nhu cầu ngày càng tăng về độ chính xác, những hệ thống định vị toàn cầu dần trở nên không phù hợp. Từ đó, dẫn đến sự ra đời của bài toán bản địa hóa trực quan - Visual Localization - trong lĩnh vực thị giác máy tính.
+Trước đây, những hệ thống định vị toàn cầu như GPS đã được sử dụng để xác định thông tin về môi trường. Tuy nhiên, những hệ thống này có một số khiếm khuyết như độ chính xác chỉ nằm trong khoảng vài mét, hiệu quả bị giới hạn ở không gian bên trong và thiếu thông tin về hướng quay nếu không sử dụng thêm la bàn. Để có thể đáp ứng nhu cầu về độ chính xác, bài toán bản địa hóa trực quan - Visual Localization - trong lĩnh vực thị giác máy tính đã được ra đời.
 
-Bộ não con người có thể thực hiện bài toán bản địa hóa trực quan bằng trực giác. Thông tin trực quan về môi trường nhận được bởi mắt sẽ được dùng để truy xuất thông tin từ biểu diễn bên trong bộ não con người về những nơi đã được đi qua. Tuy nhiên, để mô phỏng lại quá trình này, những giải thuật phức tạp liên quan đến việc xây dựng một cách biểu diễn phù hợp cho không gian như 3D-point cloud hay thực hiện feature matching đã được sử dụng. Những tác vụ này sẽ tiêu tốn rất nhiều tài nguyên để xây dựng và thực hiện.
+Bộ não con người có thể thực hiện bài toán bản địa hóa trực quan bằng trực giác. Tuy nhiên, để mô phỏng lại quá trình này, những giải thuật phức tạp liên quan đến việc xây dựng một cách biểu diễn phù hợp cho không gian như 3D-point cloud hay thực hiện feature matching đã được sử dụng. Những tác vụ này sẽ tiêu tốn rất nhiều tài nguyên để xây dựng và thực hiện.
 
 Trong những năm gần đây, lĩnh vực này đã có những bước phát triển đáng kể, được thể hiện qua một lượng lớn bài báo nghiên cứu khoa học. Những bài báo này đã đưa ra những hướng đi đa dạng để giải quyết bài toán bản địa hóa trực quan, nhưng đa số đều tập trung vào hai chủ đề chính là:
 \begin{itemize}
@@ -18,75 +18,70 @@ Trong những năm gần đây, lĩnh vực này đã có những bước phát 
     \item Cải thiện độ chính xác của vị trí được truy xuất mà vẫn đảm bảo được tính hiệu quả.
 \end{itemize}
 
-\subsection*{Những hướng đi đã được đề xuất}
+\subsection{Những hướng đi đã được đề xuất}
 
-Với mục tiêu là xác định được vị trí mà ảnh được chụp, nhiều phương pháp khác nhau đã được đề xuất để giải quyết bài toán bản địa hóa trực quan. Một nhóm phương pháp truyền thống mà cho đến hiện tại vẫn cho ra kết quả cạnh tranh là phương pháp dựa trên cấu trúc của cảnh - Structure-based Method. Phương pháp này sẽ dựa trên việc tái tạo lại cấu trúc của môi trường đang xét bằng một tập các điểm trong không gian 3D, tạo thành một 3D-point cloud và tiến hành xác định những cặp đặc trưng cục bộ tương ứng với nhau trong ảnh truy vấn và bản đồ 3D \cite{sattler2011fast}. Từ đó, tọa độ chính xác của vị trí chụp ảnh có thể được xác định. Để tối ưu hóa quá trình xác định tương ứng của các điểm ảnh, phương pháp truy xuất ảnh có thể được sử dụng để giới hạn lại không gian tìm kiếm. Chỉ những đặc trưng nằm trong những ảnh tương đồng truy xuất ra mới được xét \cite{sarlin2019coarse}. Ngoài ra, ở bước xác định những cặp đặc trưng tương ứng, thay vì sử dụng những phương pháp được định nghĩa sẵn bởi con người, mạng học sâu có thể được ứng dụng để trực tiếp xác định vị trí của các điểm ảnh trong không gian 3D \cite{brachmann2021visual}. 
+Với mục tiêu là xác định được vị trí mà ảnh được chụp, nhiều phương pháp khác nhau đã được đề xuất để giải quyết bài toán bản địa hóa trực quan. Một nhóm phương pháp truyền thống mà cho đến hiện tại vẫn cho ra kết quả cạnh tranh là phương pháp dựa trên cấu trúc của cảnh - Structure-based Method. Phương pháp này sẽ dựa trên việc tái tạo lại cấu trúc của môi trường đang xét bằng một tập các điểm trong không gian 3D, tạo thành một 3D-point cloud để biểu diễn khu vực đang xét. Từ đó, tọa độ chính xác của vị trí chụp ảnh có thể được xác định. Để tối ưu hóa quá trình tìm kiếm tương quan 2D-3D, phương pháp truy xuất ảnh có thể được sử dụng để giới hạn lại không gian tìm kiếm \cite{sarlin2019coarse}. Ngoài ra, ở bước xác định tương quan 2D-3D, thay vì sử dụng những phương pháp được định nghĩa sẵn bởi con người, mạng học sâu có thể được ứng dụng để trực tiếp xác định vị trí của các điểm ảnh trong không gian 3D \cite{brachmann2021visual}. 
 
-Một hướng đi khác, sử dụng những ảnh có nét tương đồng truy xuất được, vị trí cuối cùng có thể được nội suy từ vị trí của những ảnh đó. Kết quả này sẽ chỉ là một ước tính sơ bộ với độ chính xác khá thấp \cite{pion2020benchmarking}. Với phương pháp hồi quy tương đối, từ cặp ảnh gồm ảnh truy vấn và ảnh tham chiếu, mô hình sẽ xác định được khoảng cách về vị trí giữa hai ảnh \cite{zhou2020learn}. Ngoài ra, thay vì truy xuất ảnh làm điểm mốc để xác định vị trí, phương pháp hồi quy vị trí tuyệt đối sẽ xây dựng cách biểu diễn của môi trường bên trong mô hình và có thể tính trực tiếp kết quả chỉ với đầu vào là ảnh truy vấn \cite{kendall2016posenet}.
+Một hướng đi khác, sử dụng những ảnh có nét tương đồng với ảnh đầu vào, vị trí cuối cùng có thể được nội suy từ nhãn của những ảnh đó. Với phương pháp hồi quy tương đối, từ cặp ảnh gồm ảnh truy vấn và ảnh tham chiếu, mô hình sẽ xác định được khoảng cách về vị trí giữa hai ảnh \cite{zhou2020learn}. Ngoài ra, thay vì truy xuất ảnh làm điểm mốc để xác định vị trí, phương pháp hồi quy vị trí tuyệt đối sẽ xây dựng cách biểu diễn của môi trường bên trong mô hình và có thể tính trực tiếp kết quả chỉ với đầu vào là ảnh truy vấn \cite{kendall2016posenet}.
 
-\subsection*{Xác định những vấn đề hiện hữu trong bài toán bản địa hóa trực quan}
-
-\begin{itemize}
-    \item \textbf{Vấn đề với những phương pháp sử dụng biểu diễn 3D}
-    \begin{itemize}
-        \item Vấn đề về lưu trữ:
-        \item Vấn đề về khả năng mở rộng của mô hình
-        \item Vấn đề về khả năng khái quát hóa
-    \end{itemize}
-    \item \textbf{Vấn đề với những phương pháp hồi quy vị trí}
-    \begin{itemize}
-        \item Vấn đề về tài nguyên:
-        \item Vấn đề về khả năng mở rộng của mô hình
-        \item Vấn đề về khả năng khái quát hóa
-    \end{itemize}
-    \item \textbf{Những vấn đề khác}
-    \begin{itemize}
-        \item Vấn để duy trì tập dữ liệu:
-    \end{itemize}
-\end{itemize}
-
-\begin{itemize}
-    \item \textbf{Vấn đề lưu trữ}
-    \begin{itemize}
-        \item 3D-point cloud tốn quá nhiều bộ nhớ để duy trì, đặc biệt là với những thành phố lớn
-        \item Có thể compress được nhưng mà sẽ đánh đổi bằng độ chính xác đặc trưng của phương pháp 2D-3D
-    \end{itemize}
-    
-    \item \textbf{Vẫn đề tài nguyên}
-    \begin{itemize}
-        \item Những mô hình học sâu thường có xu hướng nặng về tài nguyên tính toán: các mô hình VLAD(do nó cần nhiều descriptor ~32768). Được nhắc đến trong CosPlace
-        \item Những mô hình SfM nặng về việc lưu trữ data + do cần phải tạo bản đồ 3D để có thể bắt đầu tính toán
-    \end{itemize}
-    \item \textbf{Vấn đề về khả năng mở rộng của mô hình}
-    \begin{itemize}
-        \item Mô hình deep learning chỉ chạy tốt trên những dataset nhỏ như 7Scenes và Cambridge Landmark, không phải những tập dữ liệu rộng và thưa thớt như Aachen và Mapillary Street-level Sequences
-    \end{itemize}
-    \item \textbf{Vấn để duy trì tập dữ liệu}
-    \begin{itemize}
-        \item Ảnh vệ tinh do khó thu thập được nên đa số các ảnh vệ tinh sẽ bị lỗi thời không phản ánh đúng được tình hình hiện tại của môi trường. Ngoài ra, do ảnh vệ tinh chứa thông tin của một vùng rộng lớn nên khi có sự cập nhật của một khu vực nhỏ sẽ không được phản ánh hiệu quả trong ảnh vệ tinh.
-        \item Do những tập dữ liệu thành thị bao phủ một khu vực rộng lớn và dày đặc các địa danh(tòa nhà, công viên, trường học,...) nên đa số các tập dữ liệu sẽ không thể nào chứa hết được những góc nhìn có thể có. Dẫn đến việc ảnh lấy được từ dữ liệu sẽ không có nhiều điểm tương đồng với ảnh truy vấn.
-    \end{itemize}
-    \item \textbf{Vấn đề về khả năng khái quát hóa}
-    \begin{itemize}
-        \item Phần lớn các mô hình chỉ hoạt động trong một loại địa hình khu vực như một thành phố cố định (CosPlace, MixVPR,...). Trong khi AnyLoc tuyên bố có thể hoạt động trên đa địa hình.
-        \item Một số mô hình xây dựng cách biểu diễn của khu vực theo cách bao hàm bên trong mô hình học sâu (hồi quy vị trí tuyệt đối), hoặc trải qua quá trình tiền xử lý như xây dựng bản đồ đám mây điểm 3D cho nên khi cập nhật tập dữ liệu, sẽ cần phải xử lý lại. Vậy nên, sẽ cần trải qua quá trình huấn luyện hoặc xử lý lại khi cập nhật tập dữ liệu.
-        \item Một số mô hình học sâu cho ảnh như CNN không thể nắm bắt được những đặc trưng hình học khi được huấn luyện trên những hàm loss đơn giản(for more information, please refer to the paper to learn or not to learn, EssNet)
-    \end{itemize}
-\end{itemize}
+Trong đa số những phương pháp trên, tác vụ truy xuất ảnh đóng một vai trò quan trọng để có thể đạt được kết quả chính xác. Mục tiêu của quá trình truy xuất ảnh là để xác định một tập con các ảnh từ trong tập dữ liệu đại diện cho khu vực đang xét, dựa trên giả định là những ảnh được chụp gần nhau sẽ cùng hiển thị cùng một cảnh. Do tầm quan trọng của tác vụ truy xuất ảnh trong lĩnh vực bản địa hóa trực quan mà bài toán nhận diện địa điểm trực quan đã được sinh ra và ngày càng phát triển \cite{berton2022rethinking}\cite{keetha2023anyloc}\cite{alibey2023mixvpr}.
 
 \section{Mục tiêu đề tài}
 
-Nhóm đề xuất một kiến trúc mô hình gồm 2 phần: truy xuất ảnh và hồi quy vị trí máy ảnh. 
+Qua việc phân tích nhu cầu và xác định được những nhóm phương pháp chính đã được ứng dụng trong bài toán bản địa hóa trực quan, đề tài đã được xác định sẽ hướng đến các mục tiêu chính:
+
 \begin{itemize}
-    \item Truy xuất ảnh
-    \item Hồi quy vị trí tương đối
+    \item \textit{Thứ nhất}, khảo sát những giải pháp đã được đề xuất và phân tích ưu và nhược điểm để có thể chọn ra hướng tiếp cận phù hợp.
+    \item \textit{Thứ hai}, tiến hành kiểm thử kết quả của hướng tiếp cận được chọn làm cơ sở
+    \item \textit{Thứ ba}, thiết kế giải pháp cải thiện dựa trên cơ sở ban đầu.
+    \item \textit{Thứ tư}, đánh giá và kiểm thử giải pháp được đề xuất trên những tập dữ liệu phổ biến, có phạm vi đa dạng và đồng thời tiến hành thực nghiệm trên những thành phần của giải pháp.
+\end{itemize}
+
+Trong giai đoạn \textit{Đồ án chuyên ngành}, nhóm hướng tới hai mục tiêu đầu tiên trong số những mục tiêu đã được trình bày. Hai mục tiêu sau sẽ được thực hiện trong giai đoạn \textit{Đồ án tốt nghiệp}.
+
+\subsection{Khảo sát và phân tích những giải pháp đã có}
+Nhóm đã tiến hành khảo sát những hướng tiếp cận đã được đề xuất nhằm giải quyết bài toán bản địa hóa trực quan trong thời gian gần đây. Thông qua việc khảo sát, nhóm xác định những khía cạnh có thể được cải thiện để đóng góp cho quá trình nghiên cứu của bài toán này.
+\begin{itemize}
+    \item Tìm hiểu về những nhóm phương pháp đã được đề xuất
+    \item Tìm hiểu về tác vụ truy xuất ảnh
+    \item Tìm hiểu về những phương pháp ước tính vị trí máy ảnh
+\end{itemize}
+
+Qua quá trình tìm hiểu, nhóm đã quyết định xây dựng mô hình gồm hai thành phần được đề xuất trong hai bài nghiên cứu là MixVPR \cite{alibey2023mixvpr} và mô hình hồi quy 2D-2D được đề xuất trong \cite{arnold2022mapfree} để có thể đạt được kết quả vị trí 6DoF.
+
+\subsection{Tiến hành kiểm thử kết quả của phương pháp cơ sở}
+Phương pháp được dùng làm cơ sở cải thiện sẽ được chọn. Những số liệu về hiệu quả của mô hình sẽ được xác nhận lại một lần nữa qua thực nghiệm. Ngoài ra, do phương pháp được nhóm đề xuất sẽ bao gồm hai thành phần khác nhau, nên việc xác định kết quả cơ sở là cần thiết.
+\begin{itemize}
+    \item Mô phỏng lại quá trình thí nghiệm trên từng mô hình nhằm tái tạo số liệu được đưa ra trong bài nghiên cứu, xác nhận tính khả thi và hợp lệ.
+    \item Thiết kế một mô hình kết hợp hai thành phần lại và tiến hành thực nghiệm nhằm xác định kết quả cơ sở ban đầu.
+\end{itemize}
+
+\subsection{Thiết kế giải pháp cải thiện hiệu quả của mô hình kết hợp}
+Dựa trên mô hình đã được đề xuất, nhóm sẽ tiến hành cải thiện mô hình nhằm giải quyết những vấn đề hiện hữu trong từng thành phần của mô hình
+\begin{itemize}
+    \item Đối với thành phần truy xuất ảnh, thể hiện được rằng mô hình có thể cho ra kết quả có độ chính xác cao hơn việc chỉ sử dụng nhãn của ảnh truy xuất được làm kết quả cuối cùng.
+    \item Đối với thành phần hồi quy vị trí, thể hiện được rằng mô hình có thể được áp dụng cho những tập dữ liệu có phạm vi rộng, độ phân bố ảnh thưa hơn.
+\end{itemize}
+
+\subsection{Đánh giá và kiểm thử mô hình}
+Để có thể có một cái nhìn khách quan về hiệu quả của mô hình trong bài toán bản địa hóa trực quan, thực nghiệm trên những tập dữ liệu có phạm vi và độ phân bố khác nhau sẽ được thực hiện. Cụ thể là
+
+\begin{itemize}
+    \item Thực nghiệm so sánh với những phương pháp thành phần
+    \item Thực nghiệm so sánh với những phương pháp SOTA hiện tại
+    \item Thực nghiệm trên những tập dữ liệu đa dạng
+    \begin{itemize}
+        \item Tập dữ liệu có phạm vi nhỏ nhưng phân bố dày đặc: Cambridge Landmarks
+        \item Tập dữ liệu có phạm vi lớn nhưng phân bố thưa: Pittsburgh 250k
+    \end{itemize}
+    \item Thực nghiệm trên những biến thể về nhựng bộ phận của mô hình
 \end{itemize}
 
 \section{Phạm vi đề tài}
 \begin{itemize}
     \item \textbf{Mục tiêu chung} 
     \begin{itemize}
-        \item Hướng đến việc thiết kế và áp dụng một kiến trúc mô hình học sâu để giải quyết bài toán bản địa hóa trực quan.
+        \item Hướng đến việc thiết kế và áp dụng thành công sự kết hợp giữa hai mô hình học sâu vào bài toán bản địa hóa trực quan. Từ đó cải thiện được điểm yếu của hai hướng tiếp cận.
     \end{itemize} 
     \item \textbf{Kết quả mong đợi}
     \begin{itemize}
@@ -100,26 +95,24 @@ Nhóm đề xuất một kiến trúc mô hình gồm 2 phần: truy xuất ản
     \end{itemize}
     \item \textbf{Lĩnh vực hướng đến}
     \begin{itemize}
-        \item Đóng góp cho những nghiên cứu về bài toán bản địa hóa trực quan trong chuyên ngành thị giác máy tính.
+        \item Đề tài hướng đến việc đóng góp thêm một giải pháp mới nhằm góp phần giải quyết được bài toán bản địa hóa trực quan, nhằm ứng dụng vào những công nghệ tương tác với thế giới thực.
     \end{itemize}
     
 \end{itemize}
 
 \section{Cấu trúc đồ án chuyên ngành}
-Đồ án chuyên ngành sẽ bao gồm năm (6) chương, bao gồm cả chương này. Nội dung ủa mỗi chương như sau:
+Đồ án chuyên ngành sẽ bao gồm năm chương, bao gồm cả chương này. Mỗi chương sẽ bao gồm những nội dung như sau:
 \begin{itemize}
     \item \textbf{Chương 1: Giới thiệu} \\
     Trình bày sơ lược về động cơ nghiên cứu, mục tiêu và phạm vi đề tài giải quyết.
-    \item \textbf{Chương 2: Công trình liên quan} \\
-    Chương này đề cập tới các kiến thức lý thuyết của các công trình nghiên cứu có liên quan.
-    \item \textbf{Chương 3: Kiến thức nền tảng} \\
-    Chương này đề cập tới các kiến thức lý thuyết nền tảng, các nguyên tắc cần được đảm bảo khi hiện thực và tiến hành so sánh, lựa chọn công nghệ sử dụng.
-    \item \textbf{Chương 4: Phương pháp đề xuất} \\
+    \item \textbf{Chương 2: Các công trình liên quan} \\
+    Chương này đề cập tới những hướng đi đã được đề xuất trong các công trình nghiên cứu nhằm giải quyết bài toán bản địa hóa trực quan. Ý tưởng và ưu, nhược điểm của mỗi phương pháp sẽ được phân tích nhằm xác định hướng phát triển.
+    \item \textbf{Chương 3: Phương pháp đề xuất} \\
     Chương này đề cập đến phương pháp giải quyết bài toán mà nhóm đề xuất bao gồm tổng quan về cơ chế cũng như lý thuyết cách hoạt động.
-    \item \textbf{Chương 5: Kết quả khảo sát} \\
+    \item \textbf{Chương 4: Đo đạc và đánh giá} \\
     Chương này đề cập kết quả khảo sát của nhóm bao gồm kết quả đánh giá hiệu quả của các phương pháp truy xuất ảnh và hồi quy vị trí máy ảnh.
-    \item \textbf{Chương 6: Thảo luận} \\
-    Chương này đề cập đến các câu hỏi cũng như các vấn đề nảy sinh trong quá trình nghiên cứu, thu thập kiến thức và hiện thực mô hình.
+    \item \textbf{Chương 5: Kế hoạch tương lai} \\
+    Trình bày tổng quan về quá trình thực hiện và kết quả của giai đoạn \textit{Đồ án chuyên ngành} và đưa ra kế hoạch cho giai đoạn \textit{Đồ án tốt nghiệp}
 \end{itemize}
 Cấu trúc của toàn đề tài sẽ được trình bày trong giai đoạn Đồ án tốt nghiệp.
 
