@@ -2,6 +2,31 @@
 
 \section{Những phương pháp đã được sử dụng}
 
+\subsection{Xác định những vấn đề hiện hữu trong bài toán bản địa hóa trực quan}
+
+\begin{itemize}
+    \item \textbf{Những phương pháp sử dụng biểu diễn 3D}
+    \begin{itemize}
+        \item Vấn đề về việc tiền xử lý: Để những phương pháp này có thể hoạt động được, một bản đồ điểm 3D thể hiện khu vực đang xét cần phải được tạo ra trước tiên. Bản đồ này có thể trở nên rất lớn khi mà khu vực đang xét đến là cả một tòa nhà, hay một thành phố.
+        \item Vấn đề về lưu trữ: Trong quá trình hoạt động của mô hình, khi nhận vào một ảnh truy vấn, mô hình sẽ tiến hành việc tìm tương quan 2D-3D giữa các điểm trên hình và các điểm trên bản đồ 3D. Vì vậy nên, mô hình sẽ cần phải dành ra một lượng lớn tài nguyên bộ nhớ để lưu trữ bản đồ điểm 3D của khu vực đang xét.
+        \item Vấn đề về khả năng khái quát hóa: Do mỗi bản đồ điểm 3D chỉ có thể phản ánh được một khu vực nhất định, hệ thống sẽ không thể xử lý được những ảnh truy vấn của những khu vực khác được. Trong trường hợp này, một tập ảnh mới của khu vực mới sẽ cần được thu thập để tạo thành một bản đồ điểm 3D mới.
+    \end{itemize}
+    %Để giải quyết những vấn đề trên, một phương pháp khác đã được đề xuất là xây dựng bản đồ điểm 3D cục bộ. Thay vì sinh ra bản đồ 3D cho toàn bộ khu vực đang xét ở bước tiền xử lý, phương pháp này sẽ sử dụng những ảnh truy xuất được để sinh ra bản đồ cục bộ \cite{sattler2017large}. Phương pháp này có thể tận dụng được những điểm mạnh của việc sử dụng cách biểu diễn 3D mà không cần duy trì bản đồ điểm 3D của toàn bộ khu vực. Tuy nhiên, cách tiếp cận này vẫn có một số điểm yếu như việc thời gian chạy trở nên đáng kể và số lượng ảnh truy xuất được có thể chưa đủ để sinh ra một bản đồ 3D phù hợp.
+
+    Một cách tiếp cận khác với mục tiêu loại bỏ sự cần thiết của bản đồ 3D, sử dụng mạng học sâu để xác định được vị trí của một điểm ảnh trong môi trường 3D, gọi là hồi quy điểm trong cảnh - Scene Point Regression. Tuy nhiên, những mô hình thuộc phương pháp này không có tính khái quát hóa mà để có thể chạy trên một khu vực nhất định thì mô hình cần dữ liệu mẫu thuộc khu vực đó để huấn luyện.
+    \item \textbf{Những phương pháp hồi quy vị trí}
+    \begin{itemize}
+        \item Vấn đề về phạm vi hoạt động của mô hình: Đa số những mô hình hồi quy vị trí đều chỉ hoạt động tốt trên những tập dữ liệu có phạm vi nhỏ và phân bố dày đặc như 7Scenes \cite{6619221} và Cambridge Landmarks \cite{kendall2016posenet}. Đối với những tập dữ liệu có phạm vi rộng và phân bố thưa như Aachen Day-Night \cite{Sattler2012ImageRF}, chỉ phương pháp nội suy đơn giản đã được áp dụng và kết quả đem lại là không quá tốt.
+        \item Vấn đề về khả năng khái quát hóa: Những mô hình hồi quy tuyệt đối sẽ xây dựng ngầm biểu diễn của khu vực đang xét bên trong những trọng số của mô hình. Vì vậy nên, một mô hình được huấn luyện trên một không gian nhất định chỉ có thể xử lý những ảnh được chụp trong không gian đó. Đối với những mô hình hồi quy tương đối, vấn đề này sẽ phụ thuộc vào cơ chế truy xuất ảnh được sử dụng.
+        \item Vấn đề về độ chính xác: Những phương pháp hồi quy sẽ không cho ra kết quả chính xác như những phương pháp sử dụng cách biểu diễn 3D.
+    \end{itemize}
+    \item \textbf{Những phương pháp truy xuất ảnh}
+    \begin{itemize}
+        \item Vấn đề về tài nguyên xử lý: Tuy bài toán VPR đã có nhiều bước đột phá trong thời gian qua, đa số các phương pháp đạt kết quả tốt đều sử dụng những cách tổng hợp mô tả của các đặc trưng trong ảnh như NetVLAD \cite{arandjelović2016netvlad} hoặc những biến thể tích hợp cơ chế tập trung \cite{keetha2023anyloc}, ngữ nghĩa của bộ phận ảnh \cite{peng2021semantic}, bối cảnh của ảnh \cite{jin2017learned}. Những cơ chế đó sẽ có ảnh hưởng tiêu cực đến thời gian chạy do độ phức tạp của giải thuật cũng như độ lớn của không gian mô tả.
+        \item Vấn đề về khả năng biểu diễn của CNN: Những cách tiếp cận theo mô hình học sâu sử dụng CNN cho đến hiện tại thường sẽ gặp những vấn đề trong việc biểu diễn được những thông tin về môi trường địa lý trong bài toán bản địa hóa trực quan.
+    \end{itemize}
+\end{itemize}
+
 \section{Nhận dạng địa điểm trực quan - Visual Place Recognition}
 
 Trước đây, việc định vị trực quan trên quy mô lớn (large-scale visual localization) được coi là một vấn đề truy xuất hình ảnh\cite{2022arXiv220105816X}. Vị trí cho hình ảnh truy vấn được xác định bởi hình ảnh tương tự nhất được lấy từ cơ sở dữ liệu. Tuy nhiên, để đáp ứng nhu cầu xác định vị trí của ảnh với độ chính xác trên 6 bậc tự do (6 Degrees of Freedom), việc sử dụng mô hình 3D để ước tính tư thế của máy ảnh ngày càng được các nhà nghiên cứu đề xuất và sử dụng. Sử dụng phương pháp này, bài toán định vị trực quan có thể được chia thành hai bước: truy xuất hình ảnh và định vị tư thế máy ảnh từ hình ảnh truy xuất được.
