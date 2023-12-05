@@ -46,13 +46,12 @@ Nhờ vào việc sử dụng cách biểu diễn trong không gian 3D, lớp ph
 
 \subsection{Những phương pháp hồi quy vị trí}
 \subsubsection*{Ý tưởng}
-Với những thành công gần đây trong các tác vụ của ngành khoa học máy tính như phân loại ảnh, phân vùng ảnh theo ngữ nghĩa, truy xuất ảnh, những phương pháp sử dụng mạng học sâu đã có thể phần biểu diễn được thông tin về hình học bên trong mô hình. Vậy nên, những phương pháp học sâu, sử dụng CNN dần được phổ biến trong bài toán định vị trực quan. Các thành phần của một giải pháp có thể được thay thế hoàn toàn, hoặc thay thế cụ thể từng bộ phận.
+Với những thành công gần đây trong các tác vụ của ngành khoa học máy tính như phân loại ảnh, phân vùng ảnh theo ngữ nghĩa, truy xuất ảnh, những phương pháp sử dụng mạng học sâu đã có thể phần nào trích xuất được những thông tin hình học từ ảnh. Sử dụng những thông tin này, mô hình học sâu có thể xây dựng một hàm ánh xạ đến những cách biểu diễn mong muốn. Vì tính linh hoạt của hướng tiếp cận học sâu nên chúng có thể được ứng dụng để thay thế một hay nhiều tác vụ bên trong quá trình giải bài toàn định vị trực quan.
 \subsubsection*{Những bước thực hiện}
 
-Đầu tiên, về hướng tiếp cận áp dụng phương pháp học sâu đầu cuối, mô hình sẽ có thể nhận vào một ảnh RGB và xác định được vị trí chụp của ảnh đó mà không cần có sự can thiệp của con người. Thông thường, những mô hình này sẽ bao gồm những bước xử lý ảnh như sau:
+Để những phương pháp học sâu có thể hoạt động một cách hiệu quả, mô hình cần được cung cấp một tập dữ liệu đã có kết quả để huấn luyện trên đó. Sau đó, mô hình học sâu có thể biến đổi dữ liệu đầu vào thành kết quả một cách trực tiếp, không cần sự can thiệp của con người. Cụ thể hơn, một phương pháp hồi quy vị trí sẽ thường có những bước sau:
 \begin{itemize}
-    \item Mã hóa ảnh: mạng CNN sẽ được dùng ở đầu vào để có thể trích xuất được những chi tiết trong ảnh, sử dụng để sinh ra một giá trị mã hóa, đại diện cho ảnh. Ở bước này, những kiến trúc mạng CNN khác nhau như VGG, ResNet, EfficientNet có thể được thử nghiệm để tìm ra mạng thích hợp nhất với tác vụ định vị trực quan. Với những thành công gần đây trên những tác vụ thị giác máy tính khác, Vision Transformer có thể giúp cải thiện quá trình mã hóa.
-    \item Ánh xạ đến giá trị vị trí của ảnh: Từ những giá trị mã hóa đại diện cho ảnh, mô hình học sâu sẽ ánh xạ đến vị trí thực tế của ảnh, thường ở dạng 6DoF. Như trong PoseNet \cite{kendall2016posenet}, các lớp kết nối đầy đủ sẽ được sử dụng như hàm ánh xạ ra vị trí và hướng quay của ảnh.
+    \item Huấn luyện mô hình trên tập dữ liệu mẫu: 
 \end{itemize}
 \subsubsection*{Những biến thể của phương pháp}
 \subsubsection*{Phân tích ưu và nhược điểm của phương pháp}
