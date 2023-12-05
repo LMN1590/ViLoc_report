@@ -2,6 +2,36 @@
 
 \section{Những phương pháp đã được sử dụng}
 
+Bản địa hóa trực quan được định nghĩa là một bài toán nhằm xác định được vị trí của máy ảnh từ ảnh chụp được. Cho đến hiện tại, nhiều hướng tiếp cận cho bài toán bản địa hóa trực quan đã được đề xuất. Những phương pháp quan trọng nhất có thể được nhóm vào hai nhóm chính là \textbf{Những phương pháp sử dụng biểu diễn 3D} và \textbf{Những phương pháp hồi quy vị trí}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.45]{pics/Chapter2/overviewViLoc.png}
+    \caption{Tổng quát về những phương pháp bản địa hóa trực quan quan trọng \cite{methodsLocal}}
+\end{figure}
+
+\subsection{Những phương pháp sử dụng biểu diễn 3D}
+\subsubsection*{Ý tưởng}
+Những phương pháp sử dụng biểu diễn 3D sẽ hoạt động xoay quanh việc biểu diễn lại môi trường đang xét bằng một bản đồ đám mây điểm 3D. Bản đồ 3D chứa những đặc trưng trích xuất được từ các ảnh và tiến hành kiếm các cặp đặc trưng tương quan giữa các ảnh với nhau nhằm tạo thành những điểm mô tả 3D trong không gian ba chiều. Những bản đồ này thường sẽ được mô hình tạo ra vào lúc tiền xử lý tập dữ liệu và sẽ được dùng trong suốt quá trình bản địa hóa của mô hình.
+\subsubsection*{Những bước thực hiện}
+\begin{itemize}
+    \item Ở bước tiền xử lý, không gian được thể hiện bởi tập dữ liệu sẽ được tái tạo lại trong không gian 3D, sử dụng những ảnh cùng thể hiện một cảnh, nhưng từ những vị trí và góc nhìn khác nhau. Phương pháp tái tạo này được gọi là Tái tạo kiến trúc từ chuyển động - Structure from Motion. Cụ thể hơn, quá trình này sẽ gồm các giai đoạn:
+    \begin{itemize}
+        \item Trích xuất mô tả của các đặc trưng từ ảnh: Mỗi ảnh trong tập dữ liệu sẽ được trích xuất đặc trưng và mỗi đặc trưng sẽ được gán một giá trị mô tả để SfM có thể tìm được những đặc trưng tương đồng giữa các hình. Kết quả đầu ra sẽ là một tập các mô tả cho đặc trưng của từng ảnh.
+        \item Tìm kiếm sự tương quan của các đặc trưng giữa các ảnh: SfM sẽ tìm kiếm những ảnh cùng nhìn bộ phận của cảnh bằng cách kiểm tra sự tương đồng giữa các mô tả của đặc trưng trên các ảnh. Những cặp ảnh chứa những cặp đặc trưng tương quan sẽ cần được xác nhận lại về tính đúng đắn về hình học qua việc có tồn tại một cách biến đổi có khả năng ánh xạ một số lượng trưng giữa hai ảnh.
+        \item Tái tạo lại cấu trúc: Quá trình tái tạo lại cấu trúc sẽ bắt đầu từ một cặp ảnh khởi tạo. Sau đó, góc nhìn
+    \end{itemize}
+\end{itemize}
+\subsubsection*{Những biến thể của phương pháp}
+\subsubsection*{Phân tích ưu và nhược điểm của phương pháp}
+
+\subsection{Những phương pháp hồi quy vị trí}
+\subsubsection*{Ý tưởng}
+\subsubsection*{Những bước thực hiện}
+\subsubsection*{Những biến thể của phương pháp}
+\subsubsection*{Phân tích ưu và nhược điểm của phương pháp}
+
+\subsection{Những phương pháp khác}
 \subsection{Xác định những vấn đề hiện hữu trong bài toán bản địa hóa trực quan}
 
 \begin{itemize}
