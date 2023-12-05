@@ -329,9 +329,6 @@ Nhận thấy các phương pháp tái định vị trực quan (Visual Relocali
 
 Trong khi đó các phương pháp dựa trên CNN \cite{melekhov2017relative, saha2018improved, arnold2022mapfree} lại đề xuất một hướng giải quyết để hồi quy trực tiếp vị trí tương đối ngay trong mạng nơ-ron. Relative NN \cite{melekhov2017relative} đề xuất một mô hình đầu-cuối Siamese hai nhánh để hồi quy vị trí tương đối giữa hai ảnh đầu vào. AnchorNet \cite{saha2018improved} tìm cách khắc phục vấn đề định vị bằng cách định nghĩa các địa danh thành các điểm mốc để học các điểm mốc tương đối của ảnh đầu vào cũng như độ lệch của chúng. Map-free \cite{arnold2022mapfree} đề xuất việc không sử dụng ảnh để tái kiến trúc lại cảnh, đồng thời cung cấp hai phương hướng để hồi quy vị trí từ một ảnh.
 
-
-\subsection{Tái tạo kiến trúc từ chuyển động - Structure From Motion}
-
 \section{Phân tích và tổng hợp}
 Về các phương pháp hồi quy vị trí máy ảnh, các nghiên cứu cho thấy hiệu suất dự đoán vị trí vẫn chưa thể vượt qua các phương pháp tái kiến trúc từ chuyển động. Các phương pháp hồi quy vị trí máy ảnh vẫn còn đang trên đà phát triển tuy nhiên vẫn gặp nhiều khó khăn với việc giải quyết các đặc trưng cục bộ trùng lặp cũng như việc tiêu tốn nhiều tài nguyên tính toán. Hầu hết công trình tập trung vào các điểm đặc trưng có độ chắc chắn cao hoặc mô tả đặc trưng chính xác dưới điều kiện mang tính thử thách cao. Ngoài ra, phần lớn các phương pháp được đề xuất chỉ có thể áp dụng trong một phạm vi nhỏ và vẫn chưa chứng tỏ được hiệu suất trên những tập dữ liệu có quy mô lớn.
 	
