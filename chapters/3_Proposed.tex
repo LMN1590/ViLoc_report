@@ -1,24 +1,113 @@
 \chapter{PHƯƠNG PHÁP ĐỀ XUẤT}
 
 \section{Tổng quan về mô hình được đề xuất}
-Như một phương pháp hồi quy vị trí tương đối bình thường, mô hình được đề xuất sẽ bao gồm hai bộ phận chính là bộ phận truy xuất ảnh và bộ phận hồi quy vị trí tương đối dựa trên cặp ảnh. Cụ thể hơn
+Với đầu vào là một ảnh $I$, mạng MixVPR sẽ tạo ra một tập giá trị mã hóa, đại diện cho ảnh. Giá trị này sẽ được dùng để tìm kiếm ảnh $I'$ có độ tương đồng cao trong tập dữ liệu. Sau khi đã tìm được ảnh tham khảo từ tập dữ liệu, mô hình tương quan 2D-2D của Map-free Relocalization sẽ được sử dụng để xác định độ lệch về vị trí và góc quay giữa ảnh $I$ và $I'$. Cuối cùng, tọa đô tuyệt đối của ảnh $I$ trong không gian sẽ được xác định từ độ lệch và vị trí tuyệt đối của ảnh $I'$.
+
+Như một phương pháp hồi quy vị trí tương đối bình thường, mô hình được đề xuất sẽ bao gồm hai bộ phận chính là bộ phận truy xuất ảnh và bộ phận hồi quy vị trí tương đối dựa trên cặp ảnh. Cụ thể hơn:
 \begin{itemize}
-    \item Bộ phận truy xuất ảnh sẽ sử dụng mô hình được đề xuất trong bài báo nghiên cứu MixVPR của ...
-    \item Bộ phận hồi quy vị trí tương đối dựa trên cặp ảnh sẽ sử dụng mô hình tương quan 2D-2D được đề xuất trong bài báo nghiên cứu Map-free Relocalization.
+    \item Bộ phận truy xuất ảnh sẽ sử dụng mô hình được đề xuất trong bài báo nghiên cứu MixVPR.
+    \item Bộ phận hồi quy vị trí tương đối dựa trên cặp ảnh gồm ảnh truy vấn và ảnh tham khảo sẽ sử dụng mô hình tương quan 2D-2D được đề xuất trong bài báo nghiên cứu Map-free Relocalization.
 \end{itemize}
 
-\subsection{MixVPR}
+\subsection{MixVPR \cite{alibey2023mixvpr}}
 \subsubsection*{Ý tưởng đằng sau mô hình}
-\subsubsection*{Những bước xử lý của mô hình}
-\subsubsection*{Lý do chọn mô hình}
+MixVPR là một phương pháp tổng hợp toàn diện sử dụng Feature Map trích xuất từ một mô hình cơ sở đã được huấn luyện trước đó. MixVPR sẽ lần lượt kết hợp thông tin toàn cục vào mỗi Feature Map thông qua khối Feature Mixer đẳng hướng, được cấu tạo chủ yếu từ những MLP. Khả năng học thông tin toàn cục từ ảnh của MixVPR có thể vượt qua những phương pháp sử dụng cơ chế tập trung như AnyLoc \cite{keetha2023anyloc} trên lĩnh vực ảnh ở khu vực thành thị.
 
-\subsection{Mô hình tương quan 2D-2D của Map-free Relocalization}
+\subsubsection*{Những bước xử lý của mô hình}
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{pics/Proposal/mixvpr.png}
+    \caption{Tổng quát quá trình xử lý ảnh của MixVPR \cite{alibey2023mixvpr}}
+\end{figure}
+Với ảnh đầu vào là $I$, mô hình CNN cơ sở sẽ trích xuất ra được tập Feature Map có dạng $F \in R^{c \cdot h \cdot w}$ từ những lớp trung gian.
+$$
+F = CNN(I)
+$$
+Ở những phương pháp trước như NetVLAD \cite{arandjelović2016netvlad} và PatchNetVLAD \cite{hausler2021patchnetvlad}, những lớp Feature Map thuộc $F$ sẽ được xem như là một mô tả tương ứng với một miền tiếp nhận trong ảnh ban đầu. Ngược lại, MixVPR xem tensor $F$ như một tập các đặc trưng 2D có kích thước $h \cdot w$.
+$$
+F = \{X^{i}\}    i = \{1,...c\}
+$$
+với $X^{i}$ tương ứng với bản đồ kích hoạt thứ $i$ ở F. Ở cách biểu diễn này, mỗi Feature Map không chỉ đại diện cho một miền tiếp nhận trong ảnh mà sẽ chứa một loại thông tin đặc thù cho toàn bộ ảnh. $X^{i}$ sau đó sẽ được định dạng lại thành ma trận một chiều, có được $F \in R^{c \cdot n}$ với $n = h*w$.
+
+Sau đó, dữ liệu sẽ được đưa qua khối Feature Mixer, gồm $L$ những lớp mạng MLP. Những lớp này sẽ nhận vào từng Feature Map $X^{i}$ một chiều và tích hợp thông tin về mối liên kết giữa các giá trị của $X^{i}$ lên chính nó thông qua cách sau:
+$$
+X^{i} \leftarrow Norm(X^{i})
+$$
+
+$$
+X^{i} \leftarrow W_2(\sigma(W_1 X^{i}))
+$$
+với $W_1$ và $W_2$ là trọng số của hai lớp liên kết đầy đủ, cấu tạo nên MLP và $\sigma$ là hàm tạo sự phi tuyến tính cho quá trình xử lý(ReLU). Kỹ thuật nối tắt được sử dụng để nối đầu vào đã qua lớp chuẩn hóa với đầu ra nhằm giúp độ dốc trong quá trình huấn luyện có thể được truyền tải dễ hơn, cải thiện quá trình huấn luyện.
+
+Mục đích của việc sử dụng Feature Mixer là để tận dụng khả năng tổng hợp thông tin từ dữ liệu của các lớp kết nối đầy đủ, thay vì học trên những đặc trưng cục bộ trên ảnh và sử dụng cơ chế tập trung. Ngoài ra, Feature Mixer cũng sẽ trả về kết quả có định dạng như cũ, thay vì có đầu ra giảm dần như những phương pháp tổng hợp dạng phân cấp(kim tự tháp) như trước đây, để mỗi nơ-ron đều có thể biết được thông tin của toàn bộ ảnh. Những lớp MLP trong khối Feature Mixer sẽ giúp tích hợp thông tin trên toàn bộ ảnh qua mỗi lần xử lý.
+
+Mỗi khối Feature Mixer sau khi xử lý xong từng Feature Map trong tập $F \in R^{c \cdot n}$, sẽ ghép kết quả lại, tạo thành $Z \in R^{c \cdot n}$ với cùng kích thước trước khi được đưa vào khối Feature Mixer kế tiếp. Quá trình này có thể được miêu tả bằng công thức sau:
+$$
+Z = FM_L(FM_{L-1}(\dots FM_1(F)))
+$$
+Số chiều của $Z$ thường sẽ rất cao do có định dạng được giữ nguyên so với $F$. Để giúp giảm bớt số chiều của $Z$ lại sau khi qua khối Feature Mixer, hai lớp kết nối đầy đủ sẽ được sử dụng để tổng hợp giữa các kênh với nhau và sau đó là giữa các giá trị trong từng kênh. Tác vụ này thực hiện việc tổng hợp có chọn lọc nhằm điều khiển được kích thước của giá trị đầu ra.
+
+Đầu tiên, dữ liệu sẽ được tổng hợp số kênh để biến định dạng của $Z$ từ $R^{c \cdot n}$ thành $R^{d \cdot n}$.
+$$
+Z' = W_d(Transpose(Z))
+$$
+với $W_d$ là trọng số của lớp kết nối đầy đủ đầu tiên.
+
+Sau đó, giá trị trên từng kênh sẽ được tổng hợp lại, từ định dạng $R^{d \cdot n}$ thành $R^{d \cdot r}$.
+$$
+O = W_r(Transpose(Z'))
+$$
+với $W_r$ là trọng số của lớp kết nối đầy đủ thứ hai.
+
+Kết quả $O$ cuối cùng, có định dạng là $R^{d \cdot r}$, sẽ được ép thành một chiều và chuẩn hóa theo L2 như những phương pháp VPR khác \cite{arandjelović2016netvlad,berton2022rethinking}. Cuối cùng, từ ảnh đầu vào $I$, mô hình sẽ trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Đoạn mã hóa này sau đó có thể được dùng để so sánh với giá trị mã hóa của những hình khác nhằm tìm ảnh có độ tương đồng cao nhất với $I$.
+
+\subsubsection*{Chi tiết hiện thực phương pháp}
+\textbf{Cấu trúc:} Phương pháp tổng hợp sử dụng mô hình MixVPR sẽ được hiện thực trên framework PyTorch. Mô hình CNN cơ sở của MixVPR sẽ được cắt ở lớp áp cuối của mô hình ResNet. Dữ liệu đầu vào cho MixVPR sẽ là một tập các Feature Map có kích thước 20x20. Thao tác tổng hợp trong khối Feature Mixer sẽ sử dụng lớp Linear được cung cấp bởi PyTorch, theo sau đó là một lớp ReLU để tạo tính phi tuyến tính. Với lớp chuẩn hóa, LayerNorm của PyTorch sẽ được sử dụng. Cuối cùng, đầu ra cuối cùng của khối Feature Mixer sẽ được tổng hợp xuống một chiều không gian biểu diễn nhỏ hơn sử dụng hai lớp kết nối đầy đủ giữa các kênh với nhau và giữa các giá trị trong mỗi kênh, chứng minh là MixVPR là một cấu trúc chỉ sử dụng MLP. Số khối Feature Mixer được sử dụng sẽ luôn được giữ là $L=4$ trừ khi được quy định khác.
+
+\textbf{Huấn luyện:} Mô hình MixVPR được đánh giá trong bài nghiên cứu sẽ sử dụng mô hình ResNet \cite{he2016deep} đã được huấn luyện trên tập ImageNet \cite{krizhevsky2012imagenet} làm cơ sở. Sau đó, mô hình sẽ được huấn luyện trên tập dữ liệu GSV-Cities \cite{Ali_bey_2022}. Đối hàm mất mát, hàm Multi-Similarity Loss \cite{wang2019multi} do hàm đã được chứng mình là hỗ trợ cho ra kết quả tốt với tác vụ VPR \cite{Ali_bey_2022}. Kích thước của một batch sẽ có $P$ = 120 địa điểm, mỗi địa điểm được miêu tả bởi 4 ảnh, tạo thành một batch có kích thước 480 ảnh. Phương tối ưu giảm độ dốc ngẫu nhiên - SGD sẽ được sử dụng với quán tính - momentum là 0.9 với giá trị suy giảm trọng số - weight decay là 0.001. Tốc độ học - learning rate sẽ được khởi tạo với giá trị 0.05 và sẽ được chia 3 sau mỗi 5 chu kỳ - epoch. Cuối cùng, mô hình sẽ được huấn luyện tối đa 30 chu kỳ - epoch với đầu vào là ảnh đã được chỉnh xuống kích thước 320x320.
+
+\textbf{Đánh giá:} Để đánh giá, 5 tiêu chuẩn sẽ được sử dụng. Pitts250k-test \cite{6618963}, bao gồm 8k ảnh truy vấn và 83k ảnh tham khảo, được thu thập từ Google Street View và Pitts30k-test \cite{6618963} là một tập con của Pitts250k bao gồm 8k ảnh truy vấn và 8k ảnh tham khảo. Cả 2 tập dữ liệu Pittsburgh đều có những góc nhìn có độ lệch đáng kể. Tập dữ liệu SPED \cite{zaffar2021vpr} gồm 607 ảnh truy vấn và 607 ảnh tham khảo từ camera giám sát chứa những thay đổi lớn về độ sáng và về cảnh vật các mùa. MSLS \cite{warburg2020mapillary} được thu thập từ camera hành trình của xe hơi và cho rất nhiều góc nhìn đa dạng và sự thay đổi về độ sáng. Cuối cùng, Nordland \cite{zaffar2021vpr} là một tập dữ liệu chứa nhiều thử thách khi sử dụng ảnh thu thập được ở cả 4 mùa với camera được gắn trên tàu. Đơn vị đánh giá được sử dụng sẽ là recall@k, thể hiện tỷ lệ của truy xuất thành công trên tổng số lượng truy xuất. Một truy xuất hình sẽ được xem là thành công khi ảnh được truy xuất nằm trong vòng 25m xung quanh ảnh truy vấn.
+
+\subsubsection*{Hiệu quả của phương pháp}
+Khi so sánh trên những tập dữ liệu phản ánh môi trường thành thị, phương pháp sử dụng mô hình MixVPR đạt được kết quả vượt trội so với những mô hình SOTA đã được đề xuất trước nó, như CosPlace \cite{berton2022rethinking} và NetVLAD \cite{arandjelović2016netvlad}. Những tập dữ liệu được sử dụng đã bao quát hết những trường hợp có thể tác động xấu đến mô hình như góc nhìn đa dạng; thời tiết, mùa thay đổi; chênh lệch về độ sáng.
+
+MixVPR cũng có khả năng giải quyết được những trường hợp mà những phương pháp trước gặp khó khăn như:
+\begin{itemize}
+    \item Kiến trúc lặp lại nhiều
+    \item Góc nhìn thay đổi rõ rệt
+    \item Đường chân trời
+    \item Độ sáng chênh lệch lớn
+    \item Gặp nhiều vật thể cản trở tầm nhìn
+\end{itemize}
+Tuy nhiên, mô hình vẫn sẽ gặp thất bại khi độ chênh lệch góc nhìn là quá lớn hoặc có quá nhiều vật cản.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{pics/Proposal/fail.png}
+    \caption{So sánh kết quả của những trường hợp khó của MixVPR và các phương pháp khác \cite{alibey2023mixvpr}}
+\end{figure}
+
+Với sự ra đời của AnyLoc \cite{keetha2023anyloc}, bài toán VPR trong những môi trường đa dạng hơn như trong nhà, trong hang động, trên bầu trời, hoặc trên mặt biển đã có một SOTA mới. Điều này là nhờ việc AnyLoc sử dụng mạng cơ sở DINO, một mạng Vision Transformer được huấn luyện bằng cơ chế tự giám sát để sinh ra những đặc trưng có giá trị với mọi tác vụ. Tuy nhiên, khi xét đến môi trường thành thị thì MixVPR vẫn có cho ra kết quả chính xác hơn AnyLoc. Số liệu cụ thể sẽ được trình bày bên dưới.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{pics/Proposal/anyloc.png}
+    \caption{Kết quả của AnyLoc so sánh với những mô hình khác \cite{keetha2023anyloc}}
+\end{figure}
+
+
+
+\subsection{Mô hình tương quan 2D-2D của Map-free Relocalization \cite{arnold2022mapfree}}
 \subsubsection*{Ý tưởng đằng sau mô hình}
+Mô hình tương quan 2D-2D được đề xuất trong Map-free Relocalization thuộc nhóm những phương pháp sử dụng tìm kiếm cặp đặc trưng tương quan trong ảnh và xác định quy mô qua ước tính độ sâu. Phương pháp này sẽ giải quyết được điểm yếu của những phương pháp RPR là không nắm bắt được thông tin về hình học trong ảnh bằng cách sử dụng cách biểu diễn trung gian là ma trận thiết yếu. Dù kết quả của mô hình trong những môi trường có tập dữ liệu ảnh biểu diễn phân bố dày đặc là không quá vượt trội. Tuy nhiên, khi phân bố ảnh trong tập dữ liệu trở nên thưa hơn trong không gian đang xét thì phương pháp 2D-2D lại có kết quả vượt qua phương pháp 2D-3D và 3D-3D. 
 \subsubsection*{Những bước xử lý của mô hình}
-\subsubsection*{Lý do chọn mô hình}
 
-\section{Tiêu chí đánh giá}
-\subsection{MixVPR}
-\subsection{Mô hình tương quan 2D-2D của Map-free Relocalization}
+Với đầu vào là cặp ảnh $(I_1,I_2)$, những cặp đặc trưng tương quan giữa hai ảnh sẽ được xác định. Sau đó, ma trận thiết yếu giữa 2 ảnh sẽ được tính dựa vào giải thuật 5 điểm \cite{nister2004efficient} cùng với MAGSAC++ \cite{barath2020magsac++} và phân giải nó thành vector thể hiện độ lệch của vị trí và góc quay. 
+
+Những cặp tương quan được trả về sau MAGSAC++ sẽ được chiếu lên không gian 3D dựa vào độ sâu ước tính được. Mỗi cặp tương quan sẽ cung cấp một tỉ lệ cho vector độ dời vị trí và tỷ lệ phù hợp nhất với những cặp tương quan khác sẽ được chọn để áp dụng vào kết quả độ dời vị trí ban đầu và được trả về chung với vector độ dời góc quay.
+
+\subsubsection*{Chi tiết hiện thực phương pháp}
+
+\subsubsection*{Hiệu quả của phương pháp}
 
 
