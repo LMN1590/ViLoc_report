@@ -1,4 +1,5 @@
 {
   "editor.wordWrap": "on",
-  "editor.fontFamily": "Consolas, 'Courier New', monospace"
+  "editor.fontFamily": "Consolas, 'Courier New', monospace",
+  "editor.defaultFormatter": "James-Yu.latex-workshop"
 }
