@@ -14,15 +14,20 @@ Như một phương pháp hồi quy vị trí tương đối bình thường, m�
 MixVPR là một phương pháp tổng hợp toàn diện sử dụng Feature Map trích xuất từ một mô hình cơ sở đã được huấn luyện trước đó. MixVPR sẽ lần lượt kết hợp thông tin toàn cục vào mỗi Feature Map thông qua khối Feature Mixer đẳng hướng, được cấu tạo chủ yếu từ những MLP. 
 
 \subsubsection*{Những bước xử lý của mô hình}
-Với ảnh đầu vào là $\mathcal{I}$, mô hình CNN cơ sở sẽ trích xuất ra được tập Feature Map có dạng $F \in \mathcal{R}^{c \cdot h \cdot w}$ từ những lớp trung gian.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{pics/Proposal/mixvpr.png}
+    \caption{Tổng quát quá trình xử lý ảnh của MixVPR}
+\end{figure}
+Với ảnh đầu vào là $I$, mô hình CNN cơ sở sẽ trích xuất ra được tập Feature Map có dạng $F \in R^{c \cdot h \cdot w}$ từ những lớp trung gian.
 $$
-F = CNN(\mathcal{I})
+F = CNN(I)
 $$
 Ở những phương pháp trước như NetVLAD \cite{arandjelović2016netvlad} và PatchNetVLAD \cite{hausler2021patchnetvlad}, những lớp Feature Map thuộc $F$ sẽ được xem như là một mô tả tương ứng với một miền tiếp nhận trong ảnh ban đầu. Ngược lại, MixVPR xem tensor $F$ như một tập các đặc trưng 2D có kích thước $h \cdot w$.
 $$
 F = \{X^{i}\}    i = \{1,...c\}
 $$
-với $X^{i}$ tương ứng với bản đồ kích hoạt thứ $i$ ở F. Ở cách biểu diễn này, mỗi Feature Map không chỉ đại diện cho một miền tiếp nhận trong ảnh mà sẽ chứa một loại thông tin đặc thù cho toàn bộ ảnh. $X^{i}$ sau đó sẽ được định dạng lại thành ma trận một chiều, có được $F \in \mathcal{R}^{c \cdot n}$ với $n = h*w$.
+với $X^{i}$ tương ứng với bản đồ kích hoạt thứ $i$ ở F. Ở cách biểu diễn này, mỗi Feature Map không chỉ đại diện cho một miền tiếp nhận trong ảnh mà sẽ chứa một loại thông tin đặc thù cho toàn bộ ảnh. $X^{i}$ sau đó sẽ được định dạng lại thành ma trận một chiều, có được $F \in R^{c \cdot n}$ với $n = h*w$.
 
 Sau đó, dữ liệu sẽ được đưa qua khối Feature Mixer, gồm $L$ những lớp mạng MLP. Những lớp này sẽ nhận vào từng Feature Map $X^{i}$ một chiều và tích hợp thông tin về mối liên kết giữa các giá trị của $X^{i}$ lên chính nó thông qua cách sau:
 $$
@@ -54,7 +59,7 @@ O = W_r(Transpose(Z'))
 $$
 với $W_r$ là trọng số của lớp kết nối đầy đủ thứ hai.
 
-Kết quả $O$ cuối cùng, có định dạng là $R^{d \cdot r}$, sẽ được ép thành một chiều và chuẩn hóa theo L2 như những phương pháp VPR khác \cite{arandjelović2016netvlad,berton2022rethinking}.
+Kết quả $O$ cuối cùng, có định dạng là $R^{d \cdot r}$, sẽ được ép thành một chiều và chuẩn hóa theo L2 như những phương pháp VPR khác \cite{arandjelović2016netvlad,berton2022rethinking}. Cuối cùng, từ ảnh đầu vào $I$, mô hình sẽ trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Đoạn mã hóa này sau đó có thể được dùng để so sánh với đoạn mã hóa của những hình khác nhằm tìm những ảnh tương đồng với $I$.
 
 \subsection{Mô hình tương quan 2D-2D của Map-free Relocalization \cite{arnold2022mapfree}}
 \subsubsection*{Ý tưởng đằng sau mô hình}
