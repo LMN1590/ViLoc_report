@@ -6,7 +6,7 @@ Dưới góc nhìn một bài toán trích truy vấn ảnh, các đặc trưng 
 
 Trong bài toán học biễu diễn đặc trưng, một đặc trưng lân cận chỉ phân tích, biểu diễn ý nghĩa của một nhóm các điểm ảnh nhỏ và chỉ ra sự khác biệt giữa chúng với các nhóm các điểm ảnh lân cận\cite{CGV-017-localdescriptors}. Các nhóm điểm ảnh được tạo ra bằng cách chia mỗi hình ảnh thành lưới với độ phân giải nhất định và tất cả các nhóm điểm ảnh được thu thập, trích xuất để tìm đặc trưng. Để áp dụng cho bài toán truy xuất hình ảnh trực quan, các thuật toán lựa chọn như Hessian-Affine detector\cite{hessian-affine-detector}, MSER\cite{MSER-detector} được áp dụng để lựa chọn chỉ những nhóm điểm ảnh mang tính quan trọng, quyết định đến sự khác nhau giữa các ảnh và loại bỏ các nhóm điểm ảnh dễ bị ảnh hưởng bởi yếu tố môi trường. Vào thời gian đầu, việc truy xuất đặc trưng từ các nhóm ảnh, điểm ảnh được thực hiện bằng cách sử dụng các thuật toán như SIFT\cite{lowe1999object}, SURF\cite{bay2006surf}, RootSIFT\cite{Arandjelovi2012ThreeTE}, BRIEF\cite{brief}, DSP-SIFT\cite{Dong2014DomainsizePI} và đặc trưng kernel\cite{kernel-descriptors}.
 
-Các hướng tiếp cận trên sử dụng số lượng lớn đặc trưng cần trích xuất và lưu trữ trong khi đối với  dẫn đến vấn đề trong việc sử dụng tất cả đặc trưng đã được trích xuất cho bài toán truy xuất.
+Các hướng tiếp cận mới hơn cho rằng các hướng tiếp cận trên sử dụng số lượng lớn đặc trưng cần trích xuất và lưu trữ trong khi không phải tất cả các đặc trưng đều có đủ tính phân biệt cho quá trình truy xuất ảnh \cite{predicting-good-features}, đề xuất
 
 \subsubsection{Biễu diễn đặc trưng toàn cục  - Local descriptors}
 
