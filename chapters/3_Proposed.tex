@@ -102,11 +102,31 @@ Với sự ra đời của AnyLoc \cite{keetha2023anyloc}, bài toán VPR trong 
 Mô hình tương quan 2D-2D được đề xuất trong Map-free Relocalization thuộc nhóm những phương pháp sử dụng tìm kiếm cặp đặc trưng tương quan trong ảnh và xác định quy mô qua ước tính độ sâu. Phương pháp này sẽ giải quyết được điểm yếu của những phương pháp RPR là không nắm bắt được thông tin về hình học trong ảnh bằng cách sử dụng cách biểu diễn trung gian là ma trận thiết yếu. Dù kết quả của mô hình trong những môi trường có tập dữ liệu ảnh biểu diễn phân bố dày đặc là không quá vượt trội. Tuy nhiên, khi phân bố ảnh trong tập dữ liệu trở nên thưa hơn trong không gian đang xét thì phương pháp 2D-2D lại có kết quả vượt qua phương pháp 2D-3D và 3D-3D. 
 \subsubsection*{Những bước xử lý của mô hình}
 
-Với đầu vào là cặp ảnh $(I_1,I_2)$, những cặp đặc trưng tương quan giữa hai ảnh sẽ được xác định. Sau đó, ma trận thiết yếu giữa 2 ảnh sẽ được tính dựa vào giải thuật 5 điểm \cite{nister2004efficient} cùng với MAGSAC++ \cite{barath2020magsac++} và phân giải nó thành vector thể hiện độ lệch của vị trí và góc quay. 
+Với đầu vào là cặp ảnh $(I_0,I_1)$, những cặp đặc trưng tương quan giữa hai ảnh sẽ được xác định thành 2 tập là $(kpts_0, kpts_1)$ tương ứng với mỗi hình. Sau đó, ma trận thiết yếu giữa 2 ảnh sẽ được ước tính dựa vào giải thuật 5 điểm \cite{nister2004efficient} cùng với MAGSAC++ \cite{barath2020magsac++} dựa trên 2 tập điểm tương quan đã được xác định. Ma trận thiết yếu sau đó sẽ được phân giải thành ma trận thể hiện góc quay chênh lệch, $R \in SO(3)$ và vector đơn vị độ lệch về vị trí giữa hai ảnh, $\hat{t} \in R^{3}, \lvert \hat{t} \rvert = 1$.
 
-Những cặp tương quan được trả về sau MAGSAC++ sẽ được chiếu lên không gian 3D dựa vào độ sâu ước tính được. Mỗi cặp tương quan sẽ cung cấp một tỉ lệ cho vector độ dời vị trí và tỷ lệ phù hợp nhất với những cặp tương quan khác sẽ được chọn để áp dụng vào kết quả độ dời vị trí ban đầu và được trả về chung với vector độ dời góc quay.
+Các cặp điểm tương quan giữa hai ảnh thỏa ma trận thiết yếu sẽ được chiếu lên không gian 3D qua độ sâu của ảnh. Với mỗi cặp điểm $(p_0,p_1)$, một tỷ lệ $s$ có thể được xác định bằng công thức:
+$$
+\begin{aligned}
+\lvert Rp_0 + s \cdot \hat{t} - p_1 \rvert = 0\\
+s = (p_1 - Rp_0) \cdot \hat{t}
+\end{aligned}
+$$
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{pics/Proposal/reprojection.png}
+    \caption{Hình minh họa cho việc chiếu điểm $p_0$ qua vector góc quay $R$ và vector độ lệch đơn vị $\hat{t}$ cùng với tỷ lệ $s$ \cite{arnold2022mapfree}}
+\end{figure}
+
+
+Mỗi cặp tương quan sẽ trả về một tỷ lệ $s$ cho vector đơn vị độ lệch. Vòng lặp RANSAC sẽ được sử dụng để loại bỏ những trường hợp ngoại lệ sinh ra từ việc ước lượng độ sâu sai lệch. Sau đó, giá trị $s$ có số cặp điểm hợp lệ lớn nhất sẽ được chọn để kiếm được vector độ lệch. Một cặp điểm sẽ được coi là hợp lệ nếu khoảng cách giữa hai điểm sau phép chiếu nhỏ hơn một giá trị nhất định. Trong bài nghiên cứu, giá trị 10cm được chọn.
 
 \subsubsection*{Chi tiết hiện thực phương pháp}
+
+\textbf{Cấu trúc:} Tác vụ tìm kiếm tương quan giữa hai ảnh sẽ có thể lựa chọn giữa phương pháp truyền thống như SIFT, hoặc những phương pháp theo hướng tiếp cận học sâu gần đây hơn như SuperPoint+SuperGlue \cite{sarlin2020superglue} và LoFTR \cite{sun2021loftr}. Tác vụ tính độ sâu đơn ảnh sẽ được phân thành hai trường hợp là bên trong nhà và ngoài trời. Với những tập dữ liệu trong nhà, mô hình DPT \cite{ranftl2021vision} được huấn luyện trên tập dữ liệu NYUv2 \cite{silberman2012indoor} PlaneRCNN \cite{liu2019planercnn} được huấn luyện trên tập dữ liệu ScanNet \cite{dai2017scannet}. Với trường hợp ngoài trời, mô hình DPT \cite{ranftl2021vision} được huấn luyện trên tập KITTI sẽ được sử dụng \cite{geiger2012we}.
+
+\textbf{Đánh giá:} Để đánh giá hiệu quả của mô hình trong tác vụ định vị trực quan, một số tiêu chí cơ bản đã được đưa ra như độ lệch về góc quay 
+
 
 \subsubsection*{Hiệu quả của phương pháp}
 
