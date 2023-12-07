@@ -1,0 +1,23 @@
+\section{Nhận dạng địa điểm trực quan - Visual Place Recognition}
+
+Để đáp ứng nhu cầu xác định vị trí của ảnh với độ chính xác trên 6 bậc tự do (6 Degrees of Freedom), việc thu thập thông tin 3 chiều của bối cảnh bằng cảm biến LiDAR, hoặc chế tạo mô hình 3 chiều của bối cảnh bằng các hướng tiếp cận mô hình từ chuyển động (Structure from Motion) để ước tính tư thế của máy ảnh ngày càng được các nhà nghiên cứu sử dụng vì tính chính xác cao và độ bền tốt trước các yếu tố thay đổi về môi trường như ánh sáng và các bề mặt phản chiếu, ... Tuy tận dụng được lợi thế về tính phổ biến ngày càng cao của các phương tiện tự động lái với cảm biến độ sâu và cảm biến LiDAR, các hướng tiếp cận này đều có chi phí và yêu cầu tài nguyên rất lớn để duy trì và phát triển, giới hạn quy mô giải pháp về  cả không gian và thời gian. Vấn đề này bắt nguồn từ yêu cầu thu thập, lưu trữ và cập nhật dữ liệu đám mây điểm. Vì lý do này, một nhánh phát triển của bài toán định vị trực quan trên quy mô lớn (large-scale visual localization) tìm cách giải quyết bài toán từ góc nhìn của bài toán truy xuất hình ảnh\cite{2022arXiv220105816X} (Image retrieval/Instance retrieval).
+
+Bằng cách sử dụng một cơ sở dữ liệu hình ảnh đã được gắn nhãn với thông tin tư thế và vị trí, việc duy trì mô hình dự đoán trở thành việc duy trì cơ sở dữ liệu ảnh RGB(3 kênh màu đỏ - xanh lá - xanh dương) 2 chiều được gắn nhãn. Điều chỉnh các phương pháp truy xuất hình ảnh hiện có để phù hợp hơn với bài toán định vị, với một ảnh truy vấn (query image), mục tiêu định vị trực quan lúc này trở thành việc xác định hình ảnh tương tự nhất với ảnh truy vấn trong cơ sở dữ liệu chứa các ảnh đã được gắn nhãn với thông tin định vị, từ đó, tính toán tư thế thật của ảnh truy vấn. Sử dụng phương pháp này, bài toán định vị trực quan có thể được chia thành hai bước: truy xuất hình ảnh trực quan (Visual Place Recognition) và ước tính tư thế máy ảnh từ hình ảnh truy xuất được (Pose Estimation).
+
+Sử dụng và duy trì cơ sở dữ liệu ảnh RGB 2D làm giảm đáng kể chi phí duy trì, cũng như chi phí cập nhật và thu thập dữ liệu so với dữ liệu đám mây điểm, cho phép triển khai các mô hình truy xuất nhỏ và nhẹ với tốc độ truy xuất cao. Tuy nhiên, việc phụ thuộc vào dữ liệu có được từ cảm biến RGB máy ảnh thông dụng đặt mô hình trước các thách thức mà các phương pháp truy xuất bằng dữ liệu 3 chiều đã tránh khỏi dẫn đến hiệu năng thấp hơn. Ở đề mục này, chúng tôi sẽ trình bày quá trình phát triển, các giải pháp nền tảng và các hướng tiếp cận hiện đại để giải quyết các vấn đề nêu trên, tăng hiệu năng truy xuất và mức độ thông tin hiệu dụng có thể truyền cho bước định vị tư thế.
+
+\input{chapters/related-works/vpr/HandCraftedRepresentations.tex}
+
+\input{chapters/related-works/vpr/DeepLearnedRepresentations.tex}
+
+\input{chapters/related-works/vpr/ReductionWhitening.tex}
+
+\input{chapters/related-works/vpr/LearnToRetrieve.tex}
+
+\input{chapters/related-works/vpr/SimilaritySearch.tex}
+
+\input{chapters/related-works/vpr/RetrievalRefinement.tex}
+
+\input{chapters/related-works/vpr/ChallengingConditions.tex}
+
+\input{chapters/related-works/vpr/AerialVPR.tex}
