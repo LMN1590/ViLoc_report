@@ -125,9 +125,25 @@ Mỗi cặp tương quan sẽ trả về một tỷ lệ $s$ cho vector đơn v�
 
 \textbf{Cấu trúc:} Tác vụ tìm kiếm tương quan giữa hai ảnh sẽ có thể lựa chọn giữa phương pháp truyền thống như SIFT, hoặc những phương pháp theo hướng tiếp cận học sâu gần đây hơn như SuperPoint+SuperGlue \cite{sarlin2020superglue} và LoFTR \cite{sun2021loftr}. Tác vụ tính độ sâu đơn ảnh sẽ được phân thành hai trường hợp là bên trong nhà và ngoài trời. Với những tập dữ liệu trong nhà, mô hình DPT \cite{ranftl2021vision} được huấn luyện trên tập dữ liệu NYUv2 \cite{silberman2012indoor} PlaneRCNN \cite{liu2019planercnn} được huấn luyện trên tập dữ liệu ScanNet \cite{dai2017scannet}. Với trường hợp ngoài trời, mô hình DPT \cite{ranftl2021vision} được huấn luyện trên tập KITTI sẽ được sử dụng \cite{geiger2012we}.
 
-\textbf{Đánh giá:} Để đánh giá hiệu quả của mô hình trong tác vụ định vị trực quan, một số tiêu chí cơ bản đã được đưa ra như độ lệch về góc quay 
+\textbf{Đánh giá:} Để đánh giá hiệu quả của mô hình trong tác vụ định vị trực quan, một số tiêu chí cơ bản đã được đưa ra như độ lệch về góc quay, độ lệch về vị trí của máy ảnh, cũng như một sai số mới được đưa ra trong bài nghiên cứu, sai số phản chiếu của điểm 3D ảo - VCRE, được lấy cảm hứng từ sai số phản chiếu của những điểm tương ứng - DCRE \cite{wald2020beyond}. Cụ thể, với giá trị dự đoán $(R,t)$ và giá trị thực $(R_{gt},t_{gt})$, các sai số sẽ được xác định như sau:
+\begin{itemize}
+    \item Sai số về góc quay, $\measuredangle(R,R_{gt})$, sẽ được tính là độ chênh lệch giữa góc quay được dự đoán và góc quay thực tế.
+    \item Sai số về độ lệch máy quay sẽ được tính là khoảng cách Euclidian giữa cặp vị trí $(c,c_{gt})$ được tính theo công thức $c=-R \intercal t$.
+    \item Sai số phản chiếu của điểm 3D ảo sẽ được dùng để đánh giá khả năng chiếu
+\end{itemize}
 
 
 \subsubsection*{Hiệu quả của phương pháp}
 
 
+\subsection{Mô hình kết hợp đề xuất}
+Sau những nghiên cứu và tìm hiểu, nhóm quyết định đề xuất một mô hình kết hợp giữa MixVPR \cite{alibey2023mixvpr}và Map-free Relocalization \cite{arnold2022mapfree}. Gọi $I$ là ảnh mà người dùng chụp từ máy ảnh và sẽ được dùng làm ảnh truy vấn cho mô hình đề xuất của nhóm. Trước hết, mô hình sẽ nhận $I$ và truyền làm đầu vào cho MixVPR. Từ ảnh đầu vào $I$, sau khi qua các giai đoạn xử lý, MixVPR sẽ trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Với đoạn mã hóa này, mô hình tiến hành so sánh với giá trị mã hóa của các ảnh trong cơ sở dữ liệu và tìm ra ảnh có sự tương đồng cao nhất với ảnh nhận vào $I$ gọi là $I_0$.
+
+Bước tiếp theo, mô hình tiếp tục truyền cả ảnh nhận vào $I$ và ảnh được truy xuất $I_0$ cho mô hình tương quan 2D - 2D của Map-free Relocalization \cite{arnold2022mapfree}. Với đầu vào là cặp ảnh $(I, I_0)$, những cặp đặc trưng tương quan giữa hai ảnh sẽ được xác định tương ứng với mỗi hình. Sau đó, ma trận thiết yếu $E$ giữa 2 ảnh sẽ được ước tính dựa vào giải thuật 5 điểm \cite{nister2004efficient} cùng với MAGSAC++ \cite{barath2020magsac++} dựa trên 2 tập điểm tương quan đã được xác định. Ma trận thiết yếu sau đó sẽ được phân giải thành ma trận thể hiện góc quay chênh lệch và một véc-tơ thể hiện độ dịch vị trí thống nhất. Từ các thông tin đã nhận, mô hình tiến hành một bước chiếu ngược 3D để tính toán giá trị tỷ lệ $s$ với mỗi cặp điểm tương quan 3D - 3D.
+
+Giá trị $s$ với số cặp điểm hợp lệ lớn nhất được chọn. Từ giá trị $s$ này, kết hợp với vị trí tương đối đã có được từ việc tính toán và phân tách ma trận thiết yếu, ta sẽ có được vị trí tuyệt đối của ảnh nhận vào $I$.
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{pics/Proposal/models.png}
+    \caption{Minh họa mô hình đề xuất}
+\end{figure}
