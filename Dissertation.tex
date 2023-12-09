@@ -32,7 +32,7 @@
 \usepackage{tabularx}
 \usepackage{adjustbox}
 \usepackage{multirow}
-
+\usepackage{acronym} 
 \usepackage{bkthesis}
 
 \usepackage{tikz}
@@ -67,7 +67,6 @@
 \cttime{12/2023}
 
 \thesislayout
-
 \begin{document}
 %-	Bìa cứng - màu xanh dương, chữ mạ vàng (xem mẫu đính kèm)
 %-	Trang tên (tờ lót): chất liệu giấy, nội dung giống như bìa LV
@@ -100,10 +99,12 @@
 \listoffigures
 %\listofalgorithms
 ~
+
 \input{misc/keywords}
 ~
 \input{misc/acronym}
 ~
+
 \mainmatter
 \fancypagestyle{plain}{%
 \fancyhf{}
