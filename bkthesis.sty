@@ -124,7 +124,6 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 \makeatletter
 \newenvironment{acknowledgments}{
 	\titlepage \null
-	\small
 	\begin{center}
 	  {\bfseries Lời ngỏ\vspace{-.5em}\vspace{\z@}}~
 	\end{center}
@@ -136,7 +135,6 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 \makeatletter
 \newenvironment{declaration}{
 	\titlepage \null
-	\small
 	\begin{center}
 	  {\bfseries Lời cam đoan\vspace{-.5em}\vspace{\z@}}
 	\end{center}
@@ -148,11 +146,19 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 \makeatletter
 \newenvironment{keyword}{
 	\titlepage \null
-	\small
 	\begin{center}
-	  {\bfseries Bảng những từ ngữ chuyên ngành được sử dụng và phiên bản tiếng Anh\vspace{-.5em}\vspace{\z@}}
+	  {\bfseries Bảng những từ chuyên ngành và bản tiếng Anh\vspace{-.5em}\vspace{\z@}}
 	\end{center}
-	\quotation
+  }{}
+\makeatother
+
+% Acronym
+\makeatletter
+\newenvironment{arc}{
+	\titlepage \null
+	\begin{center}
+	  {\bfseries Bảng những từ viết tắt được sử dụng\vspace{-.5em}\vspace{\z@}}
+	\end{center}
   }{}
 \makeatother
 
@@ -161,7 +167,8 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
-
+\newcommand{\abbrlabel}[2]{\makebox[15cm][l]{\textbf{#1}\ \dotfill #2}}
+%\newenvironment{abbreviations}{\begin{list}{}{\renewcommand{\makelabel}{\abbrlabel}}}{\end{list}}
 %\renewcommand{\section}{\@startsection
 %{section}%                   % the name
 %{1}%                         % the level
