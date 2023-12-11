@@ -79,6 +79,11 @@ Dựa trên mô hình đã được đề xuất, nhóm sẽ tiến hành cải 
 \section{Phạm vi đề tài}
 Đề tài được thực hiện và thí nghiệm trên các tập dữ liệu ngoài trời với ảnh đầu vào được chụp từ máy ảnh nhằm thu được dữ liệu tham số nội tại với đầu ra là vị trí và hướng quay của người chụp. Độ chính xác của kết quả đầu ra được xác định trên đơn vị (cm, độ).
 \begin{itemize}
+    \item \textbf{Dữ liệu đầu vào và đầu ra}
+    \begin{itemize}
+        \item Dữ liệu đầu vào của mô hình sẽ là một ảnh truy vấn do người dùng chụp được và đưa vào mô hình để xử lý.
+        \item Dữ liệu đầu ra sẽ gồm hai vector $R$ và $t$, lần lượt thể hiện góc quay và vị trí chụp ảnh trong không gian. Vector $R$ thể hiện góc quay sẽ có định dạng của một Quaternion, $(q_w,q_x,q_y,q_z)$. Vector $t$ thể hiện vị trí của chụp ảnh trong không gian 3 chiều, có định dạng $(t_x,t_y,t_z)$.
+    \end{itemize}
     \item \textbf{Kết quả mong đợi}
     \begin{itemize}
         \item Đối với truy xuất ảnh, nhóm mong muốn cải thiện độ chính xác của những mô hình truy xuất ảnh đã được đề xuất trước đây.
