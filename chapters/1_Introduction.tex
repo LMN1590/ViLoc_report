@@ -1,6 +1,6 @@
 \chapter{GIỚI THIỆU}
 
-\textit{Nội dung chương 1 sẽ đề cập đến nội dung của bài toán định vị trực quan - Visual Localization, những giải pháp đã được đề xuất hiện nay của bài toán, và những hạn chế của chúng. Từ đó, nhóm sẽ xác định mục tiêu cần thực hiện và phạm vi của đề tài}
+\textit{Trước hết, nhóm sẽ trình bày nội dung của bài toán định vị trực quan - Visual Localization, những giải pháp đã được đề xuất hiện nay của bài toán, và những hạn chế của chúng. Từ đó, nhóm sẽ xác định mục tiêu cần thực hiện và phạm vi của đề tài}
 
 \section{Động cơ nghiên cứu}
 
@@ -28,8 +28,7 @@ Trong đa số những phương pháp trên, tác vụ truy xuất ảnh đóng 
 
 \section{Mục tiêu đề tài}
 
-Qua việc phân tích nhu cầu và xác định được những nhóm phương pháp chính đã được ứng dụng trong bài toán định vị trực quan, đề tài đã được xác định sẽ hướng đến các mục tiêu chính:
-
+Đề tài hướng đến mục tiêu xây dựng giải pháp mới cho bài toán định vị trực quan. Nhằm phục vụ cho mục đích trên, nhóm đề ra những nhiệm vụ cần hoàn thành như sau:
 \begin{itemize}
     \item \textit{Thứ nhất}, khảo sát những giải pháp đã được đề xuất và phân tích ưu và nhược điểm để có thể chọn ra hướng tiếp cận phù hợp.
     \item \textit{Thứ hai}, tiến hành kiểm thử kết quả của hướng tiếp cận được chọn làm cơ sở
@@ -37,7 +36,7 @@ Qua việc phân tích nhu cầu và xác định được những nhóm phươn
     \item \textit{Thứ tư}, đánh giá và kiểm thử giải pháp được đề xuất trên những tập dữ liệu phổ biến, có phạm vi đa dạng và đồng thời tiến hành thực nghiệm trên những thành phần của giải pháp.
 \end{itemize}
 
-Trong giai đoạn \textit{Đồ án chuyên ngành}, nhóm hướng tới hai mục tiêu đầu tiên trong số những mục tiêu đã được trình bày. Hai mục tiêu sau sẽ được thực hiện trong giai đoạn \textit{Đồ án tốt nghiệp}.
+Trong báo cáo này, nhóm hướng tới hoàn thành hai nhiệm vụ đầu tiên trong số những nhiệm vụ đã được trình bày. Các nhiệm vụ còn lại sẽ tiếp tục được thực hiện vào giai đoạn tiếp theo.
 
 \subsection{Khảo sát và phân tích những giải pháp đã có}
 Nhóm đã tiến hành khảo sát những hướng tiếp cận đã được đề xuất nhằm giải quyết bài toán định vị trực quan trong thời gian gần đây. Thông qua việc khảo sát, nhóm xác định những khía cạnh có thể được cải thiện để đóng góp cho quá trình nghiên cứu của bài toán này.
@@ -78,30 +77,22 @@ Dựa trên mô hình đã được đề xuất, nhóm sẽ tiến hành cải 
 \end{itemize}
 
 \section{Phạm vi đề tài}
+Đề tài được thực hiện và thí nghiệm trên các tập dữ liệu ngoài trời với ảnh đầu vào được chụp từ máy ảnh nhằm thu được dữ liệu tham số nội tại với đầu ra là vị trí và hướng quay của người chụp. Độ chính xác của kết quả đầu ra được xác định trên đơn vị (cm, độ).
 \begin{itemize}
-    \item \textbf{Mục tiêu chung} 
+    \item \textbf{Dữ liệu đầu vào và đầu ra}
     \begin{itemize}
-        \item Hướng đến việc thiết kế và áp dụng thành công sự kết hợp giữa hai mô hình học sâu vào bài toán định vị trực quan. Từ đó cải thiện được điểm yếu của hai hướng tiếp cận.
-    \end{itemize} 
+        \item Dữ liệu đầu vào của mô hình sẽ là một ảnh truy vấn do người dùng chụp được và đưa vào mô hình để xử lý.
+        \item Dữ liệu đầu ra sẽ gồm hai vector $R$ và $t$, lần lượt thể hiện góc quay và vị trí chụp ảnh trong không gian. Vector $R$ thể hiện góc quay sẽ có định dạng của một Quaternion, $(q_w,q_x,q_y,q_z)$. Vector $t$ thể hiện vị trí của chụp ảnh trong không gian 3 chiều, có định dạng $(t_x,t_y,t_z)$.
+    \end{itemize}
     \item \textbf{Kết quả mong đợi}
     \begin{itemize}
-        \item Đối với truy xuất ảnh, nhóm mong có thể giúp cải thiện độ chính xác của những mô hình truy xuất ảnh đã được đề xuất trước đây.
-        \item Đối với mô hình hồi quy vị trí máy ảnh, nhóm mong có thể giúp mô hình được sử dụng trên các tập dữ liệu lớn hơn.
+        \item Đối với truy xuất ảnh, nhóm mong muốn cải thiện độ chính xác của những mô hình truy xuất ảnh đã được đề xuất trước đây.
+        \item Đối với mô hình hồi quy vị trí máy ảnh, nhóm mong muốn cải thiện khả năng mở rộng của mô hình giúp mô hình có thể được sử dụng trên các tập dữ liệu lớn hơn.
     \end{itemize}
-    \item \textbf{Thời gian}
-    \begin{itemize}
-        \item Đồ án chuyên ngành kéo dài trong 15 tuần
-        \item Đồ án tốt nghiệp kéo dài trong 15 tuần
-    \end{itemize}
-    \item \textbf{Lĩnh vực hướng đến}
-    \begin{itemize}
-        \item Đề tài hướng đến việc đóng góp thêm một giải pháp mới nhằm góp phần giải quyết được bài toán định vị trực quan, nhằm ứng dụng vào những công nghệ tương tác với thế giới thực.
-    \end{itemize}
-    
 \end{itemize}
 
-\section{Cấu trúc đồ án chuyên ngành}
-Đồ án chuyên ngành sẽ bao gồm năm chương, bao gồm cả chương này. Mỗi chương sẽ bao gồm những nội dung như sau:
+\section{Cấu trúc báo cáo}
+Báo cáo này bao gồm năm chương. Mỗi chương sẽ bao gồm những nội dung như sau:
 \begin{itemize}
     \item \textbf{Chương 1: Giới thiệu} \\
     Trình bày sơ lược về động cơ nghiên cứu, mục tiêu và phạm vi đề tài giải quyết.
@@ -112,11 +103,9 @@ Dựa trên mô hình đã được đề xuất, nhóm sẽ tiến hành cải 
     \item \textbf{Chương 4: Đo đạc và đánh giá} \\
     Chương này đề cập kết quả khảo sát của nhóm bao gồm kết quả đánh giá hiệu quả của các phương pháp truy xuất ảnh và hồi quy vị trí máy ảnh.
     \item \textbf{Chương 5: Kế hoạch tương lai} \\
-    Trình bày tổng quan về quá trình thực hiện và kết quả của giai đoạn \textit{Đồ án chuyên ngành} và đưa ra kế hoạch cho giai đoạn \textit{Đồ án tốt nghiệp}
+    Trình bày tổng quan về quá trình thực hiện và kết quả của giai đoạn này và đưa ra kế hoạch cho giai đoạn tiếp theo.
 \end{itemize}
-Cấu trúc của toàn đề tài sẽ được trình bày trong giai đoạn Đồ án tốt nghiệp.
-
-\section{Kết chương}
+\newpage
 Việc xác định chính xác vị trí có một phạm vi ứng dụng rộng rãi, là công nghệ chủ chốt trong rất nhiều lĩnh vực khác nhau. Tuy nhiên, việc chỉ dựa vào hệ thống không đảm bảo được sự ổn định như GPS sẽ hạn chế khả năng phát triển trong tương lai của những lĩnh vực ấy. Vậy nên bài toán định vị hóa trực quan đã được đưa ra để có một hệ thống đưa ra định vị chính xác và ổn định, dựa vào thông tin hình ảnh môi trường xung quanh.
 
 Trong những phương pháp được đưa ra, nhóm tập trung vào việc kết hợp 2 hướng xử lý là truy xuất ảnh và hồi quy tương đối vị trí. Mỗi phương án sẽ có một vấn đề riêng. Đối với việc truy xuất ảnh, kết quả cho ra được sẽ không có độ chính xác cao, do vị trí của ảnh truy xuất được sẽ được lấy làm kết quả. Đối với hướng hồi quy tương đối vị trí, đa số những phương pháp trước đây đều tập trung vào việc hồi quy trong những không gian nhỏ, có lượng dữ liệu dày đặc, không phù hợp với tập dữ liệu đô thị, mục tiêu của bài nghiên cứu của nhóm. Qua việc ứng dụng cả 2 cách giải quyết trong một mô hình, nhóm hy vọng 2 mô hình có thể bổ trợ, giải quyết điểm yếu của nhau.
