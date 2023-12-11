@@ -51,16 +51,34 @@ Tập dữ liệu San Francisco Extra Large (SF-XL) \cite{berton2022rethinking} 
 \end{figure}
 
 \section{Mô hình MixVPR}
-\subsection*{Mô tả quá trình thực nghiệm}
-\subsection*{Kết quả thực nghiệm}
+\subsection*{Mô tả quá trình thí nghiệm}
+\subsection*{Kết quả thí nghiệm}
 \subsection*{Nhận xét}
 
 
 \section{Mô hình Map-free Relocalization}
-\subsection*{Mô tả quá trình thực nghiệm}
-\subsection*{Kết quả thực nghiệm}
+\subsection*{Mô tả quá trình thí nghiệm}
+
+Để kiểm chứng kết quả đã được công bố trên trang chủ của nhóm nghiên cứu tác giả công trình, nhóm đã tiến hành chạy quá trình hồi quy vị trí tương quan 2D - 2D của mô hình Niantic Map-free Relocalization trên tập dữ liệu kiểm thử do chính tác giả cung cấp. Cụ thể tập dữ liệu bao gồm 15000 ảnh chia thành 130 cảnh khác nhau với mỗi cảnh bao gồm một vật thể chú ý đặt ở tâm như mô tả bài báo.
+
+Các thang đo kết quả được sử dụng trong báo cáo này sẽ bao gồm độ lệch vị trí (m), độ lệch góc quay (độ) và sai số phản chiếu điểm 3D ảo VCRE (điểm ảnh).
+
+\subsection*{Kết quả thí nghiệm}
+
+\begin{table}[H]
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+Method                                                                                                    & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Precision \\ (Err \textless 25cm, 5°)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Trans. \\ Error (m)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Rot. \\ Error (°)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Reproj. \\ Error (px)\end{tabular}} \\ \hline
+\begin{tabular}[c]{@{}l@{}}DPT-KITTI \& SuperGlue \\ (Ess.Mat. + D.Scale) \\ (Author)\end{tabular}        & 15.4\%                                                                                             & 1.98                                                                                    & 30.5                                                                                  & 167.6                                                                                     \\ \hline
+\textbf{\begin{tabular}[c]{@{}l@{}}DPT-KITTI \& SuperGlue \\ (Ess.Mat. + D.Scale) \\ (Ours)\end{tabular}} & 15.6\%                                                                                             & 1.92                                                                                    & 26.1                                                                                  & 161.1                                                                                     \\ \hline
+\end{tabular}
+\caption{Bảng so sánh kết quả công bố và kết quả kiểm thử mô hình 2D - 2D Map-free}
+\end{table}
+
 \subsection*{Nhận xét}
 
-\section{Hướng phát triển}
+Các số liệu đo đạc thu được từ thí nghiệm của nhóm tương đối sát với kết quả do nhóm tác giả nghiên cứu đã công bố trên trang chủ với độ lệch vị trí khoảng gần 2m và độ lệch góc quay khoảng 26 độ. Với bài toán định vị trực quan, nhóm nhận định rằng độ lệch vị trí là tương đối ổn nhưng độ lệch góc quay lại có phần tương đối lớn.
+
+Dự kiến ở giai đoạn tiếp theo, nhóm sẽ tìm cách cải thiện mô hình hiện có hoặc tiếp tục nghiên cứu các mô hình tốt hơn để có thể giảm thiểu tối đa sai số về vị trí và góc quay.
 
 \section{Kết luận}
