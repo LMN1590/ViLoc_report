@@ -14,7 +14,7 @@ MixVPR là một phương pháp tổng hợp toàn diện sử dụng Feature Ma
 \subsubsection*{Những bước xử lý của mô hình}
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{pics/Proposal/mixvpr.png}
+    \includegraphics[width=\textwidth]{pics/Proposal/mixvpr.png}
     \caption{Tổng quát quá trình xử lý ảnh của MixVPR \cite{alibey2023mixvpr}}
 \end{figure}
 Với ảnh đầu vào là $I$, mô hình CNN cơ sở sẽ trích xuất ra được tập Feature Map có dạng $F \in R^{c \cdot h \cdot w}$ từ những lớp trung gian.
@@ -282,7 +282,7 @@ Khi ảnh truy vấn $I$ được đưa vào, mô hình cơ sở CNN sẽ đư�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.75]{pics/Proposal/cropped-cnn.png}
+    \includegraphics[scale=0.6]{pics/Proposal/cropped-cnn.png}
     \caption{Mô hình cơ sở xử lý ảnh để tạo ra tập các bản đồ đặc trưng \cite{alibey2023mixvpr}}
 \end{figure}
 
@@ -305,7 +305,7 @@ Lớp Feature Mixer sẽ giúp tích hợp thông tin toàn cục của ảnh, p
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.75]{pics/Proposal/mixer.png}
+    \includegraphics[scale=0.6]{pics/Proposal/mixer.png}
     \caption{Cấu tạo của một lớp Feature Mixer \cite{alibey2023mixvpr}}
 \end{figure}
 
@@ -324,7 +324,7 @@ Cuối cùng, kết quả sẽ được làm phẳng thành 1D và lấy chuẩn
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.75]{pics/Proposal/proj-agg.png}
+    \includegraphics[scale=0.6]{pics/Proposal/proj-agg.png}
     \caption{Quá trình tổng hợp của mô hình \cite{alibey2023mixvpr}}
 \end{figure}
 
