@@ -8,20 +8,20 @@ Mạng thần kinh nhân tạo là một hướng đi trong lĩnh vực học m�
 
 Đơn vị nhỏ nhất cấu tạo nên một mạng thần kinh nhân tạo sẽ là một nơ-ron nhân tạo, hay còn được biết đến là một Perceptron. Các Perceptron sẽ được sắp xếp thành từng lớp, với luồng dữ liệu đi từ những nơ-ron ở lớp trước sang lớp sau. Hai nơ-ron được nối với nhau có thể truyền tải dữ liệu cho nhau, mô phỏng lại việc truyền tín hiệu giữa các synap thần kinh.
 
-Mạng thần kinh nhân tạo phụ thuộc vào dữ liệu đã được xử lý sẵn để tự huấn luyện, cải thiện độ chính xác của bản thân. Quá trình tự huấn luyện sẽ giúp mạng phát hiện được những quy luật bên trong dữ liệu mà không cần sự can thiệp của con người. Vì vậy nên, những mô hình này có thể phát hiện ra được những quy luật chính xác hơn và hiệu quả hơn so với những quy luật được định nghĩa thủ công bởi chuyên gia. 
+Mạng thần kinh nhân tạo phụ thuộc vào dữ liệu đã được xử lý sẵn để tự huấn luyện, cải thiện độ chính xác của bản thân. Quá trình tự huấn luyện sẽ giúp mạng phát hiện được những quy luật bên trong dữ liệu mà không cần sự can thiệp của con người. Vì vậy nên, những mô hình này có thể phát hiện ra được những quy luật chính xác hơn và hiệu quả hơn so với những quy luật được định nghĩa thủ công bởi chuyên gia.
 \subsubsection*{Perceptron}
 Perceptron là một thuật toán giúp phân loại dữ liệu theo hai lớp. Perceptron sẽ nhận vào một số lượng bất kỳ dữ liệu, áp dụng các trọng số được gán với mỗi dữ liệu đầu vào và một giá trị dời để tạo thành một hàm tuyến tính. Sau đó, kết quả của hàm tuyến tính sẽ được đi qua một lớp kích hoạt, đưa giá trị này về một trong hai phân loại đã được định nghĩa bằng đầu dựa vào một giới hạn đã được định trước(thường là giá trị 0).
 
 Phương thức hoạt động của một Perceptron có thể được thể hiện qua công thức
 $$
-f(X) = \Theta(w\cdot X + b)
+    f(X) = \Theta(w\cdot X + b)
 $$
 \[
-\Theta(x) = 
-\begin{cases}
-  1 & \text{if $x>=0$} \\
-  0 & \text{if $x<0$}
-\end{cases}
+    \Theta(x) =
+    \begin{cases}
+        1 & \text{if $x>=0$} \\
+        0 & \text{if $x<0$}
+    \end{cases}
 \]
 
 Tuy nhiên, một vấn đề của mô hình Perceptron là mô hình sẽ chỉ xử lý tốt với những dạng dữ liệu có thể phân tách được ở dạng tuyến tính và chỉ hoạt động được với hai lớp phân loại do hàm kích hoạt. Vì vậy nên, để có thể mô hình hóa được những dạng dữ liệu có cấu trúc phức tạp hơn, nhiều mô hình Perceptron sẽ được kết hợp lại với nhau để tạo thành mạng Perceptron nhiều lớp.
@@ -33,7 +33,7 @@ Tuy nhiên, một vấn đề của mô hình Perceptron là mô hình sẽ ch�
 \end{figure}
 
 \subsubsection*{Mạng Perceptron nhiều lớp}
-Đây là một cấu trúc cơ bản, một ví dụ điển hình của mạng thần kinh nhân tạo với đơn vị nhỏ nhất là các Perceptron. Mạng này sẽ được cấu tạo từ nhiều lớp khác nhau, mỗi lớp sẽ bao gồm các Perceptron có đầu vào là những Perceptron ở lớp trước và đầu ra sẽ được nối vào Perceptron ở lớp sau. 
+Đây là một cấu trúc cơ bản, một ví dụ điển hình của mạng thần kinh nhân tạo với đơn vị nhỏ nhất là các Perceptron. Mạng này sẽ được cấu tạo từ nhiều lớp khác nhau, mỗi lớp sẽ bao gồm các Perceptron có đầu vào là những Perceptron ở lớp trước và đầu ra sẽ được nối vào Perceptron ở lớp sau.
 
 Tín hiệu, là những số thực, sẽ được truyền từ Perceptron ở lớp trước sang Perceptron của những lớp sau qua các cạnh liên kết. Mỗi cạnh sẽ được gán một trọng số. Trọng số này sẽ quyết định mức độ quan trọng của tín hiệu đi qua cạnh liên kết đó. Trong quá trình xử lý, các tín hiệu qua mỗi cạnh sẽ được nhân với trọng số tương ứng và cộng với lại độ dời ở nút Perceptron. Sau đó, kết quả này sẽ được đi qua một lớp phi tuyến tính để có thể thích ứng với nhiều kiểu dữ liệu khác nhau, không như một Perceptron đơn giản.
 \begin{figure}[H]
@@ -61,7 +61,7 @@ Cơ chế điều chỉnh trọng số này được gọi là cơ chế truyề
 
 \subsection{Mạng Nơ-ron tích chập - Convolutional Neural Network}
 \subsubsection*{Định nghĩa}
-Mạng nơ-ron tích chập, hay còn được gọi là CNN hay ConvNet, là một loại mạng nơ-ron nhân tạo được thiết kế để xử lý những dạng dữ liệu có cấu trúc dạng bảng, như một hình ảnh. Trong máy tính, hình ảnh sẽ được lưu dưới dạng một bảng các điểm ảnh, với mỗi điểm ảnh chứa các dữ liệu nhằm thể hiện màu sắc và độ sáng của điểm ảnh đó. 
+Mạng nơ-ron tích chập, hay còn được gọi là CNN hay ConvNet, là một loại mạng nơ-ron nhân tạo được thiết kế để xử lý những dạng dữ liệu có cấu trúc dạng bảng, như một hình ảnh. Trong máy tính, hình ảnh sẽ được lưu dưới dạng một bảng các điểm ảnh, với mỗi điểm ảnh chứa các dữ liệu nhằm thể hiện màu sắc và độ sáng của điểm ảnh đó.
 
 
 Mạng nơ-ron tích chập sẽ giúp tối ưu hóa quá trình huấn luyện mô hình trên một lượng lớn dữ liệu ở dạng bảng. Cụ thể hơn, để huấn luyện một lớp của mạng nơ-ron nhân tạo truyền thống, là một mạng kết nối đầy đủ giữa các lớp, trên một ảnh có kích thước $100x100$ điểm ảnh, 10000 trọng số sẽ cần được sử dụng và điều chỉnh trong quá trình huấn luyện. Việc sử dụng một số lượng lớn trọng số sẽ gây ra các vấn đề về tài nguyên tính toán, cũng như việc áp dụng cơ chế truyền ngược - làm cho giá trị đạo hàm bị tăng không kiểm soát hoặc biến mất.
@@ -83,15 +83,15 @@ Sau đó, ở bên trong lớp tích chập, một hay nhiều bộ lọc sẽ �
 
 Với ma trận $A$ và $B$ được thể hiện như bên dưới,
 $$
-{\displaystyle \mathbf {A} ={\begin{pmatrix}A_{11}&A_{12}&\cdots &A_{1m}\\A_{21}&A_{22}&\cdots &A_{2m}\\\vdots &\vdots &\ddots &\vdots \\A_{n1}&A_{n2}&\cdots &A_{nm}\\\end{pmatrix}}\,,\quad \mathbf {B} ={\begin{pmatrix}B_{11}&B_{12}&\cdots &B_{1m}\\B_{21}&B_{22}&\cdots &B_{2m}\\\vdots &\vdots &\ddots &\vdots \\B_{n1}&B_{n2}&\cdots &B_{nm}\\\end{pmatrix}}}
+    {\displaystyle \mathbf {A} ={\begin{pmatrix}A_{11}&A_{12}&\cdots &A_{1m}\\A_{21}&A_{22}&\cdots &A_{2m}\\\vdots &\vdots &\ddots &\vdots \\A_{n1}&A_{n2}&\cdots &A_{nm}\\\end{pmatrix}}\,,\quad \mathbf {B} ={\begin{pmatrix}B_{11}&B_{12}&\cdots &B_{1m}\\B_{21}&B_{22}&\cdots &B_{2m}\\\vdots &\vdots &\ddots &\vdots \\B_{n1}&B_{n2}&\cdots &B_{nm}\\\end{pmatrix}}}
 $$
 Giá trị của phép nhân ma trận Forbenius giữa $A$ và $B$ là
 $$
-{\displaystyle \langle \mathbf {A} ,\mathbf {B} \rangle _{\mathrm {F} }=\sum _{i,j}{\overline {A_{ij}}}B_{ij}\,=\mathrm {Tr} \left({\overline {\mathbf {A} ^{T}}}\mathbf {B} \right)\equiv \mathrm {Tr} \left(\mathbf {A} ^{\!\dagger }\mathbf {B} \right)}
+    {\displaystyle \langle \mathbf {A} ,\mathbf {B} \rangle _{\mathrm {F} }=\sum _{i,j}{\overline {A_{ij}}}B_{ij}\,=\mathrm {Tr} \left({\overline {\mathbf {A} ^{T}}}\mathbf {B} \right)\equiv \mathrm {Tr} \left(\mathbf {A} ^{\!\dagger }\mathbf {B} \right)}
 $$
 với ký hiệu gạch đầu là phép tính số phức liên hợp và ký hiệu $\!\dagger$ thể hiện phép nghịch đảo ma trận và tính số phức liên hợp trên tất cả các phần tử. Tuy nhiên, do lớp tích chập chỉ xử lý dữ liệu các số thực, cho nên công thức có thể được đơn giản hóa thành
 $$
-{\displaystyle {\begin{aligned}\langle \mathbf {A} ,\mathbf {B} \rangle _{\mathrm {F} }=&{ {A}}_{11}B_{11}+{ {A}}_{12}B_{12}+\cdots +{ {A}}_{1m}B_{1m}\\&+{ {A}}_{21}B_{21}+{ {A}}_{22}B_{22}+\cdots +{ {A}}_{2m}B_{2m}\\&\vdots \\&+{ {A}}_{n1}B_{n1}+{ {A}}_{n2}B_{n2}+\cdots +{ {A}}_{nm}B_{nm}\\\end{aligned}}}
+    {\displaystyle {\begin{aligned}\langle \mathbf {A} ,\mathbf {B} \rangle _{\mathrm {F} }=&{ {A}}_{11}B_{11}+{ {A}}_{12}B_{12}+\cdots +{ {A}}_{1m}B_{1m}\\&+{ {A}}_{21}B_{21}+{ {A}}_{22}B_{22}+\cdots +{ {A}}_{2m}B_{2m}\\&\vdots \\&+{ {A}}_{n1}B_{n1}+{ {A}}_{n2}B_{n2}+\cdots +{ {A}}_{nm}B_{nm}\\\end{aligned}}}
 $$
 
 \begin{figure}[H]
@@ -139,14 +139,14 @@ Trong bài toán về nhận dạng địa điểm trực quan - Visual Place Re
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.7]{pics/Chapter3/overlap-based.png}
-    \caption{Hình minh họa cho phương pháp nhận diện địa điểm trực quan thông qua việc truy xuất ảnh từ hệ cơ sở dữ liệu \cite{arandjelović2016netvlad}}
+    \caption{Hình minh họa cho phương pháp nhận diện địa điểm trực quan thông qua việc truy xuất ảnh từ hệ cơ sở dữ liệu \cite{arandjelovic2016netvlad}}
     \label{fig:enter-label}
 \end{figure}
 
 Mô hình Mix-VPR được chọn là một phương pháp nhận biết dựa vào điểm chung giữa ảnh truy vấn và các ảnh bên trong hệ cơ sở dữ liệu, đại diện cho một khu vực cần được biểu diễn. Mix-VPR so sánh các ảnh với nhau thông qua việc truy xuất đặc trưng của các ảnh và tìm cặp ảnh có đặc trưng mang điểm tương đồng cao nhất.
 
 \subsection{Trích xuất đặc trưng}
-Để có thể tìm được những ảnh lân cận, có sẵn tọa độ GPS, những đặc trưng của ảnh sẽ được tạo ra thông qua một quá trính trích xuất và so sánh với lẫn nhau. Phương pháp này hoạt động dựa trên việc những ảnh có góc nhìn, vị trí gần nhau thì sẽ nhìn cùng một tập hợp các vật thể, dẫn đến việc ảnh sẽ có những chi tiết bị trùng lặp ở các vật thể đó. Tuy nhiên, việc chỉ so sánh ảnh với nhau ở mức độ từng điểm ảnh sẽ tạo ra một lượng dữ liệu rất lớn và có thể không cần thiết. 
+Để có thể tìm được những ảnh lân cận, có sẵn tọa độ GPS, những đặc trưng của ảnh sẽ được tạo ra thông qua một quá trính trích xuất và so sánh với lẫn nhau. Phương pháp này hoạt động dựa trên việc những ảnh có góc nhìn, vị trí gần nhau thì sẽ nhìn cùng một tập hợp các vật thể, dẫn đến việc ảnh sẽ có những chi tiết bị trùng lặp ở các vật thể đó. Tuy nhiên, việc chỉ so sánh ảnh với nhau ở mức độ từng điểm ảnh sẽ tạo ra một lượng dữ liệu rất lớn và có thể không cần thiết.
 
 Vì vậy nên việc sản sinh ra các đặc trưng cho hình ảnh sẽ giúp mã hóa ảnh một cách tối ưu mà không làm mất những thông tin quan trọng trong hình. Qua thời gian, việc trích xuất đặc trưng trong lĩnh vực nhận diện địa điểm trực quan(Visual Place Recognition) đã có những bước phát triển nhất định, từ việc chỉ trích xuất những đặc trưng cục bộ trong ảnh. Sau đó, một lớp tổng hợp các đặc trưng cục bộ sẽ được sử dụng \cite{pion2020benchmarking}. Cuối cùng, với sự phát triển của các mô hình học sâu, mạng nơ-ron tích chập đã được huấn luyện để có thể tạo thành những đặc trưng toàn cục của ảnh từ bản đồ đặc trưng đạt được từ những lớp tích chập của mạng.
 \subsubsection*{Đặc trưng cục bộ}
@@ -176,14 +176,14 @@ Một mạng nơ-ron tích chập bình thường có thể được dùng cho m
 
 Sau đó, ở bước tổng hợp, một số các lớp phương pháp đã xuất hiện như:
 \begin{itemize}
-    \item Một số phương pháp sẽ lấy cảm hứng từ những cách truyền thống, nhưng được điều chỉnh để trở thành một mạng huấn luyện được, như NetVLAD \cite{arandjelović2016netvlad}, SPE-VLAD \cite{yu2019spatial}. 
+    \item Một số phương pháp sẽ lấy cảm hứng từ những cách truyền thống, nhưng được điều chỉnh để trở thành một mạng huấn luyện được, như NetVLAD \cite{arandjelovic2016netvlad}, SPE-VLAD \cite{yu2019spatial}.
     \item Một lớp các phương pháp sẽ tập trung vào việc sử dụng một lớp tổng hợp - pooling layer để tổng hợp. Các phương pháp phổ biến bao gồm GeM \cite{radenovic2018fine}, MAC, R-MAC \cite{tolias2015particular}
 \end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.8]{pics/Chapter3/netvlad.png}
-    \caption{Mô hình mã hóa ảnh bằng đặc trưng được truy xuất từ CNN và  NetVLAD \cite{arandjelović2016netvlad}}
+    \caption{Mô hình mã hóa ảnh bằng đặc trưng được truy xuất từ CNN và  NetVLAD \cite{arandjelovic2016netvlad}}
     \label{fig:enter-label}
 \end{figure}
 
@@ -206,7 +206,7 @@ Mạng MLP-Mixer hoạt động dựa trên 2 cơ chế chính là pha trộn to
 \subsubsection*{Thực hiện}
 Mạng Mixer sẽ nhận đầu vào là một ảnh đã được phân thành $S$ mảnh không trùng nhau. Từng mảnh sẽ có dạng dữ liệu là ma trận 2D sẽ được tham chiếu đến một chiều không gian $R^{C}$ và chuyển thành một vector 1 chiều có $C$ phần tử. Ma trận được dùng để tham chiếu sẽ được dùng chung cho quá trình chuyển đổi. Thông số $S$, số lượng những mảnh có kích thước $(P,P)$ của một ảnh có độ phân giải $(H,W)$ sẽ được tính bằng công thức:
 $$
-S = \frac{H*W}{P^{2}}
+    S = \frac{H*W}{P^{2}}
 $$
 
 Sau đó các vector đại diện cho từng mảnh sẽ được nối lại với nhau, tạo thành một ma trận 2 chiều có dạng $R^{SxC}$. Với các hàng là những token(mã hóa của từng mảnh được cắt từ ảnh) và các cột là những kênh dữ liệu trên không gian $C$. Ma trận 2 chiều này sẽ được ký hiệu là $X$.
@@ -227,10 +227,10 @@ Ma trận này sau đó sẽ được đưa qua những lớp Mixer, lần lư�
 Mỗi lớp MLP được sử dụng bên trong mô hình sẽ được cấu tạo từ 2 lớp mạng kết nối đầy đủ. Giữa lớp mạng đầu tiên và lớp mạng thứ hai, một lớp hàm kích hoạt sẽ được dùng để tạo sự phi tuyến tính cho quá trình. Ngoài ra, đầu vào của các mạng MLP đều sẽ được chạy qua một lớp chuẩn hóa và mỗi lần chạy qua một lớp MLP đều sẽ được kết nối tắt với giá trị ban đầu. Các công thức bên dưới sẽ tóm tắt được quá trình xử lý của một lớp mạng Mixer
 
 $$
-U_*,i = X_*,i + W_2*\sigma(W_1*LayerNorm(X)_*,i),
+    U_*,i = X_*,i + W_2*\sigma(W_1*LayerNorm(X)_*,i),
 $$
 $$
-Y_j,* = U_j,* + W_4*\sigma(W_3*LayerNorm(U)_j,*) 
+    Y_j,* = U_j,* + W_4*\sigma(W_3*LayerNorm(U)_j,*)
 $$
 với $i = [1...C]$ và $j = [1...S]$. $\sigma$ là hàm không tuyến tính, trong bài báo này sẽ là hàm GELU \cite{hendrycks2023gaussian}.
 
@@ -241,7 +241,7 @@ Về độ phức tạp khi tính toán, do các hàm pha trộn tokens và pha 
 
 Một mô hình MLP dùng cho pha trộn các tokens sẽ được áp dụng cho mọi kênh dữ liệu và một mô hình MLP dùng để pha trộn các kênh trong một tokens cũng sẽ được dùng chung cho mọi tokens. Việc dùng chung một mạng MLP cho các kênh trong một tokens là một quyết định bình thường, nhằm giữ lại sự bất biến về vị trí trong ảnh, một yếu tố quan trọng trong mạng nơ-ron tích chập. Tuy nhiên, việc sử dụng chung một mạng MLP nhằm pha trộn tokens cho các kênh dữ liệu thì ít phổ biến hơn. Tuy nhiên, việc sử dụng chung các thông số sẽ giúp giảm tốc độ tăng trưởng và tiết kiệm bộ nhớ của mô hình khi số mảnh $S$ hoặc số chiều của không gian $C$ tăng lên.
 
-Mỗi lớp Mixer sẽ nhận đầu vào có kích thước không đổi. Kiến trúc này có những nét tương đồng với mạng Transformer hoặc những mô hình RNN trong những lĩnh vực khác. Đây là điểm khác biệt lớn với những mạng nơ-ron tích chập khác, khi mà độ phân giải của đầu vào ở những lớp sâu hơn sẽ thấp, nhưng số kênh dữ liệu tăng lên. 
+Mỗi lớp Mixer sẽ nhận đầu vào có kích thước không đổi. Kiến trúc này có những nét tương đồng với mạng Transformer hoặc những mô hình RNN trong những lĩnh vực khác. Đây là điểm khác biệt lớn với những mạng nơ-ron tích chập khác, khi mà độ phân giải của đầu vào ở những lớp sâu hơn sẽ thấp, nhưng số kênh dữ liệu tăng lên.
 
 
 \section{Kiến thức phương pháp ước tính vị trí của máy ảnh bằng ma trận thiết yếu}
@@ -271,4 +271,4 @@ Các mô hình hồi quy vị trí tuyệt đối sẽ xây dựng cách biểu 
 \textbf{Lưu ý}: Cần ghi ra phương pháp, cấu trúc mô hình được sử dụng trong bài. Cấu trúc khá đơn giản nên có thể không tổng quát hóa được. Cần ghi thêm các thí nghiệm của người ta.
 
 \section{Tìm hiểu giới hạn của một số tập dữ liệu}
-Một số tập dữ liệu quá thưa, không phản ánh được chính xác vùng mà tập dữ liệu muốn miêu tả, mà nó dày quá thì mô hình chạy không nổi\cite{berton2022rethinking} 
+Một số tập dữ liệu quá thưa, không phản ánh được chính xác vùng mà tập dữ liệu muốn miêu tả, mà nó dày quá thì mô hình chạy không nổi\cite{berton2022rethinking}

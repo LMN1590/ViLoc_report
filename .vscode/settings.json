@@ -1,5 +1,11 @@
 {
   "editor.wordWrap": "on",
   "editor.fontFamily": "Consolas, 'Courier New', monospace",
-  "editor.defaultFormatter": "James-Yu.latex-workshop"
+  "editor.defaultFormatter": "James-Yu.latex-workshop",
+  "latex-workshop.bibtex-format.sortby": [
+    "author",
+    "year-desc",
+    "title",
+    "key"
+  ]
 }

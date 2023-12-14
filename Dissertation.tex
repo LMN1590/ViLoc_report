@@ -1,7 +1,6 @@
 \documentclass[12pt,a4paper,oneside]{book} % twoside for draf
 
-%\usepackage{babel}
-\usepackage[utf8]{vietnam}
+% \usepackage[utf8]{vietnam}
 %\usepackage{times}
 \usepackage{graphicx}
 \usepackage{subcaption}
@@ -12,6 +11,9 @@
 %\renewcommand{\sfdefault}{phv} % Arial
 \usepackage{url}
 \usepackage{setspace}
+\usepackage[numbers, sort&compress]{natbib}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
 %link to part by click on contents region
 \usepackage{hyperref}
 \hypersetup{
@@ -108,9 +110,9 @@
 
 \mainmatter
 \fancypagestyle{plain}{%
-\fancyhf{}
-\fancyfoot[LE, RO]{\thepage}
-\renewcommand{\headrulewidth}{0.0pt}
+  \fancyhf{}
+  \fancyfoot[LE, RO]{\thepage}
+  \renewcommand{\headrulewidth}{0.0pt}
 }
 
 \pagestyle{fancy}
@@ -136,8 +138,8 @@
 \input{chapters/4_Evaluation and Validation}
 \input{chapters/5_Plan for the future}
 
-\bibliography{refs}{}
-\bibliographystyle{plain}
+\bibliographystyle{vietnumeric}
+\bibliography{refs}
 
 \appendix
 %\input{chapters/6_Appendix}
