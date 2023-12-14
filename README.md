@@ -1,4 +1,6 @@
-# Thesis Template
+# Visual Localization 2023 dissertation
+
+[![Compile and Release LaTeX Document](https://github.com/LMN1590/ViLoc_report/actions/workflows/CompileAndReleaseLatex.yml/badge.svg?branch=master)](https://github.com/LMN1590/ViLoc_report/actions/workflows/CompileAndReleaseLatex.yml)
 
 This repository is made for the capstone projects at HCMUT (Hochiminh City University of Technology).
 The template can be used for project proposal as well as the dissertation. The main code for 
