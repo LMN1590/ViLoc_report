@@ -20,7 +20,7 @@ Trong những năm gần đây, lĩnh vực này đã có những bước phát 
 
 \subsection{Những hướng đi đã được đề xuất}
 
-Với mục tiêu là xác định được vị trí mà ảnh được chụp, nhiều phương pháp khác nhau đã được đề xuất để giải quyết bài toán định vị trực quan. Một nhóm phương pháp truyền thống mà cho đến hiện tại vẫn cho ra kết quả cạnh tranh là phương pháp dựa trên cấu trúc của cảnh - Structure-based Method. Phương pháp này sẽ dựa trên việc tái tạo lại cấu trúc của môi trường đang xét bằng một tập các điểm trong không gian 3D, tạo thành một 3D-point cloud để biểu diễn khu vực đang xét. Từ đó, tọa độ chính xác của vị trí chụp ảnh có thể được xác định. Để tối ưu hóa quá trình tìm kiếm tương quan 2D-3D, phương pháp truy xuất ảnh có thể được sử dụng để giới hạn lại không gian tìm kiếm \cite{sarlin2019coarse}. Ngoài ra, ở bước xác định tương quan 2D-3D, thay vì sử dụng những phương pháp được định nghĩa sẵn bởi con người, mạng học sâu có thể được ứng dụng để trực tiếp xác định vị trí của các điểm ảnh trong không gian 3D \cite{brachmann2021visual}. 
+Với mục tiêu là xác định được vị trí mà ảnh được chụp, nhiều phương pháp khác nhau đã được đề xuất để giải quyết bài toán định vị trực quan. Một nhóm phương pháp truyền thống mà cho đến hiện tại vẫn cho ra kết quả cạnh tranh là phương pháp dựa trên cấu trúc của cảnh - Structure-based Method. Phương pháp này sẽ dựa trên việc tái tạo lại cấu trúc của môi trường đang xét bằng một tập các điểm trong không gian 3D, tạo thành một 3D-point cloud để biểu diễn khu vực đang xét. Từ đó, tọa độ chính xác của vị trí chụp ảnh có thể được xác định. Bước xây dựng mô hình 3D có thể được rút gọn lại đáng kể khi mỗi ảnh được bổ sung thêm độ sâu. Ngoài ra, để tối ưu hóa quá trình tìm kiếm tương quan 2D-3D, phương pháp truy xuất ảnh có thể được sử dụng để giới hạn lại không gian tìm kiếm \cite{sarlin2019coarse}. Ngoài ra, ở bước xác định tương quan 2D-3D, thay vì sử dụng những phương pháp được định nghĩa sẵn bởi con người, mạng học sâu có thể được ứng dụng để trực tiếp xác định vị trí của các điểm ảnh trong không gian 3D \cite{brachmann2021visual}.
 
 Một hướng đi khác, sử dụng những ảnh có nét tương đồng với ảnh đầu vào, vị trí cuối cùng có thể được nội suy từ nhãn của những ảnh đó. Với phương pháp hồi quy tương đối, từ cặp ảnh gồm ảnh truy vấn và ảnh tham chiếu, mô hình sẽ xác định được khoảng cách về vị trí giữa hai ảnh \cite{zhou2020learn}. Ngoài ra, thay vì truy xuất ảnh làm điểm mốc để xác định vị trí, phương pháp hồi quy vị trí tuyệt đối sẽ xây dựng cách biểu diễn của môi trường bên trong mô hình và có thể tính trực tiếp kết quả chỉ với đầu vào là ảnh truy vấn \cite{kendall2016posenet}.
 
@@ -30,7 +30,7 @@ Trong đa số những phương pháp trên, tác vụ truy xuất ảnh đóng 
 
 Đề tài hướng đến mục tiêu xây dựng giải pháp mới cho bài toán định vị trực quan. Nhằm phục vụ cho mục đích trên, nhóm đề ra những nhiệm vụ cần hoàn thành như sau:
 \begin{itemize}
-    \item \textit{Thứ nhất}, khảo sát những giải pháp đã được đề xuất và phân tích ưu và nhược điểm để có thể chọn ra hướng tiếp cận phù hợp.
+    \item \textit{Thứ nhất}, khảo sát những giải pháp đã được đề xuất và dữ liệu chúng sử dụng và phân tích ưu và nhược điểm để có thể chọn ra hướng tiếp cận phù hợp.
     \item \textit{Thứ hai}, tiến hành kiểm thử kết quả của hướng tiếp cận được chọn làm cơ sở
     \item \textit{Thứ ba}, thiết kế giải pháp cải thiện dựa trên cơ sở ban đầu.
     \item \textit{Thứ tư}, đánh giá và kiểm thử giải pháp được đề xuất trên những tập dữ liệu phổ biến, có phạm vi đa dạng và đồng thời tiến hành thực nghiệm trên những thành phần của giải pháp.
@@ -41,6 +41,7 @@ Trong báo cáo này, nhóm hướng tới hoàn thành hai nhiệm vụ đầu 
 \subsection{Khảo sát và phân tích những giải pháp đã có}
 Nhóm đã tiến hành khảo sát những hướng tiếp cận đã được đề xuất nhằm giải quyết bài toán định vị trực quan trong thời gian gần đây. Thông qua việc khảo sát, nhóm xác định những khía cạnh có thể được cải thiện để đóng góp cho quá trình nghiên cứu của bài toán này.
 \begin{itemize}
+    \item Tìm hiểu và đánh giá ưu và nhược điểm của ảnh RGB và ảnh RGBD.
     \item Tìm hiểu về những nhóm phương pháp đã được đề xuất
     \item Tìm hiểu về tác vụ truy xuất ảnh
     \item Tìm hiểu về những phương pháp ước tính vị trí máy ảnh
@@ -73,15 +74,15 @@ Dựa trên mô hình đã được đề xuất, nhóm sẽ tiến hành cải 
         \item Tập dữ liệu có phạm vi nhỏ nhưng phân bố dày đặc: Cambridge Landmarks
         \item Tập dữ liệu có phạm vi lớn nhưng phân bố thưa: Pittsburgh 250k
     \end{itemize}
-    \item Thực nghiệm trên những biến thể về nhựng bộ phận của mô hình
+    \item Thực nghiệm trên những biến thể về những bộ phận của mô hình
 \end{itemize}
 
 \section{Phạm vi đề tài}
-Đề tài được thực hiện và thí nghiệm trên các tập dữ liệu ngoài trời với ảnh đầu vào được chụp từ máy ảnh nhằm thu được dữ liệu tham số nội tại với đầu ra là vị trí và hướng quay của người chụp. Độ chính xác của kết quả đầu ra được xác định trên đơn vị (cm, độ).
+Đề tài được thực hiện và thí nghiệm trên các tập dữ liệu ngoài trời với ảnh đầu vào được chụp từ máy ảnh nhằm thu được dữ liệu tham số nội tại với đầu ra là vị trí và hướng quay của người chụp. Cơ sở dữ liệu được sử dụng sẽ là những ảnh 2D, diễn tả cảnh vật của khu vực đang xét. Kết quả sẽ là vị trí đã chụp ảnh của người dùng đưa vào. Độ chính xác của kết quả đầu ra được xác định trên đơn vị (cm, độ).
 \begin{itemize}
     \item \textbf{Dữ liệu đầu vào và đầu ra}
     \begin{itemize}
-        \item Dữ liệu đầu vào của mô hình sẽ là một ảnh truy vấn do người dùng chụp được và đưa vào mô hình để xử lý.
+        \item Dữ liệu đầu vào của mô hình sẽ là một ảnh truy vấn do người dùng chụp được và đưa vào mô hình để xử lý. Đồng thời, một tập dữ liệu gồm các ảnh 2D, biểu diễn khu vực cần xét sẽ được cung cấp cho mô hình.
         \item Dữ liệu đầu ra sẽ gồm hai vector $R$ và $t$, lần lượt thể hiện góc quay và vị trí chụp ảnh trong không gian. Vector $R$ thể hiện góc quay sẽ có định dạng của một Quaternion, $(q_w,q_x,q_y,q_z)$. Vector $t$ thể hiện vị trí của chụp ảnh trong không gian 3 chiều, có định dạng $(t_x,t_y,t_z)$.
     \end{itemize}
     \item \textbf{Kết quả mong đợi}
