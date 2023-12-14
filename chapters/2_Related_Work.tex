@@ -1,8 +1,41 @@
 \chapter{CÁC CÔNG TRÌNH LIÊN QUAN}
 
+\section{Những phương pháp biểu diễn khu vực}
+
+Định vị trực quan được định nghĩa là một bài toán nhằm xác định vị trí của ảnh chụp. Nhằm giúp mô hình có thể định vị được trong một khu vực lớn, đa phần các phương pháp sẽ cần một cách để biểu diễn khu vực đang xét. Thông thường, ảnh 2D sẽ được sử dụng để xây dựng nên những tập dữ liệu biểu diễn này. Điều này là nhờ vào sự phát triển của công nghệ camera, giúp ảnh 2D có thể được thu thập một cách dễ dàng. Thông thường, những tập dữ liệu ảnh 2D chỉ mang thông tin về màu sắc của cảnh vật, dưới định dạng RGB. Tuy nhiên, một số tập dữ liệu sẽ sử dụng ảnh RGBD, chứa cả thông tin về màu và độ sâu của ảnh, nhằm biểu diễn rõ ràng hơn cảnh vật. 
+
+\subsection{Đặc trưng của ảnh}
+
+Do số lượng ảnh bên trong tập dữ liệu có kích thước rất lớn, vậy nên đa số những tác vụ thao tác trên ảnh trong tập dữ liệu sẽ sử dụng những đặc trưng, một cách biểu diễn tối ưu hơn của ảnh. Đặc trưng ảnh là những điểm ảnh mang nhiều thông tin như góc, cạnh, giúp thể hiện khung cảnh trong ảnh mà không bị thay đổi khi thay đổi góc quay. Một đặc trưng ảnh sẽ được xác định vị trí rồi được sinh ra mô tả cho những đặc điểm trực quan tại vị trí đó. Những mô tả này sẽ cần phải có giá trị ổn định khi gặp những điều kiện như thay đổi về độ chiếu sáng, góc quay và thay đổi tỷ lệ phóng to, thu nhỏ.
+
+\subsection{Ảnh RGB}
+
+Ảnh RGB là tập hợp các điểm ảnh có chiều cao và chiều rộng nhất định. Mỗi điểm ảnh sẽ được thể hiện bằng một vector 3 biến nhất định. Màu của một điểm ảnh sẽ là sự kết hợp của ba màu đỏ, xanh lá, xanh dương với cường độ của mỗi màu sẽ được thể hiện qua vector tại điểm ảnh đó. Ảnh RGB sẽ được sinh ra từ việc ánh sáng tiếp xúc với tập hợp những cảm biến trong camera, từ đó xác định được cường độ của các màu.
+
+Chính vì cấu tạo của chúng nên ảnh RGB sẽ không thể biểu diễn được không gian 3D mà chỉ biết được hướng của những sự vật trong hình so với camera. Tuy nhiên, ảnh RGB lại có thể được thu thập một cách dễ dàng từ rất nhiều loại camera, dẫn đến những tập dữ liệu RGB phổ biến và được sử dụng nhiều. Ngoài ra, để bổ sung thêm thông tin về không gian 3D cho ảnh RGB, một số giải thuật phức tạp, cần nhiều tài nguyên tính toán, cũng như yêu cầu nhiều hình có thể được sử dụng. 
+
+Một mô hình sử dụng ảnh RGB sẽ chỉ có thể trích xuất những đặc trưng bên trong ảnh và sẽ cần sử dụng biểu diễn của khu vực để có được thông tin từ không gian 3D.
+
+\subsection{Ảnh RGBD}
+
+So với ảnh RGB, ảnh RGBD sẽ không những chỉ rõ màu sắc và hướng chiếu đến camera của vật mà còn cho biết khoảng cách giữa camera và vật. Ở những điểm ảnh ở ảnh RGBD sẽ có một vector gồm 4 biến, 3 biến màu ban đầu và một biến thể hiện độ sâu vật thể tại điểm đó so với camera. Ảnh RGBD được sinh ra với cơ chế thu ánh sáng như ảnh RGB thông thường với thông tin về độ sâu thu được từ các cảm biến tích hợp vào.
+
+Thông tin thêm về độ sâu sẽ giúp ảnh phản ánh đúng hơn môi trường không gian 3D trong khung hình. Tuy nhiên, để đo được độ sâu của ảnh, một số cảm biến chuyên dụng cần được sử dụng. Hiện tại, có tổng cộng 4 phương pháp đo độ sâu bằng là sử dụng công nghệ chiếu rọi 3D, cảm biến ToF, cảm biến LiDAR và đa camera \cite{lopes2022survey}.
+\begin{itemize}
+    \item Phương pháp chiếu rọi 3D sẽ dựa trên việc một chùm sáng gồm một loạt các mẫu hình dáng với hình dạng, kích thước tính toán sẵn lên vật thể. Sau đó, ánh sáng phản chiếu từ vật sẽ được thu bởi nhiều camera để tính toán độ sâu dựa vào phép đạc tam giác.
+    \item Cảm biến ToF sẽ tính được độ sâu từ camera đến ảnh dựa trên thời gian cần thiết để một sóng ánh sáng đi tới vật thể và phản xạ về lại cảm biến. 
+    \item Cảm biến LiDAR cũng sẽ đo thời gian phản xạ của ánh sáng như cảm biến ToF, tuy nhiên tia laser sẽ được sử dụng thay thế cho ánh sáng thông thường. Chùm tia laser sẽ được chiếu 360 độ và các xung phản xạ sẽ được đo bằng cảm biến nhằm sinh ra một bản đồ điểm 3D.
+    \item Phương pháp đa camera sẽ sử dụng phép đạc tam giác để xác định độ sâu của một điểm trong không gian thực khi biết được vị trí của điểm đó ở trong ảnh của mỗi camera, khoảng cách giữa hai camera và thông số kỹ thuật của mỗi camera.
+\end{itemize}
+
+Với ảnh RGBD, thông tin của không gian 3D đã được tích hợp sẵn trong ảnh. Điều này giúp cung cấp thêm dữ liệu cho mô hình, nhằm đưa ra kết quả chính xác hơn. Ví dụ như qua việc xác định được vị trí của những đặc trưng của ảnh trong không gian 3D trong quá trình huấn luyện mô hình \cite{brachmann2021visual,arnold2022mapfree}. 
+
+
+\subsection{Kết luận}
+Ảnh RGBD cung cấp thêm thông tin về độ sâu của những vật thể bên trong ảnh đang xét, giúp biểu diễn không gian 3D bên trong mô hình một cách chính xác hơn. Nhờ vậy nên những mô hình ứng dụng ảnh RGBD như DSAC* \cite{brachmann2021visual} sẽ có độ chính xác cao so với những phương pháp sử dụng ảnh RGB thuần. Để cạnh tranh với ảnh RGBD, những phương pháp sử dụng ảnh RGB sẽ cần phải suy ra thông tin về độ sâu thông qua phép tái tạo cấu trúc từ chuyển động, sẽ được đề cập kỹ hơn trong phần sau. Tuy nhiên, một giới hạn của ảnh RGBD chính là những khó khăn trong việc thu thập dữ liệu. Ảnh RGBD sẽ cần những thiết bị đặc thù, giá thành cao để thu thập, dẫn đến việc mô hình bị giới hạn trong những khu vực có thể ứng dụng được. Ngược lại, ảnh RGB có thể được sinh ra từ nhiều loại máy ảnh, từ camera điện thoại, camera hành trình cho đến camera chuyên dụng. Vì vậy, để có thể phát triển một mô hình có thể được ứng dụng ở nhiều khu vực khác nhau, nhóm hướng đến việc sử dụng ảnh RGB trong mô hình được đề xuất.
 \section{Những phương pháp đã được sử dụng}
 
-Định vị trực quan được định nghĩa là một bài toán nhằm xác định được vị trí của máy ảnh từ ảnh chụp được. Cho đến hiện tại, nhiều hướng tiếp cận cho bài toán định vị trực quan đã được đề xuất. Những phương pháp quan trọng nhất có thể được nhóm vào hai nhóm chính là \textbf{Những phương pháp sử dụng biểu diễn 3D} và \textbf{Những phương pháp hồi quy vị trí}.
+Cho đến hiện tại, nhiều hướng tiếp cận cho bài toán định vị trực quan đã được đề xuất. Những phương pháp quan trọng nhất có thể được nhóm vào hai nhóm chính là \textbf{Những phương pháp sử dụng biểu diễn 3D} và \textbf{Những phương pháp hồi quy vị trí}.
 
 \begin{figure}[H]
     \centering
@@ -12,7 +45,7 @@
 
 \subsection{Những phương pháp sử dụng biểu diễn 3D}
 \subsubsection*{Ý tưởng}
-Những phương pháp sử dụng biểu diễn 3D sẽ hoạt động xoay quanh việc biểu diễn lại môi trường đang xét bằng một bản đồ đám mây điểm 3D. Bản đồ 3D chứa những đặc trưng trích xuất được từ các ảnh và tiến hành kiếm các cặp đặc trưng tương quan giữa các ảnh với nhau nhằm tạo thành những điểm mô tả 3D trong không gian ba chiều. Những bản đồ này thường sẽ được mô hình tạo ra vào lúc tiền xử lý tập dữ liệu và sẽ được dùng trong suốt quá trình bản địa hóa của mô hình.
+Những phương pháp sử dụng biểu diễn 3D sẽ hoạt động xoay quanh việc tái tạo lại môi trường đang xét bằng một bản đồ đám mây điểm 3D. Bản đồ 3D chứa những đặc trưng trích xuất được từ các ảnh và tiến hành kiếm các cặp đặc trưng tương quan giữa các ảnh với nhau nhằm tạo thành những điểm mô tả 3D trong không gian ba chiều. Những bản đồ này thường sẽ được mô hình tạo ra vào lúc tiền xử lý tập dữ liệu và sẽ được dùng trong suốt quá trình bản địa hóa của mô hình.
 \subsubsection*{Những bước thực hiện}
 \begin{itemize}
     \item Ở bước tiền xử lý, không gian được thể hiện bởi tập dữ liệu sẽ được tái tạo lại trong không gian 3D, sử dụng những ảnh cùng thể hiện một cảnh, nhưng từ những vị trí và góc nhìn khác nhau. Phương pháp tái tạo này được gọi là Tái tạo kiến trúc từ chuyển động - Structure from Motion. Cụ thể hơn, quá trình này sẽ gồm các giai đoạn:
