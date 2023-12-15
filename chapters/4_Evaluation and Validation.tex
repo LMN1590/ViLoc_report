@@ -53,20 +53,30 @@ Tập dữ liệu San Francisco Extra Large (SF-XL) \cite{berton2022rethinking} 
 \section{Mô hình MixVPR}
 \subsection*{Mô tả quá trình thí nghiệm}
 
-Để kiểm chứng kết quả đã được công bố trên bài báo khoa học của nhóm nghiên cứu tác giả, nhóm đã tiến hành chạy mô hình MixVPR trên tập dữ liệu Pittsburgh 250k \cite{6618963}. Cụ thể tập dữ liệu bao gồm khoảng 250.000 ảnh bao phủ thành phố Pittsburgh của quốc gia Mỹ.
+Để kiểm chứng kết quả đã được công bố trên bài báo khoa học của nhóm nghiên cứu tác giả, nhóm đã tiến hành chạy mô hình MixVPR trên tập dữ liệu Pittsburgh 250k \cite{6618963} và tập dữ liệu Pittsburgh 30k \cite{6618963}.
 
-Các thang đo kết quả được sử dụng trong báo cáo này sẽ là recall@k, thể hiện tỷ lệ của truy xuất thành công trên tổng số lượng truy xuất và một truy xuất hình sẽ được xem là thành công khi ảnh được truy xuất nằm trong vòng 25m xung quanh ảnh truy vấn.
+Các thang đo kết quả được sử dụng trong báo cáo này sẽ là recall@k, thể hiện tỷ lệ của truy xuất thành công trên tổng số lượng truy xuất và một truy xuất hình sẽ được xem là thành công khi ảnh được truy xuất nằm trong vòng 25m xung quanh ảnh truy vấn. Để thích hợp cho việc chạy trên thiết bị cá nhân với cấu hình yếu hơn so với thiết bị của tác giả, nhóm đã hiệu chỉnh cài đặt kích thước mỗi batch chuyển từ 120 xuống 10, các cài đặt khác được giữ nguyên so với bài nghiên cứu.
 
 \subsection*{Kết quả thí nghiệm}
+
+\begin{table}[H]
+\begin{tabular}{llllllll}
+               & \textbf{R@1} & \textbf{R@5} & \textbf{R@10} & \textbf{R@15} & \textbf{R@20} & \textbf{R@50} & \textbf{R@100} \\
+Pittsburgh30k  & 91.64        & 95.55        & 96.35         & 96.99         & 97.34         & 98.25         & 98.69          \\
+Pittsburgh250k & 94.32        & 98.22        & 98.84         & 99.13         & 99.34         & 99.54         & 99.66         
+\end{tabular}
+\end{table}
+
 \subsection*{Nhận xét}
 
+Các số liệu đo đạc thu được từ thí nghiệm của nhóm là hoàn toàn giống với bảng kết quả đã được công bố của nhóm tác giả với recall@1 đạt 94.32\%, recall@5 đạt 98.22\%, recall@10 đạt 98.84\%. Ngoài ra, nhóm nhận xét rằng các cài đặt được thay đổi không ảnh hưởng đến kết quả đầu ra của mô hình mà thay vào đó chỉ ảnh hưởng đến tài nguyên thiết bị cũng như tốc độ chạy mô hình. Cuối cùng, với tác vụ nhận diện địa điểm trực quan, nhóm cho rằng các chỉ số kết quả này là đủ tốt để tiến hành sử dụng MixVPR trong mô hình kết hợp.
 
 \section{Mô hình Map-free Relocalization}
 \subsection*{Mô tả quá trình thí nghiệm}
 
 Để kiểm chứng kết quả đã được công bố trên trang chủ của nhóm nghiên cứu tác giả công trình, nhóm đã tiến hành chạy quá trình hồi quy vị trí tương quan 2D - 2D của mô hình Niantic Map-free Relocalization trên tập dữ liệu kiểm thử do chính tác giả cung cấp. Cụ thể tập dữ liệu bao gồm 15.000 ảnh chia thành 130 cảnh khác nhau với mỗi cảnh bao gồm một vật thể chú ý đặt ở tâm như mô tả bài báo.
 
-Các thang đo kết quả được sử dụng trong báo cáo này sẽ bao gồm độ lệch vị trí (m), độ lệch góc quay (độ) và sai số phản chiếu điểm 3D ảo VCRE (điểm ảnh).
+Các thang đo kết quả được sử dụng trong báo cáo này sẽ bao gồm độ lệch vị trí (m), độ lệch góc quay (độ) và sai số phản chiếu điểm 3D ảo VCRE (điểm ảnh). Các cài đặt của mô hình được giữ nguyên như trong bài nghiên cứu của tác giả.
 
 \subsection*{Kết quả thí nghiệm}
 
@@ -84,6 +94,5 @@ Method                                                                          
 
 Các số liệu đo đạc thu được từ thí nghiệm của nhóm tương đối sát với kết quả do nhóm tác giả nghiên cứu đã công bố trên trang chủ với độ lệch vị trí khoảng gần 2m và độ lệch góc quay khoảng 26 độ. Với bài toán định vị trực quan, nhóm nhận định rằng độ lệch vị trí là tương đối ổn nhưng độ lệch góc quay lại có phần tương đối lớn.
 
-Dự kiến ở giai đoạn tiếp theo, nhóm sẽ tìm cách cải thiện mô hình hiện có hoặc tiếp tục nghiên cứu các mô hình tốt hơn để có thể giảm thiểu tối đa sai số về vị trí và góc quay.
-
 \section{Kết luận}
+Nhóm đã có thể đo đạc và kiểm chứng các số liệu kết quả được công bố từ các bài báo khoa học được chọn trong mô hình kết hợp là thật và hoàn toàn đáng tin cậy. Dự kiến ở giai đoạn tiếp theo, nhóm sẽ tìm cách cải thiện kết quả các mô hình thuộc mô hình kết hợp hoặc tiếp tục nghiên cứu các mô hình cũng như các phương pháp tiếp cận tốt hơn để có thể giảm thiểu tối đa sai số về vị trí và góc quay.
