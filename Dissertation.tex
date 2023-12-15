@@ -53,17 +53,16 @@
 \newcolumntype{b}{>{\hsize=1.0\hsize}X}
 
 \crname{BÁO CÁO ĐỒ ÁN CHUYÊN NGÀNH}
-\ctname{CẢI THIỆN ĐỊNH VỊ TRỰC QUAN BẰNG HƯỚNG TIẾP CẬN HỌC SÂU}
+\ctname{CẢI THIỆN ĐỊNH VỊ TRỰC QUAN VỚI HƯỚNG TIẾP CẬN HỌC SÂU}
 \cstuname{
-	Sinh viên thực hiện: \\
-	\begin{tabular}{ l c }
-		Lê Minh Nghĩa & MSSV: 2010445\\
-		Phạm Khai Anh Duy & MSSV: 2011015\\
-            Nguyễn Trọng Nhân & MSSV: 2011744
-	\end{tabular}
+\begin{tabular}{ l l l}
+	SVTH 1: & Lê Minh Nghĩa & 2010445\\
+	SVTH 2: & Phạm Khai Anh Duy & 2011015\\
+  SVTH 3: & Nguyễn Trọng Nhân & 2011744
+\end{tabular}
 }
 
-\csCouncil{Khoa học máy tính}
+\csCouncil{Hội đồng 4 Đồ án Chuyên ngành}
 \csSupervise{TS. Nguyễn Đức Dũng}
 \csReviewer{Trần Huy}
 \cttime{12/2023}
@@ -97,7 +96,7 @@
 % sử dụng các phần bên dưới nếu cần:
 \tableofcontents
 %\listofsymbols
-%\listoftables
+\listoftables
 \listoffigures
 
 %\listofalgorithms
@@ -118,9 +117,11 @@
 \pagestyle{fancy}
 \renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
 \fancyhf{}
-\fancyhead[LE,RO]{\leftmark}
-\fancyhead[RE,LO]{}
-\fancyfoot[LE,RO]{\thepage}
+\fancyhead[RO]{\leftmark}
+
+\setlength{\headheight}{18pt}
+
+\fancyfoot[RO]{\thepage}
 \renewcommand{\footrulewidth}{0.4pt}
 
 %\fancyhead{}  % Clears all page headers and footers
