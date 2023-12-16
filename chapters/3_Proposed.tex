@@ -436,6 +436,13 @@ Chúng tôi đề xuất một bước tiền xử lý tập dữ liệu tham kh
 
 \subsection{Cải thiện mô hình cơ bản}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{pics/Chapter3/ImprovedModel.drawio.png}
+  \caption[Mô hình phát triển đề xuất cho quá trình huấn luyện]{Mô hình cơ bản với đề xuất cho các mô đun phát triển trong quá trình huấn luyện. Các mô đun có nền màu trắng là mô đun thừa hưởng từ mô hình cơ bản. Các mô đun có nền màu xám là các mô đun được đề xuất phát triển.}
+  \label{fig:improved-model}
+\end{figure}
+
 So sánh với những mô hình định vị trực quan đầu-cuối (End-to-end) \cite{shavit2021learning, shavit2023coarse, wang2023hypliloc}, việc tách bài toán định vị trực quan thành hai bài toán tách biệt đặt mô hình cơ bản vào vị trí phụ thuộc trước độ chính xác và hiệu năng hoạt động của nhiều mô hình khác dẫn đến thiệt hại tiềm tàng về thời gian và độ chính xác. Đồng thời, sự tách biệt giữa bước truy xuất và bước hồi quy vị trí tương đối ngăn cản mô hình truy xuất có thể học được những đặc trưng tốt nhất để phục vụ cho bước hồi quy vị trí tương đối. Nhận thấy một cứu nghiên cứu đánh giá tiềm năng phát triển của các mô hình truy xuất và định vị trực quan nói chung với cấu trúc tương tự khi các đặc trưng được huấn luyện nhận thức được không chỉ các yếu tố hỗ trợ quá trình truy xuất, mà cả quá trình khai thác tương quan và hồi quy vị trí \cite{pion2020benchmarking}. Vì vậy, chúng tôi đề xuất một phương hướng phát triển phù hợp cho mô hình định vị trực quan, có khả năng học được những đặc trưng tốt nhất cho cả hai bước truy xuất và hồi quy vị trí tương đối bằng cách thay đổi phương pháp huấn luyện, tận dụng một lớp tổng hợp đặc trưng mới để kết hợp đặc trưng tương quan giữa nhiều cặp ảnh vào đặc trưng học được từ mô hình MLP-Mixer và sử dụng hàm mất mát mới, lấy cảm hứng từ hàm Multi-Similarity Loss để đánh giá độ tương đồng giữa các cặp ảnh và huấn luyện mô hình học đầu-cuối (Xem hình \ref{fig:improved-model}), \textbf{Mô hình nhận diện địa điểm trực quan tự nhận thức vị trí tương đối cho bài toán định vị hóa trực quan (Relative pose-aware visual place recognition for visual localization)}. Trong đó, chúng tôi đề xuất sẽ phát triển các mô đun sau:
 
 \begin{enumerate}
@@ -443,9 +450,3 @@ So sánh với những mô hình định vị trực quan đầu-cuối (End-to-
   \item \textbf{Hàm mất mát tổng hợp} thường được đánh giá là yếu tố có tác động lớn hơn cho sự hiệu quả của một mô hình nhận diện địa điểm trực quan. Vì mô hình phát triển sử dụng lớp tổng hợp đặc trưng tương quan có sự khác biệt lớn so với các mô hình nhận diện địa điểm trong quá khứ, chúng tôi nhận thấy sự cần thiết cho việc biển đổi hàm mất mát Multi-Similarity Loss \cite{wang2019multi} để nắm bắt và huấn luyện được những đặc trưng tốt nhất cho cả hai bước truy xuất và hồi quy vị trí tương đối.
 \end{enumerate}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{pics/Chapter3/ImprovedModel.drawio.png}
-  \caption[Mô hình phát triển đề xuất cho quá trình huấn luyện]{Mô hình cơ bản với đề xuất cho các mô đun phát triển trong quá trình huấn luyện. Các mô đun có nền màu trắng là mô đun thừa hưởng từ mô hình cơ bản. Các mô đun có nền màu xám là các mô đun được đề xuất phát triển.}
-  \label{fig:improved-model}
-\end{figure}
