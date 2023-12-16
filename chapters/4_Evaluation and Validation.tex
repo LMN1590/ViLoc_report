@@ -5,31 +5,31 @@
 \subsubsection*{7Scenes}
 Tập dữ liệu 7-Scenes \cite{6619221} bao gồm các ảnh RGB-D thuộc bảy khung cảnh khác nhau được chụp từ một máy ảnh cầm tay Kinect RGB-D ở độ phân giải 640x480. Bảy khung cảnh bap gồm: "Chess", "Fire", "Heads", "Office", "Pumpkin", "RedKitchen" và "Stairs". Với mỗi cảnh sẽ có vài chuỗi khung ảnh RGB-D. Mỗi chuỗi bao gồm khoảng từ 1000 đến 5000 khung ảnh. Mỗi khung sẽ gồm: ảnh màu, độ sâu và vị trí.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{pics/Chapter2/7scenes.png}
-    \caption{Minh họa tập dữ liệu 7-Scenes \cite{6619221}}
+	\centering
+	\includegraphics[width=\textwidth]{pics/Chapter2/7scenes.png}
+	\caption{Minh họa tập dữ liệu 7-Scenes \cite{6619221}}
 \end{figure}
 \subsubsection*{Cambridge Landmark}
 Tập dữ liệu Cambridge Landmarks \cite{kendall2016posenet} là một tập dữ liệu định vị thành thị bao gồm năm khung cảnh khác nhau. Các yếu tố dày đặc quan trọng như phương tiện giao thông hay người đi bộ cũng xuất hiện trong tập dữ liệu này, ngoài ra dữ liệu cũng được thu thập ở nhiều thời điểm trong ngày đại diện cho các yếu tố ánh sáng và điều kiện thời tiết khác nhau. Cambridge Landmarks được tạo ra nhờ vào việc áp dụng các kỹ thuật tái tạo kiến trúc từ chuyển động. Một chiếc điện thoại thông minh Google LG Nexus 5 được một người đi bộ trên phố sử dụng để ghi lại đoạn phim chất lượng cao cho mỗi cảnh. Mỗi đoạn phim sau đó sẽ được lấy mẫu với tần số 2Hz để trích xuất ảnh cho quy trình tái tạo kiến trúc từ chuyển động. Mỗi vị trí máy ảnh sẽ cách nhau khoảng 1m.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{pics/Chapter2/cambridge.png}
-    \caption{Minh họa tập dữ liệu Cambridge Landmarks \cite{kendall2016posenet}}
+	\centering
+	\includegraphics[width=\textwidth]{pics/Chapter2/cambridge.png}
+	\caption{Minh họa tập dữ liệu Cambridge Landmarks \cite{kendall2016posenet}}
 \end{figure}
 \subsubsection*{Niantic Map-free Relocalization Dataset}
 Tập dữ liệu Niantic Map-free Relocalization \cite{arnold2022mapfree} là một tập dữ liệu được thu thập chủ yếu để giúp ích cho phương pháp định vị Map-free \cite{arnold2022mapfree}. Tập dữ liệu bao gồm 655 cảnh bên ngoài với mỗi cảnh sẽ chứa một "địa điểm đáng chú ý" như một pho tượng, cổng, bảng hiệu,... sao cho địa điểm đó phải được xác định rõ trong một bức ảnh. Các cảnh được chia ra thành 460 cảnh phục vụ cho tác vụ huấn luyện, 65 cảnh phục vụ cho tác vụ kiểm tra quy trình huấn luyện và 130 cảnh phục vụ cho quá trình kiểm thử. Mỗi ảnh trong tập huấn luyện đều được gắn kèm vị trí tuyệt đối. Với tập kiểm thử và kiểm tra quy trình, mỗi cảnh sẽ được kèm theo một ảnh đại diện cũng như vị trí tuyệt đối tại cảnh. Ngoài ra, ma trận tham số nội tại của máy ảnh cũng được gắn kèm theo mỗi ảnh trong tập dữ liệu.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{pics/Chapter2/niantic.png}
-    \caption{Minh họa tập dữ liệu Niantic Map-free Relocalization \cite{arnold2022mapfree}}
+	\centering
+	\includegraphics[width=\textwidth]{pics/Chapter2/niantic.png}
+	\caption{Minh họa tập dữ liệu Niantic Map-free Relocalization \cite{arnold2022mapfree}}
 \end{figure}
 \subsection{Tập dữ liệu thành thị}
 \subsubsection*{Aachen Day-Night}
 Tập dữ liệu Aachen Day-Night \cite{Sattler2012ImageRF} bao gồm 14.607 ảnh được chụp với nhiều máy ảnh khác nhau bao phủ cả thành phố Aachen thuộc quốc gia Đức. Các ảnh dữ liệu được chụp ở nhiểu thời điểm trong ngày và trong năm, cụ thể là khoảng thời gian trong 2 năm. Hệ quả mang lại là tập dữ liệu bao phủ nhiều điều kiện ngoại cảnh như thời tiết, ánh sáng cũng như sự thay đổi của công trình kiến trúc trong khu vực.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{pics/Chapter2/aachen.png}
-    \caption{Minh họa tập dữ liệu Aachen Day-Night \cite{Sattler2012ImageRF}}
+	\centering
+	\includegraphics[width=\textwidth]{pics/Chapter2/aachen.png}
+	\caption{Minh họa tập dữ liệu Aachen Day-Night \cite{Sattler2012ImageRF}}
 \end{figure}
 \subsubsection*{Pittsburgh 250k}
 Tập dữ liệu Pittsburgh 250k \cite{6618963} là một tập dữ liệu tương đối rộng bao phủ thành phố Pittsburgh của Mỹ. Đây là một tập dữ liệu tương đối phổ biến trong thị giác máy tính, cụ thể là ở tác vụ nhận điện địa điểm trực quan, truy xuất ảnh và định vị trực quan.
@@ -37,62 +37,62 @@ Tập dữ liệu Pittsburgh 250k \cite{6618963} là một tập dữ liệu tư
 \subsubsection*{GSV-Cities}
 Tập dữ liệu GSV-Cities \cite{Ali_bey_2022} bao phủ một vùng địa lý cực kỳ rộng lớn với hơn 40 thành phố xuyên lục địa trong khoảng thời gian 14 năm liên tục. GSV-Cities chứa khoảng hơn 530.000 ảnh - khoảng hơn 62.000 vị trí. Mỗi vị trí sẽ có khoảng từ 4 đến 20 ảnh. Đồng thời mỗi vị trí sẽ cách nhau một khoảng ít nhất 100m.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{pics/Chapter2/gsv.png}
-    \caption{Minh họa tập dữ liệu GSV-Cities \cite{Ali_bey_2022}}
+	\centering
+	\includegraphics[width=\textwidth]{pics/Chapter2/gsv.png}
+	\caption{Minh họa tập dữ liệu GSV-Cities \cite{Ali_bey_2022}}
 \end{figure}
 
 \subsubsection*{SF-XL}
 Tập dữ liệu San Francisco Extra Large (SF-XL) \cite{berton2022rethinking} được tạo nên từ 3.43 triệu ảnh 360 độ thu thập từ kho ảnh Google Streetview. Các ảnh này sau đó được cắt ra thành 41.2 triệu ảnh. Mỗi ảnh cắt ra đều được gắn nhãn 6DoF (bao gồm cả GPS). Dữ liệu được thu thập từ năm 2009 đến năm 2021, dẫn đến việc tập dữ liệu bao phủ nhiều điều kiện ngoại cảnh như thời tiết, ánh sáng cũng như sự thay đổi của công trình kiến trúc trong khu vực.
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{pics/Chapter2/sfxl.png}
-    \caption{Minh họa tập dữ liệu San Francisco Extra Large \cite{berton2022rethinking}}
+	\centering
+	\includegraphics[width=\textwidth]{pics/Chapter2/sfxl.png}
+	\caption{Minh họa tập dữ liệu San Francisco Extra Large \cite{berton2022rethinking}}
 \end{figure}
 
 \section{Mô hình MixVPR}
 \subsection*{Mô tả quá trình thí nghiệm}
 
-Để kiểm chứng kết quả đã được công bố trên bài báo khoa học của nhóm nghiên cứu tác giả, nhóm đã tiến hành chạy mô hình MixVPR trên tập dữ liệu Pittsburgh 250k \cite{6618963} và tập dữ liệu Pittsburgh 30k \cite{6618963}.
+Để kiểm chứng kết quả đã được công bố trên bài báo khoa học của nhóm nghiên cứu tác giả, chúng tôi đã tiến hành chạy mô hình MixVPR trên tập dữ liệu Pittsburgh 250k \cite{6618963} và tập dữ liệu Pittsburgh 30k \cite{6618963}.
 
-Các thang đo kết quả được sử dụng trong báo cáo này sẽ là recall@k, thể hiện tỷ lệ của truy xuất thành công trên tổng số lượng truy xuất và một truy xuất hình sẽ được xem là thành công khi ảnh được truy xuất nằm trong vòng 25m xung quanh ảnh truy vấn. Để thích hợp cho việc chạy trên thiết bị cá nhân với cấu hình yếu hơn so với thiết bị của tác giả, nhóm đã hiệu chỉnh cài đặt kích thước mỗi batch chuyển từ 120 xuống 10, các cài đặt khác được giữ nguyên so với bài nghiên cứu.
+Các thang đo kết quả được sử dụng trong báo cáo này sẽ là recall@k, thể hiện tỷ lệ của truy xuất thành công trên tổng số lượng truy xuất và một truy xuất hình sẽ được xem là thành công khi ảnh được truy xuất nằm trong vòng 25m xung quanh ảnh truy vấn. Để thích hợp cho việc chạy trên thiết bị cá nhân với cấu hình yếu hơn so với thiết bị của tác giả, chúng tôi đã hiệu chỉnh cài đặt kích thước mỗi batch chuyển từ 120 xuống 10, các cài đặt khác được giữ nguyên so với bài nghiên cứu.
 
 \subsection*{Kết quả thí nghiệm}
 
 \begin{table}[H]
-\begin{tabular}{llllllll}
-               & \textbf{R@1} & \textbf{R@5} & \textbf{R@10} & \textbf{R@15} & \textbf{R@20} & \textbf{R@50} & \textbf{R@100} \\
-Pittsburgh30k  & 91.64        & 95.55        & 96.35         & 96.99         & 97.34         & 98.25         & 98.69          \\
-Pittsburgh250k & 94.32        & 98.22        & 98.84         & 99.13         & 99.34         & 99.54         & 99.66         
-\end{tabular}
+	\begin{tabular}{llllllll}
+		               & \textbf{R@1} & \textbf{R@5} & \textbf{R@10} & \textbf{R@15} & \textbf{R@20} & \textbf{R@50} & \textbf{R@100} \\
+		Pittsburgh30k  & 91.64        & 95.55        & 96.35         & 96.99         & 97.34         & 98.25         & 98.69          \\
+		Pittsburgh250k & 94.32        & 98.22        & 98.84         & 99.13         & 99.34         & 99.54         & 99.66
+	\end{tabular}
 \end{table}
 
 \subsection*{Nhận xét}
 
-Các số liệu đo đạc thu được từ thí nghiệm của nhóm là hoàn toàn giống với bảng kết quả đã được công bố của nhóm tác giả với recall@1 đạt 94.32\%, recall@5 đạt 98.22\%, recall@10 đạt 98.84\%. Ngoài ra, nhóm nhận xét rằng các cài đặt được thay đổi không ảnh hưởng đến kết quả đầu ra của mô hình mà thay vào đó chỉ ảnh hưởng đến tài nguyên thiết bị cũng như tốc độ chạy mô hình. Cuối cùng, với tác vụ nhận diện địa điểm trực quan, nhóm cho rằng các chỉ số kết quả này là đủ tốt để tiến hành sử dụng MixVPR trong mô hình kết hợp.
+Các số liệu đo đạc thu được từ thí nghiệm của chúng tôi là hoàn toàn giống với bảng kết quả đã được công bố của nhóm tác giả với recall@1 đạt 94.32\%, recall@5 đạt 98.22\%, recall@10 đạt 98.84\%. Ngoài ra, chúng tôi nhận xét rằng các cài đặt được thay đổi không ảnh hưởng đến kết quả đầu ra của mô hình mà thay vào đó chỉ ảnh hưởng đến tài nguyên thiết bị cũng như tốc độ chạy mô hình. Cuối cùng, với tác vụ nhận diện địa điểm trực quan, chúng tôi cho rằng các chỉ số kết quả này là đủ tốt để tiến hành sử dụng MixVPR trong mô hình kết hợp.
 
 \section{Mô hình Map-free Relocalization}
 \subsection*{Mô tả quá trình thí nghiệm}
 
-Để kiểm chứng kết quả đã được công bố trên trang chủ của nhóm nghiên cứu tác giả công trình, nhóm đã tiến hành chạy quá trình hồi quy vị trí tương quan 2D - 2D của mô hình Niantic Map-free Relocalization trên tập dữ liệu kiểm thử do chính tác giả cung cấp. Cụ thể tập dữ liệu bao gồm 15.000 ảnh chia thành 130 cảnh khác nhau với mỗi cảnh bao gồm một vật thể chú ý đặt ở tâm như mô tả bài báo.
+Để kiểm chứng kết quả đã được công bố trên trang chủ của nhóm nghiên cứu tác giả công trình, chúng tôi đã tiến hành chạy quá trình hồi quy vị trí tương quan 2D - 2D của mô hình Niantic Map-free Relocalization trên tập dữ liệu kiểm thử do chính tác giả cung cấp. Cụ thể tập dữ liệu bao gồm 15.000 ảnh chia thành 130 cảnh khác nhau với mỗi cảnh bao gồm một vật thể chú ý đặt ở tâm như mô tả bài báo.
 
 Các thang đo kết quả được sử dụng trong báo cáo này sẽ bao gồm độ lệch vị trí (m), độ lệch góc quay (độ) và sai số phản chiếu điểm 3D ảo VCRE (điểm ảnh). Các cài đặt của mô hình được giữ nguyên như trong bài nghiên cứu của tác giả.
 
 \subsection*{Kết quả thí nghiệm}
 
 \begin{table}[H]
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-Method                                                                                                    & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Precision \\ (Err \textless 25cm, 5°)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Trans. \\ Error (m)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Rot. \\ Error (°)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Reproj. \\ Error (px)\end{tabular}} \\ \hline
-\begin{tabular}[c]{@{}l@{}}DPT-KITTI \& SuperGlue \\ (Ess.Mat. + D.Scale) \\ (Author)\end{tabular}        & 15.4\%                                                                                             & 1.98                                                                                    & 30.5                                                                                  & 167.6                                                                                     \\ \hline
-\textbf{\begin{tabular}[c]{@{}l@{}}DPT-KITTI \& SuperGlue \\ (Ess.Mat. + D.Scale) \\ (Ours)\end{tabular}} & 15.6\%                                                                                             & 1.92                                                                                    & 26.1                                                                                  & 161.1                                                                                     \\ \hline
-\end{tabular}
-\caption{Bảng so sánh kết quả công bố và kết quả kiểm thử mô hình 2D - 2D Map-free}
+	\begin{tabular}{|l|c|c|c|c|}
+		\hline
+		Method                                                                                                    & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Precision \\ (Err \textless 25cm, 5°)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Trans. \\ Error (m)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Rot. \\ Error (°)\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[c]{@{}l@{}}Median Reproj. \\ Error (px)\end{tabular}} \\ \hline
+		\begin{tabular}[c]{@{}l@{}}DPT-KITTI \& SuperGlue \\ (Ess.Mat. + D.Scale) \\ (Author)\end{tabular}        & 15.4\%                                                                                             & 1.98                                                                                    & 30.5                                                                                  & 167.6                                                                                     \\ \hline
+		\textbf{\begin{tabular}[c]{@{}l@{}}DPT-KITTI \& SuperGlue \\ (Ess.Mat. + D.Scale) \\ (Ours)\end{tabular}} & 15.6\%                                                                                             & 1.92                                                                                    & 26.1                                                                                  & 161.1                                                                                     \\ \hline
+	\end{tabular}
+	\caption{Bảng so sánh kết quả công bố và kết quả kiểm thử mô hình 2D - 2D Map-free}
 \end{table}
 
 \subsection*{Nhận xét}
 
-Các số liệu đo đạc thu được từ thí nghiệm của nhóm tương đối sát với kết quả do nhóm tác giả nghiên cứu đã công bố trên trang chủ với độ lệch vị trí khoảng gần 2m và độ lệch góc quay khoảng 26 độ. Với bài toán định vị trực quan, nhóm nhận định rằng độ lệch vị trí là tương đối ổn nhưng độ lệch góc quay lại có phần tương đối lớn.
+Các số liệu đo đạc thu được từ thí nghiệm của chúng tôi tương đối sát với kết quả do nhóm tác giả nghiên cứu đã công bố trên trang chủ với độ lệch vị trí khoảng gần 2m và độ lệch góc quay khoảng 26 độ. Với bài toán định vị trực quan, chúng tôi nhận định rằng độ lệch vị trí là tương đối ổn nhưng độ lệch góc quay lại có phần tương đối lớn.
 
 \section{Kết luận}
-Nhóm đã có thể đo đạc và kiểm chứng các số liệu kết quả được công bố từ các bài báo khoa học được chọn trong mô hình kết hợp là thật và hoàn toàn đáng tin cậy. Dự kiến ở giai đoạn tiếp theo, nhóm sẽ tìm cách cải thiện kết quả các mô hình thuộc mô hình kết hợp hoặc tiếp tục nghiên cứu các mô hình cũng như các phương pháp tiếp cận tốt hơn để có thể giảm thiểu tối đa sai số về vị trí và góc quay.
+Chúng tôi đã có thể đo đạc và kiểm chứng các số liệu kết quả được công bố từ các bài báo khoa học được chọn trong mô hình kết hợp là thật và hoàn toàn đáng tin cậy. Dự kiến ở giai đoạn tiếp theo, chúng tôi sẽ tìm cách cải thiện kết quả các mô hình thuộc mô hình kết hợp hoặc tiếp tục nghiên cứu các mô hình cũng như các phương pháp tiếp cận tốt hơn để có thể giảm thiểu tối đa sai số về vị trí và góc quay.
