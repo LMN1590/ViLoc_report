@@ -1,12 +1,12 @@
 \chapter{GIỚI THIỆU}
 
-\textit{Trước hết, nhóm sẽ trình bày nội dung của bài toán định vị trực quan - Visual Localization, những giải pháp đã được đề xuất hiện nay của bài toán, và những hạn chế của chúng. Từ đó, nhóm sẽ xác định mục tiêu cần thực hiện và phạm vi của đề tài}
+\textit{Trước hết, chúng tôi sẽ trình bày nội dung của bài toán định vị trực quan - Visual Localization, những giải pháp đã được đề xuất hiện nay của bài toán, và những hạn chế của chúng. Từ đó, chúng tôi sẽ xác định mục tiêu cần thực hiện và phạm vi của đề tài}
 
 \section{Động cơ nghiên cứu}
 
 \subsection{Nhu cầu sử dụng trong thực tế}
 
-Việc có thể nhận biết được môi trường xung quanh để có thể tương tác là một tác vụ cốt lõi trong những công nghệ được tích hợp vào cuộc sống hàng ngày của con người. Những công nghệ này bao gồm xe tự hành \cite{chaabane2021end}, robot \cite{sunderhauf2015place}, công nghệ tương tác thực tế ảo \cite{middelberg2014scalable}, định hướng \cite{sarlin2023orienternet}, ... 
+Việc có thể nhận biết được môi trường xung quanh để có thể tương tác là một tác vụ cốt lõi trong những công nghệ được tích hợp vào cuộc sống hàng ngày của con người. Những công nghệ này bao gồm xe tự hành \cite{chaabane2021end}, robot \cite{sunderhauf2015place}, công nghệ tương tác thực tế ảo \cite{middelberg2014scalable}, định hướng \cite{sarlin2023orienternet}, ...
 
 Trước đây, những hệ thống định vị toàn cầu như GPS đã được sử dụng để xác định thông tin về môi trường. Tuy nhiên, những hệ thống này có một số khiếm khuyết như độ chính xác chỉ nằm trong khoảng vài mét, hiệu quả bị giới hạn ở không gian bên trong và thiếu thông tin về hướng quay nếu không sử dụng thêm la bàn. Để có thể đáp ứng nhu cầu về độ chính xác, bài toán định vị trực quan - Visual Localization - trong lĩnh vực thị giác máy tính đã được ra đời.
 
@@ -28,7 +28,7 @@ Trong đa số những phương pháp trên, tác vụ truy xuất ảnh đóng 
 
 \section{Mục tiêu đề tài}
 
-Đề tài hướng đến mục tiêu xây dựng giải pháp mới cho bài toán định vị trực quan. Nhằm phục vụ cho mục đích trên, nhóm đề ra những nhiệm vụ cần hoàn thành như sau:
+Đề tài hướng đến mục tiêu xây dựng giải pháp mới cho bài toán định vị trực quan. Nhằm phục vụ cho mục đích trên, chúng tôi đề ra những nhiệm vụ cần hoàn thành như sau:
 \begin{itemize}
     \item \textit{Thứ nhất}, khảo sát những giải pháp đã được đề xuất và dữ liệu chúng sử dụng và phân tích ưu và nhược điểm để có thể chọn ra hướng tiếp cận phù hợp.
     \item \textit{Thứ hai}, tiến hành kiểm thử kết quả của hướng tiếp cận được chọn làm cơ sở
@@ -36,10 +36,10 @@ Trong đa số những phương pháp trên, tác vụ truy xuất ảnh đóng 
     \item \textit{Thứ tư}, đánh giá và kiểm thử giải pháp được đề xuất trên những tập dữ liệu phổ biến, có phạm vi đa dạng và đồng thời tiến hành thực nghiệm trên những thành phần của giải pháp.
 \end{itemize}
 
-Trong báo cáo này, nhóm hướng tới hoàn thành hai nhiệm vụ đầu tiên trong số những nhiệm vụ đã được trình bày. Các nhiệm vụ còn lại sẽ tiếp tục được thực hiện vào giai đoạn tiếp theo.
+Trong báo cáo này, chúng tôi hướng tới hoàn thành hai nhiệm vụ đầu tiên trong số những nhiệm vụ đã được trình bày. Các nhiệm vụ còn lại sẽ tiếp tục được thực hiện vào giai đoạn tiếp theo.
 
 \subsection{Khảo sát và phân tích những giải pháp đã có}
-Nhóm đã tiến hành khảo sát những hướng tiếp cận đã được đề xuất nhằm giải quyết bài toán định vị trực quan trong thời gian gần đây. Thông qua việc khảo sát, nhóm xác định những khía cạnh có thể được cải thiện để đóng góp cho quá trình nghiên cứu của bài toán này.
+chúng tôi đã tiến hành khảo sát những hướng tiếp cận đã được đề xuất nhằm giải quyết bài toán định vị trực quan trong thời gian gần đây. Thông qua việc khảo sát, chúng tôi xác định những khía cạnh có thể được cải thiện để đóng góp cho quá trình nghiên cứu của bài toán này.
 \begin{itemize}
     \item Tìm hiểu và đánh giá ưu và nhược điểm của ảnh RGB và ảnh RGBD.
     \item Tìm hiểu về những nhóm phương pháp đã được đề xuất
@@ -47,17 +47,17 @@ Nhóm đã tiến hành khảo sát những hướng tiếp cận đã được 
     \item Tìm hiểu về những phương pháp ước tính vị trí máy ảnh
 \end{itemize}
 
-Qua quá trình tìm hiểu, nhóm đã quyết định tiếp cận bài toán theo hướng hồi quy vị trí tương đối, xây dựng mô hình gồm hai thành phần được đề xuất trong hai bài nghiên cứu là MixVPR \cite{alibey2023mixvpr} và mô hình hồi quy 2D-2D được đề xuất trong \cite{arnold2022mapfree} để có thể đạt được kết quả vị trí 6DoF.
+Qua quá trình tìm hiểu, chúng tôi đã quyết định tiếp cận bài toán theo hướng hồi quy vị trí tương đối, xây dựng mô hình gồm hai thành phần được đề xuất trong hai bài nghiên cứu là MixVPR \cite{alibey2023mixvpr} và mô hình hồi quy 2D-2D được đề xuất trong \cite{arnold2022mapfree} để có thể đạt được kết quả vị trí 6DoF.
 
 \subsection{Tiến hành kiểm thử kết quả của phương pháp cơ sở}
-Phương pháp được dùng làm cơ sở cải thiện sẽ được chọn. Những số liệu về hiệu quả của mô hình sẽ được xác nhận lại một lần nữa qua thực nghiệm. Ngoài ra, do phương pháp được nhóm đề xuất sẽ bao gồm hai thành phần khác nhau, nên việc xác định kết quả cơ sở là cần thiết.
+Phương pháp được dùng làm cơ sở cải thiện sẽ được chọn. Những số liệu về hiệu quả của mô hình sẽ được xác nhận lại một lần nữa qua thực nghiệm. Ngoài ra, do phương pháp được chúng tôi đề xuất sẽ bao gồm hai thành phần khác nhau, nên việc xác định kết quả cơ sở là cần thiết.
 \begin{itemize}
     \item Mô phỏng lại quá trình thí nghiệm trên từng mô hình nhằm tái tạo số liệu được đưa ra trong bài nghiên cứu, xác nhận tính khả thi và hợp lệ.
     \item Thiết kế một mô hình kết hợp hai thành phần lại và tiến hành thực nghiệm nhằm xác định kết quả cơ sở ban đầu.
 \end{itemize}
 
 \subsection{Thiết kế giải pháp cải thiện hiệu quả của mô hình kết hợp}
-Dựa trên mô hình đã được đề xuất, nhóm sẽ tiến hành cải thiện mô hình nhằm giải quyết những vấn đề hiện hữu trong từng thành phần của mô hình
+Dựa trên mô hình đã được đề xuất, chúng tôi sẽ tiến hành cải thiện mô hình nhằm giải quyết những vấn đề hiện hữu trong từng thành phần của mô hình
 \begin{itemize}
     \item Đối với thành phần truy xuất ảnh, thể hiện được rằng mô hình có thể cho ra kết quả có độ chính xác cao hơn việc chỉ sử dụng nhãn của ảnh truy xuất được làm kết quả cuối cùng.
     \item Đối với thành phần hồi quy vị trí, thể hiện được rằng mô hình có thể được áp dụng cho những tập dữ liệu có phạm vi rộng, độ phân bố ảnh thưa hơn.
@@ -70,10 +70,10 @@ Dựa trên mô hình đã được đề xuất, nhóm sẽ tiến hành cải 
     \item Thực nghiệm so sánh với những phương pháp thành phần
     \item Thực nghiệm so sánh với những phương pháp SOTA hiện tại
     \item Thực nghiệm trên những tập dữ liệu đa dạng
-    \begin{itemize}
-        \item Tập dữ liệu có phạm vi nhỏ nhưng phân bố dày đặc: 7Scenes
-        \item Tập dữ liệu có phạm vi lớn nhưng phân bố thưa: Pittsburgh 250k
-    \end{itemize}
+          \begin{itemize}
+              \item Tập dữ liệu có phạm vi nhỏ nhưng phân bố dày đặc: 7Scenes
+              \item Tập dữ liệu có phạm vi lớn nhưng phân bố thưa: Pittsburgh 250k
+          \end{itemize}
     \item Thực nghiệm trên những biến thể về những bộ phận của mô hình
 \end{itemize}
 
@@ -81,34 +81,34 @@ Dựa trên mô hình đã được đề xuất, nhóm sẽ tiến hành cải 
 Đề tài được thực hiện và thí nghiệm trên các tập dữ liệu ngoài trời với ảnh đầu vào được chụp từ máy ảnh nhằm thu được dữ liệu tham số nội tại với đầu ra là vị trí và hướng quay của người chụp. Cơ sở dữ liệu được sử dụng sẽ là những ảnh 2D, diễn tả cảnh vật của khu vực đang xét. Kết quả sẽ là vị trí đã chụp ảnh của người dùng đưa vào. Độ chính xác của kết quả đầu ra được xác định trên đơn vị (cm, độ).
 \begin{itemize}
     \item \textbf{Dữ liệu đầu vào và đầu ra}
-    \begin{itemize}
-        \item Dữ liệu đầu vào của mô hình sẽ là một ảnh truy vấn do người dùng chụp được và đưa vào mô hình để xử lý. Đồng thời, một tập dữ liệu gồm các ảnh 2D, biểu diễn khu vực cần xét sẽ được cung cấp cho mô hình.
-        \item Dữ liệu đầu ra sẽ gồm hai vector $R$ và $t$, lần lượt thể hiện góc quay và vị trí chụp ảnh trong không gian. Vector $R$ thể hiện góc quay sẽ có định dạng của một Quaternion, $(q_w,q_x,q_y,q_z)$. Vector $t$ thể hiện vị trí của chụp ảnh trong không gian 3 chiều, có định dạng $(t_x,t_y,t_z)$.
-    \end{itemize}
+          \begin{itemize}
+              \item Dữ liệu đầu vào của mô hình sẽ là một ảnh truy vấn do người dùng chụp được và đưa vào mô hình để xử lý. Đồng thời, một tập dữ liệu gồm các ảnh 2D, biểu diễn khu vực cần xét sẽ được cung cấp cho mô hình.
+              \item Dữ liệu đầu ra sẽ gồm hai vector $R$ và $t$, lần lượt thể hiện góc quay và vị trí chụp ảnh trong không gian. Vector $R$ thể hiện góc quay sẽ có định dạng của một Quaternion, $(q_w,q_x,q_y,q_z)$. Vector $t$ thể hiện vị trí của chụp ảnh trong không gian 3 chiều, có định dạng $(t_x,t_y,t_z)$.
+          \end{itemize}
     \item \textbf{Kết quả mong đợi}
-    \begin{itemize}
-        \item Đối với truy xuất ảnh, nhóm mong muốn cải thiện độ chính xác của những mô hình truy xuất ảnh đã được đề xuất trước đây.
-        \item Đối với mô hình hồi quy vị trí máy ảnh, nhóm mong muốn cải thiện khả năng mở rộng của mô hình giúp mô hình có thể được sử dụng trên các tập dữ liệu lớn hơn.
-    \end{itemize}
+          \begin{itemize}
+              \item Đối với truy xuất ảnh, chúng tôi mong muốn cải thiện độ chính xác của những mô hình truy xuất ảnh đã được đề xuất trước đây.
+              \item Đối với mô hình hồi quy vị trí máy ảnh, chúng tôi mong muốn cải thiện khả năng mở rộng của mô hình giúp mô hình có thể được sử dụng trên các tập dữ liệu lớn hơn.
+          \end{itemize}
 \end{itemize}
 
 \section{Cấu trúc báo cáo}
 Báo cáo này bao gồm năm chương. Mỗi chương sẽ bao gồm những nội dung như sau:
 \begin{itemize}
     \item \textbf{Chương 1: Giới thiệu} \\
-    Trình bày sơ lược về động cơ nghiên cứu, mục tiêu và phạm vi đề tài giải quyết.
+          Trình bày sơ lược về động cơ nghiên cứu, mục tiêu và phạm vi đề tài giải quyết.
     \item \textbf{Chương 2: Các công trình liên quan} \\
-    Chương này đề cập tới những hướng đi đã được đề xuất trong các công trình nghiên cứu nhằm giải quyết bài toán định vị trực quan. Ý tưởng và ưu, nhược điểm của mỗi phương pháp sẽ được phân tích nhằm xác định hướng phát triển.
+          Chương này đề cập tới những hướng đi đã được đề xuất trong các công trình nghiên cứu nhằm giải quyết bài toán định vị trực quan. Ý tưởng và ưu, nhược điểm của mỗi phương pháp sẽ được phân tích nhằm xác định hướng phát triển.
     \item \textbf{Chương 3: Phương pháp đề xuất} \\
-    Chương này đề cập đến phương pháp giải quyết bài toán mà nhóm đề xuất bao gồm tổng quan về cơ chế cũng như lý thuyết cách hoạt động.
+          Chương này đề cập đến phương pháp giải quyết bài toán mà chúng tôi đề xuất bao gồm tổng quan về cơ chế cũng như lý thuyết cách hoạt động.
     \item \textbf{Chương 4: Đo đạc và đánh giá} \\
-    Chương này đề cập kết quả khảo sát của nhóm bao gồm kết quả đánh giá hiệu quả của các phương pháp truy xuất ảnh và hồi quy vị trí máy ảnh.
+          Chương này đề cập kết quả khảo sát của chúng tôi bao gồm kết quả đánh giá hiệu quả của các phương pháp truy xuất ảnh và hồi quy vị trí máy ảnh.
     \item \textbf{Chương 5: Kế hoạch tương lai} \\
-    Trình bày tổng quan về quá trình thực hiện và kết quả của giai đoạn này và đưa ra kế hoạch cho giai đoạn tiếp theo.
+          Trình bày tổng quan về quá trình thực hiện và kết quả của giai đoạn này và đưa ra kế hoạch cho giai đoạn tiếp theo.
 \end{itemize}
 \section{Kết luận}
 Việc xác định chính xác vị trí có một phạm vi ứng dụng rộng rãi, là công nghệ chủ chốt trong rất nhiều lĩnh vực khác nhau. Tuy nhiên, việc chỉ dựa vào hệ thống không đảm bảo được sự ổn định như GPS sẽ hạn chế khả năng phát triển trong tương lai của những lĩnh vực ấy. Vậy nên bài toán định vị hóa trực quan đã được đưa ra để có một hệ thống đưa ra định vị chính xác và ổn định, dựa vào thông tin hình ảnh môi trường xung quanh.
 
-Trong những phương pháp được đưa ra, nhóm tập trung vào việc kết hợp 2 hướng xử lý là truy xuất ảnh và hồi quy tương đối vị trí. Mỗi phương án sẽ có một vấn đề riêng. Đối với việc truy xuất ảnh, kết quả cho ra được sẽ không có độ chính xác cao, do vị trí của ảnh truy xuất được sẽ được lấy làm kết quả. Đối với hướng hồi quy tương đối vị trí, đa số những phương pháp trước đây đều tập trung vào việc hồi quy trong những không gian nhỏ, có lượng dữ liệu dày đặc, không phù hợp với tập dữ liệu đô thị, mục tiêu của bài nghiên cứu của nhóm. Qua việc ứng dụng cả 2 cách giải quyết trong một mô hình, nhóm hy vọng 2 mô hình có thể bổ trợ, giải quyết điểm yếu của nhau.
+Trong những phương pháp được đưa ra, chúng tôi tập trung vào việc kết hợp 2 hướng xử lý là truy xuất ảnh và hồi quy tương đối vị trí. Mỗi phương án sẽ có một vấn đề riêng. Đối với việc truy xuất ảnh, kết quả cho ra được sẽ không có độ chính xác cao, do vị trí của ảnh truy xuất được sẽ được lấy làm kết quả. Đối với hướng hồi quy tương đối vị trí, đa số những phương pháp trước đây đều tập trung vào việc hồi quy trong những không gian nhỏ, có lượng dữ liệu dày đặc, không phù hợp với tập dữ liệu đô thị, mục tiêu của bài nghiên cứu của chúng tôi. Qua việc ứng dụng cả 2 cách giải quyết trong một mô hình, chúng tôi hy vọng 2 mô hình có thể bổ trợ, giải quyết điểm yếu của nhau.
 
-Để có thể lựa chọn được những giải pháp phù hợp, nhóm đã tiến hành khảo sát những kiến thức nền tảng và những công trình nghiên cứu đã được xuất bản trước đây. Những nội dung này sẽ được thể hiện trong \textbf{Chương 2: Các công trình liên quan}.
+Để có thể lựa chọn được những giải pháp phù hợp, chúng tôi đã tiến hành khảo sát những kiến thức nền tảng và những công trình nghiên cứu đã được xuất bản trước đây. Những nội dung này sẽ được thể hiện trong \textbf{Chương 2: Các công trình liên quan}.

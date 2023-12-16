@@ -1,14 +1,14 @@
 \begin{abstract}
 
-Khả năng định vị toàn cầu có vai trò cốt lõi trong những lĩnh vực phụ thuộc vào việc nhận biết và tương tác với môi trường xung quanh như xe tự hành, robot và công nghệ thực tế ảo AR. Trước đây, những công nghệ này sẽ phụ thuộc vào những hệ thống định vị toàn cầu như GPS. Tuy nhiên, những hệ thống này vẫn còn những giới hạn nhất định. Vì vậy nên, bài toán định vị trực quan - Visual Localization - đã được đưa ra nhằm đạt được kết quả chất lượng hơn, thông qua dữ liệu trực quan thu được tại vị trí đó.
+    Khả năng định vị toàn cầu có vai trò cốt lõi trong những lĩnh vực phụ thuộc vào việc nhận biết và tương tác với môi trường xung quanh như xe tự hành, robot và công nghệ thực tế ảo AR. Trước đây, những công nghệ này sẽ phụ thuộc vào những hệ thống định vị toàn cầu như GPS. Tuy nhiên, những hệ thống này vẫn còn những giới hạn nhất định. Vì vậy nên, bài toán định vị trực quan - Visual Localization - đã được đưa ra nhằm đạt được kết quả chất lượng hơn, thông qua dữ liệu trực quan thu được tại vị trí đó.
 
-Hai hướng tiếp cận đã có những cải tiến liên tục trong những năm gần đây chính là hướng nhận dạng địa điểm trực quan - Visual Place Recognition - và hướng ước tính vị trí của máy ảnh - Pose Estimation. Với hướng tiếp cận nhận dạng địa điểm trực quan, mô hình sẽ nhận vào một ảnh truy vấn và chọn ra một hay nhiều ảnh từ tập ảnh được cung cấp, thể hiện cùng một cảnh với ảnh đầu vào. Với hướng tiếp cận ước tính vị trí của máy ảnh, từ cặp ảnh truy vấn và ảnh tham khảo đầu vào, mô hình sẽ tính toán vị trí và hướng quay của máy ảnh trong không gian.  
+    Hai hướng tiếp cận đã có những cải tiến liên tục trong những năm gần đây chính là hướng nhận dạng địa điểm trực quan - Visual Place Recognition - và hướng ước tính vị trí của máy ảnh - Pose Estimation. Với hướng tiếp cận nhận dạng địa điểm trực quan, mô hình sẽ nhận vào một ảnh truy vấn và chọn ra một hay nhiều ảnh từ tập ảnh được cung cấp, thể hiện cùng một cảnh với ảnh đầu vào. Với hướng tiếp cận ước tính vị trí của máy ảnh, từ cặp ảnh truy vấn và ảnh tham khảo đầu vào, mô hình sẽ tính toán vị trí và hướng quay của máy ảnh trong không gian.
 
-Nhận thấy rằng hai hướng tiếp cận của bài toán khi đứng riêng đều đã có kết quả khả quan trong phạm vi của mình, và dữ liệu đầu ra và đầu vào của hai hướng tiếp cận tương thích với nhau, nhóm quyết định sẽ kết hợp hai bài toán này thành một quy trình hoàn chỉnh, nhằm bổ trợ cho những khiếm khuyết của mỗi hướng. Cụ thể hơn:
+    Nhận thấy rằng hai hướng tiếp cận của bài toán khi đứng riêng đều đã có kết quả khả quan trong phạm vi của mình, và dữ liệu đầu ra và đầu vào của hai hướng tiếp cận tương thích với nhau, chúng tôi quyết định sẽ kết hợp hai bài toán này thành một quy trình hoàn chỉnh, nhằm bổ trợ cho những khiếm khuyết của mỗi hướng. Cụ thể hơn:
 
-\begin{itemize}
-    \item Với hướng tiếp cận nhận dạng địa điểm trực quan, nhóm sẽ sử dụng mô hình MixVPR. Đây sẽ là nửa đầu của quy trình, cung cấp khả năng mở rộng lên những không gian rộng lớn như thành phố.
-    \item Với hướng tiếp cận ước tính vị trí máy ảnh, nhóm sẽ sử dụng hướng tiếp cận 2D-2D được đề xuất trong Map-free Relocalization. Đây sẽ là nửa còn lại của quy trình, cung cấp khả năng đưa ra một dự đoán cụ thể cho quy trình.
-\end{itemize}
+    \begin{itemize}
+        \item Với hướng tiếp cận nhận dạng địa điểm trực quan, chúng tôi sẽ sử dụng mô hình MixVPR. Đây sẽ là nửa đầu của quy trình, cung cấp khả năng mở rộng lên những không gian rộng lớn như thành phố.
+        \item Với hướng tiếp cận ước tính vị trí máy ảnh, chúng tôi sẽ sử dụng hướng tiếp cận 2D-2D được đề xuất trong Map-free Relocalization. Đây sẽ là nửa còn lại của quy trình, cung cấp khả năng đưa ra một dự đoán cụ thể cho quy trình.
+    \end{itemize}
 
 \end{abstract}

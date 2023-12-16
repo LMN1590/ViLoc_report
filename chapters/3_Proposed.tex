@@ -1,7 +1,7 @@
 \chapter{MÔ HÌNH ĐỀ XUẤT}
 
 \section{Ý tưởng}
-Sau khi đã tìm hiểu về những hướng tiếp cận được sử dụng để thực hiện tác vụ hồi quy vị trí tương đối, nhóm quyết định sẽ xây dựng một mô hình gồm hai thành phần chính. Hai thành phần này được định nghĩa là tác vụ \textbf{nhận diện địa điểm trực quan} và \textbf{hồi quy vị trí tương đối giữa cặp ảnh}. Cụ thể hơn:
+Sau khi đã tìm hiểu về những hướng tiếp cận được sử dụng để thực hiện tác vụ hồi quy vị trí tương đối, chúng tôi quyết định sẽ xây dựng một mô hình gồm hai thành phần chính. Hai thành phần này được định nghĩa là tác vụ \textbf{nhận diện địa điểm trực quan} và \textbf{hồi quy vị trí tương đối giữa cặp ảnh}. Cụ thể hơn:
 \begin{itemize}
   \item Bộ phận nhận diện địa điểm trực quan sẽ dựa trên mô hình được đề xuất trong bài báo nghiên cứu MixVPR \cite{alibey2023mixvpr}.
   \item Bộ phận hồi quy vị trí tương đối dựa trên cặp ảnh, bao gồm ảnh truy vấn và ảnh tham khảo, sẽ sử dụng mô hình tương quan 2D-2D được đề xuất trong bài báo nghiên cứu Map-free Relocalization \cite{arnold2022mapfree}.
@@ -236,7 +236,7 @@ Qua kết quả thu được, tập dữ liệu Niantic có độ khó cao hơn 
 \section{Mô hình cơ bản}
 \subsection{Tổng quan}
 
-Gọi $I$ là ảnh mà người dùng chụp từ camera và sẽ được dùng làm ảnh truy vấn cho mô hình đề xuất của nhóm. Trước hết, mô hình sẽ nhận $I$ và truyền làm đầu vào cho MixVPR. Từ ảnh đầu vào $I$, sau khi qua các giai đoạn xử lý, MixVPR sẽ trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Với đoạn mã hóa này, mô hình tiến hành so sánh với giá trị mã hóa của các ảnh trong cơ sở dữ liệu và tìm ra ảnh có sự tương đồng cao nhất với ảnh nhận vào $I$ gọi là $I_0$.
+Gọi $I$ là ảnh mà người dùng chụp từ camera và sẽ được dùng làm ảnh truy vấn cho mô hình đề xuất của chúng tôi. Trước hết, mô hình sẽ nhận $I$ và truyền làm đầu vào cho MixVPR. Từ ảnh đầu vào $I$, sau khi qua các giai đoạn xử lý, MixVPR sẽ trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Với đoạn mã hóa này, mô hình tiến hành so sánh với giá trị mã hóa của các ảnh trong cơ sở dữ liệu và tìm ra ảnh có sự tương đồng cao nhất với ảnh nhận vào $I$ gọi là $I_0$.
 
 Bước tiếp theo, mô hình tiếp tục truyền cả ảnh nhận vào $I$ và ảnh được truy xuất $I_0$ cho mô hình tương quan 2D - 2D của Map-free Relocalization \cite{arnold2022mapfree}. Với đầu vào là cặp ảnh $(I, I_0)$, những cặp đặc trưng tương quan giữa hai ảnh sẽ được xác định tương ứng với mỗi hình. Sau đó, ma trận thiết yếu $E$ giữa 2 ảnh sẽ được ước tính. Ma trận thiết yếu sau đó sẽ được phân giải thành ma trận thể hiện góc quay chênh lệch $R$ và một véc-tơ đơn vị độ dịch vị trí $\hat{t}$. Từ các cặp đặc trưng và độ sâu của ảnh, mô hình tiến hành một bước chiếu 3D để tính toán giá trị tỷ lệ $s$ của véc-tơ độ dịch vị trí. Cuối cùng, vị trí thực của camera sẽ được xác định bằng vị trí thực của ảnh tham khảo và độ lệch giữa ảnh tham khảo và ảnh truy vấn $(R,s*\hat{t})$.
 
@@ -432,7 +432,7 @@ $$
 
 Hiệu quả của bộ phận hồi quy vị trí tương đối - RPR sẽ bị ảnh hưởng tiêu cực khi ảnh truy xuất được không biểu diễn được tốt khu vực xung quanh. Vì vậy nên, việc truy xuất được ảnh tham khảo tuy có vị trí gần với ảnh truy vấn, nhưng lại không biểu diễn được một khu vực đủ lớn để có trùng lấp với cảnh vật trong ảnh truy vấn sẽ làm cho bộ phận RPR không hoạt động tốt được. Điều này đặc biệt đúng trong một môi trường có phân bố dữ liệu thưa như những tập dữ liệu thành thị, khi mà khoảng cách giữa ảnh truy vấn và ảnh tham khảo gần nhất vẫn có khoảng cách khá xa.
 
-Nhóm đề xuất một bước tiền xử lý tập dữ liệu tham khảo nhằm loại bỏ những ảnh không biểu diễn được trọn vẹn khu vực xung quanh thông qua những giá trị mã hóa sinh ra bởi bộ phận VPR, ở đây là mô hình MixVPR. Mô hình MixVPR có khả năng khái quát hóa tốt với những tập dữ liệu chưa được huấn luyện qua nhờ vào việc ghi nhận đặc trưng của những vật thể mang tính cố định như tòa nhà, địa danh, \dots
+Chúng tôi đề xuất một bước tiền xử lý tập dữ liệu tham khảo nhằm loại bỏ những ảnh không biểu diễn được trọn vẹn khu vực xung quanh thông qua những giá trị mã hóa sinh ra bởi bộ phận VPR, ở đây là mô hình MixVPR. Mô hình MixVPR có khả năng khái quát hóa tốt với những tập dữ liệu chưa được huấn luyện qua nhờ vào việc ghi nhận đặc trưng của những vật thể mang tính cố định như tòa nhà, địa danh, \dots
 
 \subsection{Cải thiện mô hình cơ bản}
 
