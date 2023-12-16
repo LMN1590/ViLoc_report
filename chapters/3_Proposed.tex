@@ -415,3 +415,28 @@ $$
 Kết quả đầu ra của bộ phận này sẽ là hai tập số $(q^{abs},t^{abs})$ thể hiện vị trí và góc quay của ảnh truy vấn trong không gian 3D.
 
 Sau khi đã có được vị trí của ảnh $I$ khi so với tập $k$ ảnh tham khảo có độ tương đồng cao nhất, mô hình sẽ chọn ra kết quả cuối cùng dựa vào độ đáng tin cậy được xác định ở \textbf{Bộ phận xác định ma trận thiết yếu}. Dự đoán nào có số cặp điểm tương quan thỏa ma trận thiết yếu $M$ được chọn cao nhất sẽ được dùng làm dự đoán cuối cùng của mô hình.
+
+\section{Phương pháp đề xuất}
+\subsection{Cải thiện qua tiêu chí truy vấn ảnh}
+\subsection{Cải thiện tập dữ liệu}
+Để mô hình 2D-2D của Map-free có thể xác định được vị trí và góc quay của một ảnh truy vấn chỉ từ một ảnh tham khảo, ảnh tham khảo cần phải có một góc nhìn khái quát, biểu diễn được tốt về khu vực bên trong ảnh. Trong tập dữ liệu Niantic được cung cấp trong cùng bài nghiên cứu, mỗi ảnh tham khảo trong tập dữ liệu sẽ thỏa điều kiện trên và những ảnh truy vấn tương ứng sẽ chụp khu vực quanh đó. Tuy nhiên, ở một tập dữ liệu định vị trực quan ở khu vực thành thị như Pittsburgh 250k \cite{6618963}, những ảnh tham khảo sẽ không được kiểm soát chặt chẽ để thỏa điều kiện trên.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=.5\linewidth]{pics/Proposal/good_pitts.jpg}
+        \caption{Ảnh biểu diễn tốt khu vực trong ảnh}
+    \end{subfigure}
+    \hspace{2cm}
+    \begin{subfigure}{.4\textwidth}
+        \centering
+        \includegraphics[width=.5\linewidth]{pics/Proposal/bad_pitts.jpg}
+        \caption{Ảnh không biểu diễn tốt}
+    \end{subfigure}
+    \caption{Ảnh từ tập dữ liệu Pittsburgh 250k}
+\end{figure}
+
+Hiệu quả của bộ phận hồi quy vị trí tương đối - RPR sẽ bị ảnh hưởng tiêu cực khi ảnh truy xuất được không biểu diễn được tốt khu vực xung quanh. Vì vậy nên, việc truy xuất được ảnh tham khảo tuy có vị trí gần với ảnh truy vấn, nhưng lại không biểu diễn được một khu vực đủ lớn để có trùng lấp với cảnh vật trong ảnh truy vấn sẽ làm cho bộ phận RPR không hoạt động tốt được. Điều này đặc biệt đúng trong một môi trường có phân bố dữ liệu thưa như những tập dữ liệu thành thị, khi mà khoảng cách giữa ảnh truy vấn và ảnh tham khảo gần nhất vẫn có khoảng cách khá xa.
+
+Nhóm đề xuất một bước tiền xử lý tập dữ liệu tham khảo nhằm loại bỏ những ảnh không biểu diễn được trọn vẹn khu vực xung quanh thông qua những giá trị mã hóa sinh ra bởi bộ phận VPR, ở đây là mô hình MixVPR. Mô hình MixVPR có khả năng khái quát hóa tốt với những tập dữ liệu chưa được huấn luyện qua nhờ vào việc ghi nhận đặc trưng của những vật thể mang tính cố định như tòa nhà, địa danh, \dots
