@@ -13,7 +13,7 @@ MixVPR \cite{alibey2023mixvpr} là một phương pháp tổng hợp đặc trư
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{pics/Proposal/mixvpr.png}
+  \includegraphics[width=\textwidth]{pics/Proposal/mixvpr.png}
   \caption{Tổng quát quá trình hoạt động của MixVPR \cite{alibey2023mixvpr}}
 \end{figure}
 
@@ -81,7 +81,7 @@ Tuy nhiên, mô hình vẫn sẽ gặp thất bại khi độ chênh lệch góc
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{pics/Proposal/fail.png}
+  \includegraphics[width=\textwidth]{pics/Proposal/fail.png}
   \caption{Kết quả của những trường hợp khó khi chạy trên MixVPR và các phương pháp khác \cite{alibey2023mixvpr}}
 \end{figure}
 
@@ -154,7 +154,7 @@ $$
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.8]{pics/Proposal/reprojection.png}
+  \includegraphics[scale=1]{pics/Proposal/reprojection.png}
   \caption[Minh họa cho việc xác định tỷ lệ $s$ bằng độ sâu ảnh]{Hình minh họa cho việc chiếu điểm $p_0$ qua vector góc quay $R$ và vector độ lệch đơn vị $\hat{t}$ cùng với tỷ lệ $s$ để tối thiểu khoảng cách \cite{arnold2022mapfree}}
 \end{figure}
 
@@ -222,12 +222,12 @@ Khi xét trên tập dữ liệu 7Scenes với tất cả các ảnh tham khảo
 Với việc so sánh độ chính xác ở hai kịch bản, ngưỡng chấp nhận về độ chính xác sẽ là $VCRE<10\%$ của đường chéo ảnh(80px). Khi ngưỡng tin cậy được hạ thấp, điều này làm cho tỷ lệ số dự đoán đáng tin cậy tăng lên. Điều này làm độ chính xác giảm dần, do chứa những trường hợp có độ tin cậy không đủ cao. Trong trường hợp này, những mô hình 2D-2D, đặc biệt là mô hình sử dụng SuperGlue, có kết quả tốt hơn so với những mô hình còn lại. Điều này thể hiện rõ nhất trong khoảng $0.5~1.0$. Ngoài ra, mô hình 2D-2D có thể tính ra vị trí và góc quay của hơn 50\% ảnh với VCRE < 40px.
 
 Mô hình DSAC* vẫn có kết quả tốt nhất trong các mô hình. Tuy nhiên, phương pháp này lại quá phụ thuộc vào tập dữ liệu. Trong khi đó, những mô hình khác được huấn luyện trên tập ScanNet vẫn có kết quả tốt trên tập 7Scenes. Phương pháp sử dụng phép đạc tam giác cũng có kết quả cạnh tranh, tuy nhiên lại không thể hoạt động chỉ với một ảnh tham khảo. Những phương pháp ghép cặp đặc trưng + tính toán độ sâu có khả năng khái quát hóa tốt hơn những phương pháp RPR, có thể thấy ở hiệu quả tương đối thấp hơn của những phương pháp hồi quy vị trí tương đối.
-
+\newpage
 \textbf{Tập dữ liệu Niantic \cite{arnold2022mapfree}}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.4]{pics/Proposal/all_niantic.png}
+  \includegraphics[scale=0.5]{pics/Proposal/all_niantic.png}
   \caption{Hiệu quả của các mô hình trên tập dữ liệu Niantic, xác định theo độ chính xác và số ảnh có sai số phản chiếu dưới ngưỡng}
 \end{figure}
 
@@ -275,7 +275,7 @@ Có được vị trí của ảnh $I$ khi so với tập $k$ ảnh tham khảo 
 \subsection{Kiến trúc của mô hình đề xuất}
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.4]{pics/Proposal/models.png}
+  \includegraphics[width=\textwidth]{pics/Proposal/models.png}
   \caption{Minh họa mô hình đề xuất}
 \end{figure}
 
@@ -303,7 +303,7 @@ $$
 $$
   Z = FM_L(FM_{L-1}(\dots FM_1(F)))
 $$
-
+\newpage
 Lớp Feature Mixer sẽ giúp tích hợp thông tin toàn cục của ảnh, phân bố trên toàn bản đồ đặc trưng, vào các giá trị trên bản đồ đặc trưng. Vì vậy, định dạng của đầu vào và đầu ra của các lớp kết nối đầy đủ $W_1$ và $W_2$ sẽ giống nhau. Ngoài ra, trọng số của các lớp này sẽ được chia sẻ giữa các bản đồ đặc trưng nhằm tối ưu quá trình huấn luyện.
 
 \begin{figure}[H]
@@ -318,16 +318,16 @@ Sau khi chạy qua $L$ lớp Feature Mixer và ghép lại với nhau, kết qu�
 
 $$
   \begin{aligned}
-    Z' & = W_d(Transpose(Z))
+    Z' & = W_d(Transpose(Z)) \\
     O  & = W_r(Transpose(Z'))
   \end{aligned}
 $$
-
+\newpage
 Cuối cùng, kết quả sẽ được làm phẳng thành 1D và lấy chuẩn hóa theo $L_2$ để tạo thành kết quả cuối cùng là giá trị mã hóa biểu diễn cho ảnh. Vector kết quả sẽ có dạng $d*r$.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.6]{pics/Proposal/proj-agg.png}
+  \includegraphics[scale=0.8]{pics/Proposal/proj-agg.png}
   \caption{Quá trình tổng hợp của mô hình \cite{alibey2023mixvpr}}
 \end{figure}
 
@@ -410,6 +410,22 @@ $$
 
 \section{Đề xuất phát triển}
 
+\subsection{Cải thiện mô hình cơ bản}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{pics/Chapter3/ImprovedModel.drawio.png}
+  \caption[Mô hình phát triển đề xuất cho quá trình huấn luyện]{Mô hình cơ bản với đề xuất cho các mô đun phát triển trong quá trình huấn luyện. Các mô đun có nền màu trắng là mô đun thừa hưởng từ mô hình cơ bản. Các mô đun có nền màu xám là các mô đun được đề xuất phát triển.}
+  \label{fig:improved-model}
+\end{figure}
+
+So sánh với những mô hình định vị trực quan đầu-cuối (End-to-end) \cite{shavit2021learning, shavit2023coarse, wang2023hypliloc}, việc tách bài toán định vị trực quan thành hai bài toán tách biệt đặt mô hình cơ bản vào vị trí phụ thuộc trước độ chính xác và hiệu năng hoạt động của nhiều mô hình khác dẫn đến thiệt hại tiềm tàng về thời gian và độ chính xác. Đồng thời, sự tách biệt giữa bước truy xuất và bước hồi quy vị trí tương đối ngăn cản mô hình truy xuất có thể học được những đặc trưng tốt nhất để phục vụ cho bước hồi quy vị trí tương đối. Như đã được đề xuất trong bài nghiên cứu \cite{pion2020benchmarking}, mô hình truy xuất và định vị trực quan với cấu trúc tương tự khi được huấn luyện để nhận thức được không chỉ các yếu tố hỗ trợ quá trình truy xuất, mà cả các yếu tố hỗ trợ quá trình khai thác tương quan và hồi quy vị trí có tiềm năng phát triển rất lớn. Vì vậy, chúng tôi đề xuất một phương hướng phát triển phù hợp cho mô hình định vị trực quan, có khả năng học được những đặc trưng tốt nhất cho cả hai bước truy xuất và hồi quy vị trí tương đối bằng cách thay đổi phương pháp huấn luyện, tận dụng một lớp tổng hợp đặc trưng mới để kết hợp đặc trưng tương quan giữa nhiều cặp ảnh vào đặc trưng học được từ mô hình MLP-Mixer và sử dụng hàm mất mát mới, lấy cảm hứng từ hàm Multi-Similarity Loss để đánh giá độ tương đồng giữa các cặp ảnh và huấn luyện mô hình học đầu-cuối (Xem hình \ref{fig:improved-model}), \textbf{Mô hình nhận diện địa điểm trực quan tự nhận thức vị trí tương đối cho bài toán định vị hóa trực quan (Relative pose-aware visual place recognition for visual localization)}. Trong đó, chúng tôi đề xuất sẽ phát triển các mô đun sau:
+\newpage
+\begin{enumerate}
+  \item \textbf{Tổng hợp đặc trưng tương quan} kết hợp các đặc trưng có được từ lớp MLP-Mixer với đặc trưng tương quan truy xuất được từ các cặp ảnh với mục đích chọn ra các điểm ảnh có độ bền cao trước những yếu tố môi trường và yếu tố gây nhiễu phục vụ tác vụ khai phá ma trận thiết yếu và tìm vị trí tuyệt đối. Chúng tôi tin rằng đây là hướng phát triển có tiềm năng cao sẽ tăng hiệu quả cho lớp trích xuất đặc trưng và giá trị cho các đặc trưng đã được trích xuất. Giả định mô hình có thể học được đặc trưng đủ bền, mô hình trích xuất tương quan và xây dựng ma trận thiết yếu sẽ được đơn giản hóa đáng kể, cho phép việc xây dựng một mô hình định vị trực quan có kích thước nhỏ và hiệu quả hơn.
+  \item \textbf{Hàm mất mát tổng hợp} thường được đánh giá là yếu tố có tác động lớn hơn cho sự hiệu quả của một mô hình nhận diện địa điểm trực quan. Vì mô hình phát triển sử dụng lớp tổng hợp đặc trưng tương quan có sự khác biệt lớn so với các mô hình nhận diện địa điểm trong quá khứ, chúng tôi nhận thấy sự cần thiết cho việc biển đổi hàm mất mát Multi-Similarity Loss \cite{wang2019multi} để nắm bắt và huấn luyện được những đặc trưng tốt nhất cho cả hai bước truy xuất và hồi quy vị trí tương đối.
+\end{enumerate}
+
 \subsection{Cải thiện tập dữ liệu}
 
 Để mô hình 2D-2D của Map-free có thể xác định được vị trí và góc quay của một ảnh truy vấn chỉ từ một ảnh tham khảo, ảnh tham khảo cần phải có một góc nhìn khái quát, biểu diễn được tốt về khu vực bên trong ảnh. Trong tập dữ liệu Niantic được cung cấp trong cùng bài nghiên cứu, mỗi ảnh tham khảo trong tập dữ liệu sẽ thỏa điều kiện trên và những ảnh truy vấn tương ứng sẽ chụp khu vực quanh đó. Tuy nhiên, ở một tập dữ liệu định vị trực quan ở khu vực thành thị như Pittsburgh 250k \cite{6618963}, những ảnh tham khảo sẽ không được kiểm soát chặt chẽ để thỏa điều kiện trên.
@@ -418,13 +434,13 @@ $$
   \centering
   \begin{subfigure}{.4\textwidth}
     \centering
-    \includegraphics[width=.5\linewidth]{pics/Proposal/good_pitts.jpg}
+    \includegraphics[width=.9\linewidth]{pics/Proposal/good_pitts.jpg}
     \caption{Ảnh biểu diễn tốt khu vực trong ảnh}
   \end{subfigure}
   \hspace{2cm}
   \begin{subfigure}{.4\textwidth}
     \centering
-    \includegraphics[width=.5\linewidth]{pics/Proposal/bad_pitts.jpg}
+    \includegraphics[width=.9\linewidth]{pics/Proposal/bad_pitts.jpg}
     \caption{Ảnh không biểu diễn tốt}
   \end{subfigure}
   \caption{Ảnh từ tập dữ liệu Pittsburgh 250k}
@@ -433,20 +449,4 @@ $$
 Hiệu quả của bộ phận hồi quy vị trí tương đối - RPR sẽ bị ảnh hưởng tiêu cực khi ảnh truy xuất được không biểu diễn được tốt khu vực xung quanh. Vì vậy nên, việc truy xuất được ảnh tham khảo tuy có vị trí gần với ảnh truy vấn, nhưng lại không biểu diễn được một khu vực đủ lớn để có trùng lấp với cảnh vật trong ảnh truy vấn sẽ làm cho bộ phận RPR không hoạt động tốt được. Điều này đặc biệt đúng trong một môi trường có phân bố dữ liệu thưa như những tập dữ liệu thành thị, khi mà khoảng cách giữa ảnh truy vấn và ảnh tham khảo gần nhất vẫn có khoảng cách khá xa.
 
 Chúng tôi đề xuất một bước tiền xử lý tập dữ liệu tham khảo nhằm loại bỏ những ảnh không biểu diễn được trọn vẹn khu vực xung quanh thông qua những giá trị mã hóa sinh ra bởi bộ phận VPR, ở đây là mô hình MixVPR. Mô hình MixVPR có khả năng khái quát hóa tốt với những tập dữ liệu chưa được huấn luyện qua nhờ vào việc ghi nhận đặc trưng của những vật thể mang tính cố định như tòa nhà, địa danh, \dots
-
-\subsection{Cải thiện mô hình cơ bản}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.8\textwidth]{pics/Chapter3/ImprovedModel.drawio.png}
-  \caption[Mô hình phát triển đề xuất cho quá trình huấn luyện]{Mô hình cơ bản với đề xuất cho các mô đun phát triển trong quá trình huấn luyện. Các mô đun có nền màu trắng là mô đun thừa hưởng từ mô hình cơ bản. Các mô đun có nền màu xám là các mô đun được đề xuất phát triển.}
-  \label{fig:improved-model}
-\end{figure}
-
-So sánh với những mô hình định vị trực quan đầu-cuối (End-to-end) \cite{shavit2021learning, shavit2023coarse, wang2023hypliloc}, việc tách bài toán định vị trực quan thành hai bài toán tách biệt đặt mô hình cơ bản vào vị trí phụ thuộc trước độ chính xác và hiệu năng hoạt động của nhiều mô hình khác dẫn đến thiệt hại tiềm tàng về thời gian và độ chính xác. Đồng thời, sự tách biệt giữa bước truy xuất và bước hồi quy vị trí tương đối ngăn cản mô hình truy xuất có thể học được những đặc trưng tốt nhất để phục vụ cho bước hồi quy vị trí tương đối. Nhận thấy một cứu nghiên cứu đánh giá tiềm năng phát triển của các mô hình truy xuất và định vị trực quan nói chung với cấu trúc tương tự khi các đặc trưng được huấn luyện nhận thức được không chỉ các yếu tố hỗ trợ quá trình truy xuất, mà cả quá trình khai thác tương quan và hồi quy vị trí \cite{pion2020benchmarking}. Vì vậy, chúng tôi đề xuất một phương hướng phát triển phù hợp cho mô hình định vị trực quan, có khả năng học được những đặc trưng tốt nhất cho cả hai bước truy xuất và hồi quy vị trí tương đối bằng cách thay đổi phương pháp huấn luyện, tận dụng một lớp tổng hợp đặc trưng mới để kết hợp đặc trưng tương quan giữa nhiều cặp ảnh vào đặc trưng học được từ mô hình MLP-Mixer và sử dụng hàm mất mát mới, lấy cảm hứng từ hàm Multi-Similarity Loss để đánh giá độ tương đồng giữa các cặp ảnh và huấn luyện mô hình học đầu-cuối (Xem hình \ref{fig:improved-model}), \textbf{Mô hình nhận diện địa điểm trực quan tự nhận thức vị trí tương đối cho bài toán định vị hóa trực quan (Relative pose-aware visual place recognition for visual localization)}. Trong đó, chúng tôi đề xuất sẽ phát triển các mô đun sau:
-
-\begin{enumerate}
-  \item \textbf{Tổng hợp đặc trưng tương quan} kết hợp các đặc trưng có được từ lớp MLP-Mixer với đặc trưng tương quan truy xuất được từ các cặp ảnh với mục đích chọn ra các điểm ảnh có độ bền cao trước những yếu tố môi trường và yếu tố gây nhiễu phục vụ tác vụ khai phá ma trận thiết yếu và tìm vị trí tuyệt đối. Chúng tôi tin rằng đây là hướng phát triển có tiềm năng cao sẽ tăng hiệu quả cho lớp trích xuất đặc trưng và giá trị cho các đặc trưng đã được trích xuất. Giả định mô hình có thể học được đặc trưng đủ bền, mô hình trích xuất tương quan và xây dựng ma trận thiết yếu sẽ được đơn giản hóa đáng kể, cho phép việc xây dựng một mô hình định vị trực quan có kích thước nhỏ và hiệu quả hơn.
-  \item \textbf{Hàm mất mát tổng hợp} thường được đánh giá là yếu tố có tác động lớn hơn cho sự hiệu quả của một mô hình nhận diện địa điểm trực quan. Vì mô hình phát triển sử dụng lớp tổng hợp đặc trưng tương quan có sự khác biệt lớn so với các mô hình nhận diện địa điểm trong quá khứ, chúng tôi nhận thấy sự cần thiết cho việc biển đổi hàm mất mát Multi-Similarity Loss \cite{wang2019multi} để nắm bắt và huấn luyện được những đặc trưng tốt nhất cho cả hai bước truy xuất và hồi quy vị trí tương đối.
-\end{enumerate}
 

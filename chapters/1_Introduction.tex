@@ -17,7 +17,7 @@ Trong những năm gần đây, lĩnh vực này đã có những bước phát 
     \item Tìm kiếm một cách biểu diễn tuy đơn giản, nhưng vẫn đảm bảo được tính hiệu quả trong việc truy xuất thông tin nhằm tiết kiệm tài nguyên để xây dựng, duy trì, mở rộng và sử dụng.
     \item Cải thiện độ chính xác của vị trí được truy xuất mà vẫn đảm bảo được tính hiệu quả.
 \end{itemize}
-
+\newpage
 \subsection{Những hướng đi đã được đề xuất}
 
 Với mục tiêu là xác định được vị trí mà ảnh được chụp, nhiều phương pháp khác nhau đã được đề xuất để giải quyết bài toán định vị trực quan. Một nhóm phương pháp truyền thống mà cho đến hiện tại vẫn cho ra kết quả cạnh tranh là phương pháp dựa trên cấu trúc của cảnh - Structure-based Method. Phương pháp này sẽ dựa trên việc tái tạo lại cấu trúc của môi trường đang xét bằng một tập các điểm trong không gian 3D, tạo thành một 3D-point cloud để biểu diễn khu vực đang xét. Từ đó, tọa độ chính xác của vị trí chụp ảnh có thể được xác định. Bước xây dựng mô hình 3D có thể được rút gọn lại đáng kể khi mỗi ảnh được bổ sung thêm độ sâu. Ngoài ra, để tối ưu hóa quá trình tìm kiếm tương quan 2D-3D, phương pháp nhận diện địa điểm trực quan có thể được sử dụng để giới hạn lại không gian tìm kiếm \cite{sarlin2019coarse}. Ngoài ra, ở bước xác định tương quan 2D-3D, thay vì sử dụng những phương pháp được định nghĩa sẵn bởi con người, mạng học sâu có thể được ứng dụng để trực tiếp xác định vị trí của các điểm ảnh trong không gian 3D \cite{brachmann2021visual}.
@@ -38,7 +38,7 @@ Nhận thấy các hướng tiếp cận học sâu đầu-cuối (end-to-end), 
 \end{itemize}
 
 Trong báo cáo này, chúng tôi hướng tới hoàn thành hai nhiệm vụ đầu tiên trong số những nhiệm vụ đã được trình bày. Các nhiệm vụ còn lại sẽ tiếp tục được thực hiện vào giai đoạn tiếp theo.
-
+\newpage
 \subsection{Khảo sát và phân tích những giải pháp đã có}
 
 Chúng tôi đã tiến hành khảo sát những hướng tiếp cận đã được đề xuất nhằm giải quyết bài toán định vị trực quan trong thời gian gần đây. Thông qua việc khảo sát, chúng tôi xác định những khía cạnh có thể được cải thiện để đóng góp cho quá trình nghiên cứu của bài toán này.
@@ -78,7 +78,7 @@ Dựa trên mô hình đã được đề xuất, chúng tôi sẽ tiến hành 
           \end{itemize}
     \item Thực nghiệm trên những biến thể về những bộ phận của mô hình
 \end{itemize}
-
+\newpage
 \section{Phạm vi đề tài}
 Đề tài được thực hiện và thí nghiệm trên các tập dữ liệu ngoài trời với ảnh đầu vào được chụp từ máy ảnh nhằm thu được dữ liệu tham số nội tại với đầu ra là vị trí và hướng quay của người chụp. Cơ sở dữ liệu được sử dụng sẽ là những ảnh 2D, diễn tả cảnh vật của khu vực đang xét. Kết quả sẽ là vị trí đã chụp ảnh của người dùng đưa vào. Độ chính xác của kết quả đầu ra được xác định trên đơn vị (cm, độ).
 \begin{itemize}
@@ -108,6 +108,7 @@ Báo cáo này bao gồm năm chương. Mỗi chương sẽ bao gồm những n�
     \item \textbf{Chương 5: Kế hoạch tương lai} \\
           Trình bày tổng quan về quá trình thực hiện và kết quả của giai đoạn này và đưa ra kế hoạch cho giai đoạn tiếp theo.
 \end{itemize}
+\newpage
 \section{Kết luận}
 Việc xác định chính xác vị trí của một vật gì đó có phạm vi ứng dụng vô cùng rộng rãi, là công nghệ chủ chốt trong rất nhiều lĩnh vực khác nhau. Tuy nhiên, việc chỉ dựa vào hệ thống không đảm bảo được sự ổn định như GPS sẽ hạn chế khả năng phát triển trong tương lai của những lĩnh vực ấy. Vậy nên bài toán định vị hóa trực quan đã được đưa ra để có một hệ thống đưa ra định vị chính xác và ổn định, dựa vào thông tin hình ảnh môi trường xung quanh.
 

@@ -66,7 +66,7 @@ Một trong những tác vụ quan trọng nhất trong bài toán định vị 
 Để không phải lưu trữ một bản đồ 3D cho toàn khu vực đang xét, một phương pháp khác đã được đề xuất là xây dựng bản đồ điểm 3D cục bộ. Thay vì sinh ra bản đồ 3D cho toàn bộ khu vực đang xét ở bước tiền xử lý, phương pháp này sẽ sử dụng những ảnh truy xuất được để sinh ra bản đồ cục bộ \cite{sattler2017large}. Phương pháp này có thể tận dụng được những điểm mạnh của việc sử dụng cách biểu diễn 3D mà không cần duy trì bản đồ điểm 3D của toàn bộ khu vực. Tuy nhiên, cách tiếp cận này vẫn có một số điểm yếu như việc thời gian chạy trở nên đáng kể và số lượng ảnh truy xuất được có thể chưa đủ để sinh ra một bản đồ 3D phù hợp.
 
 Một cách tiếp cận khác với mục tiêu loại bỏ sự cần thiết của bản đồ 3D, sử dụng mạng học sâu để xác định được vị trí của một điểm ảnh trong môi trường 3D, gọi là hồi quy điểm trong cảnh - Scene Point Regression \cite{brachmann2021visual}. Tuy nhiên, những mô hình thuộc phương pháp này không có tính khái quát hóa mà để có thể chạy trên một khu vực nhất định thì mô hình cần dữ liệu mẫu thuộc khu vực đó để huấn luyện.
-
+\newpage
 \subsubsection*{Phân tích ưu và nhược điểm của phương pháp}
 Nhờ vào việc sử dụng cách biểu diễn trong không gian 3D, lớp phương pháp này đã thành công học được tính hình học của môi trường, nhờ vậy nên những kết quả của lớp phương pháp này thường sẽ đạt được kết quả định vị chính xác. Ngoài ra, lớp phương pháp này sử dụng điểm 3D trong không gian làm mốc để định vị. Nhờ vậy nên mô hình vẫn sẽ cho ra được kết quả tốt khi không gian mẫu của vị trí chụp của ảnh bị giới hạn.
 
@@ -81,6 +81,8 @@ Nhờ vào việc sử dụng cách biểu diễn trong không gian 3D, lớp ph
 \subsection{Những phương pháp hồi quy vị trí}
 \subsubsection*{Ý tưởng}
 Với những thành công gần đây trong các tác vụ của ngành khoa học máy tính như phân loại ảnh, phân vùng ảnh theo ngữ nghĩa, truy xuất ảnh, những phương pháp sử dụng mạng học sâu đã có thể phần nào trích xuất được những thông tin hình học từ ảnh. Sử dụng những thông tin này, mô hình học sâu có thể xây dựng một hàm ánh xạ đến những cách biểu diễn mong muốn. Vì tính linh hoạt của hướng tiếp cận học sâu nên chúng có thể được ứng dụng để thay thế một hay nhiều tác vụ bên trong quá trình giải bài toàn định vị trực quan.
+
+\newpage
 \subsubsection*{Những bước thực hiện}
 
 Để những phương pháp học sâu có thể hoạt động một cách hiệu quả, mô hình cần được cung cấp một tập dữ liệu đã có kết quả để huấn luyện trên đó. Sau đó, mô hình học sâu có thể biến đổi dữ liệu đầu vào thành kết quả một cách trực tiếp, không cần sự can thiệp của con người. Cụ thể hơn, một phương pháp hồi quy vị trí sẽ thường có những bước sau:
@@ -126,7 +128,7 @@ Với phương pháp hồi quy vị trí tuyệt đối thông qua một ảnh (
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.7]{pics/Chapter2/kientruc_APR_1.png}
+    \includegraphics[width=\textwidth]{pics/Chapter2/kientruc_APR_1.png}
     \caption{Kiến trúc mô hình hồi quy vị trí tuyệt đối đơn ảnh \cite{kendall2016posenet}}
 \end{figure}
 
@@ -184,7 +186,7 @@ Không dùng đến cả hàm mất mát cố định hoặc những hàm mất 
 Một nhóm nghiên cứu \cite{shavit2021learning, shavit2023coarse} đề xuất áp dụng mô hình Transformer vào tác vụ hồi quy vị trí tuyệt đối. Mô hình nhận vào một ảnh đơn và sử dụng một CNN làm bộ trích xuất đặc trưng, sau đó các bản đồ đặc trưng được truyền song song qua hai nhánh: mỗi nhánh là một mô hình Transformer đảm nhiệm một tác vụ riêng lần lượt là hồi quy vị trí và hồi quy hướng quay. Mô hình sử dụng hàm mất mát tương tự với PoseNet.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/trans.png}
+    \includegraphics[width=\textwidth]{pics/Chapter2/trans.png}
     \caption{Minh họa kiến trúc mô hình Multi-Scene Transformer \cite{shavit2021learning, shavit2023coarse}}
 \end{figure}
 
@@ -216,16 +218,17 @@ Năm 2019, tác giả Xue và những cộng sự \cite{xue2019local} cũng có 
 \end{center}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{pics/Chapter2/lsg.png}
+    \includegraphics[width=0.8\textwidth]{pics/Chapter2/lsg.png}
     \caption{Minh họa kiến trúc mô hình LSG \cite{xue2019local}}
 \end{figure}
+\newpage
 VlocNet \cite{valada2018deep} cũng học đồng thời đo lường cảm biến trực quan như một tác vụ phụ để hồi quy vị trí toàn cục với hai mạng phụ. Mất mát nhất quán hình học được điều chỉnh để giảm thiểu tối đa lỗi vị trí, được định nghĩa như sau:
 \begin{center}
     $l(I_{total}) = (I_{i_x} + I_{ij_x})exp(-\hat{s}_x) + (I_{i_q} + I^{q}_{ij})exp(-\hat{s}_q)+ \hat{s}_q$
 \end{center}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/vlocnet.png}
+    \includegraphics[width=0.9\textwidth]{pics/Chapter2/vlocnet.png}
     \caption{Minh họa kiến trúc mô hình VlocNet \cite{valada2018deep}}
 \end{figure}
 VlocNet++ \cite{Radwan_2018} giới thiệu kiến thức ngữ nghĩa vào hồi quy vị trí, kết hợp thông tin hình học-thời gian với các đặc trưng ngữ nghĩa cùng một lúc. Hàm mất mát của VlocNet++ kết hợp hồi quy vị trí toàn cục, mất mát đo lường cảm biến trực quan và mất mát Entropy chéo cho mất mát phân đoạn ngữ nghĩa cùng một lúc, với ba yếu tố $\hat{s}_{log}$, $\hat{s}_{vo}$ và $\hat{s}_{seg}$ để cân bằng ba thành phần này:
@@ -234,7 +237,7 @@ VlocNet++ \cite{Radwan_2018} giới thiệu kiến thức ngữ nghĩa vào hồ
 \end{center}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/vlocnetplus.png}
+    \includegraphics[width=\textwidth]{pics/Chapter2/vlocnetplus.png}
     \caption{Minh họa kiến trúc mô hình VlocNet++ \cite{Radwan_2018}}
 \end{figure}
 Một bản mở rộng của AtLoc, AtLocPlus \cite{wang2019atloc} cũng kết hợp các ràng buộc thời gian để học cùng lúc mất mát vị trí tuyệt đối và mất mát vị trí tương đối, dẫn đến hiệu suất tốt hơn AtLoc trong việc sử dụng một đầu vào ảnh đơn. AtLocPlus sử dụng hàm mất mát giống với MapNet.
@@ -245,7 +248,7 @@ DGRNet \cite{lin2019deep} đề xuất một kiến trúc với một mạng con
 \end{center}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/dgrnet.png}
+    \includegraphics[width=\textwidth]{pics/Chapter2/dgrnet.png}
     \caption{Minh họa kiến trúc mô hình DGRNet \cite{lin2019deep}}
 \end{figure}
 \subsubsection*{Hồi quy vị trí tuyệt đối qua đoạn phim - Absolute pose regression through video}
@@ -259,9 +262,10 @@ VidLoc \cite{clark2017vidloc} đề xuất một mô hình hồi quy vị trí m
 Với $[x_t, q_t]$ và $[\hat{x}_t, \hat{q}_t]$ đại diện cho sự thật nền tảng và giá trị dự đoán cho độ dời vị trí và hướng quay.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/vidloc.png}
+    \includegraphics[width=0.9\textwidth]{pics/Chapter2/vidloc.png}
     \caption{Minh họa kiến trúc mô hình VidLoc \cite{clark2017vidloc}}
 \end{figure}
+\newpage
 MapNet+ và MapNet+PGO \cite{brahmbhatt2018geometryaware} mang cùng một kiến trúc mạng với MapNet trích xuất đặc trưng qua mạng ResNet34 và dùng một lớp tổng hợp trung bình toàn cục. Không chỉ dùng mất mát vị trí tuyệt đối, mất mát đo lường cảm biến trực quan cũng được tính toán để cải thiện hiệu suất dự đoán vị trí của MapNet. Phương pháp này cũng đồng thời tích hợp dữ liệu GNSS và IMU để giúp cải thiện hồi quy vị trí. Điều này giúp kết hợp dữ liệu đã được gắn nhãn và dữ liệu chưa gắn nhãn từ VO hay cảm biến để phục vụ cho việc học tự giám sát và đã thể hiện hiệu suất tốt dưới những điều kiện khó khăn, thử thách như thay đổi môi trường ngoài, thiếu sáng,... .
 \begin{center}
     $l = l_{labelled data} + l_{unlabelled data}$
@@ -280,14 +284,14 @@ Cho rằng các phương pháp hồi quy vị trí tuyệt đối thông qua ả
 \subsection{Hồi quy vị trí tương đối - Relative Pose Regression}
 
 Mô hình hồi quy vị trí tuyệt đối học cách ánh xạ các pixel của ảnh sang vị trí của máy ảnh, thường được quyết định bởi hệ trục tọa độ của chính cảnh vật cụ thể mà máy ảnh đang chụp. Khác với hồi quy vị trí tuyệt đối, các phương pháp mang hướng tiếp cận hồi quy vị trí tương đối (Relative Pose Regression) chỉ tính toán vị trí tương đối của ảnh và thường được huấn luyện trên những tập dữ liệu đa cảnh để tăng cường khả năng mở rộng mô hình đầu cuối.
-
+\newpage
 \subsubsection*{Hồi quy vị trí tương đối thông qua truy xuất rõ ràng - Relative camera pose regression through explicit retrieval}
 Quy trình hồi quy vị trí tương đối của máy ảnh có thể được hiểu như một quy trình bao gồm truy xuất ảnh có độ tương đồng cao nhất trong kho dữ liệu với ảnh nhận đầu vào và sau đó dự đoán vị trí tương đối giữa chúng để lấy được vị trí tuyệt đối của ảnh nhận đầu vào. Cho một ảnh $I_a^c$ được chụp từ máy ảnh $c$, thông qua các phương pháp truy xuất ảnh từ kho dữ liệu, chúng ta có được ảnh có độ tương đồng cao nhất $I_b^c$. Nếu có được vị trí nền tảng $p_b$ của ảnh $I_b^c$ và vị trí tương đối giữa hai ảnh là $p_{a->b}$, vị trí tuyệt đối $p_a$ của ảnh đầu vào $I_a^c$ có thể được xác định bằng các phép biến đổi toán học.
 
 NNnet \cite{laskar2017camera} là công trình đầu tiên đề xuất một phương pháp hồi quy vị trí tương đối dựa trên truy xuất ảnh. Đầu vào của phương pháp này là một ảnh và một kho dữ liệu ảnh có bao gồm vị trí nền tảng. Một tập các cặp ảnh được tận dụng để hồi quy vị trí tương đối thông qua một mạng Siamese với hai nhánh ResNet34 đã được hiệu chỉnh và một hàm mất mát cố định. Ảnh có độ tương đồng gần nhất với ảnh nhận đầu vào có thể được tính toán xác định thông qua bộ trích xuất đặc trưng hình thành bởi nhánh mạng CNN, sau đó vị trí tương đối và vị trí nền tảng của ảnh trích xuất sẽ kết hợp để tính toán xác định vị trí tuyệt đối của ảnh đầu vào.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/nnet.png}
+    \includegraphics[width=0.9\textwidth]{pics/Chapter2/nnet.png}
     \caption{Minh họa kiến trúc mô hình NNet \cite{laskar2017camera}}
 \end{figure}
 RelocNet \cite{10.1007/978-3-030-01264-9_46} cải tiến NNet với việc học liên tục thước đo với mục đích học các đặc trưng ảnh toàn cục với một góc nhìn chóp cụt của máy ảnh để cải thiện kết quả, mất mát vị trí tương đối cũng được áp dụng. Mất mát vị trí tương đối học sự khác biệt vị trí giữa hai ma trận vị trí bằng cách sử dụng một biểu diễn ma trận cho hướng quay và độ dời vị trí. Hàm mất mát huấn luyện được định nghĩa như sau:
@@ -305,7 +309,7 @@ RelocNet \cite{10.1007/978-3-030-01264-9_46} cải tiến NNet với việc họ
 \end{center}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/camnet.png}
+    \includegraphics[width=0.9\textwidth]{pics/Chapter2/camnet.png}
     \caption{Minh họa kiến trúc mô hình CamNet \cite{9008579}}
 \end{figure}
 Qunjie Zhou và những cộng sự \cite{zhou2020learn} sau khi phân tích các phương pháp hồi quy vị trí dựa trên việc truy xuất ảnh đã đề xuất một kiến trúc mới sử dụng ma trận thiết yếu và RANSAC để tính toán vị trí tuyệt đối. Một mạng Siamese ResNet34 với một lớp tìm sự tương ứng cố định (EssNet) và một lớp tìm sự tương ứng đồng thuận lân cận (NC-EssNet) được học để tạo ra một bản đồ điểm tương ứng phục vụ cho mục đích hồi quy về sau của ma trận thiết yếu. Hàm mất mát cải tiến khoảng cách Euclidean giữa ma trận thiết yếu với hai véc-tơ 9 chiều.
@@ -314,7 +318,7 @@ Qunjie Zhou và những cộng sự \cite{zhou2020learn} sau khi phân tích cá
 \end{center}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/essnet.png}
+    \includegraphics[width=\textwidth]{pics/Chapter2/essnet.png}
     \caption{Minh họa kiến trúc mô hình EssNet \cite{zhou2020learn}}
 \end{figure}
 
@@ -324,7 +328,7 @@ Qunjie Zhou và những cộng sự \cite{zhou2020learn} sau khi phân tích cá
 Relative NN \cite{melekhov2017relative} đề xuất một phương pháp đầu-cuối để hồi quy vị trí tương đối giữa hai máy ảnh bằng hai ảnh đầu vào. Kiến trúc mô hình là một mạng Nơ-ron hỗn hợp Siamese hai nhánh sử dụng mạng AlexNet đã được huấn luyện từ trước được dùng cho việc hồi quy với hàm mất mát Euclidean cố định.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/relativenn.png}
+    \includegraphics[width=0.9\textwidth]{pics/Chapter2/relativenn.png}
     \caption{Minh họa kiến trúc mô hình Relative Neural Network \cite{melekhov2017relative}}
 \end{figure}
 AnchorNet \cite{saha2018improved} tìm cách khắc phục vấn đề định vị bằng cách định nghĩa các địa danh thành các điểm mốc để học các điểm mốc tương đối của ảnh đầu vào cũng như độ lệch của chúng. Mô hình đa nhiệm bao gồm việc phân loại hình ảnh truy vấn đầu vào theo các điểm mốc cụ thể và tìm sự chênh lệch so với điểm mốc đã phân loại, điều này dẫn đến việc hình thành hàm mất mát. $\hat{C}$, $X$, và $Y$ đại diện cho kết quả phân loại và sự chênh lệch với sự thật nền tảng.
@@ -333,7 +337,7 @@ AnchorNet \cite{saha2018improved} tìm cách khắc phục vấn đề định v
 \end{center}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/anchornet.png}
+    \includegraphics[width=\textwidth]{pics/Chapter2/anchornet.png}
     \caption{Minh họa kiến trúc mô hình AnchorNet \cite{saha2018improved}}
 \end{figure}
 
@@ -341,7 +345,7 @@ AnchorNet \cite{saha2018improved} tìm cách khắc phục vấn đề định v
 Nhận thấy các phương pháp tái định vị trực quan (Visual Relocalization) hiện tại đều cần một kho dữ liệu ảnh khổng lồ nhằm mục đích xây dựng một mô hình 3 chiều cho một khung cảnh nhất định, một nhóm nghiên cứu \cite{arnold2022mapfree} đề xuất phương pháp mang tên "Tái định vị không cần bản đồ (Map-free Relocalization)" với việc chỉ sử dụng duy nhất một ảnh làm đầu vào mà không cần phải xây dựng mô hình 3 chiều cho cảnh. \cite{arnold2022mapfree} đã đề xuất hai phương pháp khác nhau để có thể xác định vị trí, góc quay chính xác từ một ảnh: thứ nhất là tận dụng ma trận thiết yếu kết hợp với các kỹ thuật tìm sự tương ứng giữa đặc trưng ảnh, thứ hai là hồi quy vị trí tương đối.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pics/Chapter2/mapfreeRPR}
+    \includegraphics[width=\textwidth]{pics/Chapter2/mapfreeRPR}
     \caption{Minh họa kiến trúc mô hình hồi quy vị trí tương đối của Map-free \cite{arnold2022mapfree}}
 \end{figure}
 
