@@ -1,29 +1,26 @@
-\chapter{KẾ HOẠCH TƯƠNG LAI}
+\chapter{TỔNG KẾT}
 
 Ở báo cáo này, chúng tôi đã đạt được một số thành quả như sau:
 \begin{itemize}
 	\item Hiểu rõ hơn về bài toán định ví hóa trực quan; bao gồm định nghĩa bài toán và các áp dụng của bài toán vào thực tế.
 	\item Thông qua việc khảo sát các bài báo khoa học, chúng tôi đã hiểu được nhiều cách tiếp cận với bài toán định vị hóa trực quan cũng như các ưu điểm và khuyết điểm của từng phương pháp.
-	\item Học cách sử dụng nền tảng Colab để có thể chạy các mô hình nhằm thí nghiệm và kiểm thử kết quả.
-	\item Ngoài ra, chúng tôi đề xuất được một phương pháp được cho là tối ưu nhất làm giải pháp cho bài toán định vị trực quan.
+	\item Chúng tôi đề xuất được một phương pháp sử dụng mô hình hai bước, kết hợp giữa tác vụ nhận dạng địa điểm trực quan và tác vụ hồi quy tư thế máy ảnh, để giải quyết bài toán định vị trực quan.
+	\item Chúng tôi đề xuất miner mới làm hướng để cố gắng cải thiện và tinh chỉnh mô hình MixVPR.
+	\item Kết quả kiểm thử cho thấy mô hình hai bước của chúng tôi hoạt động tốt hơn hẳn so với các mô hình được so sánh khác trên tác vụ RPR.
 \end{itemize}
 
 Tuy nhiên chúng tối vẫn gặp phải một số vấn đề và hạn chế:
 \begin{itemize}
-	\item Chưa thể huấn luyện lại hoàn toàn mô hình do hạn chế về mặt thiết bị phần cứng.
-	\item Chưa thể kết nối các mô hình trong phương pháp đề xuất, hoạt động của các mô hình vẫn còn mang tính riêng biệt.
+	\item Chưa thể huấn luyện lại hoàn toàn mô hình VPR do hạn chế về mặt thiết bị phần cứng.
+	\item Kết quả kiểm thử cho thấy miner chưa hoàn toàn phù hợp với mô hình, thể hiện qua việc độ cải thiện giữa mô hình tinh chỉnh không quá nhiều so với mô hình cơ sở.
+	\item Kết quả kiểm thử tác vụ VPR trên tập dữ liệu Pittsburgh250k-test cho thấy dù đã cải thiện về vị trí, mô hình của chúng tôi vẫn gặp khó khăn về mặt tính toán góc quay.
 \end{itemize}
 
 Để khắc phục những thiếu sót cũng như cải thiện và hoàn thành đề tài của mình, chúng tôi dự định vào giai đoạn tiếp theo sẽ:
 \begin{itemize}
-	\item Xây dựng một bộ khung để có thể ghép và chạy cả hai mô hình trong cùng một lúc.
+	\item Tiếp tục tìm hiểu, cải thiện miner được đề xuất trong bài báo cáo để phù hợp hơn với mô hình.
 	      \begin{itemize}
-		      \item Dự kiến khoảng thời gian thực hiện là một tháng.
-		      \item Kết quả mong muốn ở bước này là một bộ khung để chạy cả quá trình định vị hóa trực quan trong một thao tác: chỉ cần nhận ảnh đơn 2D vào, mô hình sẽ trả về kết quả là vị trí 6 DoF mà không cần đến các thao tác nào khác của người dùng trong lúc chạy.
-	      \end{itemize}
-	\item Đồng thời, chúng tôi cũng đề xuất một quy trình để kết hợp cả hai mô hình thành một mô hình đầu-cuối.
-	      \begin{itemize}
-		      \item Dự kiến khoảng thời gian thực hiện là hai tháng.
-		      \item Kết quả mong muốn ở bước này là một mô hình học sâu để chạy cả quá trình định vị hóa trực quan: đầu vào là ảnh đơn 2D và đầu ra của mô hình sẽ là vị trí 6 DoF của máy ảnh chụp.
+		      \item Dự kiến khoảng thời gian thực hiện là một đến hai tháng.
+		      \item Kết quả mong muốn: độ chính xác của mô hình sau khi tinh chỉnh vượt trội so với mô hình cơ sở gốc.
 	      \end{itemize}
 \end{itemize}
