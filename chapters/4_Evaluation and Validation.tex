@@ -1,7 +1,7 @@
 \chapter{ĐO ĐẠC VÀ ĐÁNH GIÁ}
 
 \section{Một số tập dữ liệu phổ biến được sử dụng}
-\subsection{Tập dữ liệu trong không gian nhỏ}
+\subsection{Tập dữ liệu phạm vi vừa - nhỏ}
 \subsubsection*{7Scenes}
 Tập dữ liệu 7-Scenes \cite{6619221} bao gồm các ảnh RGB-D thuộc bảy khung cảnh khác nhau được chụp từ một máy ảnh cầm tay Kinect RGB-D ở độ phân giải 640x480. Bảy khung cảnh bap gồm: "Chess", "Fire", "Heads", "Office", "Pumpkin", "RedKitchen" và "Stairs". Với mỗi cảnh sẽ có vài chuỗi khung ảnh RGB-D. Mỗi chuỗi bao gồm khoảng từ 1000 đến 5000 khung ảnh. Mỗi khung sẽ gồm: ảnh màu, độ sâu và vị trí.
 \begin{figure}[H]
@@ -10,7 +10,7 @@ Tập dữ liệu 7-Scenes \cite{6619221} bao gồm các ảnh RGB-D thuộc b�
 	\caption{Minh họa tập dữ liệu 7-Scenes \cite{6619221}}
 \end{figure}
 \subsubsection*{Cambridge Landmark}
-Tập dữ liệu Cambridge Landmarks \cite{kendall2016posenet} là một tập dữ liệu định vị thành thị bao gồm năm khung cảnh khác nhau. Các yếu tố dày đặc quan trọng như phương tiện giao thông hay người đi bộ cũng xuất hiện trong tập dữ liệu này, ngoài ra dữ liệu cũng được thu thập ở nhiều thời điểm trong ngày đại diện cho các yếu tố ánh sáng và điều kiện thời tiết khác nhau. Cambridge Landmarks được tạo ra nhờ vào việc áp dụng các kỹ thuật tái tạo kiến trúc từ chuyển động. Một chiếc điện thoại thông minh Google LG Nexus 5 được một người đi bộ trên phố sử dụng để ghi lại đoạn phim chất lượng cao cho mỗi cảnh. Mỗi đoạn phim sau đó sẽ được lấy mẫu với tần số 2Hz để trích xuất ảnh cho quy trình tái tạo kiến trúc từ chuyển động. Mỗi vị trí máy ảnh sẽ cách nhau khoảng 1m.
+Tập dữ liệu Cambridge Landmarks \cite{kendall2016posenet} là một tập dữ liệu định vị thành thị bao gồm năm khung cảnh khác nhau. Các yếu tố dày đặc quan trọng như phương tiện giao thông hay người đi bộ cũng xuất hiện trong tập dữ liệu này, ngoài ra dữ liệu cũng được thu thập ở nhiều thời điểm trong ngày đại diện cho các yếu tố ánh sáng và điều kiện thời tiết khác nhau. Cambridge Landmarks được tạo ra nhờ vào việc áp dụng các kỹ thuật tái tạo kiến trúc từ chuyển động. Một chiếc điện thoại thông minh Google LG Nexus 5 được một người đi bộ trên phố sử dụng để ghi lại đoạn phim chất lượng cao cho mỗi cảnh. Mỗi đoạn phim sau đó sẽ được lấy mẫu với tần số 2Hz để trích xuất ảnh cho quy trình tái tạo kiến trúc từ chuyển động. Mỗi vị trí máy ảnh sẽ cách nhau khoảng 1m. Đây là một trong những tập dữ liệu phổ biến nhất trong việc huấn luyện và đo đạc kết quả trên các tác vụ RPR.
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{pics/Chapter2/cambridge.png}
@@ -23,18 +23,18 @@ Tập dữ liệu Niantic Map-free Relocalization \cite{arnold2022mapfree} là m
 	\includegraphics[width=\textwidth]{pics/Chapter2/niantic.png}
 	\caption{Minh họa tập dữ liệu Niantic Map-free Relocalization \cite{arnold2022mapfree}}
 \end{figure}
-\subsection{Tập dữ liệu thành thị}
-\subsubsection*{Aachen Day-Night}
-Tập dữ liệu Aachen Day-Night \cite{Sattler2012ImageRF} bao gồm 14.607 ảnh được chụp với nhiều máy ảnh khác nhau bao phủ cả thành phố Aachen thuộc quốc gia Đức. Các ảnh dữ liệu được chụp ở nhiểu thời điểm trong ngày và trong năm, cụ thể là khoảng thời gian trong 2 năm. Hệ quả mang lại là tập dữ liệu bao phủ nhiều điều kiện ngoại cảnh như thời tiết, ánh sáng cũng như sự thay đổi của công trình kiến trúc trong khu vực.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{pics/Chapter2/aachen.png}
-	\caption{Minh họa tập dữ liệu Aachen Day-Night \cite{Sattler2012ImageRF}}
-\end{figure}
-\subsubsection*{Pittsburgh 250k}
+\subsection{Tập dữ liệu thành thị phạm vi rộng}
+%\subsubsection*{Aachen Day-Night}
+%Tập dữ liệu Aachen Day-Night \cite{Sattler2012ImageRF} bao gồm 14.607 ảnh được chụp với nhiều máy ảnh khác nhau bao phủ cả thành phố Aachen thuộc quốc gia Đức. Các ảnh dữ liệu được chụp ở nhiểu thời điểm trong ngày và trong năm, cụ thể là khoảng thời gian trong 2 năm. Hệ quả mang lại là tập dữ liệu bao phủ nhiều điều kiện ngoại cảnh như thời tiết, ánh sáng cũng như sự thay đổi của công trình kiến trúc trong khu vực.
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=\textwidth]{pics/Chapter2/aachen.png}
+%	\caption{Minh họa tập dữ liệu Aachen Day-Night \cite{Sattler2012ImageRF}}
+%\end{figure}
+\subsubsection*{Pittsburgh 250k \cite{6618963}}
 Tập dữ liệu Pittsburgh 250k \cite{6618963} là một tập dữ liệu tương đối rộng bao phủ thành phố Pittsburgh của Mỹ. Đây là một tập dữ liệu tương đối phổ biến trong thị giác máy tính, cụ thể là ở tác vụ nhận điện địa điểm trực quan, truy xuất ảnh và định vị trực quan.
 
-\subsubsection*{GSV-Cities}
+\subsubsection*{GSV-Cities \cite{Ali_bey_2022}}
 Tập dữ liệu GSV-Cities \cite{Ali_bey_2022} bao phủ một vùng địa lý cực kỳ rộng lớn với hơn 40 thành phố xuyên lục địa trong khoảng thời gian 14 năm liên tục. GSV-Cities chứa khoảng hơn 530.000 ảnh - khoảng hơn 62.000 vị trí. Mỗi vị trí sẽ có khoảng từ 4 đến 20 ảnh. Đồng thời mỗi vị trí sẽ cách nhau một khoảng ít nhất 100m.
 \begin{figure}[H]
 	\centering
@@ -42,18 +42,18 @@ Tập dữ liệu GSV-Cities \cite{Ali_bey_2022} bao phủ một vùng địa l�
 	\caption{Minh họa tập dữ liệu GSV-Cities \cite{Ali_bey_2022}}
 \end{figure}
 
-\subsubsection*{SF-XL}
-Tập dữ liệu San Francisco Extra Large (SF-XL) \cite{berton2022rethinking} được tạo nên từ 3.43 triệu ảnh 360 độ thu thập từ kho ảnh Google Streetview. Các ảnh này sau đó được cắt ra thành 41.2 triệu ảnh. Mỗi ảnh cắt ra đều được gắn nhãn 6DoF (bao gồm cả GPS). Dữ liệu được thu thập từ năm 2009 đến năm 2021, dẫn đến việc tập dữ liệu bao phủ nhiều điều kiện ngoại cảnh như thời tiết, ánh sáng cũng như sự thay đổi của công trình kiến trúc trong khu vực.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\textwidth]{pics/Chapter2/sfxl.png}
-	\caption{Minh họa tập dữ liệu San Francisco Extra Large \cite{berton2022rethinking}}
-\end{figure}
+%\subsubsection*{SF-XL}
+%Tập dữ liệu San Francisco Extra Large (SF-XL) \cite{berton2022rethinking} được tạo nên từ 3.43 triệu ảnh 360 độ thu thập từ kho ảnh Google Streetview. Các ảnh này sau đó được cắt ra thành 41.2 triệu ảnh. Mỗi ảnh cắt ra đều được gắn nhãn 6DoF (bao gồm cả GPS). Dữ liệu được thu thập từ năm 2009 đến năm 2021, dẫn đến việc tập dữ liệu bao phủ nhiều điều kiện ngoại cảnh như thời tiết, ánh sáng cũng như sự thay đổi của công trình kiến trúc trong khu vực.
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=\textwidth]{pics/Chapter2/sfxl.png}
+%	\caption{Minh họa tập dữ liệu San Francisco Extra Large \cite{berton2022rethinking}}
+%\end{figure}
 
 \section{Mô hình MixVPR}
 \subsection*{Mô tả quá trình thí nghiệm}
 
-Để kiểm chứng kết quả đã được công bố trên bài báo khoa học của nhóm nghiên cứu tác giả, chúng tôi đã tiến hành chạy mô hình MixVPR trên tập dữ liệu Pittsburgh 250k \cite{6618963} và tập dữ liệu Pittsburgh 30k \cite{6618963}.
+Để kiểm chứng kết quả đã được công bố trên bài báo khoa học của nhóm nghiên cứu tác giả, chúng tôi đã tiến hành chạy mô hình MixVPR \cite{alibey2023mixvpr} trên tập dữ liệu Pittsburgh 250k \cite{6618963} và tập dữ liệu Pittsburgh 30k \cite{6618963}.
 
 Các thang đo kết quả được sử dụng trong báo cáo này sẽ là recall@k, thể hiện tỷ lệ của truy xuất thành công trên tổng số lượng truy xuất và một truy xuất hình sẽ được xem là thành công khi ảnh được truy xuất nằm trong vòng 25m xung quanh ảnh truy vấn. Để thích hợp cho việc chạy trên thiết bị cá nhân với cấu hình yếu hơn so với thiết bị của tác giả, chúng tôi đã hiệu chỉnh cài đặt kích thước mỗi batch chuyển từ 120 xuống 10, các cài đặt khác được giữ nguyên so với bài nghiên cứu.
 
@@ -69,7 +69,7 @@ Các thang đo kết quả được sử dụng trong báo cáo này sẽ là re
 
 \subsection*{Nhận xét}
 
-Các số liệu đo đạc thu được từ thí nghiệm của chúng tôi là hoàn toàn giống với bảng kết quả đã được công bố của nhóm tác giả với recall@1 đạt 94.32\%, recall@5 đạt 98.22\%, recall@10 đạt 98.84\%. Ngoài ra, chúng tôi nhận xét rằng các cài đặt được thay đổi không ảnh hưởng đến kết quả đầu ra của mô hình mà thay vào đó chỉ ảnh hưởng đến tài nguyên thiết bị cũng như tốc độ chạy mô hình. Cuối cùng, với tác vụ nhận diện địa điểm trực quan, chúng tôi cho rằng các chỉ số kết quả này là đủ tốt để tiến hành sử dụng MixVPR trong mô hình kết hợp.
+Các số liệu đo đạc thu được từ thí nghiệm của chúng tôi là hoàn toàn giống với bảng kết quả đã được công bố của nhóm tác giả với recall@1 đạt 94.32\%, recall@5 đạt 98.22\%, recall@10 đạt 98.84\%. Ngoài ra, chúng tôi nhận xét rằng các cài đặt được thay đổi không ảnh hưởng đến kết quả đầu ra của mô hình mà thay vào đó chỉ ảnh hưởng đến tài nguyên thiết bị cũng như tốc độ thực thi của mô hình. Cuối cùng, với tác vụ nhận diện địa điểm trực quan, chúng tôi cho rằng các chỉ số kết quả này là đủ tốt để tiến hành sử dụng MixVPR trong mô hình kết hợp.
 
 \section{Mô hình Map-free Relocalization}
 \subsection*{Mô tả quá trình thí nghiệm}
@@ -94,5 +94,80 @@ Các thang đo kết quả được sử dụng trong báo cáo này sẽ bao g�
 
 Các số liệu đo đạc thu được từ thí nghiệm của chúng tôi tương đối sát với kết quả do nhóm tác giả nghiên cứu đã công bố trên trang chủ với độ lệch vị trí khoảng gần 2m và độ lệch góc quay khoảng 26 độ. Với bài toán định vị trực quan, chúng tôi nhận định rằng độ lệch vị trí là tương đối ổn nhưng độ lệch góc quay lại có phần tương đối lớn.
 
+\section{Mô hình kết hợp}
+\subsection*{Mô tả quá trình thí nghiệm}
+
+Chúng tôi tiến hành tinh chỉnh mô hình MixVPR \cite{alibey2023mixvpr} với miner mà chúng tôi đã đề xuất trên tập dữ liệu GSV-Cities \cite{Ali_bey_2022}. Tuy nhiên, chúng tôi đã tiến hành chỉ chọn ra một số thành phố đáp ứng đủ điều kiện mật độ ảnh mà nhóm đặt ra để đảm bảo rằng mỗi khu vực đều có độ đa dạng về góc nhìn. Chúng tôi chọn kích thước batch là 8 nơi với mỗi nơi gồm 16 ảnh, tức tạo thành một batch với 128 ảnh. Một lớp feature mixer được đóng băng trong quá trình tinh chỉnh. Chúng tôi tiến hành tinh chỉnh qua 5 epoch với learning rate được chỉnh về 0.0005. Các ngưỡng frustum và góc quay được đặt là 1.25 và 75 độ theo đúng thứ tự. Các cài đặt không được nêu lên sẽ được giữ nguyên như bài báo gốc.
+
+Chúng tôi tiến hành kiểm thử kết quả mô hình kết hợp trên hai tác vụ VPR và RPR riêng biệt: trên tập dữ liệu thành thị phạm vi rộng và trên một tập dữ liệu kích thước vừa nhưng mật độ ảnh cao.
+
+Với tác vụ VPR, chúng tôi tiến hành đo đạc kết quả của mô hình kết hợp trước và sau khi tinh chỉnh, sau đó so sánh với các mô hình cơ sở khác đã được huấn luyện sẵn bao gồm: MixVPR gốc \cite{alibey2023mixvpr}, NetVLAD \cite{arandjelovic2016netvlad} và AnyLoc \cite{keetha2023anyloc}. Thí nghiệm được tiến hành trên tập dữ liệu Pittsburgh250k-test \cite{6618963}. Thang đo kết quả được sử dụng trong thí nghiệm này sẽ là trung bình độ lệch vị trí và góc quay với đơn vị (mét, độ) theo thứ tự.
+
+Các mô hình sẽ vừa được so sánh với tư cách riêng lẻ vừa kết hợp với tác vụ RPR trong mô hình kết hợp của chúng tôi. Với NetVLAD \cite{arandjelovic2016netvlad}, chúng tôi sử dụng mô hình đã được huấn luyện sẵn trên tập Pittsburgh250k. Với AnyLoc \cite{keetha2023anyloc},  chúng tôi sử dụng các thiết lập mặc định như trong bài báo khoa học.
+
+\bgroup
+\def\arraystretch{1.4}%
+\setlength\tabcolsep{10 pt}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+                                & Dim   & Med. Trans. Err & Med. Rot. Err \\ \hline
+AnyLoc \cite{keetha2023anyloc}  & 12288 & 42.56           & 46.66         \\
+AnyLoc + RPR (Ours)             & 12288 & 41.35           & 53.36         \\ \hline
+MixVPR \cite{alibey2023mixvpr}  & 4096  & 21.82           & \textbf{36.57}\\
+MixVPR + RPR (Ours)             & 4096  & {\ul 19.01}     & 41.36         \\ \hline
+NetVLAD \cite{arandjelovic2016netvlad} & 32768 & 84.88             & 47.68           \\
+NetVLAD + RPR (Ours)            & 32768 & 77.26           & 53.37         \\ \hline
+MixVPR + RPR (Ours)             & 4096  &\textbf{18.34}   & {\ul 41.32}   \\
+(fine-tuned VPR)                &       &                 &               \\ \hline
+\end{tabular}
+\vspace{10pt}
+\caption{Kết quả định vị trực quan trên tập Pittsburgh250k-test \cite{6618963}. Thang đo trung bình độ lệch vị trí và góc quay được áp dụng cho các mô hình được so sánh. Kết quả tốt nhất và tốt thứ nhì được đánh dấu (với in đậm/gạch dưới, theo thứ tự).}
+\end{table}
+\egroup
+
+Với tác vụ RPR, chúng tôi tiến hành đo đạc kết quả của mô hình kết hợp trước và sau khi tinh chỉnh, sau đó so sánh với các mô hình cơ sở khác đã được huấn luyện sẵn bao gồm: EssNet \cite{zhou2020learn}, NC-EssNet \cite{zhou2020learn} và Relformer \cite{idan2023learning}. Đồng thời, chúng tôi cũng áp dụng các mô hình VPR được so sánh ở thí nghiệm trước lên thí nghiệm này nhằm kiểm chứng độ hiệu quả. Thí nghiệm được tiến hành trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}. Thang đo kết quả được sử dụng trong thí nghiệm này sẽ là trung bình độ lệch vị trí và góc quay với đơn vị (mét, độ) theo thứ tự. Do trọng tâm của chúng tôi là việc áp dụng định vị trực quan lên dữ liệu chưa từng thấy, không mô hình nào trong thí nghiệm này từng được huấn luyện trên tập dữ liệu Cambridge Landmark. \cite{kendall2016posenet}.
+
+\bgroup
+\def\arraystretch{1.4}%
+\setlength\tabcolsep{10 pt}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+                             & Median Trans. Err & Median Rot. Err \\ \hline
+EssNet \cite{zhou2020learn}  & 10.40             & 85.80           \\
+NC-EssNet \cite{zhou2020learn} & 7.98              & 24.40           \\
+Relformer \cite{idan2023learning} & 3.35              & 10.60           \\ \hline
+NetVLAD \cite{arandjelovic2016netvlad} & 3.99              & 10.03           \\
+AnyLoc \cite{keetha2023anyloc} & 4.46              & 10.42           \\
+MixVPR \cite{alibey2023mixvpr} & 4.04              & 7.44            \\ \hline
+\textbf{MixVPR + RPR} (Ours)        & \textbf{3.17}     & \textbf{4.76}   \\
+{\ul MixVPR + RPR (Ours)} & {\ul 3.19}        & {\ul 4.80}      \\ 
+{(\ul fine-tuned VPR)} &  &        \\ \hline
+\end{tabular}
+\vspace{10pt}
+\caption{Kêt quả định vị trực quan trên tập Cambridge Landmark \cite{kendall2016posenet}. Thang đo trung bình độ lệch vị trí và góc quay được áp dụng cho các mô hình được so sánh. Kết quả tốt nhất và tốt thứ nhì được đánh dấu (với in đậm/gạch dưới, theo thứ tự).}
+\end{table}
+\egroup
+
+\subsection*{Nhận xét}
+
+Nhận xét về kết quả đo được với tác vụ VPR trên tập dữ liệu Pittsburgh250k-test \cite{6618963}:
+\begin{itemize}
+	\item Áp dụng mô hình kết hợp lên các mô hình VPR giúp giảm thiểu độ lệch vị trí, nhưng lại tăng độ lệch góc quay. Điều này có thể là hệ quả trực tiếp của việc mô-đun VPR không thể chọn ra ảnh tham khảo có độ trùng lắp đủ so với ảnh nhận vào - dẫn đến trung bình lỗi góc quay bị phóng đại.
+	\item Mô hình tinh chỉnh của chúng tôi đạt kết quả tốt nhất về mặt độ lệch vị trí trung bình và có phần giảm thiểu vấn đề sai số góc quay của mô hình kết hợp cơ sở. 
+\end{itemize}
+
+Nhận xét về kết quả đo được với tác vụ RPR trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}:
+\begin{itemize}
+	\item Mô hình kết hợp của chúng tôi đạt kết quả tốt nhất và tốt thứ nhì trên tập Cambridge Landmark \cite{kendall2016posenet}.
+	\item Có thể giải thích kết quả trên là do: chúng tôi kết hợp độ khái quát hóa tốt của tác vụ VPR và khả năng tính toán tư thế tuyệt đối chuẩn xác của tác vụ RPR, dẫn đến việc mô hình kết hợp đạt được kết quả tốt nhất dù chưa từng được huấn luyện trên tập dữ liệu này. 
+	\item Các mô hình VPR khác tuy có độ chuẩn xác cao trong việc truy xuất ảnh nhưng lại không có khả năng tính toán được tư thế chính xác của ảnh được chụp dẫn đến kết quả có phần tệ hơn.
+	\item Các mô hình RPR khác, tuy có khả năng tính toán tốt tư thế tuyệt đối trong những tập dữ liệu vừa và nhỏ song lại có thể mắc phải tình trạng quá khớp vào tập dữ liệu huấn luyện, dẫn đến kết quả không quá khả quan.
+\end{itemize}
+
+
 \section{Kết luận}
-Chúng tôi đã có thể đo đạc và kiểm chứng các số liệu kết quả được công bố từ các bài báo khoa học được chọn trong mô hình kết hợp là thật và hoàn toàn đáng tin cậy. Dự kiến ở giai đoạn tiếp theo, chúng tôi sẽ tìm cách cải thiện kết quả các mô hình thuộc mô hình kết hợp hoặc tiếp tục nghiên cứu các mô hình cũng như các phương pháp tiếp cận tốt hơn để có thể giảm thiểu tối đa sai số về vị trí và góc quay.
+Chúng tôi đã có thể đo đạc và so sánh kết quả các mô hình khác nhau với phương pháp đề xuất của bản thân. Từ đó, chúng tôi đã có thể nhận xét về những điểm mạnh mà giải pháp đã đạt được cũng như nhận ra những khiếm khuyết cần cải thiện. Ngoài ra, thông qua các thí nghiệm đo đạc, chúng tôi cũng hiểu rõ hơn cách các mô hình khác nhau hoạt động và từ đó rút ra được những kiến thức cần thiết để có thể cải thiện hơn cho giải pháp của bản thân trong tương lai.
