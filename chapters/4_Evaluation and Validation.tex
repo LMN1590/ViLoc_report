@@ -92,18 +92,18 @@ Các thang đo kết quả được sử dụng trong báo cáo này sẽ bao g�
 
 \subsection*{Nhận xét}
 
-Các số liệu đo đạc thu được từ thí nghiệm của chúng tôi tương đối sát với kết quả do nhóm tác giả nghiên cứu đã công bố trên trang chủ với độ lệch vị trí khoảng gần 2m và độ lệch góc quay khoảng 26 độ. Với bài toán định vị trực quan, chúng tôi nhận định rằng độ lệch vị trí là tương đối ổn nhưng độ lệch góc quay lại có phần tương đối lớn.
+Các số liệu đo đạc thu được từ thí nghiệm của chúng tôi tương đối sát với kết quả do nhóm tác giả nghiên cứu đã công bố trên trang chủ với độ lệch vị trí khoảng gần 2m và độ lệch góc quay khoảng 26 độ.
 
 \section{Mô hình kết hợp}
 \subsection*{Mô tả quá trình thí nghiệm}
 
-Chúng tôi tiến hành tinh chỉnh mô hình MixVPR \cite{alibey2023mixvpr} với chiến lược khai phá mới mà chúng tôi đã đề xuất trên tập dữ liệu GSV-Cities \cite{Ali_bey_2022}. Tuy nhiên, chúng tôi đã tiến hành chỉ chọn ra một số thành phố đáp ứng đủ điều kiện mật độ ảnh mà nhóm đặt ra để đảm bảo rằng mỗi khu vực đều có độ đa dạng về góc nhìn. Chúng tôi chọn kích thước batch là 8 nơi với mỗi nơi gồm 16 ảnh, tức tạo thành một batch với 128 ảnh. Một lớp feature mixer được đóng băng trong quá trình tinh chỉnh. Chúng tôi tiến hành tinh chỉnh qua 5 epoch với learning rate được chỉnh về 0.0005. Các ngưỡng frustum và góc quay được đặt là 1.25 và 75 độ theo đúng thứ tự. Các cài đặt không được nêu lên sẽ được giữ nguyên như bài báo gốc.
+Chúng tôi tiến hành tinh chỉnh mô hình MixVPR \cite{alibey2023mixvpr} với chiến lược khai phá mới mà chúng tôi đã đề xuất trên tập dữ liệu GSV-Cities \cite{Ali_bey_2022}. Tuy nhiên, chúng tôi đã tiến hành chỉ chọn ra một số thành phố đáp ứng đủ điều kiện mật độ ảnh mà nhóm đặt ra để đảm bảo rằng mỗi khu vực đều có độ đa dạng về góc nhìn. Chúng tôi chọn kích thước batch là 8 nơi với mỗi nơi gồm 16 ảnh, tức tạo thành một batch với 128 ảnh. Một lớp feature mixer được đóng băng trong quá trình tinh chỉnh. Chúng tôi tiến hành tinh chỉnh qua 5 epoch với learning rate được chỉnh về 0.0005. Các ngưỡng frustum và góc quay được đặt là 1.25 và 60 độ theo thứ tự. Các cài đặt không được nêu lên sẽ được giữ nguyên như bài báo gốc.
 
-Chúng tôi tiến hành kiểm thử kết quả mô hình kết hợp trên hai tác vụ VPR và RPR riêng biệt: trên tập dữ liệu thành thị phạm vi rộng và trên một tập dữ liệu kích thước vừa nhưng mật độ ảnh cao.
+Chúng tôi tiến hành kiểm thử kết quả mô hình kết hợp trên các tập dữ liệu thường dùng cho hai tác vụ VPR và RPR riêng biệt: trên tập dữ liệu thành thị phạm vi rộng nhưng mật độ ảnh thưa và trên một tập dữ liệu kích thước vừa nhưng mật độ ảnh cao.
 
 Với tác vụ VPR, chúng tôi tiến hành đo đạc kết quả của mô hình kết hợp trước và sau khi tinh chỉnh, sau đó so sánh với các mô hình cơ sở khác đã được huấn luyện sẵn bao gồm: MixVPR gốc \cite{alibey2023mixvpr}, NetVLAD \cite{arandjelovic2016netvlad} và AnyLoc \cite{keetha2023anyloc}. Thí nghiệm được tiến hành trên tập dữ liệu Pittsburgh250k-test \cite{6618963}. Thang đo kết quả được sử dụng trong thí nghiệm này sẽ là trung bình độ lệch vị trí và góc quay với đơn vị (mét, độ) theo thứ tự.
 
-Các mô hình sẽ vừa được so sánh với tư cách riêng lẻ vừa kết hợp với tác vụ RPR trong mô hình kết hợp của chúng tôi. Với NetVLAD \cite{arandjelovic2016netvlad}, chúng tôi sử dụng mô hình đã được huấn luyện sẵn trên tập Pittsburgh250k. Với AnyLoc \cite{keetha2023anyloc},  chúng tôi sử dụng các thiết lập mặc định như trong bài báo khoa học. Lưu ý, do mô hình RPR yêu cầu các tập dữ liệu ảnh sẽ cần phải cung cấp các thông số intrinsics, chúng tôi đã sử dụng COLMAP để tính toán chỉ số intrinsics cho tập dữ liệu Pittsburgh250k trước khi đưa vào thí nghiệm đo đạc.
+Các mô hình sẽ vừa được so sánh với tư cách riêng lẻ vừa kết hợp với tác vụ RPR trong mô hình kết hợp của chúng tôi. Với NetVLAD \cite{arandjelovic2016netvlad}, chúng tôi sử dụng mô hình đã được huấn luyện sẵn trên tập Pittsburgh250k. Với AnyLoc \cite{keetha2023anyloc},  chúng tôi sử dụng các thiết lập mặc định như trong bài báo khoa học. Lưu ý, do mô hình RPR yêu cầu các tập dữ liệu ảnh sẽ cần phải cung cấp các thông số nội tại, chúng tôi đã sử dụng COLMAP để tính toán các tham số nội tại cho tập dữ liệu Pittsburgh250k trước khi đưa vào thí nghiệm đo đạc.
 
 \bgroup
 \def\arraystretch{1.4}%
@@ -123,7 +123,7 @@ MixVPR + RPR (Ours)             & 4096  &\textbf{18.34}   & {\ul 41.32}   \\
 (fine-tuned VPR)                &       &                 &               \\ \hline
 \end{tabular}
 \vspace{10pt}
-\caption{Kết quả định vị trực quan trên tập Pittsburgh250k-test \cite{6618963}. Thang đo trung bình độ lệch vị trí và góc quay được áp dụng cho các mô hình được so sánh. Kết quả tốt nhất và tốt thứ nhì được đánh dấu (với in đậm/gạch dưới, theo thứ tự).}
+\caption[Kết quả định vị trực quan trên tập Pittsburgh250k-test]{Kết quả định vị trực quan trên tập Pittsburgh250k-test \cite{6618963}. Thang đo trung bình độ lệch vị trí và góc quay được áp dụng cho các mô hình được so sánh. Kết quả tốt nhất và tốt thứ nhì được đánh dấu (với in đậm/gạch dưới, theo thứ tự).}
 \end{table}
 \egroup
 
@@ -148,7 +148,7 @@ MixVPR \cite{alibey2023mixvpr} & 4.04              & 7.44            \\ \hline
 {(\ul fine-tuned VPR)} &  &        \\ \hline
 \end{tabular}
 \vspace{10pt}
-\caption{Kêt quả định vị trực quan trên tập Cambridge Landmark \cite{kendall2016posenet}. Thang đo trung bình độ lệch vị trí và góc quay được áp dụng cho các mô hình được so sánh. Kết quả tốt nhất và tốt thứ nhì được đánh dấu (với in đậm/gạch dưới, theo thứ tự).}
+\caption[Kết quả định vị trực quan trên tập Cambridge Landmark]{Kết quả định vị trực quan trên tập Cambridge Landmark \cite{kendall2016posenet}. Thang đo trung bình độ lệch vị trí và góc quay được áp dụng cho các mô hình được so sánh. Kết quả tốt nhất và tốt thứ nhì được đánh dấu (với in đậm/gạch dưới, theo thứ tự).}
 \end{table}
 \egroup
 
