@@ -158,7 +158,10 @@ Nhận xét về kết quả đo được với tác vụ VPR trên tập dữ l
 \begin{itemize}
 	\item Áp dụng mô hình kết hợp lên các mô hình VPR giúp giảm thiểu độ lệch vị trí, nhưng lại tăng độ lệch góc quay. Điều này có thể là hệ quả trực tiếp của việc mô-đun VPR không thể chọn ra ảnh tham khảo có độ trùng lắp đủ so với ảnh nhận vào - dẫn đến trung bình lỗi góc quay bị phóng đại.
 	\item Mô hình tinh chỉnh của chúng tôi đạt kết quả tốt nhất về mặt độ lệch vị trí trung bình và có phần giảm thiểu vấn đề sai số góc quay của mô hình kết hợp cơ sở. 
+	\item Sai số lớn về góc quay có thể dẫn đến bởi việc mô hình cơ sở xử lý tác vụ feature matching hoạt động chưa đủ hiệu quả với các tập dữ liệu thành thị đa dạng về góc quay. Ngoài ra, các thông số nội tại máy ảnh được tạo bởi COLMAP chỉ mang tính chất tham khảo, có thể dẫn đến sai số trong quá trình hồi quy tư thế.
+	\item Ngoài ra, kiến trúc trùng lặp (các cảnh cách xa nhau nhưng có độ tương đồng cao) ở các tập dữ liệu thành thị rộng có thể dẫn đến việc truy xuất ảnh sai và từ đó hồi quy sai tư thế.
 \end{itemize}
+
 
 Nhận xét về kết quả đo được với tác vụ RPR trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}:
 \begin{itemize}
