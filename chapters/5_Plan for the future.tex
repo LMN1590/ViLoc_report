@@ -4,12 +4,12 @@
 \begin{itemize}
 	\item Hiểu rõ hơn về bài toán định ví hóa trực quan; bao gồm định nghĩa bài toán và các áp dụng của bài toán vào thực tế.
 	\item Thông qua việc khảo sát các bài báo khoa học, chúng tôi đã hiểu được nhiều cách tiếp cận với bài toán định vị hóa trực quan cũng như các ưu điểm và khuyết điểm của từng phương pháp.
-	\item Chúng tôi đề xuất được một phương pháp sử dụng mô hình hai bước, kết hợp giữa tác vụ nhận dạng địa điểm trực quan và tác vụ hồi quy tư thế máy ảnh, để giải quyết bài toán định vị trực quan.
-	\item Chúng tôi đề xuất chiến lược khai phá mới làm hướng để cố gắng cải thiện và tinh chỉnh mô hình MixVPR.
+	\item Chúng tôi đề xuất một phương pháp sử dụng mô hình hai bước, kết hợp giữa tác vụ nhận diện địa điểm trực quan và tác vụ hồi quy tư thế máy ảnh tương đối, để giải quyết bài toán định vị trực quan.
+	\item Chúng tôi đề xuất chiến lược khai phá mới làm hướng cải thiện và tinh chỉnh mô hình MixVPR, giúp cho mô hình này hoạt động tốt hơn với tác vụ RPR trong mô hình kết hợp.
 	\item Kết quả kiểm thử cho thấy mô hình hai bước của chúng tôi hoạt động tốt hơn hẳn so với các mô hình được so sánh khác trên tác vụ RPR.
 \end{itemize}
 
-Tuy nhiên chúng tối vẫn gặp phải một số vấn đề và hạn chế:
+Tuy nhiên chúng tôi gặp phải một số vấn đề và hạn chế:
 \begin{itemize}
 	\item Kết quả kiểm thử cho thấy chiến lược khai phá mới có thể chưa hoàn toàn phù hợp với mô hình, thể hiện qua việc độ cải thiện giữa mô hình tinh chỉnh không quá nhiều so với mô hình cơ sở.
 	\item Kết quả kiểm thử tác vụ VPR trên tập dữ liệu Pittsburgh250k-test cho thấy dù đã cải thiện về vị trí, mô hình của chúng tôi vẫn gặp khó khăn về mặt tính toán góc quay.
@@ -22,4 +22,9 @@ Tuy nhiên chúng tối vẫn gặp phải một số vấn đề và hạn ch�
 		      \item Dự kiến khoảng thời gian thực hiện là một đến hai tháng.
 		      \item Kết quả mong muốn: độ chính xác của mô hình sau khi tinh chỉnh vượt trội so với mô hình cơ sở gốc.
 	      \end{itemize}
+	\item Tiến hành thay đổi các mô hình cơ sở thuộc tác vụ RPR nhằm tìm kiếm mô hình phù hợp nhất với giải pháp của chúng tôi.
+		\begin{itemize}
+	 		  \item Dự kiến khoảng thời gian thực hiện là một đến hai tháng.
+		      \item Kết quả mong muốn: độ chính xác về mặt góc quay được cải thiện so với mô hình cơ sở chưa thay đổi.
+		\end{itemize}
 \end{itemize}

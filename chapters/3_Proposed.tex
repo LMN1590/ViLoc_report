@@ -241,7 +241,7 @@ Gọi $I$ là ảnh mà người dùng chụp từ camera và sẽ được dùn
 Bước tiếp theo, mô hình tiếp tục truyền cả ảnh nhận vào $I$ và ảnh được truy xuất $I_0$ cho mô hình tương quan 2D - 2D của Map-free Relocalization \cite{arnold2022mapfree}. Với đầu vào là cặp ảnh $(I, I_0)$, những cặp đặc trưng tương quan giữa hai ảnh sẽ được xác định tương ứng với mỗi hình. Sau đó, ma trận thiết yếu $E$ giữa 2 ảnh sẽ được ước tính. Ma trận thiết yếu sau đó sẽ được phân giải thành ma trận thể hiện góc quay chênh lệch $R$ và một véc-tơ đơn vị độ dịch vị trí $\hat{t}$. Từ các cặp đặc trưng và độ sâu của ảnh, mô hình tiến hành một bước chiếu 3D để tính toán giá trị tỷ lệ $s$ của véc-tơ độ dịch vị trí. Cuối cùng, tư thế thực của camera sẽ được xác định bằng tư thế thực của ảnh tham khảo và độ lệch giữa ảnh tham khảo và ảnh truy vấn $(R,s*\hat{t})$.
 
 \subsection{Dữ liệu đầu vào và đầu ra}
-Mô hình sẽ nhận vào ảnh $I$, có định dạng là một ảnh RGB. Sau đó, ảnh $I$ sẽ được tiền xử lý, gồm các bước đưa về kích thước 320x320 và chuẩn hóa các điểm ảnh trên hình, trước khi được đưa vào mô hình chính.
+Mô hình sẽ nhận vào ảnh $I$, có định dạng là một ảnh RGB. Sau đó, ảnh $I$ sẽ được tiền xử lý, gồm các bước đưa về kích thước 320x320 và chuẩn hóa các điểm ảnh trên hình, trước khi được đưa vào mô hình chính. Lưu ý, mô hình kết hợp sẽ cần ảnh phải mang thông tin tham số nội tại của máy ảnh nhằm thực hiện bước hồi quy tư thế. 
 
 Qua quá trình mô phỏng lại bài toán nhận diện địa điểm trực quan, mô hình sẽ thu được $k$ cặp ảnh có độ tương đồng cao, với một trong số đó là ảnh truy vấn ban đầu. Từng cặp ảnh trong $k$ cặp này sẽ được đưa vào bộ phận hồi quy tư thế tương đối tiếp theo.
 
@@ -410,9 +410,9 @@ $$
 
 \section{Đề xuất phát triển}
 
-\subsection{Chiến lược khai phá đặc trưng}
+\subsection{Chiến lược khai phá đặc trưng dựa trên độ trùng lắp}
 
-Ảnh tham khảo truy xuất được từ tác vụ VPR tiềm ẩn rủi ro không đủ độ trùng lắp với ảnh đầu vào, dẫn đến sai sót trong quá trình tính toán tư thế. Để giải quyết vấn đề này, chúng tôi đề xuất một chiến lược khai phá mới dựa trên Multi-Similarity Miner \cite{wang2019multi} nhằm đảm bảo tính trùng lắp đặc trưng trực quan giữa các ảnh. 
+Ảnh tham khảo truy xuất được từ tác vụ VPR tiềm ẩn rủi ro không đủ độ trùng lắp với ảnh đầu vào, dẫn đến sai sót trong quá trình tính toán tư thế. Để giải quyết vấn đề này, chúng tôi đề xuất một chiến lược khai phá mới dựa trên Multi-Similarity Miner \cite{wang2019multi} nhằm đảm bảo tính trùng lắp đặc trưng trực quan cao giữa các ảnh, nhằm mục đích giúp cho tác vụ RPR thực hiện hồi quy tư thế dễ dàng hơn. 
 
 Cụ thể hơn, chúng tôi xác định một cặp ảnh là được chấp nhận nếu có độ trùng lắp frustum cao hơn một ngưỡng nhất định, tức giữa cặp ảnh chia sẻ nhiều đặc điểm chung hơn, nhằm đảm bảo quy trình dự đoán tư thế chuẩn xác hơn. Để đảm bảo độ vững chắc của mô hình không bị tác động, chúng tôi sử dụng cơ chế trùng lắp camera frustum song phương từ \cite{9008579}, được tính bằng tổng độ trùng lắp frustum từ một ảnh đến ảnh còn lại và ngược lại.
 
