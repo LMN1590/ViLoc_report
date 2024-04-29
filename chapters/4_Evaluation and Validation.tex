@@ -161,6 +161,13 @@ Nhận xét về kết quả đo được với tác vụ VPR trên tập dữ l
 	\item Sai số lớn về góc quay ở mô hình kết hợp có thể dẫn đến bởi việc các ảnh truy xuất được từ VPR chưa đủ độ trùng lắp phù hợp để tác vụ RPR có thể hoàn thành tốt việc tính toán tư thế.
 	\item Sai số lớn về góc quay còn có thể dẫn đến bởi việc mô hình cơ sở xử lý tác vụ feature matching hoạt động chưa đủ hiệu quả với các tập dữ liệu thành thị đa dạng về góc quay. Ngoài ra, các thông số nội tại máy ảnh được tạo bởi COLMAP chỉ mang tính chất tham khảo, có thể dẫn đến sai số trong quá trình hồi quy tư thế.
 	\item Hiện tượng kiến trúc trùng lặp (các cảnh cách xa nhau nhưng có độ tương đồng cao về mặt hình ảnh, đặc trưng) ở tập dữ liệu Pittsburgh250k \cite{6618963} có thể dẫn đến việc truy xuất ảnh sai và từ đó hồi quy sai tư thế.
+	\item Ngoài ra, nhận thấy tác vụ dự đoán độ sâu của mô hình cơ sở vẫn còn nhiều sai sót, dẫn đến các sai sót trong quy trình hồi quy tư thế của toàn mô-đun RPR.
+	\begin{figure}[H]
+		  \centering
+		  \includegraphics[width=\textwidth]{pics/Chapter3/lowoverlap_match.png}
+		  \includegraphics[width=\textwidth]{pics/Chapter3/highoverlap_match.png}
+		  \caption[Ảnh matching không đúng]{Matching sai lệch do scale giữa các cặp ảnh}
+	\end{figure}
 \end{itemize}
 
 
@@ -175,4 +182,15 @@ Nhận xét về kết quả đo được với tác vụ RPR trên tập dữ l
 
 
 \section{Kết luận}
-Chúng tôi đã có thể đo đạc và so sánh kết quả các mô hình khác nhau với phương pháp đề xuất của nhóm. Từ đó, chúng tôi đã có thể nhận xét về những điểm mạnh mà giải pháp đã đạt được cũng như nhận ra những khiếm khuyết cần cải thiện. Ngoài ra, thông qua các thí nghiệm đo đạc, chúng tôi cũng hiểu rõ hơn cách các mô hình khác nhau hoạt động và từ đó rút ra được những kiến thức cần thiết để có thể cải thiện hơn cho giải pháp của chính mình trong tương lai.
+Chúng tôi đã có thể đo đạc và so sánh kết quả các mô hình khác nhau với phương pháp đề xuất của nhóm. Chúng tôi rút ra được một số nhận xét tổng thể về điểm mạnh và điểm yếu cần cải thiện của giải pháp đề xuất. Trước hết, về điểm mạnh:
+\begin{itemize}
+	\item Mô hình kết hợp của chúng tôi kết hợp được độ tổng quát hóa cao của VPR và độ chính xác chi tiết của RPR trong tác vụ hồi quy tư thế, dẫn đến kết quả tốt hơn hết trong tác vụ RPR trên dữ liệu chưa được huấn luyện.
+	\item Sử dụng mô hình cơ sở giúp giảm thiểu tài nguyên cũng như thời gian huấn luyện.
+	\item Tác vụ RPR với các mô hình cơ sở giúp mô hình hoạt động tốt với nhiều tập dữ liệu hơn so với các mô hình học sâu.
+\end{itemize}
+Về các điểm cần cải thiện:
+\begin{itemize}
+	\item Việc sử dụng các mô hình cơ sở được huấn luyện sẵn tiềm ẩn nhiều rủi ro sai lệch trong các bước của mô hình, dẫn đến sai số lớn ở kết quả đầu ra.
+	\item Các mô hình feature matching thường hoạt động tốt trong môi trường indoor, hoặc với một vật thể cố định nào đó thay vì toàn cảnh đô thị.
+	\item Thời gian thực thi của các nhiều mô hình cơ sở sẽ làm tăng thời gian thực thi của toàn thể mô hình kết hợp.
+\end{itemize}
