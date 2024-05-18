@@ -131,20 +131,11 @@ Ours                                                    & 4096  & 0.93          
 \egroup
 
 \subsubsection*{Nhận xét}
-Nhận xét về kết quả đo được với tác vụ VPR trên tập dữ liệu Pittsburgh250k-test \cite{6618963}:
-\begin{itemize}
-	\item Mô hình kết hợp của chúng tôi đạt kết quả tốt nhất về mặt độ lệch vị trí, nhưng lại đánh đổi sai lệch về góc quay cũng như giảm đi tỷ lệ truy xuất ảnh thành công.
-	\item Sai số lớn về góc quay ở mô hình kết hợp có thể dẫn đến bởi việc các ảnh truy xuất được từ VPR chưa đủ độ trùng lặp phù hợp để tác vụ RPR có thể hoàn thành tốt việc tính toán tư thế.
-	\item Sai số về góc quay còn có thể dẫn đến bởi việc mô hình cơ sở xử lý tác vụ feature matching hoạt động chưa đủ hiệu quả với các tập dữ liệu thành thị đa dạng về góc quay. Ngoài ra, các thông số nội tại máy ảnh được tạo bởi COLMAP chỉ mang tính chất tham khảo, có thể dẫn đến sai số trong quá trình hồi quy tư thế.
-	\item Hiện tượng kiến trúc trùng lặp (các cảnh cách xa nhau nhưng có độ tương đồng cao về mặt hình ảnh, đặc trưng) ở tập dữ liệu Pittsburgh250k \cite{6618963} có thể dẫn đến việc truy xuất ảnh sai và từ đó hồi quy sai tư thế.
-	\item Ngoài ra, nhận thấy tác vụ dự đoán độ sâu của mô hình cơ sở vẫn còn nhiều sai sót, dẫn đến các sai sót trong quy trình hồi quy tư thế của toàn module RPR.
-%	\begin{figure}[H]
-%		  \centering
-%		  \includegraphics[width=0.6\textwidth]{pics/Chapter3/lowoverlap_match.png}
-%		  \includegraphics[width=0.6\textwidth]{pics/Chapter3/highoverlap_match.png}
-%		  \caption[Ảnh matching không đúng]{Matching sai lệch do scale giữa các cặp ảnh}
-%	\end{figure}
-\end{itemize}
+Nhận xét về kết quả đo được với tác vụ VPR trên tập dữ liệu Pittsburgh250k-test \cite{6618963}, mô hình kết hợp của chúng tôi đạt kết quả tốt nhất về mặt sai lệch vị trí, nhưng lại đánh đổi sai lệch về góc quay cũng như giảm đi tỷ lệ truy xuất ảnh thành công. 
+
+Sai số lớn về góc quay ở mô hình kết hợp có thể dẫn đến bởi việc các ảnh truy xuất được từ VPR chưa đủ độ trùng lặp phù hợp để tác vụ RPR có thể hoàn thành tốt việc tính toán tư thế. Sai số về góc quay còn có thể dẫn đến bởi việc mô hình cơ sở xử lý tác vụ feature matching hoạt động chưa đủ hiệu quả với các tập dữ liệu thành thị đa dạng về góc quay. Ngoài ra, các thông số nội tại máy ảnh được tạo bởi COLMAP chỉ mang tính chất tham khảo, có thể dẫn đến sai số trong quá trình hồi quy tư thế.
+
+Hiện tượng kiến trúc trùng lặp (các cảnh cách xa nhau nhưng có độ tương đồng cao về mặt hình ảnh, đặc trưng) ở tập dữ liệu Pittsburgh250k \cite{6618963} có thể dẫn đến việc truy xuất ảnh sai và từ đó hồi quy sai tư thế. Ngoài ra, nhận thấy tác vụ dự đoán độ sâu của mô hình cơ sở vẫn còn nhiều sai sót, dẫn đến các sai sót trong quy trình hồi quy tư thế của toàn module RPR.
 
 \subsection*{Tác vụ RPR}
 
@@ -174,13 +165,9 @@ Ours                                           & 0.95                           
 \egroup
 
 \subsubsection*{Nhận xét}
-Nhận xét về kết quả đo được với tác vụ RPR trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}:
-\begin{itemize}
-	\item Mô hình kết hợp của chúng tôi đạt kết quả tốt nhất. Có thể giải thích kết quả trên là do: chúng tôi kết hợp độ khái quát hóa tốt của tác vụ VPR và khả năng tính toán tư thế tuyệt đối chuẩn xác của tác vụ RPR, dẫn đến việc mô hình kết hợp đạt được kết quả tốt nhất dù chưa từng được huấn luyện trên tập dữ liệu này. 
-	\item Tác vụ RPR hoạt động tốt hơn khi mật độ ảnh cùng nhìn vào một địa điểm cao. Cụ thể là mô hình cơ sở feature matching sẽ được cải thiện hiệu suất khi các ảnh có độ trùng lặp cao. Ngoài ra các tham số nội tại thuộc tập dữ liệu Cambridge Landmark được cung cấp bởi tác giả, dẫn đến không có sai số thêm trong quá trình tính toán tư thế. 
-	\item Các mô hình VPR tuy có độ chuẩn xác cao trong việc truy xuất ảnh nhưng lại không có khả năng tính toán được tư thế chính xác của ảnh được chụp dẫn đến kết quả có phần tệ hơn.
-	\item Các mô hình RPR tuy có khả năng tính toán tốt tư thế tuyệt đối trong những tập dữ liệu vừa và nhỏ song lại có thể mắc phải tình trạng quá khớp vào tập dữ liệu huấn luyện, dẫn đến kết quả không quá khả quan.
-\end{itemize}
+Nhận xét về kết quả đo được với tác vụ RPR trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}, mô hình kết hợp của chúng tôi đạt kết quả tốt nhất về sai số vị trí và góc quay nhưng giảm nhẹ tỷ lệ truy xuất ảnh thành công. Có thể giải thích kết quả trên là do: chúng tôi kết hợp độ khái quát hóa tốt của tác vụ VPR và khả năng tính toán tư thế tuyệt đối chuẩn xác của tác vụ RPR, dẫn đến việc mô hình kết hợp đạt được kết quả tốt nhất dù chưa từng được huấn luyện trên tập dữ liệu này. Tác vụ RPR hoạt động tốt hơn khi mật độ ảnh cùng nhìn vào một địa điểm cao. Cụ thể là mô hình cơ sở feature matching sẽ được cải thiện hiệu suất khi các ảnh có độ trùng lặp cao. Ngoài ra các tham số nội tại thuộc tập dữ liệu Cambridge Landmark được cung cấp bởi tác giả, dẫn đến không có sai số thêm trong quá trình tính toán tư thế.
+
+Các mô hình VPR tuy có độ chuẩn xác cao trong việc truy xuất ảnh nhưng lại không có khả năng tính toán được tư thế chính xác của ảnh được chụp dẫn đến kết quả có phần tệ hơn. Các mô hình RPR tuy có khả năng tính toán tốt tư thế tuyệt đối trong những tập dữ liệu vừa và nhỏ song lại có thể mắc phải tình trạng quá khớp vào tập dữ liệu huấn luyện, dẫn đến kết quả không quá khả quan.
 
 \section{Ablation Study}
 Chúng tôi tiến hành nghiên cứu, đo đạc và ghi lại kết quả của các hướng cải thiện khác nhau với mô hình kết hợp của mình ở phần này. Kết quả được ghi nhận tại các bảng 4.4, 4.5, 4.6, 4.7 và 4.8.
@@ -259,11 +246,7 @@ Reranking (k=5) & 0.9892                                                        
 \end{table}
 \egroup
 \subsubsection*{Nhận xét}
-Chúng tôi nhận xét do tính chất đa dạng góc quay của tập dữ liệu, số ảnh tăng từ bước VPR không cải thiện được hiệu quả, ngược lại có thể làm cho sai số tăng nhẹ. Điều này có thể lý giải bởi hai lý do:
-\begin{itemize} 
-	\item Do không có quá nhiều khác biệt giữa trọng số cơ sở và trọng số đã được tinh chỉnh. 
-	\item Do bản chất của tập dữ liệu có ít ảnh trùng nhau giữa cơ sở dữ liệu và tập dữ liệu truy vấn - tức ngoài ảnh đầu tiên được truy xuất là chính xác thì các ảnh sau chỉ làm cho kết quả bị sai lệch chứ không cải thiện.
-\end{itemize}
+Chúng tôi nhận xét do tính chất đa dạng góc quay của tập dữ liệu, số ảnh tăng từ bước VPR không cải thiện được hiệu quả, ngược lại có thể làm cho sai số tăng nhẹ. Điều này có thể lý giải bởi hai lý do: thứ nhất, không có quá nhiều khác biệt giữa trọng số cơ sở và trọng số đã được tinh chỉnh, thứ hai do bản chất của tập dữ liệu có ít ảnh trùng nhau giữa cơ sở dữ liệu và tập dữ liệu truy vấn - tức ngoài ảnh đầu tiên được truy xuất là chính xác thì các ảnh sau chỉ làm cho kết quả bị sai lệch chứ không cải thiện.
 
 % Ablation study Weighted Pose
 \subsection*{Ablation study với bình quân trọng số trên mô hình kết hợp}
@@ -285,7 +268,7 @@ Weighted Pose (k = 5) & 0.9996                                                  
 \end{table}
 \egroup
 \subsubsection*{Nhận xét} 
-Chúng tôi nhận xét rằng với một tập dữ liệu đa dạng về góc nhìn tại một vị trí, việc tăng số ảnh truy xuất từ VPR không cải thiện hiệu quả mà ngược lại làm giảm đi hiệu quả tương đối, thể hiện qua việc sai số vị trí và góc quay đều tăng sau khi tăng số ảnh truy xuất.
+Chúng tôi nhận xét rằng với một tập dữ liệu đa dạng về góc nhìn tại một vị trí, việc tăng số ảnh truy xuất từ VPR không cải thiện hiệu quả mà ngược lại làm giảm đi hiệu quả tương đối, thể hiện qua việc sai số vị trí và góc quay đều tăng sau khi tăng số ảnh truy xuất. Cũng như khi áp dụng kỹ thuật reranking, việc tăng số ảnh truy xuất gây ra hiện tượng các ảnh sai lệch được tính toán ở tác vụ RPR và dẫn đến sai số tăng hơn.
 
 % Ablation study Best Overlap
 \subsection*{Ablation study tinh chỉnh mô hình theo hướng độ trùng lặp cao}
@@ -308,15 +291,6 @@ Best Overlap Training & 0.9866                                                  
 Kết quả cho thấy hướng tiếp cận này vẫn không khả quan, có thể giải thích bởi: mô hình cơ sở vốn đã có thể chọn ảnh tốt nhất cả về vị trí lẫn độ trùng lặp, hoặc ảnh có độ trùng lặp cao được chọn nhưng tác vụ RPR lại không thể tính toán tư thế chính xác do sai lệch ở các mô hình tiền huấn luyện ở tác vụ này.
 
 \section{Kết luận}
-Chúng tôi đã có thể đo đạc và so sánh kết quả các mô hình khác nhau với phương pháp đề xuất của nhóm. Chúng tôi rút ra được một số nhận xét tổng thể về điểm mạnh và điểm yếu cần cải thiện của giải pháp đề xuất. Trước hết, về điểm mạnh:
-\begin{itemize}
-	\item Mô hình kết hợp của chúng tôi kết hợp được độ tổng quát hóa cao của VPR và độ chính xác chi tiết của RPR trong tác vụ hồi quy tư thế, dẫn đến kết quả tốt hơn hết trong tác vụ RPR trên dữ liệu chưa được huấn luyện.
-	\item Sử dụng mô hình cơ sở giúp giảm thiểu tài nguyên cũng như thời gian huấn luyện.
-	\item Tác vụ RPR với các mô hình cơ sở giúp mô hình hoạt động tốt với nhiều tập dữ liệu hơn so với các mô hình học sâu.
-\end{itemize}
-Về các điểm cần cải thiện:
-\begin{itemize}
-	\item Việc sử dụng các mô hình cơ sở được huấn luyện sẵn tiềm ẩn nhiều rủi ro sai lệch trong các bước của mô hình, dẫn đến sai số lớn ở kết quả đầu ra.
-	\item Các mô hình feature matching thường hoạt động tốt trong môi trường indoor, hoặc với một vật thể cố định nào đó thay vì toàn cảnh đô thị.
-	\item Thời gian thực thi của các nhiều mô hình cơ sở sẽ làm tăng thời gian thực thi của toàn thể mô hình kết hợp.
-\end{itemize}
+Chúng tôi đã có thể đo đạc và so sánh kết quả các mô hình khác nhau với phương pháp đề xuất của nhóm. Chúng tôi rút ra được một số nhận xét tổng thể về điểm mạnh và điểm yếu cần cải thiện của giải pháp đề xuất. Trước hết, về điểm mạnh, mô hình đề xuất của chúng tôi kết hợp được độ tổng quát hóa cao của VPR và độ chính xác chi tiết của RPR trong tác vụ hồi quy tư thế, dẫn đến kết quả tốt hơn hết trong tác vụ RPR trên dữ liệu chưa được huấn luyện. Việc sử dụng mô hình cơ sở giúp chúng tôi giảm thiểu tài nguyên cũng như thời gian huấn luyện mô hình. Đồng thời, tác vụ RPR khi được thực thi bởi các mô hình cơ sở giúp mô hình hoạt động tốt với nhiều tập dữ liệu khác nhau hơn so với các mô hình học sâu.
+
+Về các điểm cần cải thiện, việc sử dụng các mô hình cơ sở được huấn luyện sẵn tiềm ẩn nhiều rủi ro sai lệch trong các bước của mô hình, dẫn đến sai số lớn ở kết quả đầu ra. Các mô hình feature matching thường hoạt động tốt trong môi trường indoor, hoặc với một vật thể cố định nào đó thay vì toàn cảnh đô thị. Ngoài ra, thời gian thực thi của nhiều mô hình cơ sở sẽ làm tăng thời gian thực thi của toàn thể mô hình kết hợp. Cuối cùng, các đề xuất cải thiện của chúng tôi với mô hình kết hợp phần nhiều vẫn chưa thể cải tiến đáng kể độ hiệu quả của mô hình trên dữ liệu thành thị phạm vi rộng và thưa.
