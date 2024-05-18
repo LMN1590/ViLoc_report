@@ -107,7 +107,7 @@ Tập dữ liệu 7Scenes \cite{6619221} được sử dụng để xác định
 
 
 \subsection{Kết quả}
-\subsubsection{Tập dữ liệu 7Scenes \cite{6619221}}
+\subsubsection{Tập dữ liệu 7Scenes}
 
 \begin{table}[H]
   \adjustbox{max width=\textwidth}{
@@ -144,11 +144,11 @@ Chỉ một ảnh tham khảo sẽ được sử dụng cho một truy vấn v�
 
 Để có thể phản ánh một môi trường thực tế, nơi mà ảnh tham khảo truy xuất được cách xa một khoảng đáng kể so với ảnh truy vấn, $K$ ảnh tham khảo mang nhiều thông tin nhất sẽ được chọn làm đại diện qua giải thuật gom cụm K-means.
 
-Hai đồ thị trên thể hiện sự thay đổi về độ chính xác, số dự đoán có $VCRE<80px$ khi tỷ lệ số dự đoán chấp nhận được thay đổi. Tỷ lệ số dự đoán chấp nhận sẽ tăng dần khi ngưỡng chấp nhận dần lỏng ra. Điều này đồng thời cũng làm cho độ chính xác cũng giảm dần do tăng khả năng những dự đoán không có cơ sở chắc chắn cũng được xem là đáng tin. Trong trường hợp này, những mô hình 2D-2D, đặc biệt là mô hình sử dụng SuperGlue, có kết quả tốt hơn so với những mô hình còn lại. Điều này thể hiện rõ nhất trong khoảng $0.5~1.0$ ở cả 2 kịch bản $K=10$ và $K=1$. 
+Hai đồ thị trên thể hiện sự thay đổi về độ chính xác, số dự đoán có $VCRE<80px$ khi tỷ lệ số dự đoán chấp nhận được thay đổi. Tỷ lệ số dự đoán chấp nhận sẽ tăng dần khi ngưỡng chấp nhận dần lỏng ra. Điều này đồng thời cũng làm cho độ chính xác cũng giảm dần do tăng khả năng những dự đoán không có cơ sở chắc chắn cũng được xem là đáng tin. Trong trường hợp này, những mô hình 2D-2D, đặc biệt là mô hình sử dụng SuperGlue, có kết quả tốt hơn so với những mô hình còn lại. Điều này thể hiện rõ nhất trong khoảng 0.5~1.0 ở cả 2 kịch bản $K=10$ và $K=1$. 
 
 Mô hình DSAC* vẫn có kết quả cạnh tranh. Tuy nhiên, phương pháp này lại quá phụ thuộc vào tập dữ liệu. Trong khi đó, những mô hình khác được huấn luyện trên tập ScanNet vẫn có kết quả tốt trên tập 7Scenes. Phương pháp sử dụng phép Triangulation cũng có kết quả cạnh tranh, tuy nhiên lại không thể hoạt động chỉ với một ảnh tham khảo. Những phương pháp Feat.Matching - Depth Scale có khả năng khái quát hóa tốt hơn những phương pháp RPR, có thể thấy ở hiệu quả tương đối thấp hơn của những phương pháp RPR.
 
-\subsubsection{Tập dữ liệu Niantic \cite{arnold2022mapfree}}
+\subsubsection{Tập dữ liệu Niantic}
 
 \begin{figure}[H]
   \centering
