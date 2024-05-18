@@ -13,16 +13,16 @@ Mạng thần kinh nhân tạo phụ thuộc vào dữ liệu đã được xử
 Perceptron là một thuật toán giúp phân loại dữ liệu theo hai lớp. Perceptron sẽ nhận vào một số lượng bất kỳ dữ liệu, áp dụng các trọng số được gán với mỗi dữ liệu đầu vào và một giá trị dời để tạo thành một hàm tuyến tính. Sau đó, kết quả của hàm tuyến tính sẽ được đi qua một lớp kích hoạt, đưa giá trị này về một trong hai phân loại đã được định nghĩa bằng đầu dựa vào một giới hạn đã được định trước(thường là giá trị 0).
 
 Phương thức hoạt động của một Perceptron có thể được thể hiện qua công thức
-$$
+\begin{equation}
   f(X) = \Theta(w\cdot X + b)
-$$
-\[
-  \Theta(x) =
-  \begin{cases}
-    1 & \text{if $x>=0$} \\
-    0 & \text{if $x<0$}
-  \end{cases}
-\]
+  \[
+    \Theta(x) =
+    \begin{cases}
+      1 & \text{if $x>=0$} \\
+      0 & \text{if $x<0$}
+    \end{cases}
+  \]
+\end{equation}
 
 Tuy nhiên, một vấn đề của mô hình Perceptron là mô hình sẽ chỉ xử lý tốt với những dạng dữ liệu có thể phân tách được ở dạng tuyến tính và chỉ hoạt động được với hai lớp phân loại do hàm kích hoạt. Vì vậy nên, để có thể mô hình hóa được những dạng dữ liệu có cấu trúc phức tạp hơn, nhiều mô hình Perceptron sẽ được kết hợp lại với nhau để tạo thành mạng Perceptron nhiều lớp.
 \begin{figure}[H]
@@ -82,17 +82,17 @@ Lớp tích chập là một lớp trích xuất đặc trưng ở dữ liệu �
 Sau đó, ở bên trong lớp tích chập, một hay nhiều bộ lọc sẽ được trượt trên tất cả các mảng của ảnh. Tại mỗi mảng được một bộ lọc trượt qua, phép toán nhân ma trận Frobenius sẽ được sử dụng để tính ra một giá trị mã hóa cho chi tiết tại mảng đó. Công thức của phép toán nhân ma trận Frobenius được thể hiện như sau.
 
 Với ma trận $A$ và $B$ được thể hiện như bên dưới,
-$$
+\begin{equation}
   {\displaystyle \mathbf {A} ={\begin{pmatrix}A_{11}&A_{12}&\cdots &A_{1m}\\A_{21}&A_{22}&\cdots &A_{2m}\\\vdots &\vdots &\ddots &\vdots \\A_{n1}&A_{n2}&\cdots &A_{nm}\\\end{pmatrix}}\,,\quad \mathbf {B} ={\begin{pmatrix}B_{11}&B_{12}&\cdots &B_{1m}\\B_{21}&B_{22}&\cdots &B_{2m}\\\vdots &\vdots &\ddots &\vdots \\B_{n1}&B_{n2}&\cdots &B_{nm}\\\end{pmatrix}}}
-$$
+\end{equation}
 Giá trị của phép nhân ma trận Forbenius giữa $A$ và $B$ là
-$$
+\begin{equation}
   {\displaystyle \langle \mathbf {A} ,\mathbf {B} \rangle _{\mathrm {F} }=\sum _{i,j}{\overline {A_{ij}}}B_{ij}\,=\mathrm {Tr} \left({\overline {\mathbf {A} ^{T}}}\mathbf {B} \right)\equiv \mathrm {Tr} \left(\mathbf {A} ^{\!\dagger }\mathbf {B} \right)}
-$$
+\end{equation}
 với ký hiệu gạch đầu là phép tính số phức liên hợp và ký hiệu $\!\dagger$ thể hiện phép nghịch đảo ma trận và tính số phức liên hợp trên tất cả các phần tử. Tuy nhiên, do lớp tích chập chỉ xử lý dữ liệu các số thực, cho nên công thức có thể được đơn giản hóa thành
-$$
+\begin{equation}
   {\displaystyle {\begin{aligned}\langle \mathbf {A} ,\mathbf {B} \rangle _{\mathrm {F} }=&{ {A}}_{11}B_{11}+{ {A}}_{12}B_{12}+\cdots +{ {A}}_{1m}B_{1m}\\&+{ {A}}_{21}B_{21}+{ {A}}_{22}B_{22}+\cdots +{ {A}}_{2m}B_{2m}\\&\vdots \\&+{ {A}}_{n1}B_{n1}+{ {A}}_{n2}B_{n2}+\cdots +{ {A}}_{nm}B_{nm}\\\end{aligned}}}
-$$
+\end{equation}
 
 \begin{figure}[H]
   \centering
@@ -205,9 +205,9 @@ Mạng MLP-Mixer hoạt động dựa trên 2 cơ chế chính là pha trộn to
 
 \subsubsection*{Thực hiện}
 Mạng Mixer sẽ nhận đầu vào là một ảnh đã được phân thành $S$ mảnh không trùng nhau. Từng mảnh sẽ có dạng dữ liệu là ma trận 2D sẽ được tham chiếu đến một chiều không gian $R^{C}$ và chuyển thành một vector 1 chiều có $C$ phần tử. Ma trận được dùng để tham chiếu sẽ được dùng chung cho quá trình chuyển đổi. Thông số $S$, số lượng những mảnh có kích thước $(P,P)$ của một ảnh có độ phân giải $(H,W)$ sẽ được tính bằng công thức:
-$$
+\begin{equation}
   S = \frac{H*W}{P^{2}}
-$$
+\end{equation}
 
 Sau đó các vector đại diện cho từng mảnh sẽ được nối lại với nhau, tạo thành một ma trận 2 chiều có dạng $R^{SxC}$. Với các hàng là những token(mã hóa của từng mảnh được cắt từ ảnh) và các cột là những kênh dữ liệu trên không gian $C$. Ma trận 2 chiều này sẽ được ký hiệu là $X$.
 
@@ -226,12 +226,12 @@ Ma trận này sau đó sẽ được đưa qua những lớp Mixer, lần lư�
 
 Mỗi lớp MLP được sử dụng bên trong mô hình sẽ được cấu tạo từ 2 lớp mạng kết nối đầy đủ. Giữa lớp mạng đầu tiên và lớp mạng thứ hai, một lớp hàm kích hoạt sẽ được dùng để tạo sự phi tuyến tính cho quá trình. Ngoài ra, đầu vào của các mạng MLP đều sẽ được chạy qua một lớp chuẩn hóa và mỗi lần chạy qua một lớp MLP đều sẽ được kết nối tắt với giá trị ban đầu. Các công thức bên dưới sẽ tóm tắt được quá trình xử lý của một lớp mạng Mixer
 
-$$
+\begin{equation}
   U_*,i = X_*,i + W_2*\sigma(W_1*LayerNorm(X)_*,i),
-$$
-$$
+\end{equation}
+\begin{equation}
   Y_j,* = U_j,* + W_4*\sigma(W_3*LayerNorm(U)_j,*)
-$$
+\end{equation}
 với $i = [1...C]$ và $j = [1...S]$. $\sigma$ là hàm không tuyến tính, trong bài báo này sẽ là hàm GELU \cite{hendrycks2023gaussian}.
 
 Cuối cùng, dữ liệu sẽ được đưa vào một lớp tổng hợp trung bình toàn cục và qua một mạng kết nối đầy đủ trước khi trả về kết quả là một đoạn mã hóa cho ảnh đầu vào.
