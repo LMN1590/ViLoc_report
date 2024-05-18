@@ -1,11 +1,11 @@
 \section{Đề xuất phát triển}
 
 \subsection{Chiến lược khai phá đặc trưng dựa trên độ trùng lắp}
-Ảnh tham khảo truy xuất được từ tác vụ VPR tiềm ẩn rủi ro không đủ độ trùng lắp với ảnh đầu vào, dẫn đến sai sót trong quá trình tính toán tư thế. Để giải quyết vấn đề này, chúng tôi đề xuất một chiến lược khai phá mới dựa trên hàm khai phá Multi-Similarity Miner \cite{wang2019multi} nhằm đảm bảo tính trùng lấp về vùng khung hình(frustum) cao giữa các ảnh. Điều này sẽ hỗ trợ cho quá trình Feature Matching tại module RPR ở phía sau.
+Ảnh tham khảo truy xuất được từ tác vụ VPR tiềm ẩn rủi ro không đủ độ trùng lắp với ảnh đầu vào, dẫn đến sai sót trong quá trình tính toán tư thế. Để giải quyết vấn đề này, chúng tôi đề xuất một chiến lược khai phá mới dựa trên hàm khai phá Multi-Similarity Miner \cite{wang2019multi} nhằm đảm bảo tính trùng lấp về vùng khung hình (frustum) cao giữa các ảnh, hỗ trợ cho quá trình Feature Matching tại module RPR ở phía sau.
 
-Cụ thể hơn, chúng tôi xác định một cặp ảnh là được một positive pair nếu có độ trùng lắp frustum cao hơn một ngưỡng nhất định, tức giữa cặp ảnh chia sẻ nhiều điểm chung hơn. Để đảm bảo độ vững chắc của mô hình không bị tác động, chúng tôi sử dụng cơ chế trùng lắp camera frustum song phương từ \cite{9008579}, được tính bằng tổng độ trùng lắp frustum từ một ảnh đến ảnh còn lại và ngược lại.
+Cụ thể hơn, chúng tôi xác định một cặp ảnh là một positive pair nếu có độ trùng lắp frustum cao hơn một ngưỡng nhất định, tức giữa cặp ảnh chia sẻ nhiều điểm chung hơn. Chúng tôi sử dụng cơ chế trùng lắp camera frustum song phương từ \cite{9008579}, được tính bằng tổng độ trùng lắp frustum từ một ảnh đến ảnh còn lại và ngược lại.
 
-Tuy nhiên, độ trùng lắp cao vẫn có thể xuất hiện trong trường hợp các ảnh được chụp ở hai góc độ hoàn toàn ngược nhau, gây nên khó khăn và sai lệch trong quá trình dự đoán tư thế tuyệt đối do góc quay khác biệt quá lớn. Để giải quyết vấn đề này, chúng tôi đặt ra điều kiện khác biệt hướng nhìn làm một tiêu chuẩn phụ trong việc chấp nhận các cặp ảnh. Cụ thể hơn, các cặp ảnh không được phép có hướng nhìn lệch nhau quá một tiêu chuẩn nhất định mà chúng tôi đặt ra.
+Tuy nhiên, độ trùng lặp cao vẫn có thể xuất hiện trong trường hợp các ảnh được chụp ở hai góc độ hoàn toàn ngược nhau, gây nên khó khăn và sai lệch trong quá trình dự đoán tư thế tuyệt đối do góc quay khác biệt quá lớn. Để giải quyết vấn đề này, chúng tôi đặt ra điều kiện khác biệt hướng nhìn làm một tiêu chuẩn phụ trong việc chấp nhận các cặp ảnh. Cụ thể hơn, các cặp ảnh không được phép có hướng nhìn lệch nhau quá một tiêu chuẩn nhất định.
 
 % \begin{figure}
 %   \centering
@@ -27,15 +27,14 @@ Tuy nhiên, độ trùng lắp cao vẫn có thể xuất hiện trong trường
 
 \subsubsection*{Độ trùng lắp Frustum}
 
-Độ trùng lắp frustum giữa hai ảnh có thể được định nghĩa là tổng tỷ lệ các điểm ảnh thuộc ảnh thứ nhất nằm trong vùng tầm nhìn khi chiếu lên hệ tọa độ camera thứ hai, và ngược lại. Độ trùng lắp này được tính toán bằng cách trước hết chiếu các điểm ảnh từ hình ảnh gốc vào không gian 3D thông qua việc tận dụng độ sâu ước lượng được. Sau đó, các điểm ảnh này được chiếu vào hệ tọa độ của hình ảnh thứ hai bằng cách tận dụng thông tin vị trí và góc quay của chúng.
+Độ trùng lặp frustum giữa hai ảnh có thể được định nghĩa là tổng tỷ lệ các điểm ảnh thuộc ảnh thứ nhất nằm trong vùng tầm nhìn khi chiếu lên hệ tọa độ camera thứ hai, và ngược lại. Độ trùng lắp này được tính toán bằng cách trước hết chiếu các điểm ảnh từ hình ảnh gốc vào không gian 3D thông qua việc tận dụng độ sâu ước lượng được. Sau đó, các điểm ảnh này được chiếu vào hệ tọa độ của hình ảnh thứ hai bằng cách tận dụng thông tin vị trí và góc quay của chúng.
 
-Đầu tiên, một ma trận các điểm ảnh với kích thước 10x10 được chiếu vào hệ tọa độ thực, sau đó lại được chiếu lại vào hệ tọa độ camera thứ hai. Phép chiếu có thể được công thức hóa như sau:
+Đầu tiên, một ma trận các điểm ảnh với kích thước $10\times 10$ được chiếu vào hệ tọa độ thực, sau đó lại được chiếu lại vào hệ tọa độ camera thứ hai. Phép chiếu có thể được công thức hóa như sau:
 \begin{equation}
-W = R_1\cdot \left[(K_1^{-1} \cdot P_1)*D_1(P_1)\right] + t_1
+  W = R_1\cdot \left[(K_1^{-1} \cdot P_1)*D_1(P_1)\right] + t_1
 \end{equation}
-
 \begin{equation}
-P_2 = K_2 \cdot\left[R_2^{T} \cdot (W - t_2)\right]
+  P_2 = K_2 \cdot\left[R_2^{T} \cdot (W - t_2)\right],
 \end{equation}
 với $P_i$ là vị trí điểm ảnh trong camera $i$, $K_i$ là ma trận intrinsics, $R_i$ và $t_i$ là độ lệch góc quay và vị trí từ hệ tọa độ camera sang hệ tọa độ thực với $R$ là vector góc quay thu được từ quaternion tương ứng, và $D_i(P)$ là ước lượng độ sâu theo đơn vị khoảng cách của điểm ảnh $P$.
 
@@ -44,7 +43,7 @@ với $P_i$ là vị trí điểm ảnh trong camera $i$, $K_i$ là ma trận in
 Để kiểm soát cách biệt góc quay giữa hai ảnh, chúng tôi đo độ cách biệt về hướng nhìn giữa chúng. Độ lệch góc quay camera $\alpha$ giữa hai camera có thể được định nghĩa như sau:
 
 \begin{equation}
-\alpha = arccos\left(\frac{trace(R_1^T \cdot R_2 - 1)}{2} \right) / \pi * 180
+  \alpha = arccos\left(\frac{trace(R_1^T \cdot R_2 - 1)}{2} \right) / \pi * 180
 \end{equation}
 
 với $\alpha$ mang đơn vị độ và $R_i$ là ma trận 3x3 thể hiện góc quay của ảnh.
@@ -53,14 +52,14 @@ với $\alpha$ mang đơn vị độ và $R_i$ là ma trận 3x3 thể hiện g�
 
 Hàm loss của chúng tôi được tính toán bằng tổng có trọng số giữa hai hàm loss với một biến số 'Control Rate' - tỷ lệ kiểm soát:
 \begin{equation}
-L = \beta * L_{Miner} + (1-\beta)*L_{Control}
+  L = \beta * L_{Miner} + (1-\beta)*L_{Control}
 \end{equation}
 với $L_{Control}$ là hàm Multi-Similarity Loss từ bài báo Multi-Similarity Miner và $L_{Miner}$ là hàm Multi-Similarity Loss nhận đầu ra từ chiến lược khai phá frustum mới của chúng tôi và $\beta$ là giá trị tỷ lệ để kiểm soát hai hàm Loss trên.
 
 \subsection{Chiến lược sắp xếp lại ảnh}
 Một số nghiên cứu trước đây đã thiết kế tác vụ truy xuất ảnh ở module VPR thành một quá trình gồm 2 bước đi từ kết quả thô đến kết quả chính xác. Việc thực hiện quá trình 2 bước này giúp cho mô hình VPR có thể lọc được tập kết quả thô ban đầu và sau đó tinh chỉnh lại xếp hạng của các kết quả theo một tiêu chí khác. Trong phương pháp đề xuất của chúng tôi, bước truy xuất đầu tiên sẽ được dùng để xác định một tập $k_1$ các ảnh được chụp gần với ảnh truy vấn. Sau đó, bước sắp xếp lại phía sau sẽ sắp xếp lại thứ tự ảnh, sắp xếp theo ưu tiên những ảnh có độ trùng lấp cao với ảnh truy vấn và xác định top $k_2$ ảnh có độ trùng lấp cao nhất.
 
-Với bước truy xuất ban đầu, chúng tôi sử dụng trọng số baseline được cung cấp bởi mô hình MixVPR, do đã được chứng minh là có hiệu quả tốt trong việc xác định ảnh tham khảo có vị trí gần với ảnh truy vấn. Sau đó, ở bước sắp xếp lại thứ tự, chúng tôi sử dụng một trọng số khác của MixVPR đã được huấn luyện lại, tập trung vào việc xác định những ảnh có độ trùng lấp cao với nhau. 
+Với bước truy xuất ban đầu, chúng tôi sử dụng trọng số baseline được cung cấp bởi mô hình MixVPR, do đã được chứng minh là có hiệu quả tốt trong việc xác định ảnh tham khảo có vị trí gần với ảnh truy vấn. Sau đó, ở bước sắp xếp lại thứ tự, chúng tôi sử dụng một trọng số khác của MixVPR đã được huấn luyện lại, tập trung vào việc xác định những ảnh có độ trùng lấp cao với nhau.
 
 Để có được trọng số mới, chúng tôi huấn luyện mô hình trên tập dữ liệu GSV-Cities \cite{Ali_bey_2022} với mỗi batch sẽ chỉ gồm các ảnh từ 1 khu vực. Mô hình sẽ tập trung vào việc phân biệt những ảnh có độ trùng lấp khung hình cao và thấp theo tiêu chí đã được đặt ra ở \textbf{3.4.1}.
 
