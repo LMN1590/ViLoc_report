@@ -133,7 +133,7 @@ Ours                                                    & 4096  & 0.93          
 Nhận xét về kết quả đo được với tác vụ VPR trên tập dữ liệu Pittsburgh250k-test \cite{6618963}:
 \begin{itemize}
 	\item Mô hình kết hợp của chúng tôi đạt kết quả tốt nhất về mặt độ lệch vị trí, nhưng lại đánh đổi sai lệch về góc quay cũng như giảm đi tỷ lệ truy xuất ảnh thành công.
-	\item Sai số lớn về góc quay ở mô hình kết hợp có thể dẫn đến bởi việc các ảnh truy xuất được từ VPR chưa đủ độ trùng lắp phù hợp để tác vụ RPR có thể hoàn thành tốt việc tính toán tư thế.
+	\item Sai số lớn về góc quay ở mô hình kết hợp có thể dẫn đến bởi việc các ảnh truy xuất được từ VPR chưa đủ độ trùng lặp phù hợp để tác vụ RPR có thể hoàn thành tốt việc tính toán tư thế.
 	\item Sai số về góc quay còn có thể dẫn đến bởi việc mô hình cơ sở xử lý tác vụ feature matching hoạt động chưa đủ hiệu quả với các tập dữ liệu thành thị đa dạng về góc quay. Ngoài ra, các thông số nội tại máy ảnh được tạo bởi COLMAP chỉ mang tính chất tham khảo, có thể dẫn đến sai số trong quá trình hồi quy tư thế.
 	\item Hiện tượng kiến trúc trùng lặp (các cảnh cách xa nhau nhưng có độ tương đồng cao về mặt hình ảnh, đặc trưng) ở tập dữ liệu Pittsburgh250k \cite{6618963} có thể dẫn đến việc truy xuất ảnh sai và từ đó hồi quy sai tư thế.
 	\item Ngoài ra, nhận thấy tác vụ dự đoán độ sâu của mô hình cơ sở vẫn còn nhiều sai sót, dẫn đến các sai sót trong quy trình hồi quy tư thế của toàn mô-đun RPR.
@@ -176,7 +176,7 @@ Ours                                           & 0.95                           
 Nhận xét về kết quả đo được với tác vụ RPR trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}:
 \begin{itemize}
 	\item Mô hình kết hợp của chúng tôi đạt kết quả tốt nhất. Có thể giải thích kết quả trên là do: chúng tôi kết hợp độ khái quát hóa tốt của tác vụ VPR và khả năng tính toán tư thế tuyệt đối chuẩn xác của tác vụ RPR, dẫn đến việc mô hình kết hợp đạt được kết quả tốt nhất dù chưa từng được huấn luyện trên tập dữ liệu này. 
-	\item Tác vụ RPR hoạt động tốt hơn khi mật độ ảnh cùng nhìn vào một địa điểm cao. Cụ thể là mô hình cơ sở feature matching sẽ được cải thiện hiệu suất khi các ảnh có độ trùng lắp cao. Ngoài ra các tham số nội tại thuộc tập dữ liệu Cambridge Landmark được cung cấp bởi tác giả, dẫn đến không có sai số thêm trong quá trình tính toán tư thế. 
+	\item Tác vụ RPR hoạt động tốt hơn khi mật độ ảnh cùng nhìn vào một địa điểm cao. Cụ thể là mô hình cơ sở feature matching sẽ được cải thiện hiệu suất khi các ảnh có độ trùng lặp cao. Ngoài ra các tham số nội tại thuộc tập dữ liệu Cambridge Landmark được cung cấp bởi tác giả, dẫn đến không có sai số thêm trong quá trình tính toán tư thế. 
 	\item Các mô hình VPR tuy có độ chuẩn xác cao trong việc truy xuất ảnh nhưng lại không có khả năng tính toán được tư thế chính xác của ảnh được chụp dẫn đến kết quả có phần tệ hơn.
 	\item Các mô hình RPR tuy có khả năng tính toán tốt tư thế tuyệt đối trong những tập dữ liệu vừa và nhỏ song lại có thể mắc phải tình trạng quá khớp vào tập dữ liệu huấn luyện, dẫn đến kết quả không quá khả quan.
 \end{itemize}
@@ -192,17 +192,19 @@ Chúng tôi tiến hành thực hiện những thí nghiệm nhằm nghiên cứ
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
 \begin{table}[H]
-\begin{tabular}{c|c|c|c|c}
-\multicolumn{1}{l|}{}                                                                    & \begin{tabular}[c]{@{}c@{}}Inliers\\ Threshold\end{tabular} & \begin{tabular}[c]{@{}c@{}}Retrieval\\ Rate $\uparrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Position\\ (meters) $\downarrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Orientation\\ (degrees) $\downarrow$\end{tabular} \\ \hline
-\multirow{5}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Pittsburgh250k\\ -test \cite{6618963}\end{tabular}}} & Inliers \textgreater 0                                      & 0.98                                                                & 18.32                                                                    & 39.39                                                                        \\
-                                                                                         & Inliers \textgreater 2                                      & 0.97                                                                & 13.44                                                                    & 38.13                                                                        \\
-                                                                                         & Inliers \textgreater 5                                      & 0.93                                                                & 10.09                                                                    & 37.46                                                                        \\
-                                                                                         & Inliers \textgreater 10                                     & 0.87                                                                & 9.02                                                                     & 36.88                                                                        \\
-                                                                                         & Inliers \textgreater 25                                     & 0.66                                                                & 8.35                                                                     & 35.30                                                                        \\ \hline
-\multirow{4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Cambridge \\ Landmark \cite{kendall2016posenet}\end{tabular}}}  & Inliers \textgreater 0                                      & 1.00                                                                & 3.19                                                                     & 4.80                                                                         \\
-                                                                                         & \multicolumn{1}{l|}{Inliers \textgreater 25}                & 0.97                                                                & 3.18                                                                     & 4.65                                                                         \\
-                                                                                         & \multicolumn{1}{l|}{Inliers \textgreater 35}                & 0.95                                                                & 3.16                                                                     & 4.35                                                                         \\
-                                                                                         & \multicolumn{1}{l|}{Inliers \textgreater 50}                & 0.88                                                                & 3.14                                                                     & 4.34                                                                        
+\centering
+\begin{tabular}{c|c|c|c|c|}
+\cline{2-5}
+\multicolumn{1}{l|}{}                                                                                                                                    & \begin{tabular}[c]{@{}c@{}}Inliers\\ Threshold\end{tabular} & \begin{tabular}[c]{@{}c@{}}Retrieval\\ Rate $\uparrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Position\\ (meters) $\downarrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Orientation\\ (degrees) $\downarrow$\end{tabular} \\ \hline
+\multicolumn{1}{|c|}{\multirow{5}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Pittsburgh250k\\ -test \cite{6618963}\end{tabular}}}}           & Inliers \textgreater 0                       & 0.98                                                                & 18.32                                                                    & 39.39                                                                        \\
+\multicolumn{1}{|c|}{}                                                                                                                                   & Inliers \textgreater 2                       & 0.97                                                                & 13.44                                                                    & 38.13                                                                        \\
+\multicolumn{1}{|c|}{}                                                                                                                                   & Inliers \textgreater 5                       & 0.93                                                                & 10.09                                                                    & 37.46                                                                        \\
+\multicolumn{1}{|c|}{}                                                                                                                                   & Inliers \textgreater 10                      & 0.87                                                                & 9.02                                                                     & 36.88                                                                        \\
+\multicolumn{1}{|c|}{}                                                                                                                                   & Inliers \textgreater 25                      & 0.66                                                                & 8.35                                                                     & 35.30                                                                        \\ \hline
+\multicolumn{1}{|c|}{\multirow{4}{*}{\textbf{\begin{tabular}[c]{@{}c@{}}Cambridge \\ Landmark \cite{kendall2016posenet}\end{tabular}}}} & Inliers \textgreater 0                       & 1.00                                                                & 3.19                                                                     & 4.80                                                                         \\
+\multicolumn{1}{|c|}{}                                                                                                                                   & \multicolumn{1}{l|}{Inliers \textgreater 25} & 0.97                                                                & 3.18                                                                     & 4.65                                                                         \\
+\multicolumn{1}{|c|}{}                                                                                                                                   & \multicolumn{1}{l|}{Inliers \textgreater 35} & 0.95                                                                & 3.16                                                                     & 4.35                                                                         \\
+\multicolumn{1}{|c|}{}                                                                                                                                   & \multicolumn{1}{l|}{Inliers \textgreater 50} & 0.88                                                                & 3.14                                                                     & 4.34                                                                         \\ \hline
 \end{tabular}
 \caption{Ablation Study với các ngưỡng inlier của mô hình kết hợp trên tập dữ liệu Pittsburgh250k-test \cite{6618963} và Cambridge Landmark \cite{kendall2016posenet}}
 \end{table}
@@ -222,11 +224,13 @@ Nhận thấy tiềm năng của các mô hình VPR (AnyLoc \cite{keetha2023anyl
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
 \begin{table}[H]
-\begin{tabular}{l|c|c|c|c}
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+\hline
               & Dim   & \begin{tabular}[c]{@{}c@{}}Retrieval\\ Rate $\uparrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Position\\ (meters) $\downarrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Orientation\\ (degrees) $\downarrow$\end{tabular} \\ \hline
 AnyLoc + RPR  & 12288 & 0.99                                                                & 41.39                                                                    & 47.57                                                                        \\
 MixVPR + RPR  & 4096  & 0.98                                                                & 18.96                                                                    & 39.20                                                                        \\
-NetVLAD + RPR & 32768 & 0.99                                                                & 77.39                                                                    & 48.28                                                                       
+NetVLAD + RPR & 32768 & 0.99                                                                & 77.39                                                                    & 48.28                                                                        \\ \hline
 \end{tabular}
 \caption{Ablation Study kết quả các baseline khi kết hợp với module RPR trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
 \end{table}
@@ -242,11 +246,13 @@ Tiếp theo, chúng tôi tiến hành kiểm thử hiệu quả hướng tiếp 
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
 \begin{table}[H]
-\begin{tabular}{l|c|c|c}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
                 & \begin{tabular}[c]{@{}c@{}}Retrieval\\ Rate $\uparrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Position\\ (meters) $\downarrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Orientation\\ (degrees) $\downarrow$\end{tabular} \\ \hline
 Reranking (k=1) & 0.9886                                                              & 18.32                                                                    & 39.39                                                                        \\
 Reranking (k=3) & 0.9897                                                              & 18.81                                                                    & 42.16                                                                        \\
-Reranking (k=5) & 0.9892                                                              & 19.22                                                                    & 41.30                                                                       
+Reranking (k=5) & 0.9892                                                              & 19.22                                                                    & 41.30                                                                        \\ \hline
 \end{tabular}
 \caption{Ablation Study kết quả reranking mô hình kết hợp trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
 \end{table}
@@ -266,11 +272,13 @@ Kết quả mô hình kết hợp khi áp dụng bình quân trọng số trên 
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
 \begin{table}[H]
-\begin{tabular}{l|c|c|c}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
                       & \begin{tabular}[c]{@{}c@{}}Retrieval\\ Rate $\uparrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Position\\ (meters) $\downarrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Orientation\\ (degrees) $\downarrow$\end{tabular} \\ \hline
 Weighted Pose (k = 1) & 0.9886                                                              & 18.32                                                                    & 39.39                                                                        \\
 Weighted Pose (k = 3) & 0.9978                                                              & 22.15                                                                    & 39.72                                                                        \\
-Weighted Pose (k = 5) & 0.9996                                                              & 25.48                                                                    & 40.21                                                                       
+Weighted Pose (k = 5) & 0.9996                                                              & 25.48                                                                    & 40.21                                                                        \\ \hline
 \end{tabular}
 \caption{Ablation Study kết quả mô hình kết hợp áp dụng bình quân trọng số trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
 \end{table}
@@ -280,21 +288,23 @@ Chúng tôi nhận xét rằng với một tập dữ liệu đa dạng về gó
 
 % Ablation study Best Overlap
 \subsection*{Ablation study tinh chỉnh mô hình theo hướng độ trùng lặp cao}
-Với việc tập trung tinh chỉnh mô hình VPR theo hướng ưu tiên các ảnh có độ trùng lắp cao, kết quả được thể hiện ở bảng 4.8.
+Với việc tập trung tinh chỉnh mô hình VPR theo hướng ưu tiên các ảnh có độ trùng lặp cao, kết quả được thể hiện ở bảng 4.8.
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
 \begin{table}[H]
-\begin{tabular}{l|c|c|c}
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
                       & \begin{tabular}[c]{@{}c@{}}Retrieval\\ Rate $\uparrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Position\\ (meters) $\downarrow$\end{tabular} & \begin{tabular}[c]{@{}c@{}}Orientation\\ (degrees) $\downarrow$\end{tabular} \\ \hline
 Base Training         & 0.9886                                                              & 18.32                                                                    & 39.39                                                                        \\
-Best Overlap Training & 0.9866                                                              & 26.92                                                                    & 42.15                                                                       
+Best Overlap Training & 0.9866                                                              & 26.92                                                                    & 42.15                                                                        \\ \hline
 \end{tabular}
-\caption{Ablation Study kết quả mô hình kết hợp khi áp dụng huấn luyện ưu tiên trùng lắp trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
+\caption{Ablation Study kết quả mô hình kết hợp khi áp dụng huấn luyện ưu tiên trùng lặp trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
 \end{table}
 \egroup
 \subsubsection*{Nhận xét} 
-Kết quả cho thấy hướng tiếp cận này vẫn không khả quan, có thể giải thích bởi: mô hình cơ sở vốn đã có thể chọn ảnh tốt nhất cả về vị trí lẫn độ trùng lắp, hoặc ảnh có độ trùng lắp cao được chọn nhưng tác vụ RPR lại không thể tính toán tư thế chính xác do sai lệch ở các mô hình tiền huấn luyện ở tác vụ này.
+Kết quả cho thấy hướng tiếp cận này vẫn không khả quan, có thể giải thích bởi: mô hình cơ sở vốn đã có thể chọn ảnh tốt nhất cả về vị trí lẫn độ trùng lặp, hoặc ảnh có độ trùng lặp cao được chọn nhưng tác vụ RPR lại không thể tính toán tư thế chính xác do sai lệch ở các mô hình tiền huấn luyện ở tác vụ này.
 
 \section{Kết luận}
 Chúng tôi đã có thể đo đạc và so sánh kết quả các mô hình khác nhau với phương pháp đề xuất của nhóm. Chúng tôi rút ra được một số nhận xét tổng thể về điểm mạnh và điểm yếu cần cải thiện của giải pháp đề xuất. Trước hết, về điểm mạnh:
