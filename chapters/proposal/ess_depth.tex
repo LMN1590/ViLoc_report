@@ -44,7 +44,7 @@ Essential Matrix $M$ sau đó sẽ được phân giải thành ma trận thể 
 
 \subsubsection{Bộ phận chiếu cặp điểm tương quan lên không gian ba chiều}
 
-Những cặp điểm tương quan thỏa ma trận $M$ sau đó sẽ được chiếu lên không gian 3D qua bản đồ độ sâu ảnh đã được sinh ra ở mỗi ảnh. Với mỗi cặp điểm $p_0, p_1$ đã được chiếu lên không gian 3D, mô hình sẽ tìm được một giá trị tỷ lệ $s^*$ cho $\hat{t}$ để làm giảm thiểu độ lệch của điểm $p_0$ khi được chiếu lên hệ tọa độ của camera thứ hai và điểm $p_1$. Giá trị $s$ tương ứng với mỗi cặp điểm $(p_0, p_1)$ có thể được xác định qua công thức:
+Những cặp điểm tương quan (inlier correspondence) thỏa ma trận $M$ sau đó sẽ được chiếu lên không gian 3D qua bản đồ độ sâu ảnh đã được sinh ra ở mỗi ảnh. Với mỗi cặp điểm $p_0, p_1$ đã được chiếu lên không gian 3D, mô hình sẽ tìm được một giá trị tỷ lệ $s^*$ cho $\hat{t}$ để làm giảm thiểu độ lệch của điểm $p_0$ khi được chiếu lên hệ tọa độ của camera thứ hai và điểm $p_1$. Giá trị $s$ tương ứng với mỗi cặp điểm $(p_0, p_1)$ có thể được xác định qua công thức:
 
 \begin{equation}
   \begin{aligned}
