@@ -176,7 +176,11 @@ Nhận xét về kết quả đo được với tác vụ RPR trên tập dữ l
 \end{itemize}
 
 \section{Ablation Study}
+Chúng tôi tiến hành nghiên cứu, đo đạc và ghi lại kết quả của các hướng cải thiện khác nhau với mô hình kết hợp của mình ở phần này. Kết quả được ghi nhận tại các bảng 4.4, 4.5, 4.6, 4.7 và 4.8.
+
 % Ablation study inliers
+Chúng tôi tiến hành thực hiện những thí nghiệm nhằm nghiên cứu những ảnh hưởng cũng như những đánh đổi về mặt kết quả của mô hình kết hợp ở các ngưỡng Inlier khác nhau trên hai tập dữ liệu Pittsburgh250k-test \cite{6618963} và Cambridge Landmark \cite{kendall2016posenet}. Kết quả được thể hiện ở bảng 4.4. Chúng tôi nhận xét càng tăng ngưỡng lên cao, độ lệch vị trí và độ lệch góc quay càng được cải thiện, nhưng đổi lại tỷ lệ truy xuất ảnh cũng giảm tương đối đáng kể. Với các tập dữ liệu phạm vi rộng và các góc nhìn về một cảnh tương đối lệch nhau, số lượng inlier correspondence khá thấp và vì thế tại ngưỡng (inlier > 5) và (inlier > 2), kết quả tương đối tốt. Ngược lại với tập dữ liệu như Cambridge Landmark, một cảnh sẽ có tương đối nhiều góc quay hướng vào, sẽ có lượng inlier correspondence tương đối cao. Ngoài ra, chúng tôi nhận thấy khi tăng ngưỡng lên một khoảng cố định, các sai lệch về vị trí và góc quay không còn được cải thiện đáng kể. Chúng tôi nhận xét đây là một hướng tiếp cận khá thú vị và dự kiến sẽ nghiên cứu thêm về một giải thuật xác định ngưỡng tối ưu với mỗi cơ sở dữ liệu được sử dụng.
+% table
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
@@ -197,6 +201,8 @@ Nhận xét về kết quả đo được với tác vụ RPR trên tập dữ l
 \end{table}
 \egroup
 % Ablation study VPR + RPR
+Nhận thấy tiềm năng của các mô hình VPR (AnyLoc \cite{keetha2023anyloc}, NetVLAD \cite{arandjelovic2016netvlad}, MixVPR cơ sở \cite{alibey2023mixvpr}) được sử dụng trong quá trình thí nghiệm và so sánh. Chúng tôi tiến hành nghiên cứu hiệu quả của các mô hình này khi kết hợp với mô-đun RPR trên tập dữ liệu Pittsburgh250k \cite{6618963}. Kết quả được thể hiện ở bảng 4.5. Từ bảng số liệu có thể thấy, các mô hình có tỷ lệ truy xuất ảnh ngang nhau, với MixVPR dẫn đầu về vị trí lẫn góc quay, AnyLoc ở vị trí thứ hai và NetVLAD ở vị trí cuối cùng. Ở đây, MixVPR được huấn luyện với GSV-Cities \cite{Ali_bey_2022} trong khi AnyLoc sử dụng các mô hình cơ sở tiền huấn luyện nhằm thực thi tác vụ VPR. Kết quả này cho thấy hiện tại việc áp dụng các mô hình cơ sở tiền huấn luyện lên tác vụ VPR dù có độ tổng quát hóa cao vẫn chưa đạt được kết quả lý tưởng nhất.
+% table
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
@@ -212,6 +218,8 @@ NetVLAD + RPR & 32768 & 0.99                                                    
 \egroup
 
 % Ablation study Reranking
+Tiếp theo, chúng tôi tiến hành kiểm thử hiệu quả hướng tiếp cận reranking mô hình kết hợp trên tập dữ liệu Pittsburgh250k-test \cite{6618963}. Chúng tôi chọn các ngưỡng (k=1, 3, 5) ảnh để đo đạc và so sánh. Kết quả được thể hiện ở bảng 4.6. Chúng tôi nhận thấy do tính chất đa dạng góc quay của tập dữ liệu, số ảnh tăng từ bước VPR không cải thiện được hiệu quả, ngược lại có thể làm cho sai số tăng nhẹ. Điều này có thể lý giải bởi hai lý do: thứ nhất do không có quá nhiều khác biệt giữa trọng số cơ sở và trọng số đã được tinh chỉnh, thứ hai do bản chất của tập dữ liệu có ít ảnh trùng nhau giữa cơ sở dữ liệu và tập dữ liệu truy vấn - tức ngoài ảnh đầu tiên được truy xuất là chính xác thì các ảnh sau chỉ làm cho kết quả bị sai lệch chứ không cải thiện.
+% table
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
@@ -227,6 +235,8 @@ Reranking (k=5) & 0.9892                                                        
 \egroup
 
 % Ablation study Weighted Pose
+Kết quả mô hình kết hợp khi áp dụng bình quân trọng số trên tập dữ liệu Pittsburgh250k-test \cite{6618963} được chúng tôi đo đạc tại bảng 4.7. Một lần nữa, chúng tôi nhận xét rằng với một tập dữ liệu đa dạng về góc nhìn tại một vị trí, việc tăng số ảnh truy xuất từ VPR không cải thiện hiệu quả mà ngược lại làm giảm đi hiệu quả tương đối.
+% table
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
@@ -242,6 +252,7 @@ Weighted Pose (k = 5) & 0.9996                                                  
 \egroup
 
 % Ablation study Best Overlap
+Với việc tập trung tinh chỉnh mô hình VPR theo hướng ưu tiên các ảnh có độ trùng lắp cao, kết quả được thể hiện ở bảng 4.8. Kết quả cho thấy hướng tiếp cận này vẫn không khả quan, có thể giải thích bởi: mô hình cơ sở vốn đã có thể chọn ảnh tốt nhất cả về vị trí lẫn độ trùng lắp, hoặc ảnh có độ trùng lắp cao được chọn nhưng tác vụ RPR lại không thể tính toán tư thế chính xác do sai lệch ở các mô hình tiền huấn luyện ở tác vụ này.
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
