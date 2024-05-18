@@ -16,19 +16,19 @@ Với dữ liệu đầu vào là cặp ảnh gồm ảnh truy vấn và ảnh t
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{pics/Proposal/matching.png}
+  \includegraphics[width=0.6\textwidth]{pics/Proposal/matching.png}
   \caption{Kết quả của quá trình xác định và ghép đặc trưng}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{pics/Proposal/depth.png}
+  \includegraphics[width=0.6\textwidth]{pics/Proposal/depth.png}
   \caption{Kết quả của quá trình ước tính độ sâu ảnh}
 \end{figure}
 
-\subsubsection{Bộ phận khai phá ma trận thiết yếu}
+\subsubsection{Bộ phận khai phá Essential Matrix}
 
-Dựa vào những cặp đặc trưng tương quan đã được xác định trong các tập $(kpts_0, kpts_1)$ và ma trận thông số $T_0, T_1$ của camera của mỗi ảnh, Essnential Matrix $M$ được ước tính dựa vào giải thuật 5 điểm \cite{nister2004efficient} cùng với vòng lặp MAGSAC++ \cite{barath2020magsac++}. Ma trận thông số $T_i$ của camera sẽ chứa các thông tin về tiêu cự của camera $f_x,f_y$ và tọa độ điểm chính của camera $c_x,c_y$, được sắp xếp thành ma trận như sau:
+Dựa vào những cặp đặc trưng tương quan đã được xác định trong các tập $(kpts_0, kpts_1)$ và ma trận thông số $T_0, T_1$ của camera của mỗi ảnh, Essential Matrix $M$ được ước tính dựa vào giải thuật 5 điểm \cite{nister2004efficient} cùng với vòng lặp MAGSAC++ \cite{barath2020magsac++}. Ma trận thông số $T_i$ của camera sẽ chứa các thông tin về tiêu cự của camera $f_x,f_y$ và tọa độ điểm chính của camera $c_x,c_y$, được sắp xếp thành ma trận như sau:
 $$
   T_i = \begin{bmatrix} f_x & 0 & c_x \\ 0 & f_y & c_y \\ 0 & 0 & 1 \end{bmatrix}
 $$
@@ -99,7 +99,7 @@ Tác vụ tìm kiếm tương quan giữa hai ảnh có thể lựa chọn giữ
         $$
 
         với $\pi$ là phép chiếu từ không gian camera lên ảnh, $\mathcal{V}$ là một tập các điểm 3D, đại diện cho những vật thể ảo. $\mathcal{V}$ là một lưới điểm 3D, (chiều cao là 4, chiều rộng là 7 và chiều sâu là 7), cách nhau 30cm và có độ dịch là 1.8m dọc theo trục của máy ảnh. Giá trị sai số của phép phản chiếu sẽ được so sánh với đường chéo của ảnh.
-  \item Độ tin cậy $C$ của dự đoán cũng là một tiêu chí được đánh giá. Giá trị này cho phép mô hình có thể phát hiện và loại bỏ những dự đoán không đáng tin cậy. Giá trị này sẽ được xác định bằng số lượng cặp điểm tương quan thỏa ma trận thiết yếu được chọn trên tổng số cặp điểm tương quan xác định bởi mô hình ghép đặc trưng. Với một ngưỡng tin cậy nhất định, tỷ lệ dự đoán đáng tin cậy - ratio of confident estimate, sẽ được xác định là tỷ lệ ảnh truy vấn có độ tin cậy vượt qua ngưỡng.
+  \item Độ tin cậy $C$ của dự đoán cũng là một tiêu chí được đánh giá. Giá trị này cho phép mô hình có thể phát hiện và loại bỏ những dự đoán không đáng tin cậy. Giá trị này sẽ được xác định bằng số lượng cặp điểm tương quan thỏa Essential Matrix được chọn trên tổng số cặp điểm tương quan xác định bởi mô hình ghép đặc trưng. Với một ngưỡng tin cậy nhất định, tỷ lệ dự đoán đáng tin cậy - ratio of confident estimate, sẽ được xác định là tỷ lệ ảnh truy vấn có độ tin cậy vượt qua ngưỡng.
   \item Độ chính xác của mô hình sẽ là tỷ lệ ảnh đáng tin cậy có sai lệch giữa giá trị dự đoán và giá trị thực dưới một ngưỡng nhất định (độ lệch vị trí và góc quay) hoặc có sai số phản chiếu chấp nhận được trên tổng số ảnh.
 \end{itemize}
 
@@ -150,7 +150,7 @@ Mô hình DSAC* vẫn có kết quả cạnh tranh. Tuy nhiên, phương pháp n
 
 \subsubsection{Tập dữ liệu Niantic}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
   \includegraphics[width=\textwidth]{pics/Proposal/all_niantic.png}
   \caption{Hiệu quả của các mô hình trên tập dữ liệu Niantic, xác định theo độ chính xác và số ảnh có sai số phản chiếu dưới ngưỡng}
