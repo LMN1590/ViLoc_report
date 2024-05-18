@@ -234,7 +234,9 @@ NNnet \cite{laskar2017camera} là công trình đầu tiên đề xuất một p
     \includegraphics[width=0.7\textwidth]{pics/Chapter2/camnet.png}
     \caption{Minh họa kiến trúc mô hình CamNet \cite{9008579}}
 \end{figure}
-Qunjie Zhou và những cộng sự \cite{zhou2020learn} sau khi phân tích các phương pháp hồi quy tư thế dựa trên việc truy xuất ảnh đã đề xuất một kiến trúc mới sử dụng Essential Matrix và RANSAC để tính toán tư thế tuyệt đối. Một mạng Siamese ResNet34 với một lớp tìm sự tương ứng cố định (EssNet) và một lớp tìm sự tương ứng đồng thuận lân cận (NC-EssNet) được học để tạo ra một bản đồ điểm tương ứng phục vụ cho mục đích hồi quy về sau của Essential Matrix. Hàm mất mát cải tiến khoảng cách Euclidean giữa Essential Matrix với hai vector 9 chiều.
+
+Qunjie Zhou và nnk \cite{zhou2020learn} sau khi phân tích các phương pháp hồi quy tư thế dựa trên việc truy xuất ảnh đã đề xuất một kiến trúc mới sử dụng Essential Matrix và RANSAC để tính toán tư thế tuyệt đối. Một mạng Siamese ResNet34 với một lớp tìm sự tương ứng cố định (EssNet) và một lớp tìm sự tương ứng đồng thuận lân cận (NC-EssNet) được học để tạo ra một bản đồ điểm tương ứng phục vụ cho mục đích hồi quy về sau của Essential Matrix. Hàm mất mát cải tiến khoảng cách Euclidean giữa Essential Matrix với hai vector 9 chiều.
+
 \begin{center}
     $l_{ess}(E^*, E) = \left \| e - e^* \right \|_2$
 \end{center}
