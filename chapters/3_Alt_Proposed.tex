@@ -2,11 +2,12 @@
 
 \section{Tổng quan}
 \subsection{Kiến trúc pipeline}
-Sau khi đã xác định những mô hình baseline sẽ sử dụng trong hệ thống, chúng tôi tiến hành thiết kế một kiến trúc phù hợp để có thể kết hợp hai hướng tiếp cận trong một pipeline hoàn chỉnh. Pipeline sẽ có kiến trúc như được mô tả trong hình xx với hai module lớn là module \textbf{nhận diện địa điểm trực quan - Visual Place Recognition(VPR)} với baseline là mô hình MixVPR và module \textbf{hồi quy vị trí tương đối - Relative Pose Regression(RPR)} với baseline là mô hình Mapfree 2D-2D. Module VPR sẽ giúp chọn ra ảnh tham khảo từ tập dữ liệu mô tả khu vực đang hoạt động làm cột mốc để cho module RPR có thể hồi quy ra được vị trí của ảnh truy vấn so với ảnh tham khảo.
+Sau khi đã xác định những mô hình baseline sẽ sử dụng trong hệ thống, chúng tôi tiến hành thiết kế một kiến trúc phù hợp để có thể kết hợp hai hướng tiếp cận trong một pipeline hoàn chỉnh. Pipeline sẽ có kiến trúc như được mô tả trong hình 3.1 với hai module lớn là module \textbf{nhận diện địa điểm trực quan - Visual Place Recognition(VPR)} với baseline là mô hình MixVPR và module \textbf{hồi quy vị trí tương đối - Relative Pose Regression(RPR)} với baseline là mô hình Mapfree 2D-2D. Module VPR sẽ giúp chọn ra ảnh tham khảo từ tập dữ liệu mô tả khu vực đang hoạt động làm cột mốc để cho module RPR có thể hồi quy ra được vị trí của ảnh truy vấn so với ảnh tham khảo.
 
 \begin{figure}[htbp]
   \centering
-  \includesvg[scale=0.3]{pics/Proposal/arch.svg}
+  \includegraphics[width=\textwidth]{pics/Proposal/arch.png}
+  % \includesvg[scale=0.3]{pics/Proposal/arch.svg}
   \caption{Kiến trúc tổng quan của pipeline định vị trực quan được đề xuất}
 \end{figure}
 
@@ -17,9 +18,7 @@ Bước tiếp theo, pipeline tiếp tục truyền cả ảnh nhận vào $I$ v
 \subsection{Dữ liệu đầu vào và đầu ra}
 Mô hình sẽ nhận vào ảnh $I$, có định dạng là một ảnh RGB. Sau đó, ảnh $I$ sẽ được tiền xử lý, gồm các bước đưa về kích thước 320x320 và chuẩn hóa các điểm ảnh trên hình, trước khi được đưa vào mô hình chính. Lưu ý, mô hình kết hợp sẽ cần ảnh phải mang thông tin tham số nội tại của máy ảnh nhằm thực hiện bước hồi quy tư thế. 
 
-Qua quá trình mô phỏng lại bài toán nhận diện địa điểm trực quan, mô hình sẽ thu được $k$ cặp ảnh có độ tương đồng cao, với một trong số đó là ảnh truy vấn ban đầu. Từng cặp ảnh trong $k$ cặp này sẽ được đưa vào bộ phận hồi quy tư thế tương đối tiếp theo.
-
-Có được tư thế của ảnh $I$ khi so với tập $k$ ảnh tham khảo có độ tương đồng cao nhất, mô hình sẽ chọn ra kết quả cuối cùng dựa vào độ đáng tin cậy được xác định ở \textbf{bộ phận xác định ma trận thiết yếu}. Dự đoán nào có số cặp điểm tương quan thỏa ma trận thiết yếu $M$ được chọn cao nhất sẽ được dùng làm dự đoán cuối cùng của mô hình.
+Qua quá trình mô phỏng lại bài toán nhận diện địa điểm trực quan, mô hình sẽ thu được $k$ cặp ảnh có độ tương đồng cao, gồm ảnh truy vấn ban đầu và ảnh tham khảo truy xuất được. Từng cặp ảnh trong $k$ cặp này sẽ được đưa vào bộ phận hồi quy tư thế tương đối tiếp theo. Có được tư thế của ảnh $I$ so với $k$ ảnh tham khảo có độ tương đồng cao nhất, mô hình sẽ chọn ra kết quả cuối cùng dựa vào độ đáng tin cậy $C$ được xác định ở \textbf{bộ phận xác định ma trận thiết yếu}.
 
 Định dạng đầu ra của mô hình sẽ gồm hai tập vector $R$ và $t$, lần lượt thể hiện góc quay và vị trí chụp ảnh trong không gian 3D. Cụ thể, hai vector sẽ có dạng:
 \begin{itemize}
@@ -47,5 +46,5 @@ Có được tư thế của ảnh $I$ khi so với tập $k$ ảnh tham khảo 
 \end{itemize}
 
 \input{chapters/proposal/mixvpr.tex}
-
+\newpage
 \input{chapters/proposal/ess_depth.tex}
