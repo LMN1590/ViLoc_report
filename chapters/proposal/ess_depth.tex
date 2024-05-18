@@ -16,14 +16,22 @@ Với dữ liệu đầu vào là cặp ảnh gồm ảnh truy vấn và ảnh t
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.6\textwidth]{pics/Proposal/matching.png}
-  \caption{Kết quả của quá trình xác định và ghép đặc trưng}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{pics/Proposal/depth.png}
-  \caption{Kết quả của quá trình ước tính độ sâu ảnh}
+  \begin{minipage}[b]{0.48\textwidth}
+      \captionsetup{justification=centering}
+      \includegraphics[width=\textwidth]{pics/Proposal/matching.png}
+      \caption{Kết quả của quá trình xác định và ghép đặc trưng}
+  \end{minipage}
+  \begin{minipage}[b]{0.48\textwidth}
+      \captionsetup{justification=centering}
+      \includegraphics[width=\textwidth]{pics/Proposal/depth.png}
+      \caption{Kết quả của quá trình ước tính độ sâu ảnh}
+  \end{minipage}
+  % \begin{minipage}[t]{0.3\textwidth}
+  %     \caption{Kết quả của quá trình xác định và ghép đặc trưng}
+  % \end{minipage}
+  % \begin{minipage}[t]{0.3\textwidth}
+  %     \caption{Kết quả của quá trình ước tính độ sâu ảnh}
+  % \end{minipage}
 \end{figure}
 
 \subsubsection{Bộ phận khai phá Essential Matrix}
@@ -133,25 +141,25 @@ Tập dữ liệu 7Scenes \cite{6619221} được sử dụng để xác định
   \caption[Bảng so sánh hiệu quả của các mô hình trên tập dữ liệu 7Scenes]{Hiệu quả của những mô hình khi có đầy đủ ảnh tham khảo trên tập 7Scenes. Những phương pháp \textcolor{green}{xanh lá} sẽ phụ thuộc vào tập dữ liệu, phương pháp \textcolor{yellow}{vàng} được huấn luyện trên SUNCG \cite{song2017semantic} và \textcolor{blue}{xanh dương} trên tập ScanNet \cite{dai2017scannet}}
 \end{table}
 
-Khi xét trên tập dữ liệu 7Scenes với tất cả các ảnh tham khảo, những phương pháp sử dụng biểu diễn 3D như DSAC* \cite{brachmann2021visual}, hLoc \cite{sarlin2019coarse}, ActiveSearch \cite{sattler2016efficient} có kết quả tốt nhất, tuy nhiên lại phụ thuộc vào quá trình tái tạo lại cấu trúc. Những phương pháp sử dụng phép đạc tam giác - Triangulation, sử dụng 5 ảnh tham khảo có kết quả cạnh tranh so với những phương pháp sử dụng biểu diễn 3D, được ký hiệu bằng $\triangle$.
+Khi xét trên tập dữ liệu 7Scenes với tất cả các ảnh tham khảo, những phương pháp sử dụng biểu diễn 3D như DSAC* \cite{brachmann2021visual}, hLoc \cite{sarlin2019coarse}, ActiveSearch \cite{sattler2016efficient} có kết quả tốt nhất, tuy nhiên lại phụ thuộc vào quá trình tái tạo lại cấu trúc. Những phương pháp sử dụng phép đạc tam giác - Triangulation, sử dụng 5 ảnh tham khảo có kết quả cạnh tranh so với những phương pháp sử dụng biểu diễn 3D, được ký hiệu bằng $\triangle$. Những phương pháp trong tập \textit{RPR} và \textit{Feat.Matching - Depth Scale} chỉ sử dụng một ảnh tham khảo để truy vấn. Cả hai lớp phương pháp đều có kết quả bị không chính xác bằng, với phương pháp Feat.Matching - Depth Scale có hiệu quả cao hơn những phương pháp RPR. Tuy nhiên, các phương pháp thuộc các lớp vẫn có kết quả cạnh tranh, có thể được phần nào giải thích bởi việc truy xuất ảnh tốt và sự phân bố dày đặc của tập dữ liệu.
 
-Chỉ một ảnh tham khảo sẽ được sử dụng cho một truy vấn với những phương pháp trong tập \textit{RPR} và \textit{Feat.Matching - Depth Scale}. Cả hai lớp phương pháp đều có kết quả bị xuống cấp, với phương pháp Feat.Matching - Depth Scale có hiệu quả cao hơn những phương pháp RPR. Tuy nhiên, các phương pháp thuộc các lớp vẫn có kết quả cạnh tranh, có thể được phần nào giải thích bởi việc truy xuất ảnh tốt và sự phân bố dày đặc của tập dữ liệu.
+
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{pics/Proposal/partial_7scene.png}
+  \includegraphics[width=0.6\textwidth]{pics/Proposal/partial_7scene.png}
   \caption[Hiệu quả của các mô hình khi giới hạn ảnh tham khảo]{Hiệu quả của những mô hình khi tập 7Scenes chỉ có 10/1 ảnh tham khảo, đánh giá về độ chính xác. Đối với những mô hình RPR không có phương pháp đánh giá về độ đáng tin cậy của dự đoán, một đường thẳng ngang sẽ được dùng để thể hiện độ chính xác}
 \end{figure}
 
 Để có thể phản ánh một môi trường thực tế, nơi mà ảnh tham khảo truy xuất được cách xa một khoảng đáng kể so với ảnh truy vấn, $K$ ảnh tham khảo mang nhiều thông tin nhất sẽ được chọn làm đại diện qua giải thuật gom cụm K-means.
 
-Hai đồ thị trên thể hiện sự thay đổi về độ chính xác, số dự đoán có $VCRE<80px$ khi tỷ lệ số dự đoán chấp nhận được thay đổi. Tỷ lệ số dự đoán chấp nhận sẽ tăng dần khi ngưỡng chấp nhận dần lỏng ra. Điều này đồng thời cũng làm cho độ chính xác cũng giảm dần do tăng khả năng những dự đoán không có cơ sở chắc chắn cũng được xem là đáng tin. Trong trường hợp này, những mô hình 2D-2D, đặc biệt là mô hình sử dụng SuperGlue, có kết quả tốt hơn so với những mô hình còn lại. Điều này thể hiện rõ nhất trong khoảng 0.5~1.0 ở cả 2 kịch bản $K=10$ và $K=1$. 
+Hai đồ thị trên thể hiện sự thay đổi về độ chính xác, những dự đoán có $VCRE<80px$ khi tỷ lệ kết quả chấp nhận thay đổi. Tỷ lệ số dự đoán chấp nhận sẽ tăng dần khi ngưỡng chấp nhận dần lỏng ra. Điều này đồng thời cũng làm cho độ chính xác cũng giảm dần do tăng khả năng những dự đoán không có cơ sở chắc chắn cũng được xem là đáng tin. Trong trường hợp này, những mô hình 2D-2D, đặc biệt là mô hình sử dụng SuperGlue, có kết quả tốt hơn so với những mô hình còn lại. Điều này thể hiện rõ nhất trong khoảng 0.5~1.0 ở cả 2 kịch bản $K=10$ và $K=1$. 
 
 Mô hình DSAC* vẫn có kết quả cạnh tranh. Tuy nhiên, phương pháp này lại quá phụ thuộc vào tập dữ liệu. Trong khi đó, những mô hình khác được huấn luyện trên tập ScanNet vẫn có kết quả tốt trên tập 7Scenes. Phương pháp sử dụng phép Triangulation cũng có kết quả cạnh tranh, tuy nhiên lại không thể hoạt động chỉ với một ảnh tham khảo. Những phương pháp Feat.Matching - Depth Scale có khả năng khái quát hóa tốt hơn những phương pháp RPR, có thể thấy ở hiệu quả tương đối thấp hơn của những phương pháp RPR.
 
 \subsubsection{Tập dữ liệu Niantic}
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{pics/Proposal/all_niantic.png}
   \caption{Hiệu quả của các mô hình trên tập dữ liệu Niantic, xác định theo độ chính xác và số ảnh có sai số phản chiếu dưới ngưỡng}
