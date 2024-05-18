@@ -7,17 +7,17 @@ Cụ thể hơn, chúng tôi xác định một cặp ảnh là được một p
 
 Tuy nhiên, độ trùng lắp cao vẫn có thể xuất hiện trong trường hợp các ảnh được chụp ở hai góc độ hoàn toàn ngược nhau, gây nên khó khăn và sai lệch trong quá trình dự đoán tư thế tuyệt đối do góc quay khác biệt quá lớn. Để giải quyết vấn đề này, chúng tôi đặt ra điều kiện khác biệt hướng nhìn làm một tiêu chuẩn phụ trong việc chấp nhận các cặp ảnh. Cụ thể hơn, các cặp ảnh không được phép có hướng nhìn lệch nhau quá một tiêu chuẩn nhất định mà chúng tôi đặt ra.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{pics/Chapter3/highoverlap.png}
-  \caption[Cặp ảnh có độ overlap cao]{Cặp ảnh được chấp nhận - có độ trùng lắp cao}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=\textwidth]{pics/Chapter3/highoverlap.png}
+%   \caption[Cặp ảnh có độ overlap cao]{Cặp ảnh được chấp nhận - có độ trùng lắp cao}
+% \end{figure}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{pics/Chapter3/lowoverlap.png}
-  \caption[Cặp ảnh có độ overlap thấp]{Cặp ảnh không được chấp nhận - có độ trùng lắp thấp}
-\end{figure}
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=\textwidth]{pics/Chapter3/lowoverlap.png}
+%   \caption[Cặp ảnh có độ overlap thấp]{Cặp ảnh không được chấp nhận - có độ trùng lắp thấp}
+% \end{figure}
 
 \begin{figure}
   \centering
@@ -66,7 +66,7 @@ Với bước truy xuất ban đầu, chúng tôi sử dụng trọng số basel
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.5\textwidth]{pics/Proposal/rerank.drawio.png}
+  \includegraphics[width=\textwidth]{pics/Proposal/rerank.drawio.png}
   \caption[Quá trình truy xuất 2 bước của VPR]{Quá trình truy xuất gồm 2 bước của mô hình VPR, gồm truy xuất theo địa điểm và truy xuất theo độ trùng lắp}
 \end{figure}
 
@@ -74,7 +74,19 @@ Với bước truy xuất ban đầu, chúng tôi sử dụng trọng số basel
 
 Ở pipeline cơ bản được đề xuất của nhóm, module VPR sẽ truy xuất được $k$ ảnh tham khảo và từ đó có thể xác định được $k$ dự đoán khác nhau tương ứng với mỗi ảnh. Kết quả cuối cùng sẽ là dự đoán có độ đáng tin cậy $C$ cao nhất. Tuy nhiên, khi chọn theo cơ chế tối đa như thế, thông tin lấy được từ những dự đoán của những ảnh còn lại sẽ bị lãng phí. Vì vậy nên, chúng tôi giới thiệu phương pháp lấy trung bình của từng dự đoán dựa vào với trọng số tương ứng với độ đáng tin $C$.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{pics/Proposal/weighted.png}
+  \caption[Trung bình trọng số theo inliers của dự đoán]{Mô tả phương pháp lấy trung bình trọng số của các dự đoán theo độ tin cậy của dự đoán}
+\end{figure}
+
 \subsection{Giới hạn ngưỡng đáng tin của kết quả}
 
 Độ đáng tin cậy $C$ của dự đoán của cặp ảnh truy vấn và tham khảo được định nghĩa là số cặp điểm tương quan giữa hai hình mà khi áp dụng phép biến đổi tương ứng với độ lệch về tư thế giữa hai ảnh, cho ra độ lệch dưới một ngưỡng nhất định. Càng nhiều điểm thỏa được phép biến đổi thì cơ sở để suy luận ra được độ lệch giữa hai ảnh càng thêm chắc chắn. Vì vậy nên, để đảm bảo được dự đoán của pipeline có thể được tin tưởng, chúng tôi áp dụng một bước lọc lại dự đoán ở cuối pipeline, nhằm lọc ra những kết quả có độ đáng tin cậy thấp, từ đó cải thiện hiệu quả của mô hình.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{pics/Proposal/threshold.png}
+  \caption[Những dự đoán tốt và không tốt đánh giá theo độ tin cậy]{Mô tả những trường hợp có độ tự tin cao và thấp trong tập dữ liệu Pittsburgh250k \cite{6618963}}
+\end{figure}
 
