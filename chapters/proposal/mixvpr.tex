@@ -14,8 +14,8 @@ Khi ảnh truy vấn $I$ được đưa vào, mô hình CNN backbone sẽ đư�
 
 Ở những phương pháp trước đây như NetVLAD \cite{arandjelovic2016netvlad} và PatchNetVLAD \cite{hausler2021patchnetvlad}, những lớp bản đồ đặc trưng thuộc $F$ sẽ được xem như là một mô tả tương ứng với một miền tiếp nhận cho một khu vực trong ảnh ban đầu. Ngược lại, MixVPR xem $F$ như một tập các bản đồ đặc trưng 2D có kích thước $h \cdot w$, miêu tả toàn ảnh. Đây là một cách biểu diễn ảnh nhỏ, nhẹ và thống nhất hơn trong điều kiện thay đổi về ánh sáng và góc nhìn, thay cho việc lưu trữ từng điểm ảnh.
 \begin{equation}
-  F = \{X^{i}\}
-\end{equation},
+  F = \{X^{i}\},
+\end{equation}
 với $i \in \left[1,..,c\right]$ và $X^{i}$ tương ứng với bản đồ kích hoạt thứ $i$ ở F.
 
 Mỗi bản đồ đặc trưng $X^{i}$ thuộc tập $F$ sau đó sẽ được được định dạng lại thành ma trận một chiều có dạng $X_{flat}^{i} \in R^{h*w}$, thu được được $F_{flat} \in R^{c \cdot n}$ với $n = h*w$.
@@ -25,17 +25,17 @@ Tiếp theo, tập hợp của những bản đồ đặc trưng $F_{flat}$ sẽ
 \begin{equation}
   \begin{aligned}
     X^{i} & \leftarrow Norm(X^{i})            \\
-    X^{i} & \leftarrow W_2(\sigma(W_1 X^{i}))
+    X^{i} & \leftarrow W_2(\sigma(W_1 X^{i})),
   \end{aligned}
-\end{equation},
+\end{equation}
 với $W_1$ và $W_2$ là trọng số của hai lớp liên kết đầy đủ, cấu tạo nên MLP và $\sigma$ là hàm tạo sự phi tuyến tính cho quá trình xử lý (ReLU). Kỹ thuật nối tắt được sử dụng để nối đầu vào đã qua lớp chuẩn hóa với đầu ra nhằm giúp độ dốc trong quá trình huấn luyện có thể được truyền tải dễ hơn, cải thiện quá trình huấn luyện. Kết quả đầu ra của khối Feature Mixer sẽ được giữ định dạng giống như dữ liệu đầu vào, có dạng $R^{h*w}$. 
 
 Mục đích của việc sử dụng Feature Mixer là để tận dụng khả năng tổng hợp thông tin từ dữ liệu của các lớp kết nối đầy đủ, thay vì học trên những đặc trưng cục bộ trên ảnh và sử dụng cơ chế tập trung. Ngoài ra, Feature Mixer cũng sẽ trả về kết quả có định dạng và kích thước như đầu vào, thay vì giảm dần như những phương pháp tổng hợp dạng phân cấp (kim tự tháp) như trước đây, để mỗi neuron đều có thể biết được thông tin của toàn bộ ảnh. Những lớp MLP trong khối Feature Mixer sẽ giúp tích hợp thông tin trên toàn bộ ảnh qua mỗi lần xử lý.
 
 Mỗi khối Feature Mixer sau khi xử lý xong từng bản đồ đặc trưng trong tập $F_{flat} \in R^{c \cdot n}$ sẽ ghép kết quả lại, tạo thành $Z \in R^{c \cdot n}$ với cùng kích thước trước khi được đưa vào khối Feature Mixer kế tiếp. Quá trình xử lý tập bản đồ đặc trưng qua các khối Feature Mixer có thể được miêu tả bằng công thức sau:
 \begin{equation}
-  Z = FM_L(FM_{L-1}(\dots FM_1(F_{flat})))
-\end{equation},
+  Z = FM_L(FM_{L-1}(\dots FM_1(F_{flat}))),
+\end{equation}
 với $FM_i$ là lớp Feature Mixer thứ $i$ trên tổng số $L$ khối và $Z$ là kết quả cuối cùng của quá trình tích hợp thông tin toàn cục.
 
 \subsubsection{Lớp tổng hợp - Aggregation}
@@ -43,14 +43,14 @@ Ta có $Z \in R^{c \cdot n}$ với số chiều rất cao do có định dạng 
 
 Đầu tiên, dữ liệu sẽ được tổng hợp số kênh để biến định dạng của $Z$ từ $R^{c \cdot n}$ thành $R^{d \cdot n}$.
 \begin{equation}
-  Z' = W_d(Transpose(Z))
-\end{equation},
+  Z' = W_d(Transpose(Z)),
+\end{equation}
 với $W_d$ là trọng số của lớp kết nối đầy đủ đầu tiên và $d$ là định dạng đầu ra sau khi rút gọn số kênh lại, $d<c$.
 
 Sau đó, giá trị trên từng bản đồ đặc trưng sẽ được tổng hợp lại, từ định dạng $R^{d \cdot n}$ thành $R^{d \cdot r}$.
 \begin{equation}
-  O = W_r(Transpose(Z'))
-\end{equation},
+  O = W_r(Transpose(Z')),
+\end{equation}
 với $W_r$ là trọng số của lớp kết nối đầy đủ thứ hai và $r$ là định dạng đầu ra của các bản đồ đặc trưng 1D, $r<n$.
 
 Kết quả $O$ cuối cùng, có định dạng là $R^{d \cdot r}$, sẽ được ép thành một chiều và chuẩn hóa theo $L_2$ như những phương pháp VPR khác \cite{arandjelovic2016netvlad,berton2022rethinking}. Cuối cùng, từ ảnh đầu vào $I$, mô hình sẽ trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Đoạn mã hóa này sau đó có thể được dùng để so sánh với giá trị mã hóa của những hình khác nhằm tìm ảnh có độ tương đồng cao nhất với $I$.

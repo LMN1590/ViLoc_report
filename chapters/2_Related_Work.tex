@@ -174,8 +174,8 @@ Một phương pháp khác được áp dụng để hồi quy tư thế tuyệt
 
 MapNet \cite{brahmbhatt2018geometryaware} đề xuất sử dụng thêm một thuật ngữ mất mát lấy từ các cặp ảnh làm một ràng buộc hình học, điều này đã có thể cải thiện mạnh mẽ hiệu suất khả năng định vị. Về hàm mất mát, MapNet giảm thiểu tối đa cả mất mát tư thế tuyệt đối cho mỗi hình ảnh và mất mát tư thế tương đối giữa các cặp hình ảnh:
 \begin{equation}
-    l(I_{total}) = l(I_i) + \alpha\sum_{i\neq j}loss(I_{ij} )
-\end{equation},
+    l(I_{total}) = l(I_i) + \alpha\sum_{i\neq j}loss(I_{ij} ),
+\end{equation}
 trong đó, $loss(I_{ij} )$ chỉ tư thế máy ảnh tương đối $p_i$ và $p_j$ giữa các cặp hình ảnh $I_i$ và $I_j$, được tính bởi hàm mất mát với trọng số có thể học được.
 
 Thêm vào đó, MapNet chuyển một giá trị quaternion thành logarit của giá trị đó - biểu diễn phép quay 3DoF với ba chiều chưa bị tham số hóa quá mức. $logq$ được biểu diễn như dưới đây, với $u$ và $v$ đại diện cho phần thực và ảo của một quaternion đơn vị:
@@ -202,8 +202,8 @@ Không chỉ đơn ảnh hay đa ảnh, ngay cả đoạn phim cũng có thể �
 \end{figure}
 VidLoc \cite{clark2017vidloc} đề xuất một mô hình hồi quy tư thế máy ảnh dựa trên việc kết hợp CNN – RNN, mục đích là có thể khiến quá trình dự đoán vị trí từ ảnh hay một đoạn phim được trơn tru hơn. Mạng được xây dựng bằng cách sử dụng GoogLeNet Inception \cite{szegedy2014going} mà không dùng đến lớp kết nối đầy đủ để trích xuất đặc trưng ảnh và một module LSTM hai chiều để mô hình hóa thông tin thời gian với các ô nhớ.  Hàm mất mát của VidLoc được tính bằng tổng của lỗi vị trí và lỗi hướng quay từ đầu ra của LSTM như sau:
 \begin{equation}
-    l = \sum_{t=1}^T \alpha_1 \left \| x_t - \hat{x}_t \right \| + \alpha_2 \left \| q_t - \hat{q}_t \right \|
-\end{equation},
+    l = \sum_{t=1}^T \alpha_1 \left \| x_t - \hat{x}_t \right \| + \alpha_2 \left \| q_t - \hat{q}_t \right \|,
+\end{equation}
 với $[x_t, q_t]$ và $[\hat{x}_t, \hat{q}_t]$ đại diện cho sự thật nền tảng và giá trị dự đoán cho độ dời vị trí và hướng quay.
 
 \subsubsection*{Kết luận}
