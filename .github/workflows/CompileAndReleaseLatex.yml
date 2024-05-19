@@ -10,32 +10,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: Dissertation.tex
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release and Upload Asset
+        id: create_release_and_upload_asset
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ github.sha }}
-          release_name: Release ${{ github.sha }}
+          make_latest: true
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} 
-          asset_path: ./Dissertation.pdf
-          asset_name: Dissertation.pdf
-          asset_content_type: application/pdf
-
+          files: Dissertation.pdf
+          fail_on_unmatched_files: true
+          tag_name: Release ${{ github.event.head_commit.timestamp }} - ${{  github.ref }}
