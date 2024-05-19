@@ -26,4 +26,4 @@ jobs:
           prerelease: false
           files: Dissertation.pdf
           fail_on_unmatched_files: true
-          tag_name: Release ${{ github.event.head_commit.timestamp }} - ${{  github.ref }}
+          tag_name: Release ${{ github.event.head_commit.timestamp }}
