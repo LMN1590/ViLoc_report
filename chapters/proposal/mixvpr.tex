@@ -14,8 +14,8 @@ Khi ảnh truy vấn $I$ được đưa vào, mô hình CNN backbone sẽ đư�
 
 Ở những phương pháp trước đây như NetVLAD \cite{arandjelovic2016netvlad} và PatchNetVLAD \cite{hausler2021patchnetvlad}, những lớp bản đồ đặc trưng thuộc $F$ sẽ được xem như là một mô tả tương ứng với một miền tiếp nhận cho một khu vực trong ảnh ban đầu. Ngược lại, MixVPR xem $F$ như một tập các bản đồ đặc trưng 2D có kích thước $h \cdot w$, miêu tả toàn ảnh. Đây là một cách biểu diễn ảnh nhỏ, nhẹ và thống nhất hơn trong điều kiện thay đổi về ánh sáng và góc nhìn, thay cho việc lưu trữ từng điểm ảnh.
 \begin{equation}
-  F = \{X^{i}\},
-\end{equation}
+  F = \{X^{i}\}
+\end{equation},
 với $i \in \left[1,..,c\right]$ và $X^{i}$ tương ứng với bản đồ kích hoạt thứ $i$ ở F.
 
 Mỗi bản đồ đặc trưng $X^{i}$ thuộc tập $F$ sau đó sẽ được được định dạng lại thành ma trận một chiều có dạng $X_{flat}^{i} \in R^{h*w}$, thu được được $F_{flat} \in R^{c \cdot n}$ với $n = h*w$.
@@ -27,7 +27,7 @@ Tiếp theo, tập hợp của những bản đồ đặc trưng $F_{flat}$ sẽ
     X^{i} & \leftarrow Norm(X^{i})            \\
     X^{i} & \leftarrow W_2(\sigma(W_1 X^{i}))
   \end{aligned}
-\end{equation}
+\end{equation},
 với $W_1$ và $W_2$ là trọng số của hai lớp liên kết đầy đủ, cấu tạo nên MLP và $\sigma$ là hàm tạo sự phi tuyến tính cho quá trình xử lý (ReLU). Kỹ thuật nối tắt được sử dụng để nối đầu vào đã qua lớp chuẩn hóa với đầu ra nhằm giúp độ dốc trong quá trình huấn luyện có thể được truyền tải dễ hơn, cải thiện quá trình huấn luyện. Kết quả đầu ra của khối Feature Mixer sẽ được giữ định dạng giống như dữ liệu đầu vào, có dạng $R^{h*w}$. 
 
 Mục đích của việc sử dụng Feature Mixer là để tận dụng khả năng tổng hợp thông tin từ dữ liệu của các lớp kết nối đầy đủ, thay vì học trên những đặc trưng cục bộ trên ảnh và sử dụng cơ chế tập trung. Ngoài ra, Feature Mixer cũng sẽ trả về kết quả có định dạng và kích thước như đầu vào, thay vì giảm dần như những phương pháp tổng hợp dạng phân cấp (kim tự tháp) như trước đây, để mỗi neuron đều có thể biết được thông tin của toàn bộ ảnh. Những lớp MLP trong khối Feature Mixer sẽ giúp tích hợp thông tin trên toàn bộ ảnh qua mỗi lần xử lý.
@@ -35,7 +35,7 @@ Mục đích của việc sử dụng Feature Mixer là để tận dụng khả
 Mỗi khối Feature Mixer sau khi xử lý xong từng bản đồ đặc trưng trong tập $F_{flat} \in R^{c \cdot n}$ sẽ ghép kết quả lại, tạo thành $Z \in R^{c \cdot n}$ với cùng kích thước trước khi được đưa vào khối Feature Mixer kế tiếp. Quá trình xử lý tập bản đồ đặc trưng qua các khối Feature Mixer có thể được miêu tả bằng công thức sau:
 \begin{equation}
   Z = FM_L(FM_{L-1}(\dots FM_1(F_{flat})))
-\end{equation}
+\end{equation},
 với $FM_i$ là lớp Feature Mixer thứ $i$ trên tổng số $L$ khối và $Z$ là kết quả cuối cùng của quá trình tích hợp thông tin toàn cục.
 
 \subsubsection{Lớp tổng hợp - Aggregation}
@@ -44,13 +44,13 @@ Ta có $Z \in R^{c \cdot n}$ với số chiều rất cao do có định dạng 
 Đầu tiên, dữ liệu sẽ được tổng hợp số kênh để biến định dạng của $Z$ từ $R^{c \cdot n}$ thành $R^{d \cdot n}$.
 \begin{equation}
   Z' = W_d(Transpose(Z))
-\end{equation}
+\end{equation},
 với $W_d$ là trọng số của lớp kết nối đầy đủ đầu tiên và $d$ là định dạng đầu ra sau khi rút gọn số kênh lại, $d<c$.
 
 Sau đó, giá trị trên từng bản đồ đặc trưng sẽ được tổng hợp lại, từ định dạng $R^{d \cdot n}$ thành $R^{d \cdot r}$.
 \begin{equation}
   O = W_r(Transpose(Z'))
-\end{equation}
+\end{equation},
 với $W_r$ là trọng số của lớp kết nối đầy đủ thứ hai và $r$ là định dạng đầu ra của các bản đồ đặc trưng 1D, $r<n$.
 
 Kết quả $O$ cuối cùng, có định dạng là $R^{d \cdot r}$, sẽ được ép thành một chiều và chuẩn hóa theo $L_2$ như những phương pháp VPR khác \cite{arandjelovic2016netvlad,berton2022rethinking}. Cuối cùng, từ ảnh đầu vào $I$, mô hình sẽ trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Đoạn mã hóa này sau đó có thể được dùng để so sánh với giá trị mã hóa của những hình khác nhằm tìm ảnh có độ tương đồng cao nhất với $I$.
@@ -73,7 +73,7 @@ Mô hình MixVPR sẽ được hiện thực trên framework PyTorch. Mô hình 
 Mô hình MixVPR được đánh giá trong bài nghiên cứu sử dụng mô hình ResNet \cite{he2016deep} đã được huấn luyện trên tập ImageNet \cite{krizhevsky2012imagenet} làm cơ sở. Sau đó, mô hình được huấn luyện trên tập dữ liệu GSV-Cities \cite{Ali_bey_2022}. Đối với hàm mất mát, hàm Multi-Similarity Loss \cite{wang2019multi} được sử dụng với lý do đã được chứng minh là hỗ trợ cho ra kết quả tốt nhất với tác vụ VPR \cite{Ali_bey_2022}. Kích thước của một batch sẽ có $P = 120$ địa điểm, mỗi địa điểm được miêu tả bởi 4 ảnh, tạo thành một batch có kích thước 480 ảnh. Phương pháp tối ưu giảm độ dốc ngẫu nhiên - SGD sẽ được sử dụng với quán tính - momentum là 0.9 với giá trị suy giảm trọng số - weight decay là 0.001. Tốc độ học - learning rate sẽ được khởi tạo với giá trị 0.05 và sẽ được chia 3 sau mỗi 5 chu kỳ - epoch. Cuối cùng, mô hình sẽ được huấn luyện tối đa 30 chu kỳ - epoch với đầu vào là ảnh đã được điều chỉnh kích thước 320x320.
 
 \subsubsection{Phương pháp đánh giá}
-Để đánh giá hiệu năng mô hình, 5 tập dữ liệu tiêu chuẩn đã được sử dụng. Pitts250k-test \cite{6618963}, bao gồm 8.000 ảnh truy vấn và 83.000 ảnh tham khảo, được thu thập từ Google Street View và Pitts30k-test \cite{6618963} là một tập con của Pitts250k bao gồm 8.000 ảnh truy vấn và 8.000 ảnh tham khảo. Cả 2 tập dữ liệu Pittsburgh đều có những góc nhìn có độ lệch đáng kể, những chi tiết kiến trúc tương đồng cũng thường xuyên xuất hiện trong tập dữ liệu này. Tập dữ liệu SPEDTest \cite{zaffar2021vpr} gồm 607 ảnh truy vấn và 607 ảnh tham khảo thu từ camera giám sát, chứa những thay đổi lớn về độ sáng và về cảnh vật các mùa. MSLS \cite{warburg2020mapillary} được thu thập từ camera hành trình của xe hơi, cho rất nhiều góc nhìn đa dạng cũng như đa dạng về sự thay đổi độ sáng. Cuối cùng, Nordland \cite{zaffar2021vpr} là một tập dữ liệu chứa nhiều thử thách khi sử dụng ảnh thu thập được ở cả 4 mùa với camera được gắn trên tàu. Đơn vị đánh giá được sử dụng sẽ là recall@k, thể hiện tỷ lệ của truy xuất thành công trên tổng số lượng truy xuất. Một truy xuất hình sẽ được xem là thành công khi ảnh được truy xuất nằm trong vòng 25m xung quanh ảnh truy vấn.
+Để đánh giá hiệu năng mô hình, 5 tập dữ liệu tiêu chuẩn đã được sử dụng. Pitts250k-test \cite{6618963}, bao gồm 8.000 ảnh truy vấn và 83.000 ảnh tham khảo, được thu thập từ Google Street View và Pitts30k-test \cite{6618963} là một tập con của Pitts250k bao gồm 8.000 ảnh truy vấn và 8.000 ảnh tham khảo. Cả 2 tập dữ liệu Pittsburgh đều có những góc nhìn có độ lệch đáng kể, những chi tiết kiến trúc tương đồng cũng thường xuyên xuất hiện trong tập dữ liệu này. Tập dữ liệu SPEDTest \cite{zaffar2021vpr} gồm 607 ảnh truy vấn và 607 ảnh tham khảo thu từ camera giám sát, chứa những thay đổi lớn về độ sáng và về cảnh vật các mùa. MSLS \cite{warburg2020mapillary} được thu thập từ camera hành trình của xe hơi, cho rất nhiều góc nhìn đa dạng cũng như đa dạng về sự thay đổi độ sáng. Cuối cùng, Nordland \cite{zaffar2021vpr} là một tập dữ liệu chứa nhiều thử thách khi sử dụng ảnh thu thập được ở cả 4 mùa với camera được gắn trên tàu. Đơn vị đánh giá được sử dụng sẽ là recall@k, thể hiện tỷ lệ của truy xuất thành công trên tổng số lượng truy xuất. Một truy xuất hình được xem là thành công khi ảnh được truy xuất nằm trong vòng 25m xung quanh ảnh truy vấn.
 
 \subsection{Kết quả}
 Khi so sánh trên những tập dữ liệu phản ánh môi trường thành thị, mô hình MixVPR đạt được kết quả vượt trội so với những mô hình SOTA đã được đề xuất trước nó, như CosPlace \cite{berton2022rethinking} và NetVLAD \cite{arandjelovic2016netvlad}. Những tập dữ liệu được sử dụng đã bao quát hết những trường hợp có thể tác động xấu đến mô hình như góc nhìn đa dạng; thời tiết, mùa thay đổi; chênh lệch về độ sáng. MixVPR cũng có khả năng giải quyết được những trường hợp mà những phương pháp trước gặp khó khăn như: kiến trúc lặp lại nhiều, góc nhìn thay đổi rõ rệt, đường chân trời, độ sáng chênh lệch lớn và gặp nhiều vật thể cản trở tầm nhìn. Tuy nhiên, mô hình vẫn sẽ gặp thất bại khi độ chênh lệch góc nhìn là quá lớn hoặc có quá nhiều vật cản. Những trường hợp thất bại của mô hình MixVPR được thể hiện ở hình \textbf{3.5}

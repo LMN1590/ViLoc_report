@@ -2,17 +2,17 @@
 
 \section{Những phương pháp biểu diễn khu vực}
 
-Định vị trực quan được định nghĩa là một bài toán xác định vị trí của ảnh chụp. Nhằm giúp mô hình có thể định vị được trong một khu vực lớn, đa phần các phương pháp sẽ cần một cách để biểu diễn khu vực đang xét. Đa số các tập dữ liệu thường được xây dựng sử dụng ảnh 2D. Điều này là nhờ vào sự phát triển của công nghệ camera, giúp ảnh 2D có thể được thu thập một cách dễ dàng. Những tập dữ liệu ảnh 2D chỉ mang thông tin về màu sắc của cảnh vật, dưới định dạng RGB. Ngoài ra, một số tập dữ liệu đề xuất việc sử dụng ảnh RGBD, chứa cả thông tin về màu và độ sâu của ảnh, nhằm biểu diễn rõ ràng hơn cảnh vật.
+Định vị trực quan được định nghĩa là một bài toán xác định vị trí của ảnh chụp. Nhằm giúp mô hình có thể định vị được trong một khu vực lớn, đa phần các phương pháp cần một cách để biểu diễn khu vực đang xét. Đa số các tập dữ liệu thường được xây dựng sử dụng ảnh 2D. Điều này là nhờ vào sự phát triển của công nghệ camera, giúp ảnh 2D có thể được thu thập một cách dễ dàng. Những tập dữ liệu ảnh 2D chỉ mang thông tin về màu sắc của cảnh vật, dưới định dạng RGB. Ngoài ra, một số tập dữ liệu đề xuất việc sử dụng ảnh RGBD, chứa cả thông tin về màu và độ sâu của ảnh, nhằm biểu diễn rõ ràng hơn cảnh vật.
 
 \subsection{Đặc trưng của ảnh}
 
-Do số lượng ảnh bên trong tập dữ liệu có kích thước rất lớn, vậy nên đa số những tác vụ thao tác trên ảnh trong tập dữ liệu sẽ sử dụng những đặc trưng, một cách biểu diễn tối ưu hơn của ảnh. Đặc trưng ảnh là những điểm ảnh mang nhiều thông tin như góc, cạnh, giúp thể hiện khung cảnh trong ảnh mà không bị thay đổi khi thay đổi góc quay. Một đặc trưng ảnh sẽ được xác định vị trí rồi được sinh ra mô tả cho những đặc điểm trực quan tại vị trí đó. Những mô tả này sẽ cần phải có giá trị ổn định khi gặp những điều kiện như thay đổi về độ chiếu sáng, góc quay và thay đổi tỷ lệ phóng to, thu nhỏ.
+Do số lượng ảnh bên trong tập dữ liệu có kích thước rất lớn, vậy nên đa số những tác vụ thao tác trên ảnh trong tập dữ liệu sử dụng những đặc trưng, một cách biểu diễn tối ưu hơn của ảnh. Đặc trưng ảnh là những điểm ảnh mang nhiều thông tin như góc, cạnh, giúp thể hiện khung cảnh trong ảnh mà không bị thay đổi khi thay đổi góc quay. Một đặc trưng ảnh được xác định vị trí rồi được sinh ra mô tả cho những đặc điểm trực quan tại vị trí đó. Những mô tả này cần phải có giá trị ổn định khi gặp những điều kiện như thay đổi về độ chiếu sáng, góc quay và thay đổi tỷ lệ phóng to, thu nhỏ.
 
 \subsection{Ảnh RGB}
 
-Ảnh RGB là tập hợp các điểm ảnh có chiều cao và chiều rộng nhất định. Mỗi điểm ảnh sẽ được thể hiện bằng một vector ba biến nhất định thể hiện cho ba màu. Màu của một điểm ảnh sẽ là sự kết hợp của ba màu đỏ, xanh lá, xanh dương với cường độ của mỗi màu sẽ được thể hiện qua vector tại điểm ảnh đó. Ảnh RGB được sinh ra từ việc ánh sáng tiếp xúc với tập hợp những cảm biến trong camera, từ đó xác định được cường độ của các màu.
+Ảnh RGB là tập hợp các điểm ảnh có chiều cao và chiều rộng nhất định. Mỗi điểm ảnh được thể hiện bằng một vector ba biến nhất định thể hiện cho ba màu. Màu của một điểm ảnh là sự kết hợp của ba màu đỏ, xanh lá, xanh dương với cường độ của mỗi màu được thể hiện qua vector tại điểm ảnh đó. Ảnh RGB được sinh ra từ việc ánh sáng tiếp xúc với tập hợp những cảm biến trong camera, từ đó xác định được cường độ của các màu.
 
-Chính vì cấu tạo của chúng nên ảnh RGB sẽ không thể biểu diễn được không gian 3D mà chỉ xác định được hướng của những sự vật trong hình so với camera. Tuy nhiên, ảnh RGB lại có thể được thu thập một cách dễ dàng từ rất nhiều loại camera, dẫn đến những tập dữ liệu RGB phổ biến và được sử dụng phổ biến. Ngoài ra, để bổ sung thêm thông tin về không gian 3D cho ảnh RGB, một số giải thuật phức tạp, cần nhiều tài nguyên tính toán, cũng như yêu cầu nhiều hình có thể được sử dụng.
+Chính vì cấu tạo của chúng nên ảnh RGB không thể biểu diễn được không gian ba chiều. Tuy nhiên, ảnh RGB lại có thể được thu thập một cách dễ dàng từ rất nhiều loại camera, dẫn đến những tập dữ liệu RGB phổ biến và được sử dụng phổ biến. Ngoài ra, để bổ sung thêm thông tin về không gian 3D cho ảnh RGB, một số giải thuật phức tạp, cần nhiều tài nguyên tính toán, cũng như yêu cầu nhiều hình có thể được sử dụng.
 
 Một mô hình sử dụng ảnh RGB chỉ có thể trích xuất những đặc trưng bên trong ảnh và cần sử dụng biểu diễn của khu vực để có được thông tin từ không gian 3D.
 
@@ -175,16 +175,16 @@ Một phương pháp khác được áp dụng để hồi quy tư thế tuyệt
 MapNet \cite{brahmbhatt2018geometryaware} đề xuất sử dụng thêm một thuật ngữ mất mát lấy từ các cặp ảnh làm một ràng buộc hình học, điều này đã có thể cải thiện mạnh mẽ hiệu suất khả năng định vị. Về hàm mất mát, MapNet giảm thiểu tối đa cả mất mát tư thế tuyệt đối cho mỗi hình ảnh và mất mát tư thế tương đối giữa các cặp hình ảnh:
 \begin{equation}
     l(I_{total}) = l(I_i) + \alpha\sum_{i\neq j}loss(I_{ij} )
-\end{equation}
-Trong đó, $loss(I_{ij} )$ chỉ tư thế máy ảnh tương đối $p_i$ và $p_j$ giữa các cặp hình ảnh $I_i$ và $I_j$, được tính bởi hàm mất mát với trọng số có thể học được.
+\end{equation},
+trong đó, $loss(I_{ij} )$ chỉ tư thế máy ảnh tương đối $p_i$ và $p_j$ giữa các cặp hình ảnh $I_i$ và $I_j$, được tính bởi hàm mất mát với trọng số có thể học được.
 
 Thêm vào đó, MapNet chuyển một giá trị quaternion thành logarit của giá trị đó - biểu diễn phép quay 3DoF với ba chiều chưa bị tham số hóa quá mức. $logq$ được biểu diễn như dưới đây, với $u$ và $v$ đại diện cho phần thực và ảo của một quaternion đơn vị:
 \begin{equation}
     logq =
-        \begin{cases}
-            \frac{v}{\left \| v \right \|}cos^{-1}u, \left \| v \right \| \neq 0 \\
-            0
-        \end{cases}
+    \begin{cases}
+        \frac{v}{\left \| v \right \|}cos^{-1}u, \left \| v \right \| \neq 0 \\
+        0
+    \end{cases}
 \end{equation}
 \begin{figure}[H]
     \centering
@@ -203,8 +203,8 @@ Không chỉ đơn ảnh hay đa ảnh, ngay cả đoạn phim cũng có thể �
 VidLoc \cite{clark2017vidloc} đề xuất một mô hình hồi quy tư thế máy ảnh dựa trên việc kết hợp CNN – RNN, mục đích là có thể khiến quá trình dự đoán vị trí từ ảnh hay một đoạn phim được trơn tru hơn. Mạng được xây dựng bằng cách sử dụng GoogLeNet Inception \cite{szegedy2014going} mà không dùng đến lớp kết nối đầy đủ để trích xuất đặc trưng ảnh và một module LSTM hai chiều để mô hình hóa thông tin thời gian với các ô nhớ.  Hàm mất mát của VidLoc được tính bằng tổng của lỗi vị trí và lỗi hướng quay từ đầu ra của LSTM như sau:
 \begin{equation}
     l = \sum_{t=1}^T \alpha_1 \left \| x_t - \hat{x}_t \right \| + \alpha_2 \left \| q_t - \hat{q}_t \right \|
-\end{equation}
-Với $[x_t, q_t]$ và $[\hat{x}_t, \hat{q}_t]$ đại diện cho sự thật nền tảng và giá trị dự đoán cho độ dời vị trí và hướng quay.
+\end{equation},
+với $[x_t, q_t]$ và $[\hat{x}_t, \hat{q}_t]$ đại diện cho sự thật nền tảng và giá trị dự đoán cho độ dời vị trí và hướng quay.
 
 \subsubsection*{Kết luận}
 Xét về các phương pháp mang hướng hồi quy tư thế tuyệt đối thông qua một ảnh duy nhất, các nghiên cứu có xu hướng tiến tới việc hàm mất mát tự động hóa, không sử dụng siêu tham số và mang nhiều thông tin hơn để giảm việc sử dụng các tham số cố định. Khởi đầu từ PoseNet với việc sử dụng một hàm mất mát cố định để tính tổng độ dời và hướng quay sử dụng một số tham số cân bằng. Sau đó, một hàm mất mát có trọng số học được \cite{wang2019atloc, bui2019adversarial} đã được đề xuất bằng cách thêm độ không đảm bảo phương sai đồng nhất để tự động cân bằng mất mát độ dời và hướng quay, tránh sử dụng siêu tham số đồng thời vượt qua hiệu suất của phương pháp sử dụng hàm mất mát cố định. Với việc sử dụng nhiều ảnh cũng như học kết hợp các tác vụ phụ, các mô hình đã có thể không chỉ thu được kết quả định vị mà còn có được thông tin khác như VO, thông tin ngữ nghĩa,etc. Cho rằng các phương pháp hồi quy tư thế tuyệt đối thông qua ảnh đang bỏ phí giá trị của các ràng buộc thời gian, một số công trình \cite{clark2017vidloc, brahmbhatt2018geometryaware} đề xuất việc tận dụng các đoạn phim làm đầu vào cho tác vụ hồi quy tư thế. VidLoc \cite{clark2017vidloc} sử dụng RNN hai chiều để hồi quy tư thế 6DoF của máy ảnh.

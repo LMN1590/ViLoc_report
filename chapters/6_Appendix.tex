@@ -85,10 +85,11 @@ Với ma trận $A$ và $B$ được thể hiện như bên dưới,
 \begin{equation}
   {\displaystyle \mathbf {A} ={\begin{pmatrix}A_{11}&A_{12}&\cdots &A_{1m}\\A_{21}&A_{22}&\cdots &A_{2m}\\\vdots &\vdots &\ddots &\vdots \\A_{n1}&A_{n2}&\cdots &A_{nm}\\\end{pmatrix}}\,,\quad \mathbf {B} ={\begin{pmatrix}B_{11}&B_{12}&\cdots &B_{1m}\\B_{21}&B_{22}&\cdots &B_{2m}\\\vdots &\vdots &\ddots &\vdots \\B_{n1}&B_{n2}&\cdots &B_{nm}\\\end{pmatrix}}}
 \end{equation}
+
 Giá trị của phép nhân ma trận Forbenius giữa $A$ và $B$ là
 \begin{equation}
   {\displaystyle \langle \mathbf {A} ,\mathbf {B} \rangle _{\mathrm {F} }=\sum _{i,j}{\overline {A_{ij}}}B_{ij}\,=\mathrm {Tr} \left({\overline {\mathbf {A} ^{T}}}\mathbf {B} \right)\equiv \mathrm {Tr} \left(\mathbf {A} ^{\!\dagger }\mathbf {B} \right)}
-\end{equation}
+\end{equation},
 với ký hiệu gạch đầu là phép tính số phức liên hợp và ký hiệu $\!\dagger$ thể hiện phép nghịch đảo ma trận và tính số phức liên hợp trên tất cả các phần tử. Tuy nhiên, do lớp tích chập chỉ xử lý dữ liệu các số thực, cho nên công thức có thể được đơn giản hóa thành
 \begin{equation}
   {\displaystyle {\begin{aligned}\langle \mathbf {A} ,\mathbf {B} \rangle _{\mathrm {F} }=&{ {A}}_{11}B_{11}+{ {A}}_{12}B_{12}+\cdots +{ {A}}_{1m}B_{1m}\\&+{ {A}}_{21}B_{21}+{ {A}}_{22}B_{22}+\cdots +{ {A}}_{2m}B_{2m}\\&\vdots \\&+{ {A}}_{n1}B_{n1}+{ {A}}_{n2}B_{n2}+\cdots +{ {A}}_{nm}B_{nm}\\\end{aligned}}}
@@ -231,7 +232,7 @@ Mỗi lớp MLP được sử dụng bên trong mô hình sẽ được cấu t�
 \end{equation}
 \begin{equation}
   Y_j,* = U_j,* + W_4*\sigma(W_3*LayerNorm(U)_j,*)
-\end{equation}
+\end{equation},
 với $i = [1...C]$ và $j = [1...S]$. $\sigma$ là hàm không tuyến tính, trong bài báo này sẽ là hàm GELU \cite{hendrycks2023gaussian}.
 
 Cuối cùng, dữ liệu sẽ được đưa vào một lớp tổng hợp trung bình toàn cục và qua một mạng kết nối đầy đủ trước khi trả về kết quả là một đoạn mã hóa cho ảnh đầu vào.

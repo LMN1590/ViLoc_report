@@ -25,7 +25,7 @@ Qua quá trình mô phỏng lại bài toán nhận diện địa điểm trực
   \item \textbf{Vector góc quay $R$} sẽ có định dạng của một Quaternion, gồm 4 số là $(q_w, q_x, q_y, q_z)$. Quaternion có thể được dùng để biểu diễn góc quay trong không gian 3D và có thể dùng để thay thế ma trận xoay 3x3, nhằm có thể thể hiện và kết hợp các phép quay một cách dễ dàng hơn. Công thức biểu diễn một góc quay là
         \begin{equation}
           q=q_w + i*q_x + j*q_y + k*q_z
-        \end{equation}
+        \end{equation},
         với $q_w, q_x, q_y, q_z$ là các số thực với $i,j,k$ là những vector đơn vị trực giao lẫn nhau. Quaternion có thể được biến đổi theo dạng trục quay và góc quay, có thể được biểu diễn bởi hai thành phần là vector đơn vị biểu diễn trục của góc quay, $(\hat{x},\hat{y},\hat{z})$ và độ quay quanh trục, $\theta$.
         \begin{figure}[H]
           \centering
@@ -40,8 +40,8 @@ Qua quá trình mô phỏng lại bài toán nhận diện địa điểm trực
              & q_y=\hat{y} \sin \left(\frac{\theta}{2}\right) \\
              & q_z=\hat{z} \sin \left(\frac{\theta}{2}\right)
           \end{aligned}
-        \end{equation}
-        Từ công thức, tập các giá trị $q_w, q_x, q_y, q_z$ có độ lớn là 1, dẫn đến tập các giá trị này sẽ có 3 độ tự do, 3DoF.
+        \end{equation},
+        với tập các giá trị $q_w, q_x, q_y, q_z$ có độ lớn là 1, dẫn đến tập các giá trị này sẽ có 3 độ tự do, 3DoF.
   \item \textbf{Vector vị trí $t$} sẽ có 3 giá trị là $t_x,t_y,t_z$ lần lượt thể hiện các giá trị kinh độ, vĩ độ và độ cao của vị trí chụp ảnh trong không gian thực tế. Vector thể hiện vị trí có cách biểu diễn đơn giản và dễ hiểu hơn so với góc quay. Ngoài ra, do biểu diễn không gian 3D thực tế nên vector thể hiện vị trí sẽ có 3 độ tự do.
 \end{itemize}
 

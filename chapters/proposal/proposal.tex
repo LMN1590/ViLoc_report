@@ -35,7 +35,7 @@ Tuy nhiên, độ trùng lặp cao vẫn có thể xuất hiện trong trường
 \end{equation}
 \begin{equation}
   P_2 = K_2 \cdot\left[R_2^{T} \cdot (W - t_2)\right],
-\end{equation}
+\end{equation},
 với $P_i$ là vị trí điểm ảnh trong camera $i$, $K_i$ là ma trận intrinsics, $R_i$ và $t_i$ là độ lệch góc quay và vị trí từ hệ tọa độ camera sang hệ tọa độ thực với $R$ là vector góc quay thu được từ quaternion tương ứng, và $D_i(P)$ là ước lượng độ sâu theo đơn vị khoảng cách của điểm ảnh $P$.
 
 \subsubsection*{Khác biệt hướng nhìn}
@@ -53,7 +53,7 @@ với $\alpha$ mang đơn vị độ và $R_i$ là ma trận 3x3 thể hiện g�
 Hàm loss của chúng tôi được tính toán bằng tổng có trọng số giữa hai hàm loss với một biến số 'Control Rate' - tỷ lệ kiểm soát:
 \begin{equation}
   L = \beta * L_{Miner} + (1-\beta)*L_{Control}
-\end{equation}
+\end{equation},
 với $L_{Control}$ là hàm Multi-Similarity Loss từ bài báo Multi-Similarity Miner và $L_{Miner}$ là hàm Multi-Similarity Loss nhận đầu ra từ chiến lược khai phá frustum mới của chúng tôi và $\beta$ là giá trị tỷ lệ để kiểm soát hai hàm Loss trên.
 
 \subsection{Chiến lược sắp xếp lại ảnh}
