@@ -2,47 +2,48 @@
 
 \section{Tổng quan}
 \subsection{Kiến trúc pipeline}
-Sau khi đã xác định những mô hình baseline sẽ sử dụng trong hệ thống, chúng tôi tiến hành thiết kế một kiến trúc phù hợp để có thể kết hợp hai hướng tiếp cận trong một pipeline hoàn chỉnh. Pipeline sẽ có kiến trúc như được mô tả trong hình 3.1 với hai module lớn là module \textbf{nhận diện địa điểm trực quan - Visual Place Recognition(VPR)} với baseline là mô hình MixVPR và module \textbf{hồi quy tư thế tương đối - Relative Pose Regression(RPR)} với baseline là mô hình Mapfree 2D-2D. Module VPR sẽ giúp chọn ra ảnh tham khảo từ tập dữ liệu mô tả khu vực đang hoạt động làm cột mốc để cho module RPR có thể hồi quy ra được vị trí của ảnh truy vấn so với ảnh tham khảo.
+Sau khi đã xác định những mô hình baseline sử dụng trong hệ thống, chúng tôi tiến hành thiết kế một kiến trúc phù hợp để có thể kết hợp hai hướng tiếp cận trong một pipeline hoàn chỉnh. Pipeline có kiến trúc như được mô tả trong hình \ref{fig:arch} với hai module lớn là module \textbf{nhận diện địa điểm trực quan - Visual Place Recognition(VPR)} với baseline là mô hình MixVPR và module \textbf{hồi quy tư thế tương đối - Relative Pose Regression(RPR)} với baseline là mô hình Mapfree 2D-2D. Module VPR giúp chọn ra ảnh tham khảo từ tập dữ liệu mô tả khu vực đang hoạt động làm cột mốc để cho module RPR có thể hồi quy ra được vị trí của ảnh truy vấn so với ảnh tham khảo.
 
 \begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\textwidth]{pics/Proposal/arch.png}
-  % \includesvg[scale=0.3]{pics/Proposal/arch.svg}
-  \caption{Kiến trúc tổng quan của pipeline định vị trực quan được đề xuất}
+    \centering
+    \includegraphics[width=\textwidth]{pics/Proposal/arch.png}
+    % \includesvg[scale=0.3]{pics/Proposal/arch.svg}
+    \caption{Kiến trúc tổng quan của pipeline định vị trực quan được đề xuất}
+    \label{fig:arch}
 \end{figure}
 
-Gọi $I$ là ảnh mà người dùng chụp từ camera và sẽ được dùng làm ảnh truy vấn cho pipeline đề xuất của chúng tôi. Trước hết, pipeline sẽ nhận $I$ làm đầu vào cho MixVPR. Từ ảnh đầu vào $I$, sau khi qua các giai đoạn xử lý, MixVPR sẽ trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Với đoạn mã hóa này, pipeline tiến hành so sánh với giá trị mã hóa của các ảnh trong cơ sở dữ liệu và tìm ra ảnh có sự tương đồng cao nhất với ảnh nhận vào $I$ gọi là $I_0$.
+Gọi $I$ là ảnh mà người dùng chụp từ camera và được dùng làm ảnh truy vấn cho pipeline đề xuất của chúng tôi. Trước hết, pipeline nhận $I$ làm đầu vào cho MixVPR. Từ ảnh đầu vào $I$, sau khi qua các giai đoạn xử lý, MixVPR trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Với đoạn mã hóa này, pipeline tiến hành so sánh với giá trị mã hóa của các ảnh trong cơ sở dữ liệu và tìm ra ảnh có sự tương đồng cao nhất với ảnh nhận vào $I$ gọi là $I_0$.
 
-Bước tiếp theo, pipeline tiếp tục truyền cả ảnh nhận vào $I$ và ảnh được truy xuất $I_0$ cho mô hình tương quan 2D - 2D của Map-free Relocalization \cite{arnold2022mapfree}. Với đầu vào là cặp ảnh $(I, I_0)$, những cặp đặc trưng tương quan giữa hai ảnh sẽ được xác định tương ứng với mỗi hình. Sau đó, Essential Matrix $E$ giữa 2 ảnh sẽ được ước tính. Essential Matrix sau đó sẽ được phân giải thành ma trận thể hiện góc quay chênh lệch $R$ và một vector đơn vị độ dịch vị trí $\hat{t}$. Từ các cặp đặc trưng và độ sâu của ảnh, mô hình tiến hành một bước chiếu 3D để tính toán giá trị tỷ lệ $s$ của vector độ dịch vị trí. Cuối cùng, tư thế thực của camera sẽ được xác định bằng tư thế thực của ảnh tham khảo và độ lệch giữa ảnh tham khảo và ảnh truy vấn $(R,s*\hat{t})$.
+Bước tiếp theo, pipeline tiếp tục truyền cả ảnh nhận vào $I$ và ảnh được truy xuất $I_0$ cho mô hình tương quan 2D - 2D của Map-free Relocalization \cite{arnold2022mapfree}. Với đầu vào là cặp ảnh $(I, I_0)$, những cặp đặc trưng tương quan giữa hai ảnh được xác định tương ứng với mỗi hình. Sau đó, Essential Matrix $E$ giữa 2 ảnh được ước tính. Essential Matrix sau đó được phân giải thành ma trận thể hiện góc quay chênh lệch $R$ và một vector đơn vị độ dịch vị trí $\hat{t}$. Từ các cặp đặc trưng và độ sâu của ảnh, mô hình tiến hành một bước chiếu 3D để tính toán giá trị tỷ lệ $s$ của vector độ dịch vị trí. Cuối cùng, tư thế thực của camera được xác định bằng tư thế thực của ảnh tham khảo và độ lệch giữa ảnh tham khảo và ảnh truy vấn $(R,s*\hat{t})$.
 
 \subsection{Dữ liệu đầu vào và đầu ra}
-Mô hình sẽ nhận vào ảnh $I$, có định dạng là một ảnh RGB. Sau đó, ảnh $I$ sẽ được tiền xử lý, gồm các bước đưa về kích thước 320x320 và chuẩn hóa các điểm ảnh trên hình, trước khi được đưa vào mô hình chính. Lưu ý, mô hình kết hợp sẽ cần ảnh phải mang thông tin tham số nội tại của máy ảnh nhằm thực hiện bước hồi quy tư thế.
+Mô hình nhận vào ảnh $I$, có định dạng là một ảnh RGB. Sau đó, ảnh $I$ được tiền xử lý, gồm các bước đưa về kích thước 320x320 và chuẩn hóa các điểm ảnh trên hình, trước khi được đưa vào mô hình chính. Lưu ý, mô hình kết hợp cần ảnh phải mang thông tin tham số nội tại của máy ảnh nhằm thực hiện bước hồi quy tư thế.
 
-Qua quá trình mô phỏng lại bài toán nhận diện địa điểm trực quan, mô hình sẽ thu được $k$ cặp ảnh có độ tương đồng cao, gồm ảnh truy vấn ban đầu và ảnh tham khảo truy xuất được. Từng cặp ảnh trong $k$ cặp này sẽ được đưa vào bộ phận hồi quy tư thế tương đối tiếp theo. Có được tư thế của ảnh $I$ so với $k$ ảnh tham khảo có độ tương đồng cao nhất, mô hình sẽ chọn ra kết quả cuối cùng dựa vào độ đáng tin cậy $C$ được xác định ở \textbf{bộ phận xác định Essential Matrix}.
+Qua quá trình mô phỏng lại bài toán nhận diện địa điểm trực quan, mô hình thu được $k$ cặp ảnh có độ tương đồng cao, gồm ảnh truy vấn ban đầu và ảnh tham khảo truy xuất được. Từng cặp ảnh trong $k$ cặp này được đưa vào bộ phận hồi quy tư thế tương đối tiếp theo. Có được tư thế của ảnh $I$ so với $k$ ảnh tham khảo có độ tương đồng cao nhất, mô hình chọn ra kết quả cuối cùng dựa vào độ đáng tin cậy $C$ được xác định ở \textbf{bộ phận xác định Essential Matrix}.
 
-Định dạng đầu ra của mô hình sẽ gồm hai tập vector $R$ và $t$, lần lượt thể hiện góc quay và vị trí chụp ảnh trong không gian 3D. Cụ thể, hai vector sẽ có dạng:
+Định dạng đầu ra của mô hình gồm hai tập vector $R$ và $t$, lần lượt thể hiện góc quay và vị trí chụp ảnh trong không gian 3D. Cụ thể, hai vector có dạng:
 \begin{itemize}
-  \item \textbf{Vector góc quay $R$} sẽ có định dạng của một Quaternion, gồm 4 số là $(q_w, q_x, q_y, q_z)$. Quaternion có thể được dùng để biểu diễn góc quay trong không gian 3D và có thể dùng để thay thế ma trận xoay 3x3, nhằm có thể thể hiện và kết hợp các phép quay một cách dễ dàng hơn. Công thức biểu diễn một góc quay là
-        \begin{equation}
-          q=q_w + i*q_x + j*q_y + k*q_z
-        \end{equation}
-        với $q_w, q_x, q_y, q_z$ là các số thực với $i,j,k$ là những vector đơn vị trực giao lẫn nhau. Quaternion có thể được biến đổi theo dạng trục quay và góc quay, có thể được biểu diễn bởi hai thành phần là vector đơn vị biểu diễn trục của góc quay, $(\hat{x},\hat{y},\hat{z})$ và độ quay quanh trục, $\theta$.
-        \begin{figure}[H]
-          \centering
-          \includegraphics[scale=1]{pics/Proposal/axis-angle.png}
-          \caption{Minh họa cách biểu diễn trục quay và góc quay \cite{quaternion}}
-        \end{figure}
-        Quaternion có thể được ước tính từ cách biểu diễn trục quay và góc quay theo công thức
-        \begin{equation}
-          \begin{aligned}
-             & q_w=\cos \left(\frac{\theta}{2}\right)         \\
-             & q_x=\hat{x} \sin \left(\frac{\theta}{2}\right) \\
-             & q_y=\hat{y} \sin \left(\frac{\theta}{2}\right) \\
-             & q_z=\hat{z} \sin \left(\frac{\theta}{2}\right)
-          \end{aligned}
-        \end{equation}
-        Từ công thức, tập các giá trị $q_w, q_x, q_y, q_z$ có độ lớn là 1, dẫn đến tập các giá trị này sẽ có 3 độ tự do, 3DoF.
-  \item \textbf{Vector vị trí $t$} sẽ có 3 giá trị là $t_x,t_y,t_z$ lần lượt thể hiện các giá trị kinh độ, vĩ độ và độ cao của vị trí chụp ảnh trong không gian thực tế. Vector thể hiện vị trí có cách biểu diễn đơn giản và dễ hiểu hơn so với góc quay. Ngoài ra, do biểu diễn không gian 3D thực tế nên vector thể hiện vị trí sẽ có 3 độ tự do.
+    \item \textbf{Vector góc quay $R$} có định dạng của một Quaternion, gồm 4 số là $(q_w, q_x, q_y, q_z)$. Quaternion có thể được dùng để biểu diễn góc quay trong không gian 3D và có thể dùng để thay thế ma trận xoay 3x3, nhằm có thể thể hiện và kết hợp các phép quay một cách dễ dàng hơn. Công thức biểu diễn một góc quay là
+          \begin{equation}
+              q=q_w + i*q_x + j*q_y + k*q_z,
+          \end{equation}
+          với $q_w, q_x, q_y, q_z$ là các số thực với $i,j,k$ là những vector đơn vị trực giao lẫn nhau. Quaternion có thể được biến đổi theo dạng trục quay và góc quay, có thể được biểu diễn bởi hai thành phần là vector đơn vị biểu diễn trục của góc quay, $(\hat{x},\hat{y},\hat{z})$ và độ quay quanh trục, $\theta$.
+          \begin{figure}[H]
+              \centering
+              \includegraphics[scale=1]{pics/Proposal/axis-angle.png}
+              \caption{Minh họa cách biểu diễn trục quay và góc quay \cite{quaternion}}
+          \end{figure}
+          Quaternion có thể được ước tính từ cách biểu diễn trục quay và góc quay theo công thức
+          \begin{equation}
+              \begin{aligned}
+                   & q_w=\cos \left(\frac{\theta}{2}\right)          \\
+                   & q_x=\hat{x} \sin \left(\frac{\theta}{2}\right)  \\
+                   & q_y=\hat{y} \sin \left(\frac{\theta}{2}\right)  \\
+                   & q_z=\hat{z} \sin \left(\frac{\theta}{2}\right),
+              \end{aligned}
+          \end{equation}
+          với tập các giá trị $q_w, q_x, q_y, q_z$ có độ lớn là 1, dẫn đến tập các giá trị này có 3 độ tự do, 3DoF.
+    \item \textbf{Vector vị trí $t$} có 3 giá trị là $t_x,t_y,t_z$ lần lượt thể hiện các giá trị kinh độ, vĩ độ và độ cao của vị trí chụp ảnh trong không gian thực tế. Vector thể hiện vị trí có cách biểu diễn đơn giản và dễ hiểu hơn so với góc quay. Ngoài ra, do biểu diễn không gian 3D thực tế nên vector thể hiện vị trí có 3 độ tự do.
 \end{itemize}
 
 \input{chapters/proposal/mixvpr.tex}
