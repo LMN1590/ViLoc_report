@@ -108,17 +108,17 @@ Chúng tôi tiến hành tinh chỉnh mô hình MixVPR \cite{alibey2023mixvpr} v
 
 Chúng tôi đã tiến hành chọn lọc một số thành phố đáp ứng đủ điều kiện mật độ ảnh mà nhóm đặt ra để đảm bảo rằng mỗi khu vực đều xuất hiện tính đa dạng về góc nhìn. Kích thước batch được chọn là 8 khu vực với mỗi nơi gồm 16 ảnh, tức một batch chứa 128 ảnh. Một lớp Feature Mixer được đóng băng trong quá trình finetune. Chúng tôi tiến hành finetune qua 5 epoch với learning rate được chỉnh về 0.0005. Các ngưỡng frustum và góc quay được đặt lần lượt là 1.25/2 và 60 độ theo thứ tự. Các cài đặt không được nêu lên sẽ được giữ nguyên như bài báo gốc.
 
-Chúng tôi tiến hành kiểm thử kết quả mô hình kết hợp trên các tập dữ liệu thường dùng cho hai tác vụ VPR và RPR riêng biệt: trên tập dữ liệu thành thị phạm vi rộng nhưng mật độ ảnh thưa (Pitts250k-test \cite{6618963}) và trên một tập dữ liệu kích thước vừa nhưng mật độ ảnh cao (Cambridge Landmark \cite{kendall2016posenet}). Mô hình kết hợp của chúng tôi sẽ sử dụng ngưỡng inlier tốt nhất tương ứng với các tập dữ liệu (inlier > 5 với Pitts250k-test, inlier > 35 với Cambridge Landmark). Kết quả được thể hiện ở bảng 4.2 và 4.3.
+Chúng tôi tiến hành kiểm thử kết quả mô hình kết hợp trên các tập dữ liệu thường dùng cho hai tác vụ VPR và RPR riêng biệt: trên tập dữ liệu thành thị phạm vi rộng nhưng mật độ ảnh thưa (Pitts250k-test \cite{6618963}) và trên một tập dữ liệu kích thước vừa nhưng mật độ ảnh cao (Cambridge Landmark \cite{kendall2016posenet}). Mô hình kết hợp của chúng tôi sẽ sử dụng ngưỡng tương quan tốt nhất tương ứng với các tập dữ liệu (inlier > 5 với Pitts250k-test, inlier > 35 với Cambridge Landmark). Kết quả được thể hiện ở bảng \ref{tab:pitts250k_vpr_comparison} và \ref{tab:cambridge_vpr_comparison}.
 
 \subsection*{Tập dữ liệu Pitts250k-test}
-Với tác vụ VPR, chúng tôi tiến hành đo đạc kết quả của mô hình kết hợp sau khi tinh chỉnh, sau đó so sánh với các mô hình cơ sở khác đã được huấn luyện sẵn bao gồm: MixVPR \cite{alibey2023mixvpr}, NetVLAD \cite{arandjelovic2016netvlad} và AnyLoc \cite{keetha2023anyloc}. Thí nghiệm được tiến hành trên tập dữ liệu Pittsburgh250k-test \cite{6618963}. Thang đo kết quả được sử dụng trong thí nghiệm này sẽ là trung bình độ lệch vị trí và góc quay giữa tư thế đầu ra và tư thế chính xác của ảnh đầu vào với đơn vị (mét, độ) theo thứ tự. Kết quả được thể hiện ở bảng 4.2.
+Với tác vụ VPR, chúng tôi tiến hành đo đạc kết quả của mô hình kết hợp sau khi tinh chỉnh, sau đó so sánh với các mô hình cơ sở khác đã được huấn luyện sẵn bao gồm: MixVPR \cite{alibey2023mixvpr}, NetVLAD \cite{arandjelovic2016netvlad} và AnyLoc \cite{keetha2023anyloc}. Thí nghiệm được tiến hành trên tập dữ liệu Pittsburgh250k-test \cite{6618963}. Thang đo kết quả được sử dụng trong thí nghiệm này sẽ là trung bình độ lệch vị trí và góc quay giữa tư thế đầu ra và tư thế chính xác của ảnh đầu vào với đơn vị (mét, độ) theo thứ tự. Kết quả được thể hiện ở bảng \ref{tab:pitts250k_vpr_comparison}.
 
 Với NetVLAD \cite{arandjelovic2016netvlad}, chúng tôi sử dụng mô hình đã được huấn luyện sẵn trên tập Pittsburgh250k. Với AnyLoc \cite{keetha2023anyloc}, chúng tôi sử dụng các thiết lập mặc định như trong bài báo khoa học của nhóm nghiên cứu tác giả. Do mô hình RPR yêu cầu các tập dữ liệu ảnh sẽ cần phải cung cấp các thông số nội tại, chúng tôi đã sử dụng mô hình COLMAP\cite{schoenberger2016sfm} để tính toán các tham số nội tại cho tập dữ liệu Pittsburgh250k trước khi đưa vào thí nghiệm đo đạc, các tham số này chỉ mang tính chất tham khảo và không nên áp dụng phương pháp này khi xây dựng tập dữ liệu thành thị mới.
 
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
-\begin{table}[]
+\begin{table}
 	\centering
 	\begin{tabular}{|l|c|c|c|c|}
 		\hline
@@ -130,6 +130,7 @@ Với NetVLAD \cite{arandjelovic2016netvlad}, chúng tôi sử dụng mô hình 
 	\end{tabular}
 	\vspace{10pt}
 	\caption[Kết quả định vị trực quan trên tập Pittsburgh250k-test]{Kết quả định vị trực quan trên tập Pittsburgh250k-test \cite{6618963}. Thang đo trung bình độ lệch vị trí và góc quay được áp dụng cho các mô hình được so sánh. Kết quả tốt nhất và tốt thứ nhì được đánh dấu (với in đậm/gạch dưới, theo thứ tự).}
+	\label{tab:pitts250k_vpr_comparison}
 \end{table}
 \egroup
 
@@ -144,12 +145,12 @@ Hiện tượng kiến trúc trùng lặp (các cảnh cách xa nhau nhưng có 
 
 Với tác vụ RPR, chúng tôi tiến hành đo đạc kết quả của mô hình kết hợp và so sánh với các mô hình cơ sở khác đã được huấn luyện sẵn bao gồm: EssNet \cite{zhou2020learn}, NC-EssNet \cite{zhou2020learn} và Relformer \cite{idan2023learning}. Đồng thời, chúng tôi cũng áp dụng các mô hình VPR được so sánh ở thí nghiệm trước lên thí nghiệm này nhằm kiểm chứng độ hiệu quả.
 
-Thí nghiệm được tiến hành trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}. Thang đo kết quả được sử dụng trong thí nghiệm này là trung bình độ lệch vị trí và góc quay lần lược với đơn vị mét, độ. Do trọng tâm của chúng tôi là việc áp dụng định vị trực quan lên dữ liệu chưa từng thấy, sẽ không có mô hình nào trong thí nghiệm này từng được huấn luyện trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}. Kết quả được thể hiện ở bảng 4.3.
+Thí nghiệm được tiến hành trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}. Thang đo kết quả được sử dụng trong thí nghiệm này là trung bình độ lệch vị trí và góc quay lần lược với đơn vị mét, độ. Do trọng tâm của chúng tôi là việc áp dụng định vị trực quan lên dữ liệu chưa từng thấy, sẽ không có mô hình nào trong thí nghiệm này từng được huấn luyện trên tập dữ liệu Cambridge Landmark \cite{kendall2016posenet}. Kết quả được thể hiện ở bảng \ref{tab:cambridge_vpr_comparison}.
 
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
-\begin{table}[]
+\begin{table}
 	\centering
 	\begin{tabular}{|l|c|c|c|}
 		\hline
@@ -164,6 +165,7 @@ Thí nghiệm được tiến hành trên tập dữ liệu Cambridge Landmark \
 	\end{tabular}
 	\vspace{10pt}
 	\caption[Kết quả định vị trực quan trên tập Cambridge Landmark]{Kết quả định vị trực quan trên tập Cambridge Landmark \cite{kendall2016posenet}. Thang đo trung bình độ lệch vị trí và góc quay được áp dụng cho các mô hình được so sánh. Kết quả tốt nhất và tốt thứ nhì được đánh dấu (với in đậm/gạch dưới, theo thứ tự).}
+	\label{tab:cambridge_vpr_comparison}
 \end{table}
 \egroup
 
@@ -173,11 +175,13 @@ Thực hiện tác vụ RPR trên tập dữ liệu Cambridge Landmark \cite{ken
 Các mô hình VPR tuy có độ chuẩn xác cao trong việc truy xuất ảnh nhưng lại không có khả năng tính toán được tư thế chính xác của ảnh được chụp dẫn đến kết quả có phần tệ hơn. Các mô hình RPR tuy có khả năng tính toán tốt tư thế tuyệt đối trong những tập dữ liệu vừa và nhỏ song lại có thể mắc phải tình trạng quá khớp vào tập dữ liệu huấn luyện, dẫn đến kết quả không quá khả quan trên các tập dữ liệu chưa từng thấy.
 
 \section{Ablation Study}
-Chúng tôi tiến hành nghiên cứu, đo đạc và ghi lại kết quả của việc thử nghiệm các hướng cải thiện khác nhau với mô hình kết hợp. Kết quả được ghi nhận tại các bảng 4.4, 4.5, 4.6, 4.7 và 4.8.
+Chúng tôi tiến hành nghiên cứu, đo đạc và ghi lại kết quả của việc thử nghiệm các hướng cải thiện khác nhau với mô hình kết hợp. Kết quả được ghi nhận tại các bảng \ref{tab:inliers}, \ref{tab:vpr_rpr}, \ref{tab:reranking}, \ref{tab:weighted_pose} và \ref{tab:best_overlap}.
 
 % Ablation study inliers
-\subsection{Ablation study với các ngưỡng cặp điểm tương quan}
-Chúng tôi tiến hành thực hiện những thí nghiệm nhằm nghiên cứu những ảnh hưởng cũng như những đánh đổi về mặt kết quả của mô hình kết hợp ở các ngưỡng tương quan khác nhau trên hai tập dữ liệu Pittsburgh250k-test \cite{6618963} và Cambridge Landmark \cite{kendall2016posenet}. Kết quả được thể hiện ở bảng 4.4.
+\subsection{Ngưỡng cặp điểm tương quan (inlier correspondence)}
+
+Chúng tôi tiến hành thực hiện những thí nghiệm nhằm nghiên cứu những ảnh hưởng cũng như những đánh đổi về mặt kết quả của mô hình kết hợp ở các ngưỡng tương quan khác nhau trên hai tập dữ liệu Pittsburgh250k-test \cite{6618963} và Cambridge Landmark \cite{kendall2016posenet}. Kết quả được thể hiện ở bảng \ref{tab:inliers}. Qua quá trình thí nghiệm, chúng tôi nhận thấy khi ngưỡng inlier tăng cao, độ lệch vị trí và độ lệch góc quay được cải thiện đáng kể. Đổi lại, tỷ lệ truy xuất ảnh thành công giảm nhẹ. Khi dữ liệu sở hữu số lượng các cặp điểm tương quan thấp (các tập dữ liệu phạm vi rộng chứa các cụm tư thế gần nhau nhưng góc nhìn lại tương đối lệch nhau), tại ngưỡng $inlier > 5$ và $inlier > 2$, việc áp dụng hướng tiếp cận này đã có ảnh hưởng tích cực lên sai số mô hình. Ngược lại, vì tập dữ liệu Cambridge Landmark chứa nhiều góc quay cùng hướng vào một tâm điểm cụ thể (tòa nhà, ngã tư, \dots), dẫn đến số lượng cặp điểm tương quan đã tương đối cao, thí nghiệm không thể hiện ảnh hưởng tích cực lên sai số mô hình. Thêm vào đó, với những tập dữ liệu khác nhau, ảnh hưởng tích cực lên sai lệch về vị trí và góc quay sẽ đạt cực đại tại một ngưỡng tương quan khác nhau. Hướng tiếp cận này thể hiện nhiều tiềm năng phát triển, đặc biệt vào việc nghiên cứu các giải thuật phù hợp để xác định ngưỡng tối ưu cho các cơ sở dữ liệu định vị trực quan.
+
 % table
 \bgroup
 \def\arraystretch{1.4}%
@@ -198,14 +202,15 @@ Chúng tôi tiến hành thực hiện những thí nghiệm nhằm nghiên cứ
 		                                                                                                                  & Inliers \textgreater 50                                     & 0.88                                                                & 3.14                                                                     & 4.34                                                                         \\ \hline
 	\end{tabular}
 	\caption{Ablation Study với các ngưỡng tương quan của mô hình kết hợp trên tập dữ liệu Pittsburgh250k-test \cite{6618963} và Cambridge Landmark \cite{kendall2016posenet}}
+	\label{tab:inliers}
 \end{table}
 \egroup
-\subsubsection*{Nhận xét}
-Qua quá trình thí nghiệm, chúng tôi nhận thấy, khi ngưỡng inlier được tăng cao, độ lệch vị trí và độ lệch góc quay càng được cải thiện, nhưng đổi lại tỷ lệ truy xuất ảnh cũng giảm tương đối đáng kể. Với các tập dữ liệu phạm vi rộng và các góc nhìn về một cảnh tương đối lệch nhau, số lượng inlier correspondence khá thấp và vì thế tại ngưỡng (inlier > 5) và (inlier > 2), kết quả tương đối tốt. Ngược lại với tập dữ liệu như Cambridge Landmark, một cảnh sẽ có tương đối nhiều góc quay hướng vào, sẽ có lượng inlier correspondence tương đối cao. Ngoài ra, khi tăng ngưỡng lên một khoảng cố định, các sai lệch về vị trí và góc quay không còn được cải thiện đáng kể. Đây là một hướng tiếp cận khá thú vị và dự kiến sẽ nghiên cứu thêm về một giải thuật xác định ngưỡng tối ưu với mỗi cơ sở dữ liệu được sử dụng.
 
 % Ablation study VPR + RPR
-\subsection{Ablation study các baseline khác với mô hình kết hợp}
-Nhận thấy tiềm năng của các mô hình VPR (AnyLoc \cite{keetha2023anyloc}, NetVLAD \cite{arandjelovic2016netvlad}, MixVPR cơ sở \cite{alibey2023mixvpr}) được sử dụng trong quá trình thí nghiệm và so sánh. Chúng tôi tiến hành nghiên cứu hiệu quả của các mô hình này khi kết hợp với module RPR trên tập dữ liệu Pittsburgh250k \cite{6618963}. Kết quả được thể hiện ở bảng 4.5.
+\subsection{Sử dụng các mô hình VPR khác cho mô hình kết hợp}
+
+Nhận thấy tiềm năng của các mô hình VPR AnyLoc \cite{keetha2023anyloc} và MixVPR cơ sở \cite{alibey2023mixvpr} được sử dụng trong quá trình thí nghiệm và so sánh. Chúng tôi tiến hành nghiên cứu độ hiệu quả của các mô hình này khi kết hợp với module RPR trên tập dữ liệu Pittsburgh250k \cite{6618963}. Đồng thời, NetVLAD \cite{arandjelovic2016netvlad}, một mô hình trích xuất và tổng hợp đặc trưng tương đối cơ bản cũng được kết hợp để so sánh với các mô hình VPR hiện đại. Kết quả được thể hiện ở bảng \ref{tab:vpr_rpr}. Có thể thấy các mô hình có tỷ lệ truy xuất ảnh thành công ngang nhau, với MixVPR dẫn đầu về vị trí lẫn góc quay, AnyLoc ở vị trí thứ hai và NetVLAD ở vị trí cuối cùng. Vì MixVPR được huấn luyện trên tập dữ liệu GSV-Cities \cite{Ali_bey_2022} trong khi AnyLoc sử dụng các mô hình cơ sở tiền huấn luyện, chúng tôi cho rằng việc áp dụng các mô hình cơ sở tiền huấn luyện lên tác vụ VPR dù có độ tổng quát hóa cao vẫn chưa đạt được kết quả lý tưởng nhất trong miền dữ liệu thành thị.
+
 % table
 \bgroup
 \def\arraystretch{1.4}%
@@ -220,14 +225,15 @@ Nhận thấy tiềm năng của các mô hình VPR (AnyLoc \cite{keetha2023anyl
 		NetVLAD + RPR & 32768 & 0.99                                                                & 77.39                                                                    & 48.28                                                                        \\ \hline
 	\end{tabular}
 	\caption{Ablation Study kết quả các baseline khi kết hợp với module RPR trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
+	\label{tab:vpr_rpr}
 \end{table}
 \egroup
-\subsubsection*{Nhận xét}
-Từ bảng số liệu, ta có thể thấy các mô hình có tỷ lệ truy xuất ảnh ngang nhau, với MixVPR dẫn đầu về vị trí lẫn góc quay, AnyLoc ở vị trí thứ hai và NetVLAD ở vị trí cuối cùng. Ở đây, MixVPR được huấn luyện với GSV-Cities \cite{Ali_bey_2022} trong khi AnyLoc sử dụng các mô hình cơ sở tiền huấn luyện nhằm thực thi tác vụ VPR. Kết quả này cho thấy hiện tại việc áp dụng các mô hình cơ sở tiền huấn luyện lên tác vụ VPR dù có độ tổng quát hóa cao vẫn chưa đạt được kết quả lý tưởng nhất.
 
 % Ablation study Reranking
-\subsection{Ablation study với kỹ thuật reranking trên mô hình kết hợp}
-Tiếp theo, chúng tôi tiến hành kiểm thử hiệu quả hướng tiếp cận reranking mô hình kết hợp trên tập dữ liệu Pittsburgh250k-test \cite{6618963}. Chúng tôi chọn các ngưỡng (k=1, 3, 5) ảnh để đo đạc và so sánh. Kết quả được thể hiện ở bảng 4.6.
+\subsection{Kỹ thuật tái xếp hạng (reranking) trên mô hình kết hợp}
+
+Chúng tôi tiến hành kiểm thử hiệu quả của hướng tiếp cận tái xếp hạng lên mô hình kết hợp trên tập dữ liệu Pittsburgh250k-test \cite{6618963}. Chúng tôi chọn các ngưỡng (k=1, 3, 5) ảnh để tính toán và so sánh. Kết quả được thể hiện ở bảng \ref{tab:reranking}. Do tính đa dạng về góc quay của tập dữ liệu, việc thực hiện tái xếp hạng lên danh sách ảnh đã truy vấn được không cải thiện được hiệu quả mô hình. Ngược lại, quá trình này có thể làm tăng nhẹ sai số mô hình. Chúng tôi cho rằng vấn đề trên có thể đã được tạo ra bởi hai lý do chính: số lượng khác biệt thấp giữa trọng số cơ sở và trọng số đã được tinh chỉnh, trường hợp danh sách ảnh truy xuất được chứa nhiều ảnh không chính xác hơn ảnh chính xác (ngoài các ảnh đầu tiên được truy xuất là chính xác thì các ảnh sau chỉ làm cho kết quả bị sai lệch chứ không cải thiện).
+
 % table
 \bgroup
 \def\arraystretch{1.4}%
@@ -242,14 +248,15 @@ Tiếp theo, chúng tôi tiến hành kiểm thử hiệu quả hướng tiếp 
 		Reranking (k=5) & 0.9892                                                              & 19.22                                                                    & 41.30                                                                        \\ \hline
 	\end{tabular}
 	\caption{Ablation Study kết quả reranking mô hình kết hợp trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
+	\label{tab:reranking}
 \end{table}
 \egroup
-\subsubsection*{Nhận xét}
-Do tính chất đa dạng góc quay của tập dữ liệu, việc thực hiện reranking danh sách ảnh truy vấn được không cải thiện được hiệu quả mô hình, ngược lại, có thể làm cho sai số tăng nhẹ. Điều này có thể được lý giải bởi hai lý do: thứ nhất, không có quá nhiều khác biệt giữa trọng số cơ sở và trọng số đã được tinh chỉnh, thứ hai do bản chất của tập dữ liệu có ít ảnh trùng nhau giữa cơ sở dữ liệu và tập dữ liệu truy vấn - tức ngoài ảnh đầu tiên được truy xuất là chính xác thì các ảnh sau chỉ làm cho kết quả bị sai lệch chứ không cải thiện.
 
 % Ablation study Weighted Pose
-\subsection{Ablation study với trung bình trọng số trên mô hình kết hợp}
-Kết quả mô hình kết hợp khi áp dụng trung bình trọng số trên tập dữ liệu Pittsburgh250k-test \cite{6618963} được chúng tôi đo đạc tại bảng 4.7.
+\subsection{Trung bình trọng số trên mô hình kết hợp}
+
+Chúng tôi áp dụng trung bình trọng số trên tập dữ liệu Pittsburgh250k-test \cite{6618963} và đánh giá kết quả tại bảng \ref{tab:weighted_pose}. Tương tự với các vấn đề đã được đề cập đến trong hướng tiếp cận reranking, với một tập dữ liệu đa dạng về góc nhìn tại một vị trí, việc sử dụng danh sách ảnh truy xuất chứa ảnh truy xuất chính xác và ảnh không chính xác dẫn đến sai lệch đáng kể kết quả tính toán của mô hình. Điều này được thể hiện rõ thông qua xu hướng gia tăng của sai số vị trí và góc quay khi tăng số ảnh được truy xuất và sử dụng trong tính toán. Vấn đề này nhấn mạnh độ quan trọng trong việc đánh giá và chọn lọc danh sách ảnh truy xuất, loại bỏ ảnh không chính xác.
+
 % table
 \bgroup
 \def\arraystretch{1.4}%
@@ -264,14 +271,15 @@ Kết quả mô hình kết hợp khi áp dụng trung bình trọng số trên 
 		Weighted Pose (k = 5) & 0.9996                                                              & 25.48                                                                    & 40.21                                                                        \\ \hline
 	\end{tabular}
 	\caption{Ablation Study kết quả mô hình kết hợp áp dụng trung bình trọng số trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
+	\label{tab:weighted_pose}
 \end{table}
 \egroup
-\subsubsection*{Nhận xét}
-Chúng tôi nhận thấy rằng với một tập dữ liệu đa dạng về góc nhìn tại một vị trí, việc tăng số ảnh truy xuất từ VPR làm giảm đi hiệu quả tương đối, thể hiện qua việc sai số vị trí và góc quay đều tăng sau khi tăng số ảnh truy xuất. Cũng như khi áp dụng kỹ thuật reranking, việc tăng số ảnh truy xuất gây ra hiện tượng các ảnh sai lệch được tính toán ở tác vụ RPR và dẫn đến sai số tăng hơn.
 
 % Ablation study Best Overlap
-\subsection{Ablation study tinh chỉnh mô hình theo hướng độ trùng lặp cao}
-Với việc tập trung tinh chỉnh mô hình VPR theo hướng ưu tiên các ảnh có độ trùng lặp cao, kết quả được thể hiện ở bảng 4.8.
+\subsection{Tinh chỉnh mô hình theo hướng độ trùng lặp cao}
+
+Chúng tôi thử nghiệm việc tinh chỉnh lại mô hình VPR theo hướng ưu tiên các ảnh có độ trùng lặp cao và đánh giá kết quả ở bảng \ref{tab:best_overlap}. Qua đó, có thể thấy, hướng tiếp cận này không thể hiện tiềm năng phát triển khả quan. Vì module VPR vốn đã có thể chọn ảnh tốt nhất cả về vị trí lẫn độ trùng lặp, chúng tôi dự đoán việc ảnh có độ trùng lặp cao được chọn nhưng tác vụ RPR lại không thể tính toán tư thế chính xác có thể được là kết quả của quá trình tích lũy lỗi gây nên bởi sai số đến từ các mô hình cơ sở trong tác vụ RPR.
+
 \bgroup
 \def\arraystretch{1.4}%
 \setlength\tabcolsep{10 pt}
@@ -284,12 +292,12 @@ Với việc tập trung tinh chỉnh mô hình VPR theo hướng ưu tiên các
 		Best Overlap Training & 0.9866                                                              & 26.92                                                                    & 42.15                                                                        \\ \hline
 	\end{tabular}
 	\caption{Ablation Study kết quả mô hình kết hợp khi áp dụng huấn luyện ưu tiên trùng lặp trên tập dữ liệu Pittsburgh250k-test \cite{6618963}}
+	\label{tab:best_overlap}
 \end{table}
 \egroup
-\subsubsection*{Nhận xét}
-Kết quả cho thấy hướng tiếp cận này vẫn không khả quan, có thể được giải thích bởi: mô hình cơ sở vốn đã có thể chọn ảnh tốt nhất cả về vị trí lẫn độ trùng lặp, hoặc ảnh có độ trùng lặp cao được chọn nhưng tác vụ RPR lại không thể tính toán tư thế chính xác do sai lệch ở các mô hình tiền huấn luyện ở tác vụ này.
 
 \section{Kết luận}
-Chúng tôi đã có thể đo đạc và so sánh kết quả các mô hình khác nhau với phương pháp đề xuất của nhóm. Chúng tôi rút ra được một số nhận xét tổng thể về điểm mạnh và điểm yếu cần cải thiện của giải pháp đề xuất. Về điểm mạnh, mô hình đề xuất của chúng tôi kết hợp được độ tổng quát hóa cao của VPR và độ chính xác của RPR trong tác vụ hồi quy tư thế, dẫn đến kết quả tốt hơn hết trong tác vụ Visual localization trên dữ liệu chưa được huấn luyện. Việc sử dụng mô hình cơ sở giúp chúng tôi giảm thiểu tài nguyên cũng như thời gian huấn luyện mô hình. Đồng thời, việc sử dụng các mô hình cơ sở cho tác vụ RPR giúp mô hình hoạt động tốt với nhiều tập dữ liệu khác nhau so với các mô hình học sâu. Thêm vào đó, việc áp dụng các ngưỡng tương quan và chiến lược khai phá mới đã giúp chúng tôi tiếp tục cải thiện hiệu quả của mô hình.
 
-Về các điểm cần cải thiện, việc sử dụng các mô hình cơ sở được huấn luyện sẵn tiềm ẩn nhiều rủi ro lỗi tích lũy qua các bước của mô hình, dẫn đến sai số lớn ở kết quả đầu ra. Các mô hình feature matching thường hoạt động tốt trong môi trường trong nhà, hoặc với tập ảnh có một vật thể cố định nào đó là cột móc thay vì toàn cảnh đô thị. Ngoài ra, thời gian thực thi của nhiều mô hình cơ sở sẽ làm tăng thời gian thực thi của toàn thể mô hình kết hợp. Cuối cùng, các hướng tiếp cận với tiềm năng cải thiện pipeline ban đầu phần nhiều vẫn chưa thể hiện ảnh hưởng tích cực đến độ hiệu quả của mô hình trên dữ liệu thành thị phạm vi rộng và thưa.
+Chúng tôi đã đo đạc và so sánh phương pháp đề xuất của nhóm với các mô hình khác nhau. Mô hình đề xuất kết hợp được độ tổng quát hóa cao của tác vụ nhận diện địa điểm trực quan và độ chính xác của tác vụ hồi quy tư thế, đạt kết quả cạnh tranh trong tác vụ định vị trực quan trên dữ liệu unseen. Việc sử dụng mô hình cơ sở giúp chúng tôi giảm thiểu tài nguyên cũng như thời gian huấn luyện mô hình. Đồng thời, việc sử dụng các mô hình cơ sở cho tác vụ RPR giúp mô hình hoạt động tốt hơn với nhiều tập dữ liệu khác nhau so với các mô hình học sâu. Thêm vào đó, việc áp dụng các ngưỡng tương quan và chiến lược khai phá mới đã giúp chúng tôi tiếp tục cải thiện hiệu quả của mô hình.
+
+Qua quá trình thí nghiệm, đo đạc và đánh giá, chúng tôi cũng phát hiện được những điểm cần cải thiện của mô hình. Việc sử dụng các mô hình cơ sở được huấn luyện sẵn tiềm ẩn nhiều rủi ro lỗi tích lũy qua các bước của mô hình, dẫn đến sai số lớn ở kết quả đầu ra. Thêm vào đó, thời gian thực thi của nhiều mô hình cơ sở sẽ làm tăng thời gian thực thi của toàn thể mô hình kết hợp. Ngoài ra, các mô hình feature matching thường hoạt động tốt trong môi trường trong nhà, hoặc với tập ảnh có một vật thể cố định làm cột mốc và gặp khó khăn khi được áp dụng cho ảnh thành thị. Có thể thấy, các hướng tiếp cận, trên lý thuyết có tiềm năng cải thiện mô hình, phần nhiều vẫn chưa thể hiện ảnh hưởng tích cực đến độ hiệu quả chung của mô hình trên dữ liệu thành thị phạm vi rộng và thưa.
