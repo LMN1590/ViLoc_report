@@ -42,6 +42,9 @@
 
 \newcommand{\@sReviewer}{TS. A}
 \newcommand{\csReviewer}[1]{\renewcommand{\@sReviewer}{#1}}
+
+\newcommand{\@sCombat}{TS. A}
+\newcommand{\csCombat}[1]{\renewcommand{\@sCombat}{#1}}
 	
 \newcommand{\@sSupervise}{TS. Nguyễn Văn A}
 \newcommand{\csSupervise}[1]{\renewcommand{\@sSupervise}{#1}}
@@ -83,15 +86,17 @@ TRƯỜNG ĐẠI HỌC BÁCH KHOA\\
 \textbf{--------------------  *  ---------------------}\\[2cm]
 \includegraphics[scale=0.4]{hcmut.png}\\[1.5cm]
     {\fontsize{15}{1}\selectfont \@rname }\\[2cm]
-    {\fontsize{18}{1}\selectfont \textbf{\parbox[c][3cm]{14cm}{\centering \@tname}} }\\[2.2cm]
+    {\fontsize{18}{1}\selectfont \textbf{\parbox[c][0cm]{14cm}{\centering \@tname}} }\\[2cm]
+	{\fontsize{15}{1}\selectfont \parbox[c][0cm]{14cm}{\centering NGÀNH: KHOA HỌC MÁY TÍNH} }\\[2cm]
 \end{center}
 
-{\fontsize{12}{14}\selectfont
-\hspace{6.5cm}\parbox[t][4cm]{10cm}{
+{\fontsize{13}{14}\selectfont
+\hspace{5cm}\parbox[t][4cm]{10cm}{
 
 \parbox[t][2cm]{10cm}{\begin{tabular}{l l}
     HỘI ĐỒNG: &\@sCouncil \\
     GVHD: &\@sSupervise \\
+	GVPB: & \@sCombat \\
     TKHĐ: &\@sReviewer \\
 \end{tabular}}
 \\
