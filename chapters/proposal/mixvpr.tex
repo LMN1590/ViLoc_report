@@ -55,7 +55,7 @@ với $W_r$ là trọng số của lớp kết nối đầy đủ thứ hai và 
 
 Kết quả $O$ cuối cùng, có định dạng là $R^{d \cdot r}$, được ép thành một chiều và chuẩn hóa theo $L_2$ như những phương pháp VPR khác \cite{arandjelovic2016netvlad,berton2022rethinking}. Cuối cùng, từ ảnh đầu vào $I$, mô hình trả về một đoạn mã hóa biểu diễn cho nội dung của ảnh. Đoạn mã hóa này sau đó có thể được dùng để so sánh với giá trị mã hóa của những hình khác nhằm tìm ảnh có độ tương đồng cao nhất với $I$.
 
-\subsubsection{Bộ phận truy vấn ảnh tương đồng}
+\subsubsection{Bộ phận truy xuất ảnh tương đồng}
 Sau khi đã có được giá trị mã hóa biễu diễn cho ảnh truy vấn là $O \in R^{d \cdot r}$, mô hình tiến hành tìm kiếm trên tập dữ liệu ảnh miêu tả khu vực đang xét. Cơ chế tìm kiếm được sử dụng là tìm kiếm toàn diện, xét giá trị biểu diễn của từng ảnh. $k$ ảnh có độ tương đồng cao nhất với ảnh truy vấn được chọn để tạo thành các cặp ảnh là đầu ra của bước này.
 
 \begin{figure}[H]
